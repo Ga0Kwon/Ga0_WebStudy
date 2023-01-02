@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+/* 모든 곳에 적용 */
+*{ /*  s */
+	font-family : "궁서";
+	color : "blue";
+} /* e */
+
+/* 2. h3태그에 적용*/
+h3{
+	/*윗줄*/    
+	text-decoration: overline; 
+	
+	/*취소선*/ 
+	text-decoration: line-through;
+	
+	 /*밑줄*/ 
+	text-decoration: underline; 
+	
+	text-shadow : 2px 2px 2px orange;
+	
+	/* 정렬 */
+	text-align :center 
+}
+
+p{
+	font-family : "굴림";
+	color : black;
+	font-size : 8px;
+	font-style : italic;
+	font-weight : bold;
+	word-spacing : 2px;
+	line-height : "200%";
+}
