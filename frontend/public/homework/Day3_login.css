@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+
+#btn{
+	padding : 23px 27px;
+	margin-left: 10px
+}
+
+#txt{
+	text-align: center;
+}
+
+.login_table{
+	margin : 0 auto;
+	line-height : 120%; /*줄 간격 -> [표준] 150 ~ 180%*/
+	border-top : solid 1px #EEEEEE;
+	padding : 30px;
+}
+
+#info_txt{
+	padding-right: 10px;
+}
+
+#input_info{
+	height : 25px;
+}
