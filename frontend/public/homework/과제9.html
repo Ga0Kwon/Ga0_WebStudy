@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>Insert title here</title>
+			
+			<link href = "과제9.css" rel = "stylesheet">
+		</head>
+		<body>
+			
+			<h3 class = "signup_title">회원 가입 폼</h3>
+			
+			<form class = "signup_form">
+				<!-- ul은 기본적으로 여백을 가지고 있다. -->
+				<ul class = "signup_box">
+					<li> <!-- 행 -->
+						<ul class = "columns">
+							<li class = "col1">아이디</li>
+							<li class = "col2"><input type = "text"></li>
+						</ul>
+					</li>
+					<li> <!-- 행 -->
+						<ul class = "columns">
+							<li class = "col1">비밀번호</li>
+							<li class = "col2"><input type = "password"></li>
+						</ul>
+					</li>
+					<li> <!-- 행 -->
+						<ul class = "columns">
+							<li class = "col1">비밀번호 확인</li>
+							<li class = "col2"><input type = "password"></li>
+						</ul>
+					</li>
+					<li> <!-- 행 -->
+						<ul class = "columns">
+							<li class = "col1">이름</li>
+							<li class = "col2"><input type = "text"></li>
+						</ul>
+					</li>
+					<li> <!-- 행 -->
+						<ul class = "columns">
+							<li class = "col1">이메일</li>
+							<li class = "col2">
+								<input type = "text">
+								@
+								<select>
+									<option value ="직접입력" id = "d_input"> 직접입력 </option>
+									<option> naver.com</option>
+									<option> gmail.com</option>
+								</select>
+							</li>
+						</ul>
+					</li>
+					<li> <!-- 행 -->
+						<ul class = "columns">
+							<li class = "col1">이메일 수신</li>
+							<li>
+								<input type = "radio" name = "send" />비수신        
+								<input type = "radio" name = "send"/>수신
+							</li>
+						</ul>
+					</li>
+					<li> <!-- 행 -->
+						<ul class = "columns">
+							<li class = "col1">가입경로</li>
+							<li>
+								<input type = "checkbox"name = "who"/> 친구추천 
+								<input type = "checkbox"name = "who"/> 인터넷 검색
+								<input type = "checkbox"name = "who" checked="checked"/> 기타   
+							</li>
+						</ul>
+					</li>
+
+					<li> <!-- 행 -->
+						<ul class = "columns">
+							<li class = "col1 hello">인사말</li>
+							<li class = "col2">
+								<textarea rows = "15" cols = "50" style = "resize:none"></textarea> 
+							</li>
+						</ul>
+					</li>
+				</ul>
+				
+				<div class = "btn_box">
+					<input type = "submit" value = "저장하기" class = "btn">
+					<input type = "submit" value = "취소하기" class = "btn">
+				</div>
+			</form>
+			
+		</body>
+	</html>

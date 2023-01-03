@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+
+/*
+	class, id 정의[만들기]
+		1. 영문
+		2. 띄어쓰기 대신 _쓰기
+		3. 한글, 숫자, 특수문자X
+		4. 이해할 수 있는 단어[이름]
+	
+*/
+h3{
+	text-align: center;
+}
+
+table{
+	margin : 0 auto;
+	border-bottom : solid 2px #FF7C7C;
+	border-top: solid 2px #FF7C7C;
+	padding-top : 30px;
+	padding-bottom : 30px;
+}
+#d_input{
+	width : 30px;
+	height : 20px
+}
+
+.btn{
+	padding : 5px;
+	margin-top : 10px;
+}
+
+.col1{
+	width : 130px;
+}
+
+.btns{
+	text-align: right;
+	margin : 0 auto;
+	width : 590px;
+}
+
+tr{
+	margin : 10px;
+	padding : 20px;
+}
+
+/*입력 textarea 사이즈 고정*/
+textarea{
+	resize: none; 
+}
+
+.hello{
+	vertical-align: top;
+}
