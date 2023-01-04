@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
 
+.white_box{
+	width : 700px; /* 가로 길이 */
+	margin : 0 auto ; /*박스권 가운데 정렬 */
+}
+
 table{
 	width : 600px;
 	border-top :solid 4px black;
@@ -32,5 +37,5 @@ td{
 }
 
 .btn{
-	padding : 3px 5px;
+	padding : 4px 10px;
 }
