@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+/*
+	Ctrl + /	단일 주석 및 단일 주석 해제
+	Ctrl + Shift + /	블록 주석
+	Ctrl + Shift + \	블록 주석 해제
+*/
+
+#web_box{
+	/* border: solid 1px red;*/
+}
+
+#header{
+	/*border : solid 1px blue;*/
+	background-color: blue;
+	height : 200px;
+}
+
+#content{
+	/*border: solid 1px orange;*/
+	background-color: orange;
+	height : 600px;
+	width: 1200px; /*PC기준으로 1050px ~ 1300px 씀*/
+	margin : 0 auto; /* 가운데 정렬 */
+	display: flex; /*가로 배치할 상위 태그에 넣는다! 그래서 메뉴들의 상위 태그안에 넣음*/
+}
+
+#content #left_menu{
+	/*border: 1px solid grey;*/
+	background-color: grey;
+	height : 600px;
+	width : 900px; /* 부모가 1200씀 -900px - 4px(부모 border와 left_menu의 border)*/
+}
+
+#content #right_menu{
+	/*border : 1px solid green;*/
+	background-color: green;
+	height : 600px;
+	width: 290px;
+}
+
+#footer{
+	/*border : 1px solid black;*/
+	background-color: black;
+	height : 200px;
+}
