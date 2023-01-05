@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>인덱스 페이지</title>
+			
+			<link href = "./css/index.css" rel = "stylesheet">
+			<link href = "css/intro.css" rel = "stylesheet">
+		</head>
+		<body>
+			<div id = "wrap"> <!-- 화면 전체 -->
+			
+				<div id ="header"> <!-- 헤더  -->
+					<h1 class = "header_logo"> <!--로고이미지 대신 h1 -->
+						<a href = "index.html"> <!-- 로그 클릭시 현재 페이지(index) -->
+							<span>THE</span>스튜디오 
+						</a>
+					</h1> <!-- 로고 끝  -->
+					
+					<ul class = "header_menu"> <!-- 상위 메뉴  -->
+						<li><a href = "intro.html">스튜디오 소개 </a></li>
+						<li><a href = "reservation.html">스튜디오 예약 </a></li>
+						<li><a href = "#">블로그 </a></li>
+						<li><a href = "#">포토갤러리 </a></li>
+						<li><a href = "#">오시는 길 </a></li>
+					</ul>
+				</div>
+				<!-- class와 id 둘 다 쓰는 이유는 예약페이지에서도 상위 이미지 부분을 재사용하기 위해 -->
+				<div class = "sub_img" id = "intro_img"> <!-- 상위 이미지 -->
+					<!-- 이미지 태그를 안쓰는 이유 : 이미지 안에 텍스트를 넣어야해서 css background_imge 사용! -->
+					<h2>스튜디오 소개</h2>
+					<p>제품 사진 촬영을 위한 스튜디오 임대!</p>
+				</div>
+				<div id = "contents"> <!-- 본문  -->
+					<div id = "intro_content">
+						<img src = "img/intro1.jpg"/>
+						<div>
+							<h1>최상의 결과</h1>
+							<h4>"하나의 목표를 위해 최선의 노력을"</h4>
+							<p>스튜디오 촬영용 세트를 만든느 데에 통상 많은 비용이 들어 제작비를 상승시키는 주원인이 됩니다.</p>
+							<p>그러나 THE 스튜디오에서는 변수가 생기지 않도록 완벽한 촬영 준비와 함께 기획 단계에 같이 참여하여 최상의 결과물을 얻을 수 있게 합니다.</p>
+						</div>
+					</div>
+				</div>
+				<!-- 여기도 index와 마찬가지로 아래 부분에 background color가 다름 -->
+				<div id = "back">
+					<div id = "contents">
+						<div id = "intro_content">
+							<div>
+								<h1>최적의 환경</h1>
+								<h4>"고품질의 작품 탄생을 위한 최적의 환경"</h4>
+								<p>모던한 스튜디오의 인테리어, 다양하고 멋진 소품, 빛 예술을 구현하는 최적의 조명을 제공하여 다양한 이미지를 연출할 수 있습니다.</p>
+								<p>고객의 편안한 대기를 위해 로비 라운지를 운영하고 있으며 최대 20대까지 주차할 수 있는 주차장을 보유하고 있습니다.</p>
+							</div>
+							<img src = "img/intro2.jpg"/>
+						</div>
+					</div>
+				</div>
+				<div id = "footer"> <!-- footer(푸터) -->
+					<div class = "footer_contents"> <!-- footer 내용 부분 -->
+						<div class = "footer_txt"> <!-- footer 텍스트 있는 부분 -->
+							<h3>고객 센터</h3>
+							<h1> TEL : 1588 - 1588</h1>
+						</div>
+						<div class = "footer_txt"> <!-- footer 텍스트 있는 부분 -->
+							<ul>
+								<li><a href = "#">회사소개</a> |</li>
+								<li><a href = "#">개인정보처리방침</a> |</li>
+								<li><a href = "#">이용약관</a> |</li>
+								<li><a href = "#">제휴안내</a> |</li>
+							</ul>
+							<ul>
+								<li>주소 : 경기도 용인시 수지구 정평로 123</li>
+								<li>email : qweqwe@qweqwe.com</li>
+								<li>COPYRIGHT &copy; 2023 The 스튜디오. ALL</li>
+								<li></li>
+							</ul>
+						</div>
+						<div class = "footer_snsbtn"> <!-- footer sns 버튼 있는 부분 -->
+							<img alt = "facebook" src = "img/facebook.png">
+							<img alt = "blog" src = "img/blog.png">
+							<img alt = "instagram" src = "img/instagram.png">
+						</div>
+					</div>
+				</div>
+								
+			</div>
+		</body>
+	</html>

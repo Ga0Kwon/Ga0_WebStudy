@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.sub_img{
+	width : 100%; height : 300px;
+	display: flex; /*가로 정렬*/
+	flex-direction: column; /*세로 배치 : 새로운 요소 추가시 위부터 차례로 붙음*/
+	/*플렉스 요소의 수평 방향 정렬 방식을 설정*/
+	justify-content: center; /*가로 가운데 배치 : 플렉스 요소는 플렉스 컨테이너의 가운데에서부터 배치*/
+	/*플렉스 요소의 수직 방향 정렬 방식을 설정*/
+	align-items: center; /*세로 가운데 배치 :  플렉스 요소는 플렉스 컨테이너의 가운데에 배치*/
+	color: white; /*폰트 : 하얀색*/
+}
+
+#intro_img{
+	background-image: url("../img/sub_intro.jpg");
+}
+
+#intro_content{
+	width : 580px;
+	padding : 50px 10px;
+}
+
+#intro_content div{
+	width : 580px;
+	padding : 50px 10px;
+	margin : 0px 10px;
+}
+
+#intro_content h4, p { 
+	margin-bottom: 20px; 
+}
+
+/*contents를 재사용 하고 싶었지만 예약 페이지 제작에 어려움이 있어서 하위 요소를 하나 더 만듬*/
+#intro_content{
+	display: flex;
+	width: 1200px; 
+	margin: 0 auto;
+}

@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+/*-----------기본 css 제거----------- */
+*{ margin : 0; padding : 0; font-family : "맑은 고딕"}
+a{ 
+	text-decoration: none; /*밑줄 제거*/ 
+	color : black;
+}
+li{ list-style-type: none; /*글머리 제거*/}
+
+/*----------------헤더----------------*/
+#header{
+	width: 1200px;
+	margin : 0 auto; /*가운데 정렬*/
+	height : 80px; /*position쓰기 위해 height은 삭제x*/
+	position : relative; /*상위 요소 : 요소 자기 자신을 기준으로 배치*/
+}
+
+.header_logo{
+	position: absolute; /*하위 요소 : 부모 요소를 기준으로 배치*/
+	left : 0px; top : 20px; /*부모인 header에서 아래로 20, 왼쪽으로 붙임*/
+}
+
+.header_logo span{color : #0967bd; font-weight : bold;}
+.header_menu{
+	position: absolute; /*부모 header에 기준으로 배치*/
+	right : 0px; top :30px;  /*부모인 header에서 아래로 30, 오른쪽으로 붙임*/
+}
+.header_menu li{
+	display: inline-block; /*상위 메뉴 가로 배치*/
+	margin-left: 30px; /*각각의 메뉴들을 30만큼 띄움*/
+}
+/*----------------대표이미지----------------*/
+#main_img{text-align: center;} /*대표 이미지 가운데 정렬*/
+/*----------------본문----------------*/
+#contents{display: flex; width: 1200px; margin: 0 auto;}
+.right_banner{ /* 예약 안내/포토 갤러리 부분*/
+	display: flex;
+	width: 500px;
+	margin: 80px 50px;
+}
+.right_banner img{
+	padding: 0px 20px;
+}
+#back{ background-color: #eeeeee; }
+.studio_item{ width: 270px; margin: 30px 30px; /*촹영 스튜디오 부분 각 요소 설정*/}
+.studio_item img{ width : 100% /*이미지 자체를 너비만큼 자르지않고 100% 보여주기 위해*/}
+.studio_item li{ padding : 3px 0px; }
+
+
+/*----------------푸터----------------*/
+#footer{ background-color: #292C32; }
+.footer_contents{
+	width: 1200px;
+	margin : 0 auto;
+	display: flex; /*가로배치 O*/
+	justify-content: space-between; /*양쪽 끝을 두고 요소 사이마다 여백*/
+	padding : 50px 0px; /*위 아래 50으로 채우고 오른쪽 왼쪽은 X*/
+	color : white; /*폰트 하얀색*/
+}
+/*총 푸터 사이즈 1200px(500,500,200)*/
+.footer_txt{ width: 500px; } /*텍스트 있는 부분 너비 500px*/
+.footer_snsbtn{ width: 200px; } /*sns버튼 부분은 너비 200px*/
+.footer_contents li{ display: inline-block; /*상위 메뉴 가로 배치*/ }
+.footer_contents a{	color : white; /*폰트 하얀색*/ }
+.footer_contents ul{ margin-bottom: 10px; /*푸터 텍스트 사이 여백 아래로 10px*/}
