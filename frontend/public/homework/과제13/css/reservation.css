@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+#sub_img2{
+	/*우선 순위는 해당 css위주*/
+	background-image: url("../img/img/sub_reservation.jpg");
+}
+
+#txt{
+	text-align: center;
+	padding : 0px;
+	margin : 0px;
+}
+
+#calendar{
+	margin : 70px 10px;	
+	background-color: #FCF9EA;
+}
+
+#calendar h3{
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+#reservation_content div{
+	padding :30px
+}
+
+#reservation_content{
+	display:flex; 
+	width: 1200px;
+ 	margin: 0 auto;
+}
+#right_content{
+	width : 350px;
+	margin : 10px;
+	padding : 0px;
+}
+
+#right_content h3{
+	border-left: solid 10px grey;
+	padding : 8px;
+	margin-bottom: 11px;
+}
+#right_content li{
+	list-style-type: circle;
+	margin-bottom: 10px;
+}
+
+#right_content ul{
+	margin-left: 23px;
+	margin-bottom: 0px;
+}
+
+#right_content p{
+	color : #008329;
+	margin-left: 10px;
+	margin-top : 0px;
+}
+
+
+#col1{
+	color : red;
+}
+
+.calendar_table, td, th{
+	border : solid 1px black;
+}
+
+.calendar_table td{
+	padding : 25px;
+	vertical-align: top;
+}
+
+.calendar_table{
+	margin : 35px;
+	background-color : white;
+	border-collapse: collapse; /*테두리 병합*/
+	width : 500px;
+}
