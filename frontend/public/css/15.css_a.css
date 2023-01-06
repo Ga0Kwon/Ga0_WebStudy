@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+a{
+	color : black;
+	text-decoration: none; /*밑줄 제거*/
+}
+
+a:hover{ /*hover이라는 것은 마우스를 올렸을 때에 대한 css 적용*/
+	color : orange;
+	font-size: 14px;
+}
+
+a:active{ /*마우스를 클릭할때의 -> 클릭을 하는 동안의 css 적용*/
+	color : green;
+	font-size: 25px;
+}
+
+a:visited{ /*클릭한 적이 있을 떄 [활성화 한 적이 있을 때]*/
+	color : red;
+	font-size: 10px;
+}
+
+#header .drop_down{
+	display: inline-block;
+	margin-right: 50px;
+}
+#header{
+	background-color: #eeeeee;
+	display: flex;
+	justify-content: center;
+}
+
+.drop_down{
+	position: relative; /* 상위 요소에 relative -> 메뉴들이 drop_down 밖에 안나가도록*/
+}
+
+.sub_menu{ /*서브 메뉴는 배경색과 동일하게 가는 것이 좋다.*/
+	position: absolute;  /*하위 요소에 absolute -> 부모 밖에 안나가도록 absolute*/
+	/*상위 요소와 하위 요소의 접점이 있어야 hover 유지 */
+	top : 20px; left : -40px; /*상단 요소랑 하위 요소가 띄어져 있으면 hover가 풀림. 겹치는 부분이 있어야함*/
+
+	/*위의 hover풀림을 해결하기 위해 padding 값을 준다.*/
+	padding-top : 30px; /*상위 요소와 하위 요소 사이에 여백을 준다. -> margin은 안됨. 풀림!*/
+	
+	display: none; /*숨기기, 화면에 표시 X*/
+	font-size: 12px;
+	
+	/* border-top은 main_menu와 경계선이 진하지 않도록 빼준다.*/
+	border-left : solid 2px #eeeeee;
+	border-bottom : solid 2px #eeeeee;
+	border-right : solid 2px #eeeeee;
+	
+	
+	width: 100px;
+}
+
+.drop_down a{
+	width: 200px;
+}
+
+.sub_menu a{ width: 200px; }
+
+.drop_down:hover .sub_menu{
+	display: block; /*숨겼던 sub_menu를 다시 보여줌*/
+}
+
