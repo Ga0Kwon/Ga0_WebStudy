@@ -23,12 +23,12 @@ a{ color : black; text-decoration: none;}
 
 /*---------------------------본문-------------------------*/
 #content{
-	width: 1200px;
+	width: 1348px;
 	margin : 0 auto;
 }
 
 #content h3{ /*hot item부분의 굵은 글씨*/
-	margin-top : 30px;
+	margin-top : 100px;
 	text-align: center;
     display: block; /*텍스트가 한줄을 다 차지 해야함.*/
 }
@@ -40,9 +40,10 @@ a{ color : black; text-decoration: none;}
     margin-bottom: 60px;
 }
 
-.goods{width : 1200px}
+.goods{width : 1348px;}
 
 .line_one{
+	margin-top : 60px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -85,7 +86,7 @@ a{ color : black; text-decoration: none;}
     font-size: 20px;
 }
 
-#rush_of_order{ /*주문 폭주 이미지*/
+#rush_of_order, #best_item{ /*주문 폭주 이미지*/
 	width : 40px; height: 13px;
 	margin-right: 5px;
 }
@@ -96,6 +97,59 @@ a{ color : black; text-decoration: none;}
 
 
 /*--------------------------팝업--------------------------*/
+
+#popup_wrap{
+    position: fixed;
+    top: 30%; /*가장 오른쪽 세로로 가운데 정렬*/
+    right:0px;
+    height: 100px;
+}
+
+.popup_menu{display: block; background-color: white; opacity: 90%; border: 1.5px solid #dbdbdb;}
+
+.popup_menu ul{
+    display: block;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.popup_menu img{height: 25px; align-items: center;}
+
+.popup_menu li{
+	/*정가운데 배치*/
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	padding : 5px;
+    width: 45px;
+    height: 45px;
+    border-bottom: 1.5px solid #dbdbdb;
+}
+/*다른 메뉴와 좀 다른 updown부분이 좀 띄어져 있어야할 것 같아서 위아래로 padding 값을 줌*/
+.popup_menu #updown{padding-bottom: 10px; padding-top : 10px;}
+
+/*up down popup에서 각각의 요소 사이 벌리기*/
+.popup_menu #updown img{margin : 5px 0px;}
+
+/*hover 이벤트 관련*/
+.popup_item{position: relative;} /* 상위 요소 */
+.popup_item .sub_popup{
+	position: absolute; /*하위 요소*/
+	display: none; /*숨기기, 화면에 표시 X*/
+	width : 80px;
+	right : 50px;
+	padding : 5px 10px;
+	font-size: 12px;
+	color : white;
+	background-color: #232323;
+	border-radius: 10px;
+}
+.sub_popup{text-align: center;}
+
+.popup_item:hover .sub_popup{display: block;}
 
 /*--------------------------푸터--------------------------*/
 
