@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+#header{
+	display: flex; /*가로 배치*/
+	justify-content: space-between;/*양쪽 끝으로*/
+/* 	position: fixed;
+	top : 0px; */
+	
+	/*헤더 만들때는 sticky를 많이 씀(fixed는 팝업창에)*/
+	position: sticky; /*해당 요소가 화면에 나갔을 때 위치 고정*/
+	top : 0px; /*맨 위에다가 고정함*/
+	
+	background-color: red;
+	border-bottom: 1px solid #eeeeee;
+	
+	/*헤더가 더 우선수위가 됨*/
+	/* z-index : 1;  다른 요소와 겹쳤을 때의 대한 배치 순서*/
+	
+	/*기본 값*/
+	z-index : 0; 
+}
+
+#header .header_menu li{
+	display: inline-block; /*가로 배치*/
+	
+}
+
+.popup{
+	width : 20%;
+	border: 2px solid #eeeeee;
+	position: fixed; /* 화면 고정 : 팝업 창을 만들 때는 fixed를 많이 씀 */
+	right : 0px; /*가장 오른쪽에 붙음*/
+	top : 40%; /*위에서부터 40%로 내려옴*/
+	
+	/*배경 색상을 투명색을 넣는 뜻 -> 배경색에 맞춰 [기본값]*/
+	background-color: transparent;
+	
+	/* opacity: 0.5;  *//* = opacity: 50% 투명도 [% , 소수점을 쓰면 됨]*/
+}
+
+body{
+	background-color: green
+}
