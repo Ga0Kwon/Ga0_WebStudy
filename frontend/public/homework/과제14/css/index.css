@@ -1,1 +1,101 @@
 @charset "UTF-8";
+
+/*-------------------------기본 값------------------------*/
+
+a{ color : black; text-decoration: none;}
+
+*{border: none; margin : 0px;}
+
+/*--------------------------헤더--------------------------*/
+
+
+/*------------------------대표 이미지----------------------*/
+.main_img{
+	text-align : center;
+	width: 100%;
+    display: block;
+    height: auto;
+}
+
+.big_img{
+	width: 100%;
+}
+
+/*---------------------------본문-------------------------*/
+#content{
+	width: 1200px;
+	margin : 0 auto;
+}
+
+#content h3{ /*hot item부분의 굵은 글씨*/
+	margin-top : 30px;
+	text-align: center;
+    display: block; /*텍스트가 한줄을 다 차지 해야함.*/
+}
+
+.sub_title{ /*밑에도 p를 써야하는데 p전체적으로 center을 하면 왼쪽 정렬하고 싶을 때 하지를 못해서 class선택자 생성*/
+	text-align: center;
+    display: block; /*텍스트가 한줄을 다 차지 해야함.*/
+    color : #969696;
+    margin-bottom: 60px;
+}
+
+.goods{width : 1200px}
+
+.line_one{
+	display: flex;
+	justify-content: space-between;
+}
+
+.item{
+	width : 300px;	/*각 상품들의 너비를 300*/
+}
+
+.item img{width : 300px;} /*상품 이미지 300에 맞춰서*/
+
+.item_name a{text-align: left;} /*상품들의 이름은 왼쪽 정렬*/
+
+.color{display: flex;} 
+
+.color span{ /*상품의 색을 나타내는 작은 박스 나타내는 코드*/
+	display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin:  1px;
+    vertical-align: top;
+    border: 1px solid #dbdbdb;
+}
+#review{color : #808080;} /*리뷰 폰트색 바꿈*/
+
+.color_review{ display: flex; justify-content: space-between; margin : 10px 0px; }
+
+
+.item_price{position: relative; font-size: 20px; margin : 15px 0px;}
+
+.item_price del{
+	margin-left: 5px; /*할인된 가격과 맞추기 위해 왼쪽 margin값을 주었음*/
+	color : #808080; /*할인된 가격은 좀 더 밝음*/
+} 
+.sale_percentage{
+	position: absolute;
+    top: 0;
+    right: 0;
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#rush_of_order{ /*주문 폭주 이미지*/
+	width : 40px; height: 13px;
+	margin-right: 5px;
+}
+
+#same_day_delivery{
+	width : 40px; height: 13px;
+}
+
+
+/*--------------------------팝업--------------------------*/
+
+/*--------------------------푸터--------------------------*/
+
