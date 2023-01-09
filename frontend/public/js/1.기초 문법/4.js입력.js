@@ -94,9 +94,9 @@ let price = Number(prompt("십만원 단위의 금액을 입력해주세요."));
 
 
 
-console.log("십만원 : " + parseInt(price/100000));
-console.log("만원 : " + parseInt((price%100000)/10000));
-console.log("천원 : " + parseInt(((price%100000)%10000)/1000));
+console.log("십만원 : " + parseInt(price/100000) + "장");
+console.log("만원 : " + parseInt((price%100000)/10000)+ "장");
+console.log("천원 : " + parseInt(((price%100000)%10000)/1000)+ "장");
 
 /*
 	문제 7 : prompt로 아이디와 비밀번호를 입력받아 아이디가 admin이고 비밀번호가 1234이면 true 출력 
@@ -114,4 +114,4 @@ console.log("로그인 : " + ((id=="admin")&&(password==1234)));
 
 let number8 = Number(prompt("정수를 입력해주세요."));
 
-console.log(((number8%2==0)&&(number8%7==0)));
+console.log(((number8%2==1)&&(number8%7==0)));
