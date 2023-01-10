@@ -26,9 +26,19 @@
 
 */
 
+/*
+	*카멜표기법 : 가장 첫글자는 소문자로 하되, 두번째 글자 첫글자는 대문자로 표기한다. 
+			   ex) studentMember, userId 등등
+	
+	배열 선언
+		1. 함수 안에 선언(함수 실행마다 선언 - 누적 저장 X)
+		2. 함수 밖에 선언(JS 실행 1번 선언 - 누적 저장 O)
+*/
+//배열 선언과 동시에 3개의 요소 저장
 const studentArray = ['20230110', '20230109', '20230108'] //학생 학번이 들어있는 배열
 
-function onSearch(){ //조회 버튼 클릭시 실행 메서드 
+/*-------------------------------과제1------------------------------------ */
+function onLogin(){ //조회 버튼 클릭시 실행 메서드 
 	
 	//입력받은 데이터를 가져온다. <input> 가져와서 변수에 저장
 	let studentNumber = document.querySelector('.studentNumber');
@@ -41,7 +51,11 @@ function onSearch(){ //조회 버튼 클릭시 실행 메서드
 	if(hasNumber != -1){ //-1이 아닌 경우가 해당 학번이 있다는 것이니까 로그인 성공
 		console.log("로그인 성공")
 		
-		let sList = document.querySelector('#studentList');
+		let state = document.querySelector('#resultBox');
+		state.innerHTML = '<h4 style = "color : blue">' + "로그인 성공" + '</h4>'
+		
+		//학번을 HTML body에 list로 출력
+		let sList = document.querySelector('#studentList'); 
 		sList.innerHTML = '<li>' + studentArray + '</li>'
 		//HTML에서 text를 타입으로 가지는 <input>이면서 id가 student_Number인 요소의 값을 ''로 바꿈.
 		//텍스트 적는 곳을 초기화하겠다는 뜻. 
@@ -57,9 +71,13 @@ function onSearch(){ //조회 버튼 클릭시 실행 메서드
 	}
 	else{ //그 외
 		console.log("로그인 실패.")
+		
+		let state = document.querySelector('#resultBox');
+		state.innerHTML = '<h4 style = "color : red">' + "로그인 실패" + '</h4>'
 	}
 }
 
+/*-------------------------------과제2------------------------------------ */
 function onAdd(){ //등록 버튼 클릭시 실행 메서드
 	
 	let studentNumber = document.querySelector('.studentNumber');
@@ -71,6 +89,9 @@ function onAdd(){ //등록 버튼 클릭시 실행 메서드
 	if(hasNumber != -1){
 		
 		console.log("[실패]등록된 학번입니다.")
+		
+		let state = document.querySelector('#resultBox');
+		state.innerHTML = '<h4 style = "color : red">' + "등록 실패" + '</h4>'
 		
 	}
 	else if(sNumber == '' || sNumber.trim() == ''){
@@ -85,12 +106,16 @@ function onAdd(){ //등록 버튼 클릭시 실행 메서드
 		studentArray.push(sNumber);
 		console.log("등록이 성공되었습니다.");
 		
+		let state = document.querySelector('#resultBox');
+		state.innerHTML = '<h4 style = "color : blue">' + "등록 성공" + '</h4>'
+		
 		let sList = document.querySelector('#studentList');
 		sList.innerHTML = '<li>' + studentArray + '</li>'
 		
 		document.getElementById("student_Number").value ='';
 	}
 }
+
 
 function onDelete(){ //삭제버튼 클릭 시 실행 메서드
 	
@@ -104,7 +129,10 @@ function onDelete(){ //삭제버튼 클릭 시 실행 메서드
 		console.log("삭제 성공하였습니다.")
 		
 		studentArray.splice(deleteIndex, 1); //해당 학번의 인덱스부분에 해당하는 요소 1개를 삭제
-	
+		
+		let state = document.querySelector('#resultBox');
+		state.innerHTML = '<h4 style = "color : blue">' + "삭제 성공" + '</h4>'
+		
 		let sList = document.querySelector('#studentList');
 		sList.innerHTML = '<li>' + studentArray + '</li>'
 		
@@ -118,6 +146,9 @@ function onDelete(){ //삭제버튼 클릭 시 실행 메서드
 	}
 	else{
 		console.log("삭제 실패하였습니다.")
+		
+		let state = document.querySelector('#resultBox');
+		state.innerHTML = '<h4 style = "color : red">' + "삭제 실패" + '</h4>'
 	}
 	
 }
