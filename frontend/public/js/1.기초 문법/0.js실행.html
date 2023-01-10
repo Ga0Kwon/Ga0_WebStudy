@@ -55,10 +55,30 @@
 				HTML 이벤트 속성
 				onClick = "JS함수명()"
 					: 해당 마크업 클릭했을 때 JS 함수 실행
+					<마크업 속성 : "속성값">
+						1. 이벤트 속성
+							onClick = "JS함수명()"
+						2. value 속성 : input, select, textarea / div, span같은 것은 value 속성 없음!
+						3. innerHTML속성 : <마크업> innerHTML </마크업>
+						
+						HTML 마크업 선택자       css      			        js
+						<div class = "box" id = "root">
+							1. <마크업>    	div{속성 = 속성값}			document.querySelector('div'); 
+							2. class		.box{}					document.querySelector('.box'); 
+						3. id			#root{}						document.querySelector('#root'); 
 			 -->
+			<!--  <h3>코드가 변경되면 코드 파일 ctrl + s 저장 후에 브라우저[크롬]에서 새로고침[ctrl + F5]</h3>
 			학생명 : <input type = "text" class = "studentName">
 			<button onclick="onAdd()" type ="button">추가</button>
+			<button onclick = "onDelete()" type = "button">삭제</button>
 			
-			<script src = "6.js배열의활용.js"></script>
+			<ul id ="studentList">
+			
+			</ul>
+			
+			<script src = "6.js배열의활용.js"></script> -->
+			
+			<!-- 7. 제어문 활용 -->
+			<script src = "7.js제어문.js"></script>
 		</body>
 	</html>
