@@ -110,7 +110,7 @@ console.log('78점수의 등급 : ' + 등급);
 	문제 12 : 정수 3개를 입력받아 오름차순으로 출력
 
  */
-// 문제 9
+/*// 문제 9
 let number9 =   prompt('숫자를 입력해주세요.');
 let result9 = (number9%2==0) ? '짝수' : '홀수'
 console.log("문제 9> 정수 : " + result9)
@@ -130,7 +130,7 @@ let number11_3 = prompt("숫자를 입력해주세요.");
 let max = number11_1;
 max = max < number11_2 ? number11_2 : max;
 max = max < number11_3 ? number11_3 : max;
-
+*/
 //문제 12
 let number12_1 = prompt("숫자를 입력해주세요.");
 let number12_2 = prompt("숫자를 입력해주세요.");
@@ -139,7 +139,6 @@ let number12_3 = prompt("숫자를 입력해주세요.");
 let temp1 = number12_1;
 
 number12_1 > number12_2 ? (temp1 = number12_2) : number12_2 = temp1;
-//number12_1이 number12_2보다 크면 temp1에 number12_1이 들어가있음
 
 number12_2 > number12_3 ? (temp1 = number12_3) : number12_3 = temp1;
 
