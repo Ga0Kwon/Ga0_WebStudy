@@ -47,10 +47,12 @@ function onSearch(){ //조회 버튼 클릭시 실행 메서드
 		//텍스트 적는 곳을 초기화하겠다는 뜻. 
 		document.getElementById("student_Number").value ='';
 	}
-	else if(sNumber == '' || sNumber == ' ' || sNumber == null){ //텍스트 입력란에 공백이나 아무것도 적지 않으면
+	//trim() : 공백을 모두 제거해주는 메서드. -> 공백을 모두 제거 했는데 '' (빈값)이면 아무것도 작성하지 X
+	//이렇게 한 이유는 공백으로 8자리를 채울때와 등록을 하게 되면서 문제가 생길 것 같아서.
+	else if(sNumber == '' || sNumber.trim() == ''){ //텍스트 입력란에 공백이나 아무것도 적지 않으면
 		console.log("학번을 입력해주세요~")
 	}
-	else if(sNumber.length < 8 || sNumber.length > 8){ // 학번이 8자리보다 크거나 작으면(초과 or 미만)
+	else if(sNumber.length != 8){ // 학번이 8자리보다 크거나 작으면(초과 or 미만)
 		console.log("8자리로 입력해주세요.")
 	}
 	else{ //그 외
@@ -71,11 +73,11 @@ function onAdd(){ //등록 버튼 클릭시 실행 메서드
 		console.log("[실패]등록된 학번입니다.")
 		
 	}
-	else if(sNumber == '' || sNumber == ' ' || sNumber == null){
+	else if(sNumber == '' || sNumber.trim() == ''){
 		
 		console.log("학번을 입력해주세요~")
 	}
-	else if(sNumber.length < 8 || sNumber.length > 8){
+	else if(sNumber.length != 8){
 		
 		console.log("8자리로 입력해주세요.")
 	}
@@ -108,10 +110,10 @@ function onDelete(){ //삭제버튼 클릭 시 실행 메서드
 		
 		document.getElementById("student_Number").value ='';
 	}
-	else if(sNumber == '' || sNumber == ' ' || sNumber == null){
+	else if(sNumber == '' || sNumber.trim() == ''){
 		console.log("학번을 입력해주세요~")
 	}
-	else if(sNumber.length < 8 || sNumber.length > 8){
+	else if(sNumber.length != 8){
 		console.log("8자리로 입력해주세요.")
 	}
 	else{
