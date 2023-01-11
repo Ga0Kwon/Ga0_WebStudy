@@ -66,9 +66,11 @@ function onLogin(){ //조회 버튼 클릭시 실행 메서드
 	//이렇게 한 이유는 공백으로 8자리를 채울때와 등록을 하게 되면서 문제가 생길 것 같아서.
 	else if(sNumber == '' || sNumber.trim() == ''){ //텍스트 입력란에 공백이나 아무것도 적지 않으면
 		console.log("학번을 입력해주세요~")
+			state.innerHTML = '<h4 style = "color : red">' + "학번을 입력해주세요. 공백입니다." + '</h4>'
 	}
 	else if(sNumber.length != 8){ // 학번이 8자리보다 크거나 작으면(초과 or 미만)
 		console.log("8자리로 입력해주세요.")
+		state.innerHTML = '<h4 style = "color : red">' + "8자리로 입력해주세요." + '</h4>'
 	}
 	else{ //그 외
 		console.log("로그인 실패.")
@@ -103,10 +105,12 @@ function onAdd(){ //등록 버튼 클릭시 실행 메서드
 	else if(sNumber == '' || sNumber.trim() == ''){
 		
 		console.log("학번을 입력해주세요~")
+			state.innerHTML = '<h4 style = "color : red">' + "학번을 입력해주세요. 공백입니다." + '</h4>'
 	}
 	else if(sNumber.length != 8){
 		
 		console.log("8자리로 입력해주세요.")
+		state.innerHTML = '<h4 style = "color : red">' + "8자리로 입력해주세요." + '</h4>'
 	}
 	else{
 		studentArray.push(sNumber);
@@ -146,9 +150,11 @@ function onDelete(){ //삭제버튼 클릭 시 실행 메서드
 	}
 	else if(sNumber == '' || sNumber.trim() == ''){
 		console.log("학번을 입력해주세요~")
+		state.innerHTML = '<h4 style = "color : red">' + "학번을 입력해주세요. 공백입니다." + '</h4>'
 	}
 	else if(sNumber.length != 8){
 		console.log("8자리로 입력해주세요.")
+		state.innerHTML = '<h4 style = "color : red">' + "8자리로 입력해주세요." + '</h4>'
 	}
 	else{
 		console.log("삭제 실패하였습니다.")
