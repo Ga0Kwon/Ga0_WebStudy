@@ -16,8 +16,8 @@
 let contentArray = [];
 
 //방문록 테이블 함수 밖 선언 -> 누적해야하기 때문
-let tableRow = '<tr>'+'<th style="padding : 5px 20px;">'+ "번호"+'</th>'
-		+'<th style="padding : 5px 20px;">'+ '방문록'+'</th>'+'</tr>';
+let tableRow = '<tr>'+'<th style="padding : 5px 20px; width :100px; text-align : center">'+ "번호"+'</th>'
+		+'<th style="padding : 5px 20px; text-align : center">'+ '방문록'+'</th>'+'</tr>';
 
 //addContent 함수
 function addContent(){
@@ -31,8 +31,8 @@ function addContent(){
 	//등록한 내용의 인덱스를 찾고, 변수에 저장
 	let tableIndex = contentArray.indexOf(text)
 	
-	tableRow += '<tr>'+'<td style="padding : 5px 20px;">'+ tableIndex+'</th>'
-		+'<th style="padding : 5px 20px;">'+ contentArray[tableIndex]+'</th>'+'</tr>'
+	tableRow += '<tr>'+'<td style="padding : 5px 20px; width :100px; text-align : center">'+ tableIndex+'</th>'
+		+'<th style="padding : 5px 20px; text-align : center;">'+ contentArray[tableIndex]+'</th>'+'</tr>'
 
 	let content = document.querySelector('.noticeTable');
 	content.innerHTML = tableRow
