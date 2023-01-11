@@ -5,6 +5,12 @@
 		3. 테이블에 출력
 */
 
+/*let tableRow += '<tr>'+'<td style="padding : 10px 20px;">'+ danValue+'</td>'
+		+'<td style="padding : 10px 20px;">'+ 'X'+'</td>'
+		+'<td style="padding : 10px 20px;">'+ i+'</td>'
+		+'<td style="padding : 10px 20px;">'+ danValue*i+'</td>'+'</tr>';
+}*/
+
 function onCheck(){
 	//input으로 입력받은 단을 가져옴.
 	let gugudan_dan = document.querySelector('.gugudan_dan');
@@ -28,6 +34,7 @@ function onCheck(){
 	//3. <table> 행 <tr>만들기 
 	for(let i = 1; i <= gopValue; i++){
 		//헤더 부분 초기값을 가지고 있는 tableRow에 곱만큼 반복문을 돌려 구구단을 출력한다.
+		//이 아래의 값이 함수 밖에 들어가게 되면 누적되어 밑에 차곡차곡 쌓인다.
 		tableRow += '<tr>'+'<td style="padding : 10px 20px;">'+ danValue+'</td>'
 		+'<td style="padding : 10px 20px;">'+ 'X'+'</td>'
 		+'<td style="padding : 10px 20px;">'+ i+'</td>'
