@@ -33,6 +33,7 @@
 	배열 선언
 		1. 함수 안에 선언(함수 실행마다 선언 - 누적 저장 X)
 		2. 함수 밖에 선언(JS 실행 1번 선언 - 누적 저장 O)
+		
 */
 //배열 선언과 동시에 3개의 요소 저장
 const studentArray = ['20230110', '20230109', '20230108'] //학생 학번이 들어있는 배열
@@ -48,10 +49,10 @@ function onLogin(){ //조회 버튼 클릭시 실행 메서드
 	//만약 없다면 -1를 반환 -> 배열의 인덱스는 0부터 시작하기 때문
 	let hasNumber = studentArray.indexOf(sNumber);
 	
+	let state = document.querySelector('#resultBox');
+	
 	if(hasNumber != -1){ //-1이 아닌 경우가 해당 학번이 있다는 것이니까 로그인 성공
 		console.log("로그인 성공")
-		
-		let state = document.querySelector('#resultBox');
 		state.innerHTML = '<h4 style = "color : blue">' + "로그인 성공" + '</h4>'
 		
 		//학번을 HTML body에 list로 출력
@@ -72,7 +73,6 @@ function onLogin(){ //조회 버튼 클릭시 실행 메서드
 	else{ //그 외
 		console.log("로그인 실패.")
 		
-		let state = document.querySelector('#resultBox');
 		state.innerHTML = '<h4 style = "color : red">' + "로그인 실패" + '</h4>'
 	}
 }
@@ -86,11 +86,17 @@ function onAdd(){ //등록 버튼 클릭시 실행 메서드
 	
 	let hasNumber = studentArray.indexOf(sNumber);
 	
+	let state = document.querySelector('#resultBox');
+	
+	// ! *검사 변수[유효성 검사 체크리스트]
+	// let confirm = 0 
+	//만약 if문에서 걸릴 경우 confirm을 증가시켜서 cofirm == 0일 경우만 실행하게끔!
+	// return -> if문에서 걸릴 경우 return을 하면 함수를 나가게 되면서 -> 등록 실행이 안되게 할 수 있음.
+	
 	if(hasNumber != -1){
 		
 		console.log("[실패]등록된 학번입니다.")
-		
-		let state = document.querySelector('#resultBox');
+
 		state.innerHTML = '<h4 style = "color : red">' + "등록 실패" + '</h4>'
 		
 	}
@@ -106,7 +112,6 @@ function onAdd(){ //등록 버튼 클릭시 실행 메서드
 		studentArray.push(sNumber);
 		console.log("등록이 성공되었습니다.");
 		
-		let state = document.querySelector('#resultBox');
 		state.innerHTML = '<h4 style = "color : blue">' + "등록 성공" + '</h4>'
 		
 		let sList = document.querySelector('#studentList');
@@ -125,12 +130,13 @@ function onDelete(){ //삭제버튼 클릭 시 실행 메서드
 	
 	let deleteIndex = studentArray.indexOf(sNumber);
 	
+	//공통으로 쓰면 밖으로 빼는 게 좋음.
+	let state = document.querySelector('#resultBox');
+	
 	if(deleteIndex != -1){
 		console.log("삭제 성공하였습니다.")
 		
 		studentArray.splice(deleteIndex, 1); //해당 학번의 인덱스부분에 해당하는 요소 1개를 삭제
-		
-		let state = document.querySelector('#resultBox');
 		state.innerHTML = '<h4 style = "color : blue">' + "삭제 성공" + '</h4>'
 		
 		let sList = document.querySelector('#studentList');
@@ -146,8 +152,6 @@ function onDelete(){ //삭제버튼 클릭 시 실행 메서드
 	}
 	else{
 		console.log("삭제 실패하였습니다.")
-		
-		let state = document.querySelector('#resultBox');
 		state.innerHTML = '<h4 style = "color : red">' + "삭제 실패" + '</h4>'
 	}
 	
