@@ -19,7 +19,7 @@ function onCheck(){
 	//입력받은 곱의 값을 변수 gopValue에 저장
 	let gopValue = Number(gugudan_gop.value);
 	
-	//헤더 부분 미리 저장해둠.
+	//헤더 부분을 초기값으로 두고 
 	let tableRow = '<tr>'+'<th style="padding : 10px 20px;">'+ "단"+'</th>'
 		+'<th style="padding : 10px 20px;">'+ 'X'+'</th>'
 		+'<th style="padding : 10px 20px;">'+ "곱"+'</th>'
@@ -27,6 +27,7 @@ function onCheck(){
 	
 	//3. <table> 행 <tr>만들기 
 	for(let i = 1; i <= gopValue; i++){
+		//헤더 부분 초기값을 가지고 있는 tableRow에 곱만큼 반복문을 돌려 구구단을 출력한다.
 		tableRow += '<tr>'+'<td style="padding : 10px 20px;">'+ danValue+'</td>'
 		+'<td style="padding : 10px 20px;">'+ 'X'+'</td>'
 		+'<td style="padding : 10px 20px;">'+ i+'</td>'
