@@ -7,7 +7,7 @@ let line = Number(prompt("과제 줄 수 :"));
 if(line%2 == 0){ //짝수를 입력받을 때 
 	for(let i = 1; i <= line; i++){
 		if( i <= line/2){ //상단 부분
-			for(let b = 1; b <= line/2-i + 1; b++){
+			for(let b = 1; b <= line/2-i; b++){
 				output += " ";
 			}
 			for(let s = 1; s <= i*2 -1; s++){
@@ -15,10 +15,10 @@ if(line%2 == 0){ //짝수를 입력받을 때
 			}
 			output += "\n"
 		}else{ //하단 부분
-			for(let b = 1; b <= i -(line/2); b++){
+			for(let b = 1; b <= i -(line/2)-1; b++){
 				output += " "
 			}
-			for(let s = 1; s <= ((-2*i) + 2*line+1); s++){
+			for(let s = 1; s <= (line*2 + 1)-(i*2); s++){
 				output += "*";
 			}
 			output += "\n"	
@@ -27,7 +27,7 @@ if(line%2 == 0){ //짝수를 입력받을 때
 }
 
 if(line%2 != 0){ //홀수를 입력받을 때
-	for(let i = 1; i <= line + 1; i++){
+	for(let i = 1; i <= line; i++){
 		if( i <= line/2 +1 ){ //상단 부분
 			for(let b = 1; b <= line/2-i + 1; b++){
 				output += " ";
@@ -40,7 +40,7 @@ if(line%2 != 0){ //홀수를 입력받을 때
 			for(let b = 1; b <= i -(line/2); b++){
 				output += " "
 			}
-			for(let s = 1; s<= ((-2*i) + 2*line+1); s++){
+			for(let s = 1; s<= (line*2 + 1)-(i*2); s++){
 				output += "*"
 			}
 			output += "\n"
