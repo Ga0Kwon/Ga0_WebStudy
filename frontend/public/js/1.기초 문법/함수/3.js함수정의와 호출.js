@@ -7,34 +7,37 @@
 
 */
 
-/* 1. 인수 O 반환 O 인 함수*/
-//정의
-function 함수1(x,y){
-	return x+y;
-}
-//호출
-let 결과1 = 함수1(3,5)
+// 1. 인수X 반환X 함수
+function 함수1(){ // f s 
 
-/*2. 인수 O 반환 X 인 함수*/
-//정의
-function 함수2(x,y){
-	x + y;
-}
-//호출
-함수2(3, 5)
+	alert('함수1 실행 됨')
+} // f e 
 
-/*3. 인수 X 반환 O 인 함수*/
-//정의
-function 함수3(){
-	return value;
-}
-//호출
-let 결과3 = 함수3();
+// 1. 함수 호출 
+함수1()
 
-/*4. 인수 X 반환 X 인 함수*/
-//정의
-function 함수4(){
-	
-}
-//호출
-함수4()
+// 2. 인수O 반환O 함수 
+function 함수2( x , y  ){ // f s
+	// ( x , y ) : 해당 함수를 호출시 인수[ x와 y : 이름 아무거나 ] 2개를 받는 함수
+	alert('함수2 실행 됨')
+	return x + y;
+} // f e 
+
+let result = 함수2( 3 , 5 )	// 반환[return] 값을 변수에 저장
+alert( '함수2 실행후 보내준 값 :' + result )
+
+// 3. 인수O 반환X 함수 
+function 함수3( x , y , z ){ // f s
+	let result = x +  y + z
+	alert( '함수3 실행 됨 : ' + result )
+} // f e 
+함수3( 3 , 5 , 7 )
+
+// 4. 인수X 반환O 함수 
+function 함수4( ){ // f s
+	let result = 3 + 5 + 8
+	return result;
+} // f e 
+
+let result2 = 함수4()
+alert( '함수4 실행후 보내준 값 :' + result2 )
