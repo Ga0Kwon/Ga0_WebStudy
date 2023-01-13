@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+*{background-color: #E8F2FE} /*연동 확인용*/
+
+.wrap{display: flex;}
+
+
+.content{
+	background-color: #FFFFFF;
+	width : 50%;
+	border: 1px solid #9DABFB;
+	margin : 10px;
+	
+}
+
+.content h5{font-weight: bold; background-color :#FFFFFF}
