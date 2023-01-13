@@ -2,15 +2,79 @@
 
 *{background-color: #E8F2FE} /*연동 확인용*/
 
+table{	border-collapse: collapse; /*테이블 병합*/}
+
 .wrap{display: flex;}
 
-
+/*20230113 : 권가영*/
 .content{
+	position : relative;
 	background-color: #FFFFFF;
 	width : 50%;
 	border: 1px solid #9DABFB;
 	margin : 10px;
-	
 }
 
-.content h5{font-weight: bold; background-color :#FFFFFF}
+.content h5, h3{font-weight: bold; background-color :#FFFFFF; text-align: center;}
+
+.customerTable, .customerTable td, .customerTable th{
+	border : 1px solid black;
+	padding : 3px;
+}
+
+.customerTable td{	background-color : #FFFFFF; text-align: center; font-size: 16px;}
+.customerTable th{	background-color : #fae7e7; text-align: center; font-size: 18px;}
+
+.customerTable{
+	width : 90%; /*고객페이지테이블 화면에 꽉차게*/
+	margin : auto;
+}
+
+/*고객페이지 테이블 번호*/
+.customerTable #index{
+	width : 10%;
+}
+/*고객페이지 테이블 도서*/
+.customerTable #book{
+	width : 45%;
+}
+/*고객페이지 테이블 도서 대여 여부*/
+.customerTable #rental{
+	width : 20%;
+}
+/*고객페이지 테이블 비고*/
+.customerTable #note{
+	width : 25%;
+}
+
+/*고객페이지 비고에 있는 버튼 */
+.whatBtn{
+	width : 100%;
+	border-radius: 0.3em;
+	background-color: #4343F5;
+	color : white;
+	border : none;
+	margin : 0px;
+	padding : 7px 3px;
+}
+#customerNote{
+	padding : 7px;
+}
+
+#returnBtn{
+	background-color: #FF3939;
+}
+/*대여여부 테이블 td*/
+.rentalOX{
+	background-color: white;
+}
+
+/*대여중 텍스트*/
+#retalNO{
+	color : red;
+}
+/*대여가능 텍스트*/
+
+#retalOK{
+	color : blue;
+}
