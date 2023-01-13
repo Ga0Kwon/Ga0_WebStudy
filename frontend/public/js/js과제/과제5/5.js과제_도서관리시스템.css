@@ -61,9 +61,6 @@ table{	border-collapse: collapse; /*테이블 병합*/}
 	padding : 7px;
 }
 
-#returnBtn{
-	background-color: #FF3939;
-}
 /*대여여부 테이블 td*/
 .rentalOX{
 	background-color: white;

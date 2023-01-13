@@ -38,8 +38,8 @@
 			예시)	
 				번호		도서				도서대여여부		비고
 				1		혼자공부하는자바		대여중			도서대여버튼/도서반납버튼
-				2		이것이자바다		대여가능			도서대여버튼/도서반납버튼
-				3		열혈 C언어			대여가능			도서대여버튼/도서반납버튼
+				2		이것이자바다			대여가능		도서대여버튼/도서반납버튼
+				3		열혈 C언어			대여가능		도서대여버튼/도서반납버튼
 			
 
 
@@ -63,16 +63,16 @@ function printContent(){
 								<td>${i +1}</td>
 								<td>${도서목록[i]}</td>
 								<td><p class = "rentalOX" id ="retalNO">대여중</p></td>
-								<td id = "customerNote"><input onClick = "btnClick()"type = "button" class = "whatBtn" id = "returnBtn" value = "도서반납버튼" ></input></td>
-						</tr>`
+								<td id = "customerNote"><button onClick = "returnClick(${i})" class = "whatBtn" id = "returnBtn" style = "background-color: #FF3939;">도서반납버튼</button></td>
+					</tr>`
 		}
 		else{ //대여할 수 있는 경우
 			html += `<tr>
 								<td>${i +1}</td>
 								<td>${도서목록[i]}</td>
 								<td><p class = "rentalOX" id ="retalOK">대여가능</p></td>
-								<td id = "customerNote"><input onClick = "btnClick()" type = "button" class = "whatBtn" id = "rentalBtn" value = "도서대여버튼" ></input></td>
-						</tr>`
+								<td id = "customerNote"><button onClick = "rentalClick(${i})" class = "whatBtn" id = "rentalBtn">도서대여버튼</button></td>
+					</tr>`
 		}
 	}	
 	document.querySelector('.customerTable').innerHTML = html 
@@ -86,6 +86,32 @@ function rentalBtnOnOff(x){
 		 return 0; //만약 책을 대여해서 대여할 수 없다면 0을 반환
 	}else{
 		return 1; //만약 책을 대여한 사람이 업어서 대여할 수 있다면 1을 반환
+	}
+}
+
+
+//도서반납버튼  클릭시 처리하는 함수 [해당 인덱스를 인수를 받는다.]
+function returnClick(i){
+	
+	let inputInfo = confirm("반납하시겠습니까?"); //확인을 누르면 true반환, 취소를 누르면 false
+	
+	if(inputInfo == true){ //반납하겠다는 뜻
+		대여목록.splice(i,1); //대여목록에 있는 해당 인덱스의 도서를 삭제한다.
+		printContent(); //화면을 다시 프린트해준다. (갱신 -> 정보가 바뀌었으니)
+	}else{
+		
+	}
+}
+
+// 도서대여버튼 클릭시 처리하는 함수 [해당 인덱스를 인수를 받는다.]
+function rentalClick(i){
+	let inputInfo = confirm("대여하시겠습니까?"); //확인을 누르면 true반환, 취소를 누르면 false
+	
+	if(inputInfo == true){ //대여하겠다는 뜻
+		대여목록.push(도서목록[i]);//대여목록에 해당 인덱스에 해당하는 도서를 넣는다
+		printContent(); //화면을 다시 프린트해준다. (갱신 -> 정보가 바뀌었으니)
+	}else{
+		
 	}
 }
 
