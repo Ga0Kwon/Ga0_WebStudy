@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/*----------------------20230113 권가영-----------------------*/
 *{background-color: #E8F2FE} /*연동 확인용*/
 
 table{	border-collapse: collapse; /*테이블 병합*/}
@@ -13,6 +14,7 @@ table{	border-collapse: collapse; /*테이블 병합*/}
 	width : 50%;
 	border: 1px solid #9DABFB;
 	margin : 10px;
+	padding : 10px;
 }
 
 .content h5, h3{font-weight: bold; background-color :#FFFFFF; text-align: center;}
@@ -22,8 +24,8 @@ table{	border-collapse: collapse; /*테이블 병합*/}
 	padding : 3px;
 }
 
-.customerTable td{	background-color : #FFFFFF; text-align: center; font-size: 16px;}
-.customerTable th{	background-color : #fae7e7; text-align: center; font-size: 18px;}
+.customerTable td{	background-color : #FFFFFF; text-align: center; font-size: 14px;}
+.customerTable th{	background-color : #fae7e7; text-align: center; font-size: 17px;}
 
 .customerTable{
 	width : 90%; /*고객페이지테이블 화면에 꽉차게*/
@@ -75,3 +77,8 @@ table{	border-collapse: collapse; /*테이블 병합*/}
 #retalOK{
 	color : blue;
 }
+
+.noticeText{color: red;}
+.noticeText p{background-color : white; text-align: center;}
+
+/*----------------------20230113 권가영-----------------------*/

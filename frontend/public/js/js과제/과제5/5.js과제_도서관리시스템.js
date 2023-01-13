@@ -49,6 +49,7 @@ console.log("도서관리 시스템 실행") //연동 확인용
 let 도서목록 = ['혼자공부하는자바', '이것이자바다']
 let 대여목록 = ['혼자공부하는자바']
 
+/*-----------------------------------20230113 권가영------------------------------------- */
 //고객체이지 테이블 안을 채우는 함수
 function printContent(){
 	let html = `<tr>	
@@ -93,13 +94,18 @@ function rentalBtnOnOff(x){
 //도서반납버튼  클릭시 처리하는 함수 [해당 인덱스를 인수를 받는다.]
 function returnClick(i){
 	
+	let bookIndex  = 대여목록.indexOf(도서목록[i]);
+	
+	console.log(bookIndex)
 	let inputInfo = confirm("반납하시겠습니까?"); //확인을 누르면 true반환, 취소를 누르면 false
 	
 	if(inputInfo == true){ //반납하겠다는 뜻
-		대여목록.splice(i,1); //대여목록에 있는 해당 인덱스의 도서를 삭제한다.
+		document.querySelector(".noticeText").innerHTML = "";	
+		대여목록.splice(i, 1); //대여목록에 있는 해당 인덱스의 도서를 삭제한다.
 		printContent(); //화면을 다시 프린트해준다. (갱신 -> 정보가 바뀌었으니)
 	}else{
-		
+		//반납을 도중에 취소하면 알림으로 알려줌
+		document.querySelector(".noticeText").innerHTML = `<p> << ${대여목록[bookIndex]} >>  반납을 취소하였습니다 </p>`
 	}
 }
 
@@ -108,10 +114,15 @@ function rentalClick(i){
 	let inputInfo = confirm("대여하시겠습니까?"); //확인을 누르면 true반환, 취소를 누르면 false
 	
 	if(inputInfo == true){ //대여하겠다는 뜻
+		document.querySelector(".noticeText").innerHTML = "";
 		대여목록.push(도서목록[i]);//대여목록에 해당 인덱스에 해당하는 도서를 넣는다
+		console.log(대여목록)
 		printContent(); //화면을 다시 프린트해준다. (갱신 -> 정보가 바뀌었으니)
 	}else{
-		
+		//대여를 도중에 취소하면 알림으로 알려줌
+		document.querySelector(".noticeText").innerHTML = `<p style = "color :blue"> << ${도서목록[i]} >> 대여를 취소하였습니다 </p>`
 	}
 }
+
+/*-----------------------------------20230113 권가영------------------------------------- */
 
