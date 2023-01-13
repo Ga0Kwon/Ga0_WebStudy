@@ -101,7 +101,7 @@ function returnClick(i){
 	
 	if(inputInfo == true){ //반납하겠다는 뜻
 		document.querySelector(".noticeText").innerHTML = "";	
-		대여목록.splice(i, 1); //대여목록에 있는 해당 인덱스의 도서를 삭제한다.
+		대여목록.splice(bookIndex, 1); //대여목록에 있는 해당 인덱스의 도서를 삭제한다.
 		printContent(); //화면을 다시 프린트해준다. (갱신 -> 정보가 바뀌었으니)
 	}else{
 		//반납을 도중에 취소하면 알림으로 알려줌
