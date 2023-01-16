@@ -21,8 +21,8 @@
 .게임판 div{ /*class명이 게임판 안 아래에 있는 div 선택*/
 	width: 30%; height : 100px; /*가로/세로 사이즈*/
 	border: 5px solid white; /*테두리*/
-	background-color: #d1fec2;
+	background-color: #008040;
 	font-size: 50px;
 	text-align: center;
-	color :#f19269;
+	color: #fdfdfd;
 }
