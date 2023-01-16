@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /*----------------------20230113 권가영-----------------------*/
-*{background-color: #E8F2FE} /*연동 확인용*/
+*{background-color: #e3e3e3} /*연동 확인용*/
 
 table{	border-collapse: collapse; /*테이블 병합*/}
 
@@ -17,7 +17,7 @@ table{	border-collapse: collapse; /*테이블 병합*/}
 	padding : 10px;
 }
 
-.content h5, h3{font-weight: bold; background-color :#FFFFFF; text-align: center;}
+.content h1, h3{font-weight: bold; background-color :#FFFFFF; text-align: center;}
 
 .customerTable, .customerTable td, .customerTable th{
 	border : 1px solid black;
@@ -86,18 +86,29 @@ table{	border-collapse: collapse; /*테이블 병합*/}
 /*----------------------20230113 정소연 start----------------*/
 .wrap{display: flex; text-align: center;}
 
+.newbook{margin : 0px; height: 20px;background-color: white; background-color: white;}
+
 .content{width: 50%; border: 1px solid white; text-align: center;
 		background-color: white;color: black;}
 /*신규도서입력*/
-.search {margin-bottom: 20px;}
+.search {margin-bottom: 20px; background-color: white;}
+
 /*도서현황표*/
 .bookmaster{width: 100%; background-color:white;
-			border-collapse: collapse;border: 1px solid black;}
+			border-collapse: collapse;}
+			
 .title {background-color:#B0C1DB; color: white;}			
-.bookmaster td {padding: 10px;}
+.bookmaster td {padding: 10px; background-color: white; padding: 10px; font-size: 14px;}
+
+.bookmaster th {background-color: #9797ff; padding : 5px; font-size: 17px;}
 
 .in{border: none; background-color: transparent; color: blue;}
 .out{border: none; background-color: transparent; color: red;}
 
+.bookmaster, .bookmaster td, .bookmaster th{
+	border : 1px solid black;
+}
 
+.insertBookBtn{margin : 0px; background-color: #79ccb9; color : white; border : none; padding : 5px;}
+.bookDeleteBtn{background-color: #ea7d8d; color : white; border : none; padding : 5px; margin: 0px;}
 /*----------------------20230113 정소연 end------------------*/
