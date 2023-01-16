@@ -22,4 +22,7 @@
 	width: 30%; height : 100px; /*가로/세로 사이즈*/
 	border: 5px solid white; /*테두리*/
 	background-color: #d1fec2;
+	font-size: 50px;
+	text-align: center;
+	color :#f19269;
 }
