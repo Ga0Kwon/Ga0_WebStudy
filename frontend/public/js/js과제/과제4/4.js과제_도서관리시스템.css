@@ -82,3 +82,22 @@ table{	border-collapse: collapse; /*테이블 병합*/}
 .noticeText p{background-color : white; text-align: center;}
 
 /*----------------------20230113 권가영-----------------------*/
+
+/*----------------------20230113 정소연 start----------------*/
+.wrap{display: flex; text-align: center;}
+
+.content{width: 50%; border: 1px solid white; text-align: center;
+		background-color: white;color: black;}
+/*신규도서입력*/
+.search {margin-bottom: 20px;}
+/*도서현황표*/
+.bookmaster{width: 100%; background-color:white;
+			border-collapse: collapse;border: 1px solid black;}
+.title {background-color:#B0C1DB; color: white;}			
+.bookmaster td {padding: 10px;}
+
+.in{border: none; background-color: transparent; color: blue;}
+.out{border: none; background-color: transparent; color: red;}
+
+
+/*----------------------20230113 정소연 end------------------*/
