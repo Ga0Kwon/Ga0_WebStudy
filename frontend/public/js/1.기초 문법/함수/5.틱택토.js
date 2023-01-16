@@ -22,16 +22,10 @@ function 클릭이벤트(putnumber){
 	
 	//1. 사용자 차례
 	if(!알두기(putnumber, "O")){
-		
 		return;
 	}
 	
-	if(	결과()){
-		for(let i = 0; i < 버튼목록현황.length; i++){
-			버튼목록현황[i] = null;
-		}
-		 return;
-	 }
+	if(결과()){ return; }
 	//1) 난수 생성
 	
 	//2. 컴퓨터 차례 / 무한루프 [정상적으로 알을 두기 전까지 무한루프]
@@ -91,7 +85,14 @@ function 알두기(number, 알모양){
 
 //3. 결과 함수 [승리자 판단 => 1.승 2.패 3. 무승부[빈자리 없으면]]
 function 결과(){
-	
+	// 1. 가로 승리자 판단 
+	// * 배열의 초기값이 모두 null 이기 때문에 null 제외
+	for( let i = 0 ; i<=6 ; i+=3 ){ // i는 0부터 6까지 3씩증가 반복처리 -> 3회반복 : 0 3 6 
+		if( 버튼목록현황[i] != null && 버튼목록현황[i] == 버튼목록현황[i+1] && 버튼목록현황[i+1] == 버튼목록현황[i+2]  ){
+			결과출력(  버튼목록현황[i] ) // 버튼목록현황[i] : 승리자의 알모양[]
+			return true; // * 승리자 존재 하는 신호;
+		} // if e 
+	} // for e
 	//세로
 	for(let i = 0; i <=2; i+=1){
 		if(버튼목록현황[i] != null && 버튼목록현황[i] == 버튼목록현황[i+3] && 버튼목록현황[i+3] == 버튼목록현황[i+6]){
@@ -112,16 +113,18 @@ function 결과(){
 	}
 	
 	//null값 카운트 -> null이 없으면 무승부.
-	let count;
+	let count = 0;
 	//무승부 판단
-	for(let i = 0; i<버튼목록현황.length; i++){
-		if(버튼목록현황[i] == null){
+	for( 버튼 of 버튼목록현황) {
+		if(버튼== null){
 			count++;
 		}
-		if(count == 0){
-			승리자출력("-")
-		}
 	}
+	if(count == 0){
+		승리자출력("-")
+		return true;
+	}
+	return false;
 	
 } 
 
@@ -129,10 +132,11 @@ function 결과(){
 function 승리자출력(알모양){
 	//1. 출력할 위치의 <div>호출
 	let 게임판 = document.querySelector(".게임판");
-	게임판.innerHTML = 알모양 + "승리";
 	
 	if(알모양 == "-"){
 		게임판.innerHTML = "무승부"
+	}else{
+		게임판.innerHTML = 알모양 + "승리";
 	}
 }
 
