@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>방문록</title>
+		</head>
+		<body>
+			<div style = "width: 700px; margin: 0 auto; text-align: center">
+				<h3>---------------------------------방문록 작성---------------------------------</h3>
+				<div class ="inputInfo" style = "display : flex; flex-wrap:wrap; align-items: baseline; justify-content: center ">
+					<!-- 방문록 input text[content] -->
+					<div style = "margin : 5px">작성자 : <input type= "text" class = "name" id = "name" ></div>
+					<div style = "margin : 5px">내용 : <input  type= "text" class = "content" id = "content"></div><br/>
+					<div style ="margin : 5px">비밀번호 : <input type = "password" class = "password" id ="password"></div> 
+					<!-- 방문록 등록 버튼 -->
+					<button onclick="작성()">작성</button>
+				</div>
+				
+			
+			</div>
+
+			
+			<table class = "noticeTable" border = "1" style="margin : 0 auto; width : 700px; ">
+				<tr>
+					<th style="column-span: 4; padding : 5px 20px;">
+						방문해 주셔서 감사합니다.
+					</th>
+				</tr>
+				
+			</table>
+			<div id ="notice"></div>
+			
+<!-- 			<script src = "3.js과제3.js"></script> -->
+			<script src = "2.방문록.js"></script>
+		</body>
+	</html>
