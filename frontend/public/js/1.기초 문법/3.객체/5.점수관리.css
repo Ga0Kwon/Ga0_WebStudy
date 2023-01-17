@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+*{background-color: #F1F1F1 }
+
+.wrap{
+	display: flex; /*레이아웃 뱇치 사용*/
+	justify-content: center; /*레이아웃 가운데 정렬*/
+}
+
+.addBox, .listBox{
+	width : 30%;
+	border: 1px solid #008080; /*테두리*/
+	background-color: white; /*배경색*/
+	text-align: center; /*내용물 가운데 정렬*/
+	margin : 10px /*바깥 여백*/
+}
+
+h1{background-color: white;}
+
+.scoreTable{margin : 0 auto; background-color: white;}
+
+.scoreTable th, .scoreTable input{ background-color: white;}
