@@ -178,7 +178,7 @@ function deleteClick(i){
 }
 
 //수정할 인덱스 => 여럿 {}에서 동일한 변수 사용하려고
-let upIndex = -1;
+let upIndex = -1; //index는 -1이 절대 생길 수 없기 때문에 안전하게 -1을 넣음
 /*수정버튼 클릭시 수정할 인덱스 [i]*/
 function changeClick(i){
 	upIndex = i
