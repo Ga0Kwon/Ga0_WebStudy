@@ -13,6 +13,7 @@
 					<table class = "scoreTable">
 						<tr>
 							<th>학생명</th> <th><input class = "name" type = "text" placeholder="중복불가능"></th>
+							<!-- <th class ="nameBox"></th> : 경고 메시지 옆에 띄울때 -->
 						</tr>
 						<tr>
 							<!-- type : number여도 가지고오면 string이다. -->
@@ -33,8 +34,39 @@
 				<div class = "listBox">
 					<h1> 학생 점수 현황 </h1>
 					<table class = "listTable">
-						
+						<tr>
+							<th>번호</th>
+							<th>이름</th>
+							<th>국어</th>
+							<th>영어</th>
+							<th>수학</th>
+							<th>총점</th>
+							<th>평균</th>
+							<th>순위</th>
+							<th>비고</th>
+						</tr>
 					
+					</table>
+				</div>
+				<div class = "updateBox">
+					<h1>학생 점수 수정</h1>
+					<table class = "updateTable">
+						<tr>
+							<th>학생명</th> <th><input readonly="readonly" class = "updatename" type = "text" placeholder="중복불가능"></th>
+						</tr>
+						<tr>
+							<th>국어</th> <th><input class = "updatekor" type = "text" placeholder="숫자 입력 : 0~100"></th>
+						</tr>
+						<tr>
+							<th>영어</th> <th><input class = "updateeng" type = "text" placeholder="숫자 입력 : 0~100"></th>
+						</tr>
+						<tr>
+							<th>수학</th> <th><input class = "updatemat" type = "text" placeholder="숫자 입력 : 0~100"></th>
+						</tr>
+						<tr>
+							<th colspan="2"><button onClick = "updateClick()" class = "updateBtn">수정 완료</button></th>
+						</tr>
+						<tr>
 					</table>
 				</div>
 			</div>

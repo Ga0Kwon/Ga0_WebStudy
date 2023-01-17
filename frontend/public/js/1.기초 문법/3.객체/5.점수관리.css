@@ -2,13 +2,15 @@
 
 *{background-color: #F1F1F1 }
 
+table{ border-collapse: collapse;}
 .wrap{
 	display: flex; /*레이아웃 뱇치 사용*/
 	justify-content: center; /*레이아웃 가운데 정렬*/
+	flex-wrap: wrap;
 }
 
-.addBox, .listBox{
-	width : 30%;
+.addBox, .listBox, .updateBox{
+	width : 40%;
 	border: 1px solid #008080; /*테두리*/
 	background-color: white; /*배경색*/
 	text-align: center; /*내용물 가운데 정렬*/
@@ -17,6 +19,33 @@
 
 h1{background-color: white;}
 
-.scoreTable{margin : 0 auto; background-color: white;}
+.scoreTable, .updateTable{margin : 0 auto; background-color: white;}
 
-.scoreTable th, .scoreTable input{ background-color: white;}
+.scoreTable th, .scoreTable input, .updateTable th, .updateTable input{ background-color: white;}
+
+.listTable td, .listTable th{border: 1px solid black; padding: 5px;}
+.listTable{margin : 0 auto; border: 1px solid black; }
+.listTable td {background-color: white;}
+.listTable th{background-color: #eeeeee;}
+
+.listTable .deleteBtn{
+	padding : 1px 10px;
+	background-color: #ff8080;
+	color : white;
+	border : none;
+}
+
+.listTable .changeBtn{
+	padding : 1px 10px;
+	background-color: #0080c0;
+	color : white;
+	border : none;
+}
+
+.addBox, .listBox, .updateBox{
+	padding : 10px;
+}
+
+.updateBox{
+	display : none; /*처음에 수정창 숨기기*/
+}
