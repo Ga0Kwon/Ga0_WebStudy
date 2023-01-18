@@ -133,11 +133,14 @@ function onOrder(){
 /*	cartList.forEach((o) => {console.log(o)})
 	cartList.map((o) => {console.log(o)})
 	*/
+	
+	let mapCartLsit = cartList.map((o) =>{ return o;})
 	//2. 총 가격 만들기 
 	let totalPrice = 0;
-	for(let i = 0; i < cartList.length; i++){
-		totalPrice += cartList[i].price;
+	for(let i = 0; i < mapCartLsit.length; i++){
+		totalPrice += mapCartLsit[i].price;
 	}
+/*	console.log(totalPrice)*/
 	if(confirm('주문하시겠습니까?')){
 		/*카트 리스트 ~~~~~~~~~~~~~~~> 주문 페이지로 */
 		//1. 주문
@@ -146,7 +149,7 @@ function onOrder(){
 		/*map() : 반복문 함수이다. */
 		let order = {
 			number : number, 
-			items : cartList.map((o) =>{ return o;}), //새로운 객체를 만듦가 동시에 cartList의 객체정보를 가져옴.
+			items : mapCartLsit, //새로운 객체를 만듦가 동시에 cartList의 객체정보를 가져옴.
 			time : new Date(), //new Date() : 현재 날짜와 시간을 알려줌
 			state : true, //true : 일단 주문 -> false : 주문 완료
 			complete : 0, //아직 주문 완료 되기 전이기 때문에 0
@@ -154,6 +157,7 @@ function onOrder(){
 		}
 		//2) order 객체 배열에 저장
 		orderList.push(order)
+		console.log(order)
 		cartList.splice(0);
 	}else{
 		return;
