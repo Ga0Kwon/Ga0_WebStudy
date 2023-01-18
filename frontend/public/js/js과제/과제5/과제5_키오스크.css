@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+/*폰트*/
+@font-face {
+    font-family: 'ONE-Mobile-POP';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{ /*여백 기본 값 제거*/
+	padding : 0px;
+	margin : 0px;
+	font-family: ONE-Mobile-POP;
+	border : none;
+}
+
+.wrap{
+	display: flex; /*레이아웃 배치 : 기본값이 세로배치인데 가로배치로 바꿈*/
+	justify-content: center; /*레이아웃 가운데 배치*/
+}
+
+.container{
+	width: 45%; /*디바이스[크롬] 배율*/
+	border : 1px solid black; /*테두리*/
+	margin : 1%;
+}
+
+.kioskBox{
+	width : 100%; height : 1200px;
+}
+
+.header{
+	height : 283px;
+}
+
+.content{
+	height : 900px;
+}
+
+.categoryBox ul{
+	display: flex;
+	justify-content: space-between;
+}
+
+.categoryBox li{
+	display: inline-block; /*가로 배치*/
+	font-weight : bold;
+	margin: 5px 35px;
+	padding : 5px 15px;
+	color : #737373;
+}
+
+/*선택한 li 아이템 꾸미기*/
+.categorySelectItem{ 
+	color : red !important; /*속성 충돌시 최우선! -> id보다도!!*/
+	border-bottom: 4px solid red;
+}
+
+.hamburger{
+	width : 27%; 
+}
+
+.hamburgerInfo{
+	text-align: center;
+}
+
+.hamburgerPrice{
+	color : red;
+	margin-top: 2px;
+}
+
+.product{
+	margin : 3%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.cart{
+	background-color: #F5F0EC;
+}
+.cartContent{
+	padding : 15px 25px;
+}
+.item{
+	background-color: white;
+	width : 20%;
+	margin-top: 10px;
+	padding : 20px;
+	font-size: 20px;
+	margin-right: 10px;
+	
+}
+.item .hamburgerPrice{
+	padding-top: 20px;	
+}
+.cartCount{
+	background-color: red;
+	color: white;
+	margin-left : 5px;
+	padding : 2px 20px;
+	border-radius: 2em;
+	display: inline-block; /*span : inline :사이즈 변경 불가능*/
+}
+.cartBtn{
+	display: flex;
+}
+.cartBtn button{
+	width: 50%;
+	color : white;
+	font-size: 25px;
+	padding : 15px;
+	margin : 0px;
+	
+}
+.cancelBtn{
+	background-color: black;
+}
+.orderBtn{
+	background-color: red;
+}
+.cartTop{
+	display: flex;
+	justify-content: space-between;
+	padding : 15px 0px;
+}
+.pTotal{
+	color: red;
+	margin-left: 20px;
+}
+
+.item .hamburgerTitle{
+	width : 100%; height: 30px;
+}
+
+.cartBottom{
+	display: flex;
+	justify-content: flex-start;
+	height: 116px;
+	
+}
+/*----------------------------포스기 부분 시작-----------------------------------*/
+.container h3{text-align: center;}
+
+.orderMaster, .orderDetail{border : 1; width : 100%; border-collapse: collapse;}
+
+.orderMaster td, .orderMaster th, .orderDetail td, .orderDetail th{border: 1px black solid;}
+
+.orderMaster th, .orderDetail th{background-color: #E8F2FE; padding: 10px}
