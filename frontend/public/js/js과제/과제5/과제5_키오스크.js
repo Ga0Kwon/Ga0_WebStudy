@@ -133,7 +133,7 @@ function onOrder(){
 /*	cartList.forEach((o) => {console.log(o)})
 	cartList.map((o) => {console.log(o)})
 	*/
-	
+	//카트배열 -> 새로운 배열 [주문 객체에 카트 배열 대입시 카트배열 초기화시 주문객체나 카트배열도 초기화 = 메모리 동일하기 때문]
 	let mapCartLsit = cartList.map((o) =>{ return o;})
 	//2. 총 가격 만들기 
 	let totalPrice = 0;
