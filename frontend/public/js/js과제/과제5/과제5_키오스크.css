@@ -59,6 +59,7 @@
 
 .hamburger{
 	width : 27%; 
+	margin-bottom: 15px;
 }
 
 .hamburgerInfo{
@@ -143,8 +144,8 @@
 /*----------------------------포스기 부분 시작-----------------------------------*/
 .container h3{text-align: center;}
 
-.orderMaster, .orderDetail{border : 1; width : 100%; border-collapse: collapse;}
+.orderMaster, .orderDetail{border : 1; width : 100%; border-collapse: collapse; color : white; font-size: 16px}
 
 .orderMaster td, .orderMaster th, .orderDetail td, .orderDetail th{border: 1px black solid;}
 
-.orderMaster th, .orderDetail th{background-color: #E8F2FE; padding: 10px}
+.orderMaster th, .orderDetail th{background-color: #11246f; padding: 10px}

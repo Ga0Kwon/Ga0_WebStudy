@@ -8,6 +8,36 @@ let burgerList = [{img : '기네스와퍼.png', name : '기네스와퍼', price 
 				  {img : '콰트로치즈X.png', name : '콰트로치즈X', price : 7800, category : '프리미엄'},
 				  {img : '콰트로치즈와퍼.png', name : '콰트로치즈와퍼', price : 9000, category : '프리미엄'},
 				  {img : '통새우와퍼.png', name : '통새우와퍼', price : 6500, category : '프리미엄'},
+				  {img : 'BLT오믈렛킹모닝.png', name : 'BLT오믈렛킹모닝', price : 8800, category : '올데이킹'},
+				  {img : '오믈렛킹모닝.png', name : '오믈렛킹모닝', price : 6500, category : '올데이킹'},
+				  {img : '불고기몬스터세트.png', name : '불고기몬스터세트', price : 9500, category : '올데이킹'},
+				  {img : '타바스코몬스터.png', name : '타바스코몬스터', price : 10500, category : '올데이킹'},
+				  {img : '더블오리지널치즈버거세트.png', name : '더블오리지널치즈버거세트', price : 10000, category : '올데이킹'},
+				  {img : '타바스코더블비프.png', name : '타바스코더블비프', price : 7900, category : '올데이킹'},
+				  {img : '통새우와퍼주니어세트.png', name : '통새우와퍼주니어세트', price : 9900, category : '올데이킹'},
+			  	  {img : '치즈버거.png', name : '치즈버거', price : 4500, category : '올데이킹'},
+	  	  		  {img : '치킨킹팩1.png', name : '치킨킹팩1', price : 11000, category : '스페셜'},
+				  {img : '치킨킹팩2.png', name : '치킨킹팩2', price : 11500, category : '스페셜'},
+				  {img : '치킨킹팩3.png', name : '치킨킹팩3', price : 12000, category : '스페셜'},
+				  {img : '블랙어니언팩1.png', name : '블랙어니언팩1', price : 12000, category : '스페셜'},
+				  {img : '블랙어니언팩2.png', name : '블랙어니언팩2', price : 13000, category : '스페셜'},
+				  {img : '블랙어니언팩3.png', name : '블랙어니언팩3', price : 13000, category : '스페셜'},
+				  {img : '스태커2와퍼.png', name : '스태커2와퍼', price : 9800, category : '와퍼'},
+				  {img : '스태커3와퍼.png', name : '스태커3와퍼', price : 10800, category : '와퍼'},
+				  {img : '갈릭불고기와퍼.png', name : '갈릭불고기와퍼', price : 7900, category : '와퍼'},
+				  {img : '베이컨치즈와퍼.png', name : '베이컨치즈와퍼', price : 6900, category : '와퍼'},
+				  {img : '할라피뇨와퍼.png', name : '할라피뇨와퍼', price : 7600, category : '와퍼'},
+				  {img : '치즈와퍼.png', name : '치즈와퍼', price : 4500, category : '와퍼'},
+				  {img : '와퍼.png', name : '와퍼', price : 3900, category : '와퍼'},
+				  {img : '불고기와퍼.png', name : '불고기와퍼', price : 4900, category : '와퍼'},
+				  {img : '와퍼주니어.png', name : '와퍼주니어', price : 3900, category : '와퍼'},
+				  {img : '불고기와퍼주니어.png', name : '불고기와퍼주니어', price : 4200, category : '와퍼'},
+				  {img : '비프&슈림프버거.png', name : '비프&슈림프버거', price : 8900, category : '치킨버거'},
+				  {img : '통새우슈림프버거.png', name : '통새우슈림프버거', price : 8200, category : '치킨버거'},
+				  {img : '잔망루피슈림프버거.png', name : '잔망루피슈림프버거', price : 4000, category : '치킨버거'},
+				  {img : '롱치킨버거.png', name : '롱치킨버거', price : 4600, category : '치킨버거'},
+				  {img : '바비큐킹치킨버거.png', name : '바비큐킹치킨버거', price : 4800, category : '치킨버거'},
+				  {img : '킹치킨버거.png', name : '킹치킨버거', price : 4700, category : '치킨버거'},
 ];
 
 let cartList = []; //카트 목록
@@ -157,7 +187,7 @@ function onOrder(){
 		}
 		//2) order 객체 배열에 저장
 		orderList.push(order)
-		console.log(order)
+		console.log(orderList)
 		cartList.splice(0);
 	}else{
 		return;
