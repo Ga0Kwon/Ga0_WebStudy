@@ -43,6 +43,9 @@ let burgerList = [{img : '기네스와퍼.png', name : '기네스와퍼', price 
 let cartList = []; //카트 목록
 
 let orderList = []; //주문 목록
+
+/*매출현황 정보를 가지고 있는 객체를 담는 배열 생성 */
+let salseInfo = [];
 /*
 let adminCategory = ['등록된버거현항', '주문된주문목록현황', '매출현황']*/
 
@@ -54,6 +57,7 @@ function setting(){
 	categorySelect(0); //처음 클릭되어 있는[기본값] : 프리미엄
 	printProduct(0); //0 : 프리미엄
 	printInsertCurrentable();
+	createSalesObject(0)
 }
 
 
@@ -198,8 +202,8 @@ function onOrder(){
 		//2) order 객체 배열에 저장
 		orderList.push(order)
 		printOrderTable(orderList)
-	/*	console.log(orderList)
-		console.log(order)*/
+		console.log(orderList)
+		/*console.log(order)*/
 		cartList.splice(0); //cartList를 다른 곳에서 써야한다면 -> cartList.splice(0)하기전에 옮겨야함.
 	}else{
 		return;
@@ -332,7 +336,7 @@ function printOrderTable(){
 		for(let j = 0; j < useBurgerNameList.length; j++){
 			html += `<tr>
 					<td class = "orderNo">${orderList[i].number}</td>
-					<td class = "orderburgerName">${useBurgerNameList[j]}</td>
+					<td class = "orderburgerName">${burgerNameList[j].name}</td>
 					<td class = "orderState">${orderList[i].state ? "주문요청" : 
 					`<div class = "orderFinishText" >주문 완료</div>`}</td>
 				<td class = "orderRemark">
@@ -354,24 +358,37 @@ function printOrderTable(){
 /*주문완료를 눌렀을 경우  */
 function onOrderComplete(i){
 	orderList[i].state = false
-/*	console.log(orderList)*/
+	/*orderList 배열에서 버거 이름만 뽑아서 배열 만들기 */
+	let burgerNameList = []
+	for(let j = 0; j < orderList.length; j++){
+		burgerNameList = orderList[j].items;
+	}
+	/*	console.log(orderList)*/
+	/*주문완료를 누르면 판매 수량 증가, 매출액 증가! */
+	for(let x = 0; x < salseInfo.length; x++){
+		/*매출 현황을 가지고 있는 배열의 이름과 현재 주문울 완료한 버거의 이름과 같을 경우
+			매출액과 판매 수량을 그에 따라 증가시켜줘야하고, 그에따라 순위도 매겨야한다.*/
+		for(let j = 0; j < burgerNameList.length; j++){
+			if(salseInfo[x].productNm == burgerNameList[j].name){
+				salseInfo[x].productSalse += 1;
+			}
+		}
+	}
+	createSalesObject(salesCount);
 	printOrderTable();
 	printSalesTable();
+	console.log(salseInfo)
 }
 
-/*매출현황 정보를 가지고 있는 객체를 담는 배열 생성 */
-let salseInfo = []
-
-createSalesObject();
-function createSalesObject(){
+function createSalesObject(salesCount){
 	let salesBurgerTable = { }
 	for(let i = 0; i < burgerList.length; i++){
 /*		console.log(i)*/
 		salesBurgerTable = {
 			productNo : burgerList[i].productNo,
 			productNm : burgerList[i].name,
-			productSalse : 0,
-			productSalsePrice : 0,
+			productSalse : salesCount,
+			productSalsePrice : salesCount,
 			productRank : 0,
 		}
 		salseInfo.push(salesBurgerTable)
