@@ -41,23 +41,47 @@
 				</div>
 				<div class = "container">
 					<div>
-						<!-- 구현 -->
-						<table class = "orderMaster">
+						<h3>----------------------버거 등록----------------------</h3>
+						<table class = "insertBurger"> <!-- 새로운 버거 등록 -->
 							<tr>
-								<th class = "orderNo">주문번호</th>
-								<th class = "orderBurgerList">버거목록</th>
+								<th class ="title">버거이름</th>
+								<th><input class = "inputBurgerName" type = "text"></th>
+							</tr>
+							<tr>
+								<th class ="title">카테고리명</th>
+								<th><input class = "inputCategory" type = "text"></th>
+							</tr>
+							<tr>
+								<th class ="title" >가격</th>
+								<th><input class ="inputPrice" type = "number" placeholder="금액만 입력해주세요."></th>
+							</tr>
+							<tr>
+								<th  class ="title" >이미지명</th>
+								<th><input class ="inputImgName" type = "text" placeholder="확장자를 포함해서 입력해주세요."></th>
 							</tr>
 						</table>
-						<table class = "orderDetail">
-							<tr>
-								<th class = "orderNo">주문번호</th>
-								<th class = "orderCart">주문된 카트</th>
-								<th class = "orderTime">주문시간</th>
-								<th class = "orderState">주문상태</th>
-								<th class = "orderFinishTime">주문완료시간</th>
-								<th class = "orderPrice">주문 가격</th>
-							</tr>
-						</table>
+						<div class = "insertBox">
+							<button class ="newBurgerinsertBtn" onClick = "insertBurger()" >새로운 버거 등록</button>
+						</div>
+						
+						<h3>---------------------------------------------------</h3>
+						<!-- <div class = "admincategoryBox">
+							<button onClick = "whatPrintTable('등록된버거현황')" class = "showInsertTable">등록된버거현황</button>
+							<button onClick = "whatPrintTable('주문된주문목록현황')" class = showOrderTable> 주문된주문목록현황</button>
+							<button onClick = "whatPrintTable('매출현황')" class = "showSalesTable">매출현황</button>
+						</div> -->
+						<div class = "adminContent">
+							<table class = "insertCurrentTable"> <!-- 등록된 버거 현황 -->
+
+							</table>
+							<table class = "orderBurgerTable"> <!-- 주문된 주문 목록 현황 -->
+
+							</table>
+							<table class = "salesTable"> <!-- 매출 현황 -->
+
+							</table>
+						</div>
+						
 					</div>
 				</div>
 				
