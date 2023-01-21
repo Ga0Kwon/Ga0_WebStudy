@@ -49,6 +49,21 @@ let salseInfo = [];
 /*
 let adminCategory = ['등록된버거현항', '주문된주문목록현황', '매출현황']*/
 
+function createSalesObject(){
+	let salesBurgerTable = { }
+	for(let i = 0; i < burgerList.length; i++){
+/*		console.log(i)*/
+		salesBurgerTable = {
+			productNo : burgerList[i].productNo,
+			productNm : burgerList[i].name,
+			productSalse : 0,
+			productSalsePrice : 0,
+			productRank : 1,
+		}
+		salseInfo.push(salesBurgerTable)
+	}
+}
+
 setting();
 
 /*삭제될때도 수정될때도 하나하나 다시 새로고침해야하기 때문에 새로고침해야하는 것들을 모아 함수로 만들었습니다. */
@@ -362,6 +377,7 @@ function onOrderComplete(i){
 	let burgerNameList = []
 	for(let j = 0; j < orderList.length; j++){
 		burgerNameList = orderList[j].items;
+		console.log(burgerNameList)
 	}
 	/*	console.log(orderList)*/
 	/*주문완료를 누르면 판매 수량 증가, 매출액 증가! */
@@ -370,33 +386,22 @@ function onOrderComplete(i){
 			매출액과 판매 수량을 그에 따라 증가시켜줘야하고, 그에따라 순위도 매겨야한다.*/
 		for(let j = 0; j < burgerNameList.length; j++){
 			if(salseInfo[x].productNm == burgerNameList[j].name){
+				/*반복문을 돌면서 하나씩 체크하기 때문에 다른 연산 필요없이 반복문을 돌때마다 한개의 수령과 가격만큼 더해주면된다.
+				같은 물품 2개여도 orderList에는 1개 1개 각각 따로 들어가기 때문*/
 				salseInfo[x].productSalse += 1;
+				salseInfo[x].productSalsePrice += burgerNameList[j].price;
 			}
 		}
-	}
-	createSalesObject(salesCount);
+		
 	printOrderTable();
 	printSalesTable();
 	console.log(salseInfo)
+	console.log(burgerList)
 }
 
-function createSalesObject(salesCount){
-	let salesBurgerTable = { }
-	for(let i = 0; i < burgerList.length; i++){
-/*		console.log(i)*/
-		salesBurgerTable = {
-			productNo : burgerList[i].productNo,
-			productNm : burgerList[i].name,
-			productSalse : salesCount,
-			productSalsePrice : salesCount,
-			productRank : 0,
-		}
-		salseInfo.push(salesBurgerTable)
-	}
-}
 /*console.log(salseInfo)*/
 
-
+/*printSalesTable()*/
 /*매출현황 테이블을 출력하는 함수 */
 function printSalesTable(){
 	let html = `<tr>
@@ -406,14 +411,28 @@ function printSalesTable(){
 					<th class = "salesPrice">매출액</th>
 					<th class = "salesBurgerRank">순위[매출액기준]</th>
 				</tr>`
+			
 	for(let i = 0; i < salseInfo.length; i++){
+		let salesPrice = salseInfo[i].productSalsePrice
+		let Rank = 1;
+		
+		salseInfo.forEach((o1) => {
+			let comparePrice = o1.productSalsePrice;
+			console.log(comparePrice)
+			if(salesPrice < comparePrice){
+				Rank++;
+			}
+		})
+		
+		
 		html += `<tr>
 					<td class = "salesProductNo">${salseInfo[i].productNo}</td>
 					<td class = "salesBurgerName">${salseInfo[i].productNm}</td>
 					<td class = "salesCount">${salseInfo[i].productSalse}</td>
 					<td class = "salesPrice">${salseInfo[i].productSalsePrice}</td>
-					<td class = "salesBurgerRank">${salseInfo[i].productRank}</td>
+					<td class = "salesBurgerRank">${Rank}</td>
 				</tr>`
 	}
 	document.querySelector('.salesTable').innerHTML = html
+	}
 }
