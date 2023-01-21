@@ -81,7 +81,7 @@ function product_print( selectcategoryindex ){  // categoey_select 함수로부�
 		if( burgerList[i].category == categoryList[selectcategoryindex] ){
 			// i번째 버거객체의 카테고리와 선택된 카테고리와 같으면 
 			html += `<div onclick="cardadd( ${i} )" class="product">
-						<img src="img/${ burgerList[i].img }" width="100%" />
+						<img src="img/burger/${ burgerList[i].img }" width="100%" />
 						<div class="productinfo">
 							<div class="ptitle"> ${ burgerList[i].name } </div>
 							<div class="pprice"> ${ burgerList[i].price.toLocaleString() } 원 </div>
