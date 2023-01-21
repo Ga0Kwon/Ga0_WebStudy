@@ -1,6 +1,7 @@
 /*공통 */
 let categoryList = ['프리미엄', '스페셜', '와퍼', '올데이킹', '치킨버거'];
 
+/*제품번호 추가해줌. */
 let burgerList = [{img : '기네스와퍼.png', name : '기네스와퍼', price : 9500, category : '프리미엄', productNo : '1674104004537-334'},
 				  {img : '기네스콰트로치즈와퍼.png', name : '기네스콰트로치즈와퍼', price : 10000, category : '프리미엄', productNo : '1674104004537-335'},
 				  {img : '몬스터X.png', name : '몬스터X', price : 8800, category : '프리미엄', productNo : '1674104004537-336'},
@@ -49,16 +50,17 @@ let salseInfo = [];
 /*
 let adminCategory = ['등록된버거현항', '주문된주문목록현황', '매출현황']*/
 
+/*매출현황 전용 객체 생성 */
 function createSalesObject(){
 	let salesBurgerTable = { }
 	for(let i = 0; i < burgerList.length; i++){
 /*		console.log(i)*/
 		salesBurgerTable = {
-			productNo : burgerList[i].productNo,
-			productNm : burgerList[i].name,
-			productSalse : 0,
-			productSalsePrice : 0,
-			productRank : 1,
+			productNo : burgerList[i].productNo, //버거 제품번호
+			productNm : burgerList[i].name, //버거 이름
+			productSalse : 0,	//버거 팔린 개수
+			productSalsePrice : 0, //버거 매출액
+			productRank : 1, //버거 순위
 		}
 		salseInfo.push(salesBurgerTable)
 	}
@@ -267,6 +269,7 @@ function insertBurger(){
 		categorySelect(categoryIndex);
 		printProduct(categoryIndex)
 		printInsertCurrentable();
+		printSalesTable();
 		
 		alert("새로운 버거가 등록되었습니다.")
 		
@@ -395,8 +398,8 @@ function onOrderComplete(i){
 		
 	printOrderTable();
 	printSalesTable();
-	console.log(salseInfo)
-	console.log(burgerList)
+/*	console.log(salseInfo)
+	console.log(burgerList)*/
 }
 
 /*console.log(salseInfo)*/
@@ -412,6 +415,7 @@ function printSalesTable(){
 					<th class = "salesBurgerRank">순위[매출액기준]</th>
 				</tr>`
 			
+	/*가격을 비교하여 가격이 작으면 Rank를 1씩 증가시킴 -> 매출액이 낮으면 순위가 낮아야함(순위는 숫자가 높을 수록 낮음) */
 	for(let i = 0; i < salseInfo.length; i++){
 		let salesPrice = salseInfo[i].productSalsePrice
 		let Rank = 1;
