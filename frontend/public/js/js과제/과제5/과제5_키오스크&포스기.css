@@ -30,7 +30,7 @@
 
 /*---------------------------키오스크 구역----------------------------*/
 .kioskBox{
-	width : 100%; height : 1200px; /*가로는 부모 전체 100%, 높이는 1200px*/
+	width : 100%;/*가로는 부모 전체 100%, 높이는 1200px*/
 }
 
 .header{
@@ -41,12 +41,12 @@
 	height : 900px; /*키오스크 구역 높이 설정*/
 }
 
-.categoryBox ul{ /*카테고리 구역 설정*/
+.categoryBox ul{ /*카테고리 구역 설정[포스기/키오스크]*/
 	display: flex;
 	justify-content: space-between; /*가로는 해당 부분의 끝과 끝에 맞추고 사이사이 여백*/
 }
 
-.categoryBox li{ /*카테고리 items 부분*/
+.categoryBox li{ /*카테고리 items 부분[포스기/키오스크]*/
 	display: inline-block; /*가로 배치*/
 	font-weight : bold; /*폰트 두껍게*/
 	margin: 5px 35px; 
@@ -55,7 +55,7 @@
 }
 
 /*선택한 li item 꾸미기*/
-.categorySelectItem { 
+.categorySelectItem { /*포스기랑 공용*/
 	color : red !important; /*속성 충돌시 최우선! -> id보다도!!*/
 	border-bottom: 4px solid red; /*선택한 li 부분 폰트 색 red*/
 }
@@ -183,6 +183,28 @@
  	text-align: center; 
  	justify-content: center;
  }
+ 
+.adminCategory ul{ /*카테고리 구역 설정*/
+	display: flex;
+	justify-content: space-between; /*가로는 해당 부분의 끝과 끝에 맞추고 사이사이 여백*/
+}
+
+.adminCategory li{ /*카테고리 items 부분*/
+	display: inline-block; /*가로 배치*/
+	font-weight : bold; /*폰트 두껍게*/
+	margin: 5px 35px; 
+	padding : 5px 15px;
+	color : #737373;
+}
+
+/*카테고리 내용 박스 구역*/
+.insertCurrentBox, .orderBurgerBox, .salesBox{
+	display: none; /*처음에는 테이블을 띄우지 않는다. 카테고리를 선택하면 띄움.*/
+	width : 100%;
+	margin : 0 auto;
+}
+
+.insertCurrentBox 
 
 /*-------------등록 버거 테이블 td, th들 width 지정.-------------*/
 .productNo{width : 24%;}
@@ -211,7 +233,7 @@
 .salesTable td, .salesTable th{border: 1px black solid; color : black}
 
 /*포스기 부분에 있는 테이블들 th 배경색 설정*/
-.insertCurrentTable th, .orderBurgerTable th, .salesTable th{background-color: #11246f; padding: 10px}
+.insertCurrentTable th, .orderBurgerTable th, .salesTable th{background-color: #11246f; padding: 10px; color : white}
 
 /*---------------------등록 버거 테이블 td, th들 width 지정.------------------*/
 .productNo{width : 24%;}
