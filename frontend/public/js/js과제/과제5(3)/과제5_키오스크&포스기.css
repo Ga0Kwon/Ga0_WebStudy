@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+/*사용할 폰트*/
+@font-face {
+    font-family: 'ONE-Mobile-POP';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*여백 기본 값 제거 및 폰트 설정*/
+*{ 
+	padding : 0px;
+	margin : 0px;
+	font-family: ONE-Mobile-POP;
+	border : none;
+}
+/*------------------------키오스크&포스기 공통 구역------------------------*/
+
+.wrap{
+	display: flex; /*레이아웃 배치 : 기본값이 세로배치인데 가로배치로 바꿈*/
+	justify-content: center; /*레이아웃 가운데 배치*/
+}
+
+.container{
+	width: 45%; /*디바이스[크롬] 배율*/
+	/* border : 1px solid black; 테두리 */
+	margin : 1%; /*바깥 여백 1%씩 */
+}
+
+/*---------------------------키오스크 구역----------------------------*/
+.kioskBox{
+	width : 100%; height : 1200px; /*가로는 부모 전체 100%, 높이는 1200px*/
+}
+
+.header{
+	height : 283px; /*헤더 높이 설정*/
+}
+
+.content{
+	height : 900px; /*키오스크 구역 높이 설정*/
+}
+
+.categoryBox ul{ /*카테고리 구역 설정*/
+	display: flex;
+	justify-content: space-between; /*가로는 해당 부분의 끝과 끝에 맞추고 사이사이 여백*/
+}
+
+.categoryBox li{ /*카테고리 items 부분*/
+	display: inline-block; /*가로 배치*/
+	font-weight : bold; /*폰트 두껍게*/
+	margin: 5px 35px; 
+	padding : 5px 15px;
+	color : #737373;
+}
+
+/*선택한 li item 꾸미기*/
+.categorySelectItem { 
+	color : red !important; /*속성 충돌시 최우선! -> id보다도!!*/
+	border-bottom: 4px solid red; /*선택한 li 부분 폰트 색 red*/
+}
+
+.hamburger{ /*햄버거[제품] 정보를 담은 box[div]*/
+	width : 27%; 
+	margin-bottom: 15px;
+}
+
+.hamburgerInfo{ /*햄버거 정보[가격, 이름]를 담은 box 구역*/
+	text-align: center;
+}
+
+.hamburgerPrice{ /*햄버거 가격을 담은 box구역 설정*/
+	color : red; /*가격은 폰트 색 red*/
+	margin-top: 2px;
+}
+
+.product{ /*제품을 출력하는 부분 box 구텩*/
+	margin : 3%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.cartTop{ /*제품 개수, 제품 가격 구역*/
+	display: flex;
+	justify-content: space-between;
+	padding : 15px 0px;
+}
+
+.cart{ /*담긴 카트 구역 배경색 변경*/
+	background-color: #F5F0EC;
+}
+
+.cartContent{ /*카트 구역 안쪽 여백 설정 -> 카트에 제품이 담길때 살짝 여백을 줌*/
+	padding : 15px 25px;
+}
+
+.item{ /*카트에 추가되는 목록[제품 정보] 설정*/
+	background-color: white;
+	width : 20%;
+	margin-top: 10px;
+	padding : 20px;
+	font-size: 20px;
+	margin-right: 10px;
+}
+
+.item .hamburgerTitle{ /*카트에 추가되는 목록의 햄버거 이름 텍스트 부분*/
+	width : 100%; height: 30px;
+}
+
+.item .hamburgerPrice{ /*카트에 추가되는 목록의 햄버거 가격부분 텍스트 여백 -> 이름이랑 살짝 띄울려고*/
+	padding-top: 20px;	
+}
+
+.cartCount{ /*카트에 담긴 제품 개수 텍스트*/
+	background-color: red;
+	color: white;
+	margin-left : 5px;
+	padding : 2px 20px;
+	border-radius: 2em;
+	display: inline-block; /*span : inline :사이즈 변경 불가능*/
+}
+
+.pTotal{ /*카트에 담긴 제품들의 가격 총합 텍스트*/
+	color: red;
+	margin-left: 20px;
+}
+
+.cartBottom{ /*카트 맨 밑 버튼 구역 부분*/
+	display: flex;
+	justify-content: flex-start;
+	height: 116px;
+	margin-bottom: 20px;
+	
+}
+
+.cartBtn{ /*카트 버튼들 가로 정렬 구역 Box -> 주문취소, 주문하기 버튼*/
+	display: flex;
+}
+
+.cartBtn button{ /*주문 취소, 주문하기 버튼 설정*/
+	width: 50%;
+	color : white;
+	font-size: 25px;
+	padding : 15px;
+	margin : 0px;
+}
+
+.cancelBtn{ /*취소 버튼*/
+	background-color: black;
+}
+.orderBtn{ /*주문 버툰*/
+	background-color: red;
+}
+
+/*----------------------------포스기 구역----------------------------*/
+
+/*포스기 부분 h3 텍스트 설정*/
+.container h3{text-align: center; font-size: 25px; color : #00002F; }
+
+/*--------------새로운 버거 등록하는 부분 설정-------------------*/
+.insertBurger{border : 1; width : 70%; margin : 0 auto;  border-collapse: collapse; font-size: 20px;}
+.insertBurger .title{background-color: #C2DEFF; text-align: center;}
+.insertBurger th{border : 1px solid black; padding : 8px;}
+.insertBurger input{width :100%; height: 20px; border : none; font-weight: normal; font-size: 18px;}
+/*----------------------------------------------------*/
+
+/*새로운 버거 등록하는 버튼 부분*/
+.insertBox{ margin : 0 auto; text-align: center;}
+/*새로운 버거 등록 버튼*/
+.newBurgerinsertBtn{
+	background-color: #ff6262;
+	color : white; 
+	width:70%; height : 35px;
+	border-radius: 0.3em; 
+	margin : 3px;
+}
+
+/*포스기 부분 테이블 설정*/
+.insertCurrentTable, .orderBurgerTable, .salesTable{
+	border : 1; width : 100%; 
+	border-collapse: collapse; /*이중 테두리 X*/
+	color : white; font-size: 16px;
+	margin-top: 20px;
+	justify-content: center;
+
+}
