@@ -167,6 +167,7 @@
 
 /*새로운 버거 등록하는 버튼 부분*/
 .insertBox{ margin : 0 auto; text-align: center;}
+
 /*새로운 버거 등록 버튼*/
 .newBurgerinsertBtn{
 	background-color: #ff6262;
@@ -175,6 +176,23 @@
 	border-radius: 0.3em; 
 	margin : 3px;
 }
+
+.pos{ /*포스기 테이블들이 들어가는 구역 설정*/
+	width : 90%;
+ 	margin : 0 auto; 
+ 	text-align: center; 
+ 	justify-content: center;
+ }
+
+/*-------------등록 버거 테이블 td, th들 width 지정.-------------*/
+.productNo{width : 24%;}
+.burgerImg{width : 15%;}
+.burgerName{width : 15%;}
+.burgerCategory{width: 14%;}
+.burgerPrice{width: 14%;}
+.insertRemark{width : 25%;}
+
+
 
 /*포스기 부분 테이블 설정*/
 .insertCurrentTable, .orderBurgerTable, .salesTable{
@@ -185,3 +203,53 @@
 	justify-content: center;
 
 }
+/*----------------------------------------------------------------------*/
+
+/*포스기 부분에 있는 테이블들 td와 th 테두리, 폰트 색 설정*/
+.insertCurrentTable td, .insertCurrentTable th, 
+.orderBurgerTable td, .orderBurgerTable th,
+.salesTable td, .salesTable th{border: 1px black solid; color : black}
+
+/*포스기 부분에 있는 테이블들 th 배경색 설정*/
+.insertCurrentTable th, .orderBurgerTable th, .salesTable th{background-color: #11246f; padding: 10px}
+
+/*---------------------등록 버거 테이블 td, th들 width 지정.------------------*/
+.productNo{width : 24%;}
+.burgerImg{width : 15%;}
+.burgerName{width : 15%;}
+.burgerCategory{width: 14%;}
+.burgerPrice{width: 14%;}
+.insertRemark{width : 25%;}
+/*----------------------------------------------------------------------*/
+/*등록 버거 테이블 비고 부분/구역 (삭제, 수정 버튼이 들어가는) 설정*/
+.insertRemark div{ display : flex; justify-content: space-between; height : 40px; margin : 3px;}
+
+/*등록 버거 테이블 비고 부분에 들어가는 버튼 설정*/
+.deleteBurgerBtn{background-color: red; color : white; width : 50%; margin-right: 2px;}
+.changePriceBtn{background-color: blue; color : white; width : 50%;}
+
+/*--------------주문된 버거 목록 현황 td, th들 width 지정.-------------------*/
+.orderNo{width : 10%;}
+.orderburgerName{width : 40%;}
+.orderState{width : 25%;}
+.orderRemark{width : 25%;}
+/*----------------------------------------------------------------------*/
+/*주문된 버거 목록 현황 부분 설정*/
+.orderBurgerTable div{height : 40px; margin : 3px;}
+/*주문 완료 버튼 설정*/
+.orderCompleteBtn{background-color: #005100; color : white; width : 100%; height: 100%}
+
+/*주문 완료 눌렀을 시 버튼대신 들어갈 텍스트 설정*/
+.orderFinishText{
+	color : #8e8e8e; 
+	display : flex; 
+	align-items: center; 
+	justify-content: center
+}
+
+/*---------------------------매출 현황테이블 설정----------------------------*/
+/*매출 현황 테이블 td, th (여백)설정*/
+.salesTable td, .salesTable th{padding : 5px 0px;}
+
+/*제품 번호 가로 설정*/
+.productNo{width : 24%}
