@@ -360,7 +360,7 @@ function printOrderTable(){
 	let html = `<tr>
 					<th class = "orderNo">주문번호</th>
 					<th class = "orderburgerName">버거이름</th>
-					<th class = "orderState">상태</th>
+					<th class = "orderState">상태/완료시간</th>
 					<th class = "orderRemark">비고</th>
 				</tr>`
 				
@@ -370,11 +370,17 @@ function printOrderTable(){
 		console.log(burgerNameList)*/
 					
 		for(let j = 0; j < orderList[i].items.length; j++){
+			/*완료 시간를 담는 변수 (0000년 00월 00일 00:00:00) */
+			let completeDate = new Date;
+			let formatCompleteDate = completeDate.getFullYear() + "년" + (completeDate.getMonth()+1) + "월" + completeDate.getDate() + "일" +
+									completeDate.getHours() + ":" + completeDate.getMinutes() + ":" +completeDate.getSeconds()
+			/*console.log(formatCompleteDate)*/
+			
 			html += `<tr>
 						<td class = "orderNo">${orderList[i].number}</td>
 						<td class = "orderburgerName">${orderList[i].items[j].name}</td>
 						<td class = "orderState">${orderList[i].state ? "주문요청" : 
-							`<div class = "orderFinishText" >주문 완료</div>`}</td>
+							`<div class = "orderFinishText" >${formatCompleteDate}</div>`}</td>
 						<td class = "orderRemark">
 							<div class = "showOrderBtn">
 								${orderList[i].state ? 
