@@ -8,9 +8,16 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'KyoboHandwriting2021sjy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KyoboHandwriting2021sjy.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*기본값.*/
 *{
-	font-family: '맑은 고딕';
+	font-family: 'KyoboHandwriting2021sjy';
 	color : black;
 	margin : 0px; padding : 0px;
 }
@@ -22,7 +29,7 @@
 
 /*로고 제목*/
 .title{
-	font-family: 'SANGJUGyeongcheonIsland';
+	font-family: 'SANGJUGyeongcheonIsland' !important;
 	color : black;
 	font-size: 40px;
 	
