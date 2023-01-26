@@ -206,7 +206,7 @@ function onOrder(){
 	let number = 0; //주문 번호
 	/*주문 요펑 시간를 담는 변수 (0000년 00월 00일 00:00:00) */
 	let yetOrderDate = new Date() //주문 시간
-	let orderDate = yetOrderDate.getFullYear() + "년" + (yetOrderDate.getMonth()+1) + "월" + yetOrderDate.getDate() + "일" +
+	let orderDate = yetOrderDate.getFullYear() + "." + (yetOrderDate.getMonth()+1) + "." + yetOrderDate.getDate()+
 					yetOrderDate.getHours() + ":" + yetOrderDate.getMinutes() + ":" +yetOrderDate.getSeconds()
 	
 	if(orderList.length == 0){number = 1;} //길이가 0인 것은 주문이 하나도 없다는 것. 따라서 주문 번호는 1부터 시작하기 때문에 1
@@ -228,9 +228,9 @@ function onOrder(){
 		let order = {
 			number : number, // 주문번호 [ 인덱스사용X ]
 			items : mapCartList, //새로운 객체를 만듦가 동시에 cartList의 객체정보를 가져옴.
-			time : orderDate, //주문 날짜 및 시간
+			time : orderDate, //주문요청 날짜 및 시간
 			state : true, //true : 일단 주문 -> false : 주문 완료
-			complete : 0, //아직 주문 완료 되기 전이기 때문에 0
+			complete : 0, //아직 주문 완료 되기 전이기 때문에 0 => 주문 완료 날짜/시간
 			price : totalPrice //주문시 총 가격
 		}
 		//2)order 객체를 배열에 저장
@@ -402,7 +402,7 @@ function printOrderTable(){
 						<td class = "orderState">${orderList[i].state ? "주문요청" : 
 							`<div class = "orderFinishText" >주문처리 완료</div>`}</td>
 						<td class = "orderState">${orderList[i].state ? orderList[i].time : 
-							`<div class = "orderFinishText" >${orderList[i].complete}</div>`}</td>
+							`<div class = "orderFinishText" >${orderList[i].time +" / "+ orderList[i].complete}</div>`}</td>
 						<td class = "orderRemark">
 							<div class = "showOrderBtn">
 								${orderList[i].state ? 
@@ -422,9 +422,9 @@ function printOrderTable(){
 function onOrderComplete(i){
 	orderList[i].state = false;
 	
-	/*완료 시간를 담는 변수 (0000년 00월 00일 00:00:00) */
+	/*완료 시간를 담는 변수 (0000.00.00일 00:00:00) */
 	let completeDate = new Date;	
-	let formatCompleteDate = completeDate.getFullYear() + "년" + (completeDate.getMonth()+1) + "월" + completeDate.getDate() + "일" +
+	let formatCompleteDate = completeDate.getFullYear() + "." + (completeDate.getMonth()+1) + "." + completeDate.getDate() +
 									completeDate.getHours() + ":" + completeDate.getMinutes() + ":" +completeDate.getSeconds()
 	
 	/*orderList객체에 새로운 속성[FinishDate]을 만들어 주문완료버튼 눌렀을 시의 날짜/시간을 넣는다. */
