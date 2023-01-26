@@ -251,10 +251,11 @@
 .changePriceBtn{background-color: blue; color : white; width : 50%;}
 
 /*--------------주문된 버거 목록 현황 td, th들 width 지정.-------------------*/
-.orderNo{width : 10%;}
-.orderburgerName{width : 40%;}
-.orderState{width : 25%;}
+.orderNo{width : 8%;}
+.orderburgerName{width : 35%;}
+.orderState{width : 15%;}
 .orderRemark{width : 25%;}
+.orderDate{width : 25%}
 /*----------------------------------------------------------------------*/
 /*주문된 버거 목록 현황 부분 설정*/
 .orderBurgerTable div{height : 40px; margin : 3px;}

@@ -204,7 +204,10 @@ function onOrder(){
 /*	alert('주문합니다.')*/
 	
 	let number = 0; //주문 번호
-	let orderDate = new Date().toLocaleString(); //주문 시간
+	/*주문 요펑 시간를 담는 변수 (0000년 00월 00일 00:00:00) */
+	let yetOrderDate = new Date() //주문 시간
+	let orderDate = yetOrderDate.getFullYear() + "년" + (yetOrderDate.getMonth()+1) + "월" + yetOrderDate.getDate() + "일" +
+					yetOrderDate.getHours() + ":" + yetOrderDate.getMinutes() + ":" +yetOrderDate.getSeconds()
 	
 	if(orderList.length == 0){number = 1;} //길이가 0인 것은 주문이 하나도 없다는 것. 따라서 주문 번호는 1부터 시작하기 때문에 1
 	else{
@@ -381,32 +384,30 @@ function printOrderTable(){
 	let html = `<tr>
 					<th class = "orderNo">주문번호</th>
 					<th class = "orderburgerName">버거이름</th>
-					<th class = "orderState">상태/완료시간</th>
+					<th class = "orderState">상태</th>
+					<th class = "orderDate">요청일/완료일</th>
 					<th class = "orderRemark">비고</th>
 				</tr>`
-				
 	for(let i = 0; i < orderList.length; i++){
-	
 		/*console.log(useBurgerNameList)
 		console.log(burgerNameList)*/
 					
 		for(let j = 0; j < orderList[i].items.length; j++){
-			/*완료 시간를 담는 변수 (0000년 00월 00일 00:00:00) */
-			let completeDate = new Date;
-			let formatCompleteDate = completeDate.getFullYear() + "년" + (completeDate.getMonth()+1) + "월" + completeDate.getDate() + "일" +
-									completeDate.getHours() + ":" + completeDate.getMinutes() + ":" +completeDate.getSeconds()
+
 			/*console.log(formatCompleteDate)*/
 			
 			html += `<tr>
 						<td class = "orderNo">${orderList[i].number}</td>
 						<td class = "orderburgerName">${orderList[i].items[j].name}</td>
 						<td class = "orderState">${orderList[i].state ? "주문요청" : 
-							`<div class = "orderFinishText" >${formatCompleteDate}</div>`}</td>
+							`<div class = "orderFinishText" >주문처리 완료</div>`}</td>
+						<td class = "orderState">${orderList[i].state ? orderList[i].time : 
+							`<div class = "orderFinishText" >${orderList[i].FinishDate}</div>`}</td>
 						<td class = "orderRemark">
 							<div class = "showOrderBtn">
 								${orderList[i].state ? 
 							`<button class = "orderCompleteBtn" onClick = "onOrderComplete(${i})">주문완료</button>` 
-							:`<div class = "orderFinishText">주문처리완료</div>`}
+							:`<div class = "orderFinishText">-</div>`}
 							</div>
 						</td>
 					</tr>`
@@ -421,10 +422,16 @@ function printOrderTable(){
 function onOrderComplete(i){
 	orderList[i].state = false;
 	
-	if(orderList[i].state == false){
-		printOrderTable(); //주문완료 버튼을 누르고 해당 주문 목록 현황 테이블을 새로고침해야 주문완료 버튼이 사라진것을 확인할 수 있다.
-		printSalesTable(); //주문 완료를 누르면 버거 매출현황 또한 바뀌어야 한다. -> 따라서 해당 매출 현황 테이블도 다시 호출해준다.
-	}
+	/*완료 시간를 담는 변수 (0000년 00월 00일 00:00:00) */
+	let completeDate = new Date;	
+	let formatCompleteDate = completeDate.getFullYear() + "년" + (completeDate.getMonth()+1) + "월" + completeDate.getDate() + "일" +
+									completeDate.getHours() + ":" + completeDate.getMinutes() + ":" +completeDate.getSeconds()
+	
+	/*orderList객체에 새로운 속성[FinishDate]을 만들어 주문완료버튼 눌렀을 시의 날짜/시간을 넣는다. */
+	orderList[i].FinishDate = formatCompleteDate;
+	/*console.log(orderList[i])*/
+	printOrderTable(); //주문완료 버튼을 누르고 해당 주문 목록 현황 테이블을 새로고침해야 주문완료 버튼이 사라진것을 확인할 수 있다.
+	printSalesTable(); //주문 완료를 누르면 버거 매출현황 또한 바뀌어야 한다. -> 따라서 해당 매출 현황 테이블도 다시 호출해준다.
 	
 	/*console.log(salseInfo)
 	console.log(burgerList)*/
