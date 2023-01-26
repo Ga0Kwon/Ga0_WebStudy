@@ -232,10 +232,14 @@ function onOrder(){
 		}
 		//2)order 객체를 배열에 저장
 		orderList.push(order);
-		/*printOrderTable()*/
+		printOrderTable() //주문하기 버튼을 눌렀으면 해당 주문 현황 테이불도 새로고침하여 바로 확인이 가능해야함.
 		/*console.log(orderList)*/
 		/*console.log(order)*/
 		cartList.splice(0); //카트에 있는 것을 주문 객체에 넣었으니 비어준다 (주문이 이미 들어갔기때문에 카트에선 더이상 보여주지 X)
+		/*키오스크 부분 카트 목록을 화면상에서 지워준다. -> 주문 목록에 이미 들어갔기 때문에 */
+		document.querySelector('.cartBottom').innerHTML = ""; 
+		document.querySelector('.cartCount').innerHTML = cartList.length;
+		document.querySelector('.pTotal').innerHTML = 0;
 	}else{
 		return;
 	}
@@ -264,6 +268,12 @@ function insertBurger(){
 	}
 	
 	/*console.log(newBurgerObject)*/
+	/*카테고리가 없는 카테고리일 경우 => 존재하는 데이터인지 유효성 검사 */
+	if(!categoryList.includes(newBurgerObject.category)){
+		alert('등록할 수 없는 카테고리 명입니다.');
+		document.querySelector('.inputCategory').value = ""; 
+		check++; //유효성 검사 변수 증가 시킴
+	}
 	
 	/*가격에 문자가 들어갔을 경우 => 자료형 유효성*/
 	if(isNaN(newBurgerObject.price)){
@@ -345,9 +355,20 @@ function deleteBurger(i){
 /*버거 가격을 수정하는 함수 => 수정 버튼 */
 function changePrice(i){
 	let changeBurgerPrice = parseInt(prompt(burgerList[i].name+ '의 수정하실 가격을 입력해주세요.'))
-
+	
+	//화면 새로고침을 할 수 있도록 해당 카테고리 인덱스를 변수에 저장한다.
+	let categoryIndex = categoryList.indexOf(burgerList[i].category)
+	
+	if(isNaN(changeBurgerPrice)){ //prompt로 받은 가격이 숫자가아닌 경우, 문자가 섞여있을 경우
+		alert('수정하실 가격을 숫자로만 입력해주세요.');
+		return; //밑의 코드를 실행하면 안되기 때문에, return을 해주었다.
+	}
+	
 	burgerList[i].price = parseInt(changeBurgerPrice);
 	printInsertCurrentTable(); //가격을 수정했다면 버거 목록 테이블에도 반영된걸 바로 보여주어야하므로 호출.
+	/*console.log(categoryList.indexOf(burgerList[i].category))*/
+	printProduct(categoryIndex); //가격을 수정했다면 키오스크에도 반영된걸 바로 보여주어야 함. 
+	categoryKioskSelect(categoryIndex) //가격을 수정했다면 해당 카테고리명을 선택한게 보여야한다. (printProduct와 한몸.)
 	alert(burgerList[i].name + '의 가격이 수정되었습니다.')
 }
 
@@ -399,9 +420,12 @@ function printOrderTable(){
 /*주문완료 버튼 클릭 이벤트 함수 */
 function onOrderComplete(i){
 	orderList[i].state = false;
-
-	printOrderTable(); //주문완료 버튼을 누르고 해당 주문 목록 현황 테이블을 새로고침해야 주문완료 버튼이 사라진것을 확인할 수 있다.
-	printSalesTable(); //주문 완료를 누르면 버거 매출현황 또한 바뀌어야 한다. -> 따라서 해당 매출 현황 테이블도 다시 호출해준다.
+	
+	if(orderList[i].state == false){
+		printOrderTable(); //주문완료 버튼을 누르고 해당 주문 목록 현황 테이블을 새로고침해야 주문완료 버튼이 사라진것을 확인할 수 있다.
+		printSalesTable(); //주문 완료를 누르면 버거 매출현황 또한 바뀌어야 한다. -> 따라서 해당 매출 현황 테이블도 다시 호출해준다.
+	}
+	
 	/*console.log(salseInfo)
 	console.log(burgerList)*/
 }
