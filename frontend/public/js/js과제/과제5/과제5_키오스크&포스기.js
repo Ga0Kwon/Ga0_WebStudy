@@ -402,7 +402,7 @@ function printOrderTable(){
 						<td class = "orderState">${orderList[i].state ? "주문요청" : 
 							`<div class = "orderFinishText" >주문처리 완료</div>`}</td>
 						<td class = "orderState">${orderList[i].state ? orderList[i].time : 
-							`<div class = "orderFinishText" >${orderList[i].FinishDate}</div>`}</td>
+							`<div class = "orderFinishText" >${orderList[i].complete}</div>`}</td>
 						<td class = "orderRemark">
 							<div class = "showOrderBtn">
 								${orderList[i].state ? 
@@ -428,7 +428,7 @@ function onOrderComplete(i){
 									completeDate.getHours() + ":" + completeDate.getMinutes() + ":" +completeDate.getSeconds()
 	
 	/*orderList객체에 새로운 속성[FinishDate]을 만들어 주문완료버튼 눌렀을 시의 날짜/시간을 넣는다. */
-	orderList[i].FinishDate = formatCompleteDate;
+	orderList[i].complete = formatCompleteDate;
 	/*console.log(orderList[i])*/
 	printOrderTable(); //주문완료 버튼을 누르고 해당 주문 목록 현황 테이블을 새로고침해야 주문완료 버튼이 사라진것을 확인할 수 있다.
 	printSalesTable(); //주문 완료를 누르면 버거 매출현황 또한 바뀌어야 한다. -> 따라서 해당 매출 현황 테이블도 다시 호출해준다.
