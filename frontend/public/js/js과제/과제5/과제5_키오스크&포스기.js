@@ -236,7 +236,7 @@ function onOrder(){
 		//2)order 객체를 배열에 저장
 		orderList.push(order);
 		printOrderTable() //주문하기 버튼을 눌렀으면 해당 주문 현황 테이불도 새로고침하여 바로 확인이 가능해야함.
-		printSalesTable() //주문하기 버튼을 눌렀으면 해당 매출 현황 테이블도 렌더링.
+		printSalesTable() //주문하기 버튼을 눌렀으면 해당 매출 현황 테이블도 렌더링
 		/*console.log(orderList)*/
 		/*console.log(order)*/
 		cartList.splice(0); //카트에 있는 것을 주문 객체에 넣었으니 비어준다 (주문이 이미 들어갔기때문에 카트에선 더이상 보여주지 X)
