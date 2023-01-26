@@ -37,7 +37,7 @@
 
 /*하단 메뉴*/
 .header-bottom{
-	top : 40px !important;
+	top : 35px !important;
 	
 }
 
@@ -53,9 +53,102 @@
 	justify-content: flex-end;
 }
 
+.header-topMenu li{
+	font-size: 13px;
+}
+
 /*하단 메뉴 :  가로 수평 정렬*/
 .header-bottomMenu{
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+}
+/*-----------------------index.html에 있는  본문[제품]---------------------*/
+
+.box_title{
+	text-align: center;
+	font-family: 'SANGJUGyeongcheonIsland';
+	border-bottom: 2px solid #999999;
+	width: 20%; /*박스 가로 길이*/
+	margin: 0 auto; /*박스권 가운데 정렬*/
+	padding-top: 7%;
+	padding-bottom: 1%
+}
+
+.itembox{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+/*서로 다른 px[디바이스] 마다 css 다르게 설정 -> 미디어쿼리*/
+/* @media(조건){ 참일 경우  css} */
+
+@media( max-width : 1000px){ /*1000px아래로 떨어지면[최대 가로사이즈가 1000px 아래면]*/
+	.item{
+		width : 45% !important; 
+		margin: 2% !important;
+	}
+}
+
+@media(max-width : 500px){
+	.item{
+		width : 90% !important;
+		margin: 2% !important;
+	}
+}
+
+/*pc[1200px 이상] 기준*/
+.item{width : 20%; margin : 2%; padding-top: 10px;}
+.item img{
+	width: 100%; /*상위 요소의 크기 백분율*/
+	border-radius: 20px; /*둥근 모서리*/
+}
+
+.item :hover{ /*해당 요소의 마우스를 올렸을 때*/
+	opacity: 0.8;
+}
+
+.item_title{
+	font-size: 13px;
+	margin: 7% 0%; /*위아래 , 왼오*/
+	height : 40px;
+}
+
+.item_day{
+	font-size: 15px;
+	color : #8080c0;
+	border-bottom: 1px solid #999999; 
+	padding-bottom: 3%;
+}
+
+.item_price{
+	text-decoration: line-through; /*취소선*/
+	font-size: 14px;
+	color : #999999;
+	margin-top: 3%;
+}
+
+.item_sales{
+	font-family: SANGJUGyeongcheonIsland;
+	font-size: 17px;
+}
+
+.item_discount{
+	font-family: SANGJUGyeongcheonIsland;
+	margin-left : 5px;
+	color : red;
+	font-size: 17px;
+}
+
+.item_bottom{
+	margin-top : 5%;
+	display: flex;
+	justify-content: space-between; /*가로 배치*/
+	align-items: center; /*세로 정렬*/
+}
+
+.item_review{
+	font-size: 12px;
+	color : #999999;
+	text-align: right;
 }
