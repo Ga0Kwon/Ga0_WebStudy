@@ -35,6 +35,10 @@ let m_left = 910; //몬스터
 let monsterMaxHp = 350;
 let userMaxHP = 350;
 
+/*몬스터와 사용자 받는 데미지 */
+let monster_Damage = 0
+let user_Damage = 0
+
 //2. 문서 안에서 키 입력 이벤트 -> 문서 안에서 키를 입력하는 것이기 때문에 document
 document.addEventListener('keydown', (e)=>{
 /*	console.log('키입력')*/
@@ -90,8 +94,9 @@ document.addEventListener('keyup', (e) => {
 setInterval(mon_moving, 1000)
 function mon_moving(key){
 	
-	if(nextMonster() == 3){ //모든 몬스터가 죽은 경우 
+	if(nextMonster() > 2){ //모든 몬스터가 죽은 경우 
 		monBox.style.backgroundImage =`none`
+		clearInterval(mon_moving)
 	}
 	//1. 난수 +- 20
 	let rand = parseInt(Math.random()*35+1); //1~20사이의 랜덤한 정수 //이동 거리
@@ -100,91 +105,55 @@ function mon_moving(key){
 	if(rand2  == 1){m_left += rand;}
 	else {m_left -= rand; } 
 	
+	
 	/*사용자 데미지 적용 코드 */
-	for(let i = 0; i < 5; i++){ //+- 5정도
+	if(nextMonster() == 0){ //첫번째 몬스터일 경우
+		if((m_left-u_left ) >= -20 && ( m_left-u_left ) <= 30 ){
+			if(key == 65){ //사용자가 공격을 했을 경우
 		
-		if(m_left + i == u_left){ //+5정도 감안하고 겹칠 경우
-			if(nextMonster() == 0){ //첫번째 몬스터일 경우
-				if(key == 65){ //사용자가 공격을 했을 경우
+			}else if(key == 83){ //사용자가 실드를 했을 경우
 				
-				}else if(key == 83){ //사용자가 실드를 했을 경우
-					
-				}else{ //몬스터의 공격으로 데미지를 받았을 경우
-					monBox.style.backgroundImage = `url(img/monster1/monster1_attack.png)`
-					character.hp -= 10; //몬스터의 공격으로 hp -10
-				}
-			}else if(nextMonster() == 1){ //두번째 몬스터일 경우
-				if(key == 65){ //사용자가 공격을 했을 경우
-				
-				}else if(key == 83){ //사용자가 실드를 했을 경우
-				
-				}else{ //몬스터의 공격으로 데미지를 받았을 경우
-					monBox.style.backgroundImage = `url(img/monster2/monster2_attack.png)`
-					character.hp -= 10; //몬스터의 공격으로 hp -10
-				}
-			}else if(nextMonster() == 2){ //세번째 몬스터일 경우
-				if(key == 65){ //사용자가 공격을 했을 경우
-				
-				}else if(key == 83){ //사용자가 실드를 했을 경우
-					
-				}else{ //몬스터의 공격으로 데미지를 받았을 경우
-					monBox.style.backgroundImage = `url(img/monster3/monster3_attack.png)`
-					character.hp -= 10; //몬스터의 공격으로 hp -10
-				}
-				
+			}else{ //몬스터의 공격으로 데미지를 받았을 경우
+				monBox.style.backgroundImage = `url(img/monster1/monster1_attack.png)`
+				user_Damage += 10*(nextMonster()+1); //난이도 조절
+				character.hp -= user_Damage; //몬스터의 공격	
 			}
-			
-		}else if(m_left - i == u_left){//-5정도 감안하고 겹칠 경우
-			if(nextMonster() == 0){ //첫번째 몬스터일 경우
-				if(key == 65){ //사용자가 공격을 했을 경우
-					
-				}else if(key == 83){ //사용자가 실드를 했을 경우
-					
-				}else{ //몬스터의 공격으로 데미지를 받았을 경우
-					monBox.style.backgroundImage = `url(img/monster1/monster1_attack.png)`
-					character.hp -= 10; //몬스터의 공격으로 hp -10
-						document.querySelector('.userBlood').style.width = `${userMaxHP -(userMaxHP/character.hp)*20+1}px`
-					characterDie() //공격이 들어갈때 캐릭터의 hp가 0인지 확인
-				}
-			}else if(nextMonster() == 1){ //두번째 몬스터일 경우
-				if(key == 65){ //사용자가 공격을 했을 경우
-				
-				}else if(key == 83){ //사용자가 실드를 했을 경우
-				
-				}else{ //몬스터의 공격으로 데미지를 받았을 경우
-					monBox.style.backgroundImage = `url(img/monster2/monster2_attack.png)`
-					character.hp -= 10; //몬스터의 공격으로 hp -10
-					document.querySelector('.userBlood').style.width = `${userMaxHP -(userMaxHP/character.hp)*20+1}px`
-					characterDie() //공격이 들어갈때 캐릭터의 hp가 0인지 확인
-				}
-			}else if(nextMonster() == 2){ //세번째 몬스터일 경우
-				if(key == 65){ //사용자가 공격을 했을 경우
-				
-				}else if(key == 83){ //사용자가 실드를 했을 경우
-					
-				}else{ //몬스터의 공격으로 데미지를 받았을 경우
-					monBox.style.backgroundImage = `url(img/monster3/monster3_attack.png)`
-					character.hp -= 10; //몬스터의 공격으로 hp -10
-						document.querySelector('.userBlood').style.width = `${userMaxHP -(userMaxHP/character.hp)*20+1}px`
-					characterDie() //공격이 들어갈때 캐릭터의 hp가 0인지 확인
-					
-				}
-				
-			}
+		}
+	}else if(nextMonster() == 1){ //두번째 몬스터일 경우
+		if((m_left-u_left ) >= -30 && ( m_left-u_left ) <= 40 ){
+			if(key == 65){ //사용자가 공격을 했을 경우
 		
-		}else{
-			if(nextMonster() == 0){
-				monBox.style.backgroundImage = `url(img/monster1/monster1.png)`
-			}else if(nextMonster() == 1){
-				monBox.style.backgroundImage = `url(img/monster2/monster2.png)`
-			}else if(nextMonster() == 2){
-				monBox.style.backgroundImage = `url(img/monster3/monster3.png)`
+			}else if(key == 83){ //사용자가 실드를 했을 경우
+				
+			}else{ //몬스터의 공격으로 데미지를 받았을 경우
+				user_Damage += 10*(nextMonster()+1); //난이도 조절
+				monBox.style.backgroundImage = `url(img/monster2/monster2_attack.png)`
+				character.hp -= user_Damage; //몬스터의 공격	
+			}
+		}
+	}else if(nextMonster() == 2){ //세번째 몬스터일 경우
+		if((m_left-u_left ) >= -40 && ( m_left-u_left ) <= 50 ){
+			if(key == 65){ //사용자가 공격을 했을 경우
+				
+			}else if(key == 83){ //사용자가 실드를 했을 경우
+				
+			}else{ //몬스터의 공격으로 데미지를 받았을 경우
+				monBox.style.backgroundImage = `url(img/monster3/monster3_attack.png)`
+				user_Damage += 10*(nextMonster()+1); //난이도 조절
+				character.hp -= user_Damage; //몬스터의 공격으로
 			}
 		}
 		
-		
+	}else{
+		if(nextMonster() == 0){
+			monBox.style.backgroundImage = `url(img/monster1/monster1.png)`
+		}else if(nextMonster() == 1){
+			monBox.style.backgroundImage = `url(img/monster2/monster2.png)`
+		}else if(nextMonster() == 2){
+			monBox.style.backgroundImage = `url(img/monster3/monster3.png)`
+		}
 	}
-	
+
 	//2.게임화면 고정
 	if(m_left < 0) m_left = 0;
 	if(m_left > 910) m_left = 910;
@@ -194,6 +163,11 @@ function mon_moving(key){
 	
 	//*현재 좌표 로그 출력
 	logBox2.innerHTML = `몬스터 좌표 : ${m_left}`
+	
+	document.querySelector('.userBlood').style.width = `${userMaxHP - user_Damage*20}px`
+	console.log(user_Damage)
+	console.log(monster_Damage)
+	
 }
 
 //몬스터가 어떤 몬스터인지 판별하는 함수
@@ -220,6 +194,7 @@ function nextMonster(){
 		document.querySelector('.dieMonster3').style.display = "inline"
 		i =3 //전부 이겼을 경우
 		printTable();
+		return;
 	}
 	
 	return i;
@@ -228,22 +203,18 @@ function nextMonster(){
 /*사용자 공격 */
 function Attack(){ //공격버튼을 눌렀을 때
 	
-	if(nextMonster() != 3){ //아직 이기지 못한 상대가 있을 경우
-		for(let i = 0; i < 15; i++){ //+=10정도는 타격한 것으로 하기 위해 설정
-			if(u_left + i == m_left){ //유저 위치에서 +0~10 값이 몬스터 위치와 같을 때
-				/*alert('타격');*/
-				monsterArrays[nextMonster()].hp -= 20; //해당 몬스터 판별 함수에서 몬스터 인덱스값을 받아서 -20	
-				document.querySelector('.monBlood').style.width = `${monsterMaxHp -(monsterMaxHp/monsterArrays[nextMonster()].hp)*20+1}px`
-			}else if(u_left - i == m_left){ //유저 위치에서 -0~10 값이 몬스터 위치와 같을 때
-				/*alert('타격')*/
-				monsterArrays[nextMonster()].hp -= 20; //해당 몬스터 판별 함수에서 몬스터 인덱스값을 받아서 -20	
-				document.querySelector('.monBlood').style.width = `${monsterMaxHp -(monsterMaxHp/monsterArrays[nextMonster()].hp)*20+1}px`
+	if(nextMonster() <= 2){ //아직 이기지 못한 상대가 있을 경우
+		if((u_left - m_left ) >= -50 && ( u_left-m_left ) <= 60){
+			monster_Damage += 20*character.level;
+			monsterArrays[nextMonster()].hp -= monster_Damage;
+			document.querySelector('.monBlood').style.width = `${monsterMaxHp - monster_Damage*20}px`
+			if(nextMonster() >= 2){
+				if(monsterArrays[nextMonster()].hp <= 0){
+					printTable()
+				}
 			}
 		}
-	}else{
-		return;
 	}
-
  }
 
 /*사용자 캐릭터가 죽었을때 실행되는 코드*/
@@ -264,14 +235,16 @@ function characterDie(){
 /*게임이 끝났을 때 경험치와 레벨 보여줌. [1.내가 졌을 경우/ 2. 모두 이겼을 경우] */
 
 function printTable(){
+	let characterExp = 0
 	
 	for(let i = 0; i < monsterArrays.length; i++){
 		if(monsterArrays[i].hp <= 0){
-			character.exp += monsterArrays[i].exp;
+			characterExp += monsterArrays[i].exp;
+			character.exp = characterExp;
 		}
 	}
 	if(character.exp >= 100){
-		character.level = parseInt(character.exp/100) + 1;
+		character.level = parseInt(characterExp/100) + 1;
 	}
 	
 	let html = `<tr>

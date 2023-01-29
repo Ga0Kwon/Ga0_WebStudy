@@ -114,8 +114,8 @@
 }
 
 .game_info{
-	position: fixed;
-	top : 20px;
+	position: sticky;
+	top : 30px;
 	left : 1500px;
 }
 
