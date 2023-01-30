@@ -17,13 +17,14 @@
 
 /*기본값.*/
 *{
-	font-family: 'KyoboHandwriting2021sjy';
+	font-family: 'KyoboHandwriting2021sjy' !important;
 	color : black;
 	margin : 0px; padding : 0px;
 }
 
 a{
 	text-decoration: none !important; /*a 마크업태그의 밑줄 제거*/
+	color : black !important;
 }
 
 /*로고 구역*/
@@ -35,7 +36,7 @@ a{
 .title{
 	font-family: 'SANGJUGyeongcheonIsland' !important;
 	color : black;
-	font-size: 40px;
+	font-size: 40px !important;
 	
 }
 
@@ -71,7 +72,7 @@ a{
 
 .box_title{
 	text-align: center;
-	font-family: 'SANGJUGyeongcheonIsland';
+	font-family: 'SANGJUGyeongcheonIsland !important';
 	border-bottom: 2px solid #999999;
 	width: 20%; /*박스 가로 길이*/
 	margin: 3% auto; /*박스권 가운데 정렬*/

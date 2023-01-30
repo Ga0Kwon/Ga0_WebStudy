@@ -15,6 +15,8 @@ printTable(null, null); //1.js 열렸을 때 함수 실행
 	2. 검색이 있을 때 data, keyword
 	3. 페이지전환되었을 때
 */
+
+
 function printTable(keyword, data){
 	//1. JAVA[백엔드]로 부터 데이터 요청
 		let html = ``;
@@ -25,7 +27,7 @@ function printTable(keyword, data){
 			for(let i = 0; i < boardlist.length; i++){
 				html +=  `<tr>
 								<td>${boardlist[i].no}</td>
-								<td>${boardlist[i].title}</td>
+								<td><a href = "view.html">${boardlist[i].title}</a></td>
 								<td>${boardlist[i].writer}</td>
 								<td>${boardlist[i].date}</td>
 								<td>${boardlist[i].view}</td>
@@ -39,7 +41,7 @@ function printTable(keyword, data){
 					if(data == boardlist[i].no){
 						html +=  `<tr>
 									<td>${boardlist[i].no}</td>
-									<td>${boardlist[i].title}</td>
+									<td><a href = "view.html">${boardlist[i].title}</a></td>
 									<td>${boardlist[i].writer}</td>
 									<td>${boardlist[i].date}</td>
 									<td>${boardlist[i].view}</td>
@@ -54,7 +56,7 @@ function printTable(keyword, data){
 					if(data == boardlist[i].title){
 						html +=  `<tr>
 									<td>${boardlist[i].no}</td>
-									<td>${boardlist[i].title}</td>
+									<td><a href = "view.html">${boardlist[i].title}</a></td>
 									<td>${boardlist[i].writer}</td>
 									<td>${boardlist[i].date}</td>
 									<td>${boardlist[i].view}</td>
@@ -68,7 +70,7 @@ function printTable(keyword, data){
 					if(data == boardlist[i].writer){
 						html +=  `<tr>
 									<td>${boardlist[i].no}</td>
-									<td>${boardlist[i].title}</td>
+									<td><a href = "view.html">${boardlist[i].title}</a></td>
 									<td>${boardlist[i].writer}</td>
 									<td>${boardlist[i].date}</td>
 									<td>${boardlist[i].view}</td>
@@ -104,7 +106,12 @@ searchBtn.addEventListener('click', (e) => {
 	printTable(searchKeyword, searchData)
 })
 
-
+/*function viewPoint(index){
+	let result = true; 
+	console.log(index)
+	if(result) { location.href = 'view.html'}
+	else {}
+}*/
 /*
 	배열 반복문
 		1. for(let i = 0; i < 배열명.length; i++)
