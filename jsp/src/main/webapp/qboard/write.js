@@ -37,6 +37,7 @@ function checkObject(info){
 	
 	if(isNaN(info.password)){
 		alert('비밀번호는 숫자로입력해주세요.')
+		document.querySelector('.qpassword').value = ""
 		check++;
 	}
 	
