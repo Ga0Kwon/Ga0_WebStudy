@@ -17,7 +17,7 @@
 
 /*기본값.*/
 *{
-	font-family: 'KyoboHandwriting2021sjy' !important;
+	font-family: 'KyoboHandwriting2021sjy';
 	color : black;
 	margin : 0px; padding : 0px;
 }
@@ -72,7 +72,7 @@ a{
 
 .box_title{
 	text-align: center;
-	font-family: 'SANGJUGyeongcheonIsland !important';
+	font-family: 'SANGJUGyeongcheonIsland';
 	border-bottom: 2px solid #999999;
 	width: 20%; /*박스 가로 길이*/
 	margin: 3% auto; /*박스권 가운데 정렬*/

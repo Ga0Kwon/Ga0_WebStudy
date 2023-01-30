@@ -99,10 +99,8 @@ setInterval(mon_moving, 1000)
 
 function mon_moving(key){
 	
-	if(nextMonster() > 2){ //모든 몬스터가 죽은 경우 
-		monBox.style.backgroundImage =`none`
-		clearInterval(mon_moving)
-	}
+	nextMonster();
+	
 	//1. 난수 +- 20
 	let rand = parseInt(Math.random()*35+1); //1~20사이의 랜덤한 정수 //이동 거리
 	let rand2 = parseInt(Math.random()*2); // 0 또는 1 //이동 방향
@@ -122,6 +120,7 @@ function mon_moving(key){
 				monBox.style.backgroundImage = `url(img/monster1/monster1_attack.png)`
 				user_Damage += 10*(whoMonster + 1); //난이도 조절
 				character.hp -= user_Damage; //몬스터의 공격	
+				document.querySelector('.userBlood').style.width = `${userMaxHP - user_Damage*20}px`
 			}
 		}else{
 			if(whoMonster == 0){
@@ -142,6 +141,7 @@ function mon_moving(key){
 				user_Damage += 10*(whoMonster + 1); //난이도 조절
 				monBox.style.backgroundImage = `url(img/monster2/monster2_attack.png)`
 				character.hp -= user_Damage; //몬스터의 공격	
+				document.querySelector('.userBlood').style.width = `${userMaxHP - user_Damage*20}px`
 			}
 		}else{
 			if(whoMonster == 0){
@@ -162,6 +162,7 @@ function mon_moving(key){
 				monBox.style.backgroundImage = `url(img/monster3/monster3_attack.png)`
 				user_Damage += 10*(whoMonster + 1); //난이도 조절
 				character.hp -= user_Damage; //몬스터의 공격으로
+				document.querySelector('.userBlood').style.width = `${userMaxHP - user_Damage*20}px`
 			}
 		}else{
 			if(whoMonster == 0){
@@ -187,8 +188,10 @@ function mon_moving(key){
 	logBox2.innerHTML = `몬스터 좌표 : ${m_left}`
 	if(character.hp >= 0 && monsterArrays[2].hp <= 0){
 		monsterDie();
-	}else if(character.hp >= 0){
-		document.querySelector('.userBlood').style.width = `${userMaxHP - user_Damage*20}px`
+		monBox.style.backgroundImage =`none`
+		clearInterval()
+	}else if(character.hp < 0){
+		characterDie();
 	}
 	
 	console.log(user_Damage)

@@ -37,6 +37,15 @@ $(document).ready(function() {
 	  }); //객체 형태로 넣어주어야함.
 });
 
+//취소 버튼
+function reset(){
+	document.querySelector('.btitle').value = "";
+	document.querySelector('.bcontent').value = ""
+	document.querySelector('.bwriter').value = ""
+	document.querySelector('.bpassword').value = ""
+}
+
+
 /*
 	썸머노트 기능 속성
 	$(document).ready(function() {
