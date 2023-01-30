@@ -301,6 +301,7 @@ function printTable(){
 	return;
 	
 }
+
 /*
 	함수 형태
 		1. 일반함수 : function 함수명(){ }
