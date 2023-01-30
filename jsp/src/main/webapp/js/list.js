@@ -10,15 +10,7 @@ printTable();
 
 /*커뮤니티 테이블을 출력하는 함수 */
 function printTable(){
-	let html = `<tr>
-					<th width = "5%">번호</th>
-					<th width = "60%">제목</th>
-					<th width = "10%">작성자</th>
-					<th width = "10%">작성일자</th>
-					<th width = "5%">조회수</th>
-					<th width = "5%">좋아요</th>
-					<th width = "5%">싫어요</th>
-				</tr>`;
+	let html = ``;
 	
 	for(let i = 0; i < boardlist.length; i++){
 		html +=  `<tr>
