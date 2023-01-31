@@ -22,11 +22,7 @@
 
 */
 /* 일정 목록 */
-let contents = [
-	{date : '20230101', content : '새해맞이 여행'},
-	{date : '20230103', content : '친구 만나기'},
-	{date : '20230101', content : '새해 기념으로 친구만나서 쇼핑하기'},
-]
+let contents = [];
 
 /*--------------------전역변수 : 모든 함수{ } 공용으로 사용되는 메모리 [변수] ----------------*/
 
@@ -86,7 +82,7 @@ function contents_print(fDay){
 	
 	contents.forEach((o) => { //일정목록 반복문 foreach start
 		if(fDay == o.date){ //만약에 인수로 전달된 날짜와 일정목록에서 동일한 날짜가 존재하면
-			html += `<div class = "content">${o.content}</div>`
+			html += `<div class = "content" style = "background-color : ${o.bg_color}">${o.content}</div>`
 		}
 	}) //foreach end
 	
@@ -152,7 +148,8 @@ document.querySelector('.modal_write').addEventListener('click', (e) => {
 	//1) 입력받은 내용과 선택된 날짜를 가져와서 객체화를 한다.
 	let inputContent = {
 		date : document.querySelector('.modal_date').innerHTML, /*value값이 아님. HTML에 입력된 내용을 가져온다.*/
-		content : document.querySelector('.modal_input').value
+		content : document.querySelector('.modal_input').value,
+		bg_color : document.querySelector('.modal_color').value
 	}
 /*	console.log(content)*/
 	//2) 유효성 검사 생략
@@ -177,10 +174,12 @@ function printModalTable(fdate){
 					<th width = "20%">비고</th>
 				</tr>`
 	
+	let j = 0; // j : 동일한 일정의 일정[객체]들의 개수
 	for(let i = 0; i < contents.length; i++){
 		if(contents[i].date == fdate){
+			j++;
 			html += `<tr>
-						<td  width = "5%">${i+1}</td>
+						<td  width = "5%">${j}</td>
 						<td>${contents[i].content}</td>
 						<td width = "20%"><button onClick = "mDelete(${i})"type = "button">삭제</button></td>
 					</tr>`
