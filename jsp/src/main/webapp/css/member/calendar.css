@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.calendar{ /*캘린더 구역*/
+	border : 1px solid #eeeeee;
+	padding : 5%;
+	border-radius: 2%;
+	box-shadow: 0px 0px 3px green;
+}
+
+.calenar_top{/*캘린더 상단 메뉴*/
+	display: flex; 
+	justify-content: center ;
+	margin : 5% 0%
+}
+
+/*이전 달 다음달 버튼*/
+.prev_button, .next_button{
+	background-color: white;
+	border : 1px solid #eeeeee;
+	padding : 5px 20px;
+	color : #a7bffe; 
+}
+/*상단 연도/월*/
+.top_date{
+	font-family: SANGJUGyeongcheonIsland;
+	margin : 0% 3%; color : #a7bffe;
+}
+
+.calendar_day{
+	display: flex; justify-content: flex-start; 
+	flex-wrap: wrap; /*하위 요소의사이즈가 부족할 경우 자동 줄바꿈*/
+}
+
+/*데이*/
+.day{
+	display: inline-block; /*inline은 사이즈가 안먹힘. -> inline-block을 쓰는 이유.*/
+	border: 1px solid #eeeeee;
+	width :  14%; /*100/7 = 14.2% => 여백생각해서 14*/
+	height: 100px;
+}
+
+/*일정박스*/
+.content{
+	background-color: #ffc0cb;
+	padding : 1%; margin: 1%;
+	color : white;
+	/*내용이 구역 사이즈보다 커졌을 때*/
+	white-space: nowrap; /*자동 줄바꿈 해제*/
+	overflow : hidden; /*넘쳤을 때 숨김 처리*/
+	text-overflow: ellipsis; /*넘쳤을 때 ...으로 끝이 새겨짐.*/
+	max-width: 98%;
+	align-items: center;
+}
+
+/*요일 구역*/
+.weekDay{
+	height: 43px; 
+	border : 1px solid white;
+	text-align: center;
+	background-color: #eeeeee;
+	font-size: 23px;
+	font-weight: bold;
+}
+
+/*일요일*/
+.sunday{
+	color : red;
+}
+
+/*토요일*/
+.saturday{
+	color: blue
+}
