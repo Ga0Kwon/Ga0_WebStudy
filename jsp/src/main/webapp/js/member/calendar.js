@@ -131,5 +131,71 @@ function date_Format(date){
 
 //6. 모달 열기 함수
 function openModal(fdate){
-	alert(fdate + "열음");
+	/*alert(fdate + "열음");*/
+	
+	document.querySelector('.modal_wrap').style.display = "flex";
+	
+	printModalTable(fdate)
+	
+	//2. 모달에 선택되 날짜 표시하기
+	document.querySelector('.modal_date').innerHTML = fdate;
+	
+}
+
+//7. 모달 닫기 함수
+document.querySelector('.modal_close').addEventListener('click', (e) => {
+	document.querySelector('.modal_wrap').style.display = "none";
+})
+
+/*8. 모달에서 내용 입력[등록] 함수 */
+document.querySelector('.modal_write').addEventListener('click', (e) => {
+	//1) 입력받은 내용과 선택된 날짜를 가져와서 객체화를 한다.
+	let inputContent = {
+		date : document.querySelector('.modal_date').innerHTML, /*value값이 아님. HTML에 입력된 내용을 가져온다.*/
+		content : document.querySelector('.modal_input').value
+	}
+/*	console.log(content)*/
+	//2) 유효성 검사 생략
+	
+	//3) 배열에 저장
+	contents.push(inputContent);
+	//4) 화면 업데이트
+		//1> 입력된 데이터 초기화
+	document.querySelector('.modal_input').value = ""
+		//2>모달 닫기
+	document.querySelector('.modal_wrap').style.display = "none";
+		//3> 캘린더 재 출력
+	cal_print()
+
+})
+/*날짜마다 입력한 일정 출력하기 */
+function printModalTable(fdate){
+	// html 구성
+	let html =`<tr>
+					<th width = "5%">#</th>
+					<th>일정내용</th> 
+					<th width = "20%">비고</th>
+				</tr>`
+	
+	for(let i = 0; i < contents.length; i++){
+		if(contents[i].date == fdate){
+			html += `<tr>
+						<td  width = "5%">${i+1}</td>
+						<td>${contents[i].content}</td>
+						<td width = "20%"><button onClick = "mDelete(${i})"type = "button">삭제</button></td>
+					</tr>`
+		}
+	}
+	document.querySelector('.modal_table').innerHTML = html;
+}
+
+/*일정 삭제 함수. */
+function mDelete(index){
+	if(confirm('해당 일정을 삭제하시겠습니까?')){
+		contents.splice(index, 1);
+		alert('삭제되었습니다.')
+		//화면 업데이트
+		document.querySelector('.modal_wrap').style.display = "none";
+		cal_print();
+	}
 }
