@@ -22,7 +22,7 @@ public class Ex1_가위바위보 { //class s[클래스 시작]
 //		}
 		
 		//while이 무한루프 쓰는데 편함 
-		while(true) { //1. 무한루프[종료조건 :]
+		while(true) { //1. 무한루프[종료조건 : 3입력시]
 			play++;
 			//2. 출력 : syso + 자동완성
 			System.out.println("----------가위(0) 바위(1) 보(2) 종료(3)-----------");
