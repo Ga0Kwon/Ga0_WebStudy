@@ -16,7 +16,7 @@ public class Ex1_키오스크 { //class s
 		
 		while(true) {
 			System.out.println("------------------------<<제품 선택>>-----------------------");
-			System.out.println("----1. 콜라[300] 2. 사이다[400] 3. 환타[500] 4. 결제 5. 종료----");
+			System.out.println("-------1. 콜라[300] 2. 사이다[400] 3. 환타[500] 4. 결제-------");
 			System.out.println("----------------------------------------------------------");
 			
 			System.out.print(">> 고객 선택 : ");
@@ -91,6 +91,7 @@ public class Ex1_키오스크 { //class s
 					else{
 						customerPrice -= buyPrice; 
 						System.out.println(">>[결제 완료] 현재 사용자의 잔액 : "  + customerPrice);
+						buyCoke = 0; buySprite = 0; buyFanta = 0; //결제가 완료되면 장바구니를 비워줘야한다.
 						
 					}
 					
@@ -105,11 +106,12 @@ public class Ex1_키오스크 { //class s
 					System.out.println(">>[에러] 알 수 없는 번호입니다.");
 				}
 			}
-			else if(customerChoice ==5) { //종료를 선택했을 경우
-				System.out.println(">>[종료] 키오스크 시스템을 종료합니다.");
-				System.out.println("----------------------------------------------------------");
-				break; //반복문 나옴.
-			}
+			/*
+			 * else if(customerChoice ==5) { //종료를 선택했을 경우
+			 * System.out.println(">>[종료] 키오스크 시스템을 종료합니다."); System.out.println(
+			 * "----------------------------------------------------------"); break; //반복문
+			 * 나옴. }
+			 */
 			else { //그 외
 				System.out.println(">>[에러] 알 수 없는 번호입니다.");
 				System.out.println("----------------------------------------------------------");
