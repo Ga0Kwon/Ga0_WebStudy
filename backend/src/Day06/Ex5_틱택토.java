@@ -60,8 +60,9 @@ public class Ex5_틱택토 {//class s
 				break;
 			}
 			
-			if(결과 == true) {break;} //결과가존재하면 나가야한다.
-					
+			/*
+			 * if(결과 == true) {break;} //결과가존재하면 나가야한다.
+			 */					
 			/*-----------컴퓨터----------*/
 			while(true) {//컴퓨터가 정상적으로 알을 둘때까지 [사용자가 정상 알 두기를 했을 때]
 				Random random = new Random(); //난수 관련된 메소드 제공
@@ -80,27 +81,27 @@ public class Ex5_틱택토 {//class s
 			}
 			//4)승리자 판단[1. 승리 2. 패배 3. 무승부]
 			for(int i = 0; i < 2; i++) {
-				if(게임판[i] == 게임판[i+3] && 게임판[i+3] == 게임판[i+6]) {
+				if(게임판[i].equals("[ ]") && 게임판[i] == 게임판[i+3] && 게임판[i+3] == 게임판[i+6]) {
 					if(게임판[i].equals("[X]")) {
 						System.out.println("컴퓨터 승리");
-						결과 = true;
+						/* 결과 = true; */
 						break game;
 					}else if(게임판[i].equals("[O]")) {
 						System.out.println("사용자 승리");
-						결과 = true;
+						/* 결과 = true; */
 						break game;
 					}
 				}
 			}
 			for(int i = 0; i < 6; i++) {
-				if(게임판[i] == 게임판[i+1] && 게임판[i+1] == 게임판[i+2]) {
+				if(게임판[i].equals("[ ]") && 게임판[i] == 게임판[i+1] && 게임판[i+1] == 게임판[i+2]) {
 					if(게임판[i].equals("[X]")) {
 						System.out.println("컴퓨터 승리");
-						결과 = true;
+						/* 결과 = true; */
 						break game;
 					}else if(게임판[i].equals("[O]")) {
 						System.out.println("사용자 승리");
-						결과 = true;
+						/* 결과 = true; */
 						break game;
 					}
 				}
@@ -108,22 +109,23 @@ public class Ex5_틱택토 {//class s
 			if(게임판[2] == 게임판[4] && 게임판[6] == 게임판[4]) {
 				if(게임판[2].equals("[X]")) {
 					System.out.println("컴퓨터 승리");
-					결과 = true;
+					/* 결과 = true; */
 					break game;
 				}else if(게임판[2].equals("[O]")) {
 					System.out.println("사용자 승리");
-					결과 = true;
+					/* 결과 = true; */
+					break game;
 				}
 			}
 			
 			if(게임판[0] == 게임판[4] && 게임판[4] == 게임판[8]) {
 				if(게임판[0].equals("[X]")) {
 					System.out.println("컴퓨터 승리");
-					결과 = true;
+					/* 결과 = true; */
 					break game;
 				}else if(게임판[0].equals("[O]")) {
 					System.out.println("사용자 승리");
-					결과 = true;
+					/* 결과 = true; */
 					break game;
 				}
 			}
@@ -135,7 +137,7 @@ public class Ex5_틱택토 {//class s
 				}
 				if(check == 9) {
 					System.out.println("무승부");
-					결과 = true;
+					break game;
 				}
 			}
 			
