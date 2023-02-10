@@ -1,6 +1,5 @@
 package Day08.Ex5;
 
-/*Controll 담당 */
 public class Ex5_회원시스템 {//class s
 	
 	/*main 함수는 무조건 static => 메인 쓰레드(코드 흐름을 읽어줌)를 가지고 있는 함수!
