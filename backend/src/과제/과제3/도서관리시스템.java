@@ -51,6 +51,7 @@ public class 도서관리시스템 {// class s
 					System.out.println("이젠 도서관에 오신 것을 환영합니다.");
 					bookSystem : while(true) { //도서시스템 무한루프
 						System.out.println("---------------------- 이젠 도서관 ---------------------");
+						System.out.println("번호\t대여여부\t\t도서장르\t\t도서명\t\t대여한아이디");
 						for (int i = 0; i < bookList.size(); i++) { // 번호, 대여여부, 도서 장르, 도서명 순으로 출력
 
 							String rentalOX = ""; // 렌탈 여부를 문자열로 바꾸기 위한 변수
@@ -63,7 +64,6 @@ public class 도서관리시스템 {// class s
 								customerId = bookList.get(i).customerId;
 							}
 							
-							System.out.println("번호\t대여여부\t\t도서장르\t\t도서명\t\t대여한아이디");
 							System.out.printf("%d \t %5s  %10s \t %10s \t %5s\n", i, rentalOX, bookList.get(i).bookCategory,
 									bookList.get(i).bookname, customerId);
 						}
@@ -135,13 +135,16 @@ public class 도서관리시스템 {// class s
 																								// 데이터가 없다는 뜻
 												break;
 											}
+											
 										}
+										
+										System.out.println(bookList.get(bookNo).bookname + "이 반납 완료되었습니다.");
+										
 									}else { //해당 userId가 아닌 경우
 										System.err.println(userId + "사용자님께서 대여한 책이 아닙니다. ");
+										break;
 									}
 								}
-
-								System.out.println(bookList.get(bookNo).bookname + "이 반납 완료되었습니다.");
 							} else {
 								System.err.println(bookList.get(bookNo).bookname + "은 이미 대여 가능한 책입니다.");
 							}
