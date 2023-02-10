@@ -3,7 +3,9 @@ package Day08.Ex4;
 public class 실행 { //class s
 	public static void main(String[] args) {//main s
 		
-//		powerOn(); //=> 메모리할당 전임으로 에러!
+//		powerOn(); //=> 메모리할당 전이므로 에러!
+		
+		// 인수 : 함수에 들어가는 입구에 들어가는 값들
 		
 		// 외부에 있는 객체 Calculator을 쓰려면!
 		// 객체를 생성안하면 Calculator의 메소드는 설계도일 뿐이고, 사용할 수 X
