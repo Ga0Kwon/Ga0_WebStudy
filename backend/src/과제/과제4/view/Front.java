@@ -16,7 +16,7 @@ public class Front {
 	BContoller boardContoller = new BContoller();
 	
 	//1. 메인 페이지
-	public String index() { // public 전 범위
+	public void index() { // public 전 범위
 		while(true) {
 			System.out.println("1. 회원가입 2. 로그인 3. 아이디찾기 4. 비밀번호 찾기");
 			System.out.print("선택 : "); int choice = scanner.nextInt();
@@ -24,8 +24,12 @@ public class Front {
 			if(choice == 1) {//1. 회원가입을 클릭시
 				signup();
 			}else if(choice == 2) {//2. 로그인을 클릭시
-				String check = login();
-				return check;
+				String loginOx = login();
+				
+				if(!loginOx.equals("-1")) {
+					printBoard(loginOx);
+				}
+				
 			}else if(choice == 3) {//3. 아이디찾기 클릭시
 				findId();
 			}else if(choice == 4) {//4. 비밀번호 찾기 클릭시
@@ -47,11 +51,11 @@ public class Front {
 		int result = memberContoller.signup(id, password, cofirmPassword, name, phone);
 		
 		if(result == 1) { // 회원 가입 실패시
-			System.err.println("[안내] 비밀번호가 다릅니다.");
+			System.err.println("[안내] 비밀번호가 다릅니다.\n");
 		}else if(result == 2) { // 중복된 아이디일 경우
-			System.err.println("[안내] 이미 있는 아이디입니다.");
+			System.err.println("[안내] 이미 있는 아이디입니다.\n");
 		}else if(result == 0) { //회원가입 성공시
-			System.out.println("[회원가입 성공] 환영합니다.");
+			System.out.println("[회원가입 성공] 환영합니다.\n");
 		}
 		
 	}
@@ -162,7 +166,7 @@ public class Front {
 		if(choice == 1) { //1. 글삭제를 눌렀을 경우
 			deleteBoard(userId, index);
 		}else if(choice == 2) {//2. 글 수정을 눌렀을 경우
-			changeBoard(userId);
+			changeBoard(userId, index);
 		}else if(choice == 3) {//3. 뒤로 가기를 눌렀을 경우 -> viewBoard()
 			printBoard(userId);
 		}else {
@@ -173,14 +177,35 @@ public class Front {
 	/*글 삭제 함수*/
 	public void deleteBoard(String userId, int index) { 
 		//아이디는 해당 작성자가 맞는지 확인용. index는 삭제할 인덱스 가져오기
-		int successOX = boardContoller.deleteBoard(userId, index);
+		int check = boardContoller.checkUser(userId, index);
 		
+		if(check == 0) { //사용자의 아이디와 게시물의 작성자가 같을 경우
+			boardContoller.deleteBoard(index);
+			System.out.println("해당 게시글 삭제가 완료되었습니다.");
+		}else {
+			System.err.println("[안내] 해당 게시글을 삭제할 권한이 없습니다.");
+		}
+		printBoard(userId); //삭제하든 못하든 다시 커뮤니티로 돌아가서 게시글 목록을 보여줌
 	}
 	
 	/*글 수정 함수*/
-	public void changeBoard(String userId) {
+	public void changeBoard(String userId, int index) {
+		int check = boardContoller.checkUser(userId, index);
+		
+		if(check == 0) { //사용자의 아이디와 게시물의 작성자가 같을 경우
+			System.out.print("수정할 제목 : "); String title = scanner.next(); scanner.nextLine();
+			System.out.print("수정할 내용 : "); String content = scanner.nextLine();
+			
+			
+			boardContoller.changeBoard(title, content, index);
+			
+		}else {
+			System.err.println("[안내] 해당 게시글을 수정할 권한이 없습니다.");
+		}
+		printBoard(userId); //수정하든 못하든 다시 커뮤니티
 		
 	}
+	/*글 수정 전에 먼저 아이디가 같은지 아닌지를 확인 해야하므로*/
 	public void logOut() {//로그아웃 함수
 		index();//index로 돌아감
 	}

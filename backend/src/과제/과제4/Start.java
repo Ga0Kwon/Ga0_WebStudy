@@ -14,11 +14,7 @@ public class Start {//class s
 		
 		Front front = new Front(); //front 객체
 		
-		String loginOX = front.index();
-		
-		if(!loginOX.equals("-1")) {
-			front.printBoard(loginOX);
-		}
+		front.index();
 		
 	}//main e
 }//class e

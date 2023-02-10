@@ -38,9 +38,26 @@ public class BContoller {
 	}
 	
 	/*글 삭제 기능*/
-	public int deleteBoard(String userId, int index) {
+	public void deleteBoard(int index) {
+		
+		boardList.remove(index); //해당 인덱스 삭제
 
-		return 0;
+	}
+	
+	/*글 수정 기능*/
+	public void changeBoard(String title, String content, int index) {
+		boardList.get(index).content = content;
+		boardList.get(index).title = title;
+	}
+	
+	/*아이디가 맞는지 확인하는 함수인데, 글삭제 기능과 글 수정기능이 둘다 이걸 사용해서 
+	  공용으로 사용하기 위해 이것을 따로 만듬*/
+	public int checkUser(String userId, int index) {
+		if(boardList.get(index).writer.equals(userId)) {
+			return 0; //성공
+		}else {
+			return 1; //실패
+		}
 	}
 
 }
