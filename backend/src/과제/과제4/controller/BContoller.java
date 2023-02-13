@@ -32,7 +32,7 @@ public class BContoller {
 		
 		boardList.get(index).view += 1; //증가한 값
 		
-		Board board = new Board(index, boardList.get(index).view);//객체에도 저장
+//		Board board = new Board(index, boardList.get(index).view);//객체에도 저장
 		
 		return boardList.get(index);
 	}
