@@ -1,6 +1,5 @@
 package Day09.Ex10_게시판.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /*
@@ -17,7 +16,7 @@ public class Board {//class s
 	private String content;
 	private String password;
 	private String wirter;
-	private Date date; //작성일
+	private String date; //작성일 => format 하려고 string으로 바꿈
 	private int view; //조회수
 //	ArrayList<reply> list = new ArrayList<>(); // 댓글
 	
@@ -27,7 +26,7 @@ public class Board {//class s
 	public Board() {}
 
 		//2) 풀생성자
-	public Board(String title, String content, String password, String wirter, Date date, int view) {
+	public Board(String title, String content, String password, String wirter, String date, int view) {
 		this.title = title;
 		this.content = content;
 		this.password = password;
@@ -77,11 +76,11 @@ public class Board {//class s
 		this.wirter = wirter;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
