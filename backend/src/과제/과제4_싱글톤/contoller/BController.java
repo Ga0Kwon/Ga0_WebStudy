@@ -7,6 +7,13 @@ import 과제.과제4_싱글톤.model.Board;
 public class BController {
 	private ArrayList<Board> boardList = new ArrayList<>();
 	
+	//* 싱글톤
+	private static BController bc = new BController();
+	private BController() {};
+	public static BController getInstance() {
+		return bc;
+	}
+	
 	//1. 글쓰기
 	public boolean write(String title, String content) {
 		//1. 유효성 검사 [로그인 안되어있으면 나가기]

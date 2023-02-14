@@ -2,7 +2,10 @@ package 과제.과제4_싱글톤.view;
 
 import java.util.Scanner;
 
+import Day09.Ex10_게시판.contoller.Bcontroller;
+import 과제.과제4_싱글톤.contoller.BController;
 import 과제.과제4_싱글톤.contoller.MController;
+import 과제.과제4_싱글톤.model.Board;
 
 public class Front {
 	private Scanner scanner = new Scanner(System.in);
@@ -99,22 +102,75 @@ public class Front {
 	}
 	
 	//6. 로그인 성공시 게시물 출력페이지
-	public void board_page() {
-		
+	public void board_page() { 
+		while(true) {//[종료조선 : 3입력시 break;]
+			System.out.println("---------------------게시글-------------------");
+			System.out.println("번호\t조회수\t작성자\t제목");
+			int i = 0; //인덱스 용도
+			for(Board b : BController.getInstance().getList()) {
+				System.out.println(i + "\t" + b.getView() + "\t" + b.getMember().getId() + 
+						"\t" + b.getTitle());
+			}
+			//메뉴
+			System.out.print("1. 쓰기 2. 글보기 3. 로그아웃 : ");
+			int choice = scanner.nextInt();
+			
+			if(choice == 1) { //1. 쓰기
+				board_write();
+			}else if(choice == 2) { //2. 글보기
+				board_view();
+			}else if(choice == 3) {// 3. 로그아웃
+				MController.getInstance().logOut(); 
+				break; 
+			}
+		}
+//		System.out.println("로그아웃 후 : " + MController.getInstance().getLogSeasion().toString());
 	}
 	
 	//7. 게시물 쓰기 페이지
 	public void board_write() {
+		System.out.println("--------------------------글쓰기 페이지-----------------------");
+		System.out.print("제목 : "); String title = scanner.next();
+		System.out.print("내용 : "); String content = scanner.next();
+		boolean result = BController.getInstance().write(title, content);
 		
+		if(result) {
+			System.out.println("[알림] 글 작성 성공");
+		}else {
+			System.err.println("[알림] 글 작성 실패");
+		}
 	}
 	
 	//8. 게시물 상세 페이지
 	public void board_view() {
+		System.out.println("*이동할 게시물 번호[인덱스] : ");
+		int bno = scanner.nextInt();
+		Board result = BController.getInstance().getBoard(bno);
+		
+		System.out.println("제목 : " + result.getTitle());
+		System.out.println("작성자 : " + result.getMember().getId() + "\t\t조회수 : " + result.getView());
+		System.out.println("내용 : " + result.getContent());
+		
+		System.out.print("1. 삭제 2. 수정 3. 뒤로가기 : ");
+		int choice = scanner.nextInt();
+		
+		if(choice == 1) {//1. 삭제
+			board_delete();
+		}else if(choice == 2) {//2. 수정
+			board_update();
+		}else if(choice == 3) {//3. 뒤로가기
+			return;
+		}
 		
 	}
 	
 	//9. 게시물 수정 페이지 
 	public void board_update() {
+		
+	}
+	
+	//10. 글 삭제 페이지
+	public void board_delete() {
 		
 	}
 }
