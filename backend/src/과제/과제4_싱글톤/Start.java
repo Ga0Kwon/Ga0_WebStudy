@@ -1,8 +1,13 @@
 package 과제.과제4_싱글톤;
 
-public class Start {
-	
-}
+import 과제.과제4_싱글톤.view.Front;
+
+public class Start {//class s
+	public static void main(String[] args) {//main s
+		
+		Front.getInstance().index();
+	}//main e
+}//class e
 
 /*
 		M : 데이터 모델링[ 저장하고자 하는 데이터들의 설계 ]
