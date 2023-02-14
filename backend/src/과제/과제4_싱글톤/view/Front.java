@@ -31,11 +31,11 @@ public class Front {
 	//2. 회원가입 페이지
 	public void signup_page() {
 		//1. 입력
-		System.out.println("아이디 : ");  String id = scanner.next();
-		System.out.println("비밀번호 : "); String pw = scanner.next();
-		System.out.println("비밀번호 확인 : "); String confirmPw = scanner.next();
-		System.out.println("이름 : "); String name = scanner.next();
-		System.out.println("전화번호 : "); String phone = scanner.next();
+		System.out.print("아이디 : ");  String id = scanner.next();
+		System.out.print("비밀번호 : "); String pw = scanner.next();
+		System.out.print("비밀번호 확인 : "); String confirmPw = scanner.next();
+		System.out.print("이름 : "); String name = scanner.next();
+		System.out.print("전화번호 : "); String phone = scanner.next();
 		
 		//2. contoller에 전달
 		int result = MController.getInstance().signup(id, pw, confirmPw, name, phone);
@@ -50,8 +50,8 @@ public class Front {
 	//3. 로그인 페이지
 	public void login_page() {
 		//1. 입력
-		System.out.println("아이디 : ");  String id = scanner.next();
-		System.out.println("비밀번호 : "); String pw = scanner.next();
+		System.out.print("아이디 : ");  String id = scanner.next();
+		System.out.print("비밀번호 : "); String pw = scanner.next();
 		
 		int result = MController.getInstance().login(id, pw);
 		
@@ -69,8 +69,8 @@ public class Front {
 	//4. 아이디 찾기 페이지
 	public void findId_page() {
 		//1. 입력
-		System.out.println("이름 : ");  String name = scanner.next();
-		System.out.println("전화번호 : "); String phone = scanner.next();
+		System.out.print("이름 : ");  String name = scanner.next();
+		System.out.print("전화번호 : "); String phone = scanner.next();
 		
 		String result = MController.getInstance().findId(name, phone);
 		
@@ -85,8 +85,8 @@ public class Front {
 	//5. 비밀번호 찾기 페이지
 	public void findPw_page() {
 		//1. 입력
-		System.out.println("아이디 : ");  String id = scanner.next();
-		System.out.println("전화번호 : "); String phone = scanner.next();
+		System.out.print("아이디 : ");  String id = scanner.next();
+		System.out.print("전화번호 : "); String phone = scanner.next();
 		
 		String result = MController.getInstance().findPw(id, phone);
 		
