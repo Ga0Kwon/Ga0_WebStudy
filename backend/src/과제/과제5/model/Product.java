@@ -7,9 +7,9 @@ public class Product {
 	private int pno; //제품 고유 번호
 	
 	private String prodName; //제품이름
-	private String prodPrice; //제품 가격
+	private int prodPrice; //제품 가격
 	private String prodContent; //제품 내용
-	private String prodState; //제품 상태
+	private boolean prodState; //제품 상태 : 판매중 , 판매완료
 	
 	public String getProdName() {
 		return prodName;
@@ -18,7 +18,7 @@ public class Product {
 	//2. 생성자
 	public Product() {}
 
-	public Product(int mno, int pno, String prodName, String prodPrice, String prodContent, String prodState) {
+	public Product(int mno, int pno, String prodName, int prodPrice, String prodContent, boolean prodState) {
 		this.mno = mno;
 		this.pno = pno;
 		this.prodName = prodName;
@@ -44,11 +44,11 @@ public class Product {
 		this.pno = pno;
 	}
 
-	public String getProdPrice() {
+	public int getProdPrice() {
 		return prodPrice;
 	}
 
-	public void setProdPrice(String prodPrice) {
+	public void setProdPrice(int prodPrice) {
 		this.prodPrice = prodPrice;
 	}
 
@@ -60,11 +60,11 @@ public class Product {
 		this.prodContent = prodContent;
 	}
 
-	public String getProdState() {
+	public boolean getProdState() {
 		return prodState;
 	}
 
-	public void setProdState(String prodState) {
+	public void setProdState(boolean prodState) {
 		this.prodState = prodState;
 	}
 

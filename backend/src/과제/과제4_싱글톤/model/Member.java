@@ -61,6 +61,7 @@ public class Member {
 	public ArrayList<Board> getBoardlist() {
 		return boardlist;
 	}
+	
 	public void setBoardlist(ArrayList<Board> boardlist) {
 		this.boardlist = boardlist;
 	}
