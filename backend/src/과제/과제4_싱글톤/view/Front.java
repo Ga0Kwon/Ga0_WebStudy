@@ -68,11 +68,33 @@ public class Front {
 	
 	//4. 아이디 찾기 페이지
 	public void findId_page() {
+		//1. 입력
+		System.out.println("이름 : ");  String name = scanner.next();
+		System.out.println("전화번호 : "); String phone = scanner.next();
+		
+		String result = MController.getInstance().findId(name, phone);
+		
+		if(result == null) {
+			System.err.println("[알림] 아이디 찾기 실패");
+		}else {
+			System.out.println("[알림] 아이디 찾기 성공. 아이디는" + result + "입니다.");
+		}
 		
 	}
 	
 	//5. 비밀번호 찾기 페이지
 	public void findPw_page() {
+		//1. 입력
+		System.out.println("아이디 : ");  String id = scanner.next();
+		System.out.println("전화번호 : "); String phone = scanner.next();
+		
+		String result = MController.getInstance().findPw(id, phone);
+		
+		if(result == null) {
+			System.err.println("[알림] 비밀번호 찾기 실패");
+		}else {
+			System.out.println("[알림] 비밀번호 찾기 성공. 비밀번호는" + result + "입니다.");
+		}
 		
 	}
 	
