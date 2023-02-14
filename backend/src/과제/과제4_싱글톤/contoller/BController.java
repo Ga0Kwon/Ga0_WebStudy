@@ -5,9 +5,23 @@ import java.util.ArrayList;
 import 과제.과제4_싱글톤.model.Board;
 
 public class BController {
+	private ArrayList<Board> boardList = new ArrayList<>();
 	
 	//1. 글쓰기
 	public boolean write(String title, String content) {
+		//1. 유효성 검사 [로그인 안되어있으면 나가기]
+		if(MController.getInstance().getLogSeasion() == null){
+			return false;
+		}
+		
+		//2. DB 저장 [ 로그인이 되어있으면 ] => board가 member을 알고, member가 board를 안다. => 양방향
+		// * 이런 식으로 하면 반복문이 필요없음! => 즉, 빠르다!!!
+			//1) 객체화 [글작성 : 입력받은 데이터 2개, 초기값 0, 로그인한 회원 객체 = 글쓴이]
+		Board board = new Board(title, content, 0, MController.getInstance().getLogSeasion());
+			//2) boardList[DB]에 저장
+		boardList.add(board);
+			//3) 멤버 객체에 내가 쓴 글 등록
+		MController.getInstance().getLogSeasion().getBoardlist().add(board);
 		return true;
 	}
 	
