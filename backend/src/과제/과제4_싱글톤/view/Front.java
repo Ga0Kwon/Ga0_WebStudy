@@ -22,7 +22,7 @@ public class Front {
 	public void index() {
 		while(true) {
 			System.out.println("-----------------------커뮤니티--------------------");
-			System.out.print("1. 회원가입 2. 로그인 3. 마이페에지 4. 비밀번호 찾기 : ");
+			System.out.print("1. 회원가입 2. 로그인 3. 마이페이지 4. 비밀번호 찾기 : ");
 			int choice = scanner.nextInt();
 			
 			if(choice == 1) {signup_page();}
