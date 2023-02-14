@@ -40,6 +40,8 @@ public class BController {
 	
 	//3. 글 상세
 	public Board getBoard(int bno) {
+		boardList.get(bno).setView(boardList.get(bno).getView()+1); //조회수 증가
+		
 		return boardList.get(bno); //인수로 전달받은 인덱스[게시물 번호]의 게시물을 반환
 	}
 	

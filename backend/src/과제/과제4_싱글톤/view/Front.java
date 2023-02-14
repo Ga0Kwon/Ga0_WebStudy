@@ -3,6 +3,7 @@ package 과제.과제4_싱글톤.view;
 import java.util.Scanner;
 
 import Day09.Ex10_게시판.contoller.Bcontroller;
+import Day09.Ex8.package1.B;
 import 과제.과제4_싱글톤.contoller.BController;
 import 과제.과제4_싱글톤.contoller.MController;
 import 과제.과제4_싱글톤.model.Board;
@@ -155,9 +156,9 @@ public class Front {
 		int choice = scanner.nextInt();
 		
 		if(choice == 1) {//1. 삭제
-			board_delete();
+			board_delete(bno);
 		}else if(choice == 2) {//2. 수정
-			board_update();
+			board_update(bno);
 		}else if(choice == 3) {//3. 뒤로가기
 			return;
 		}
@@ -165,12 +166,27 @@ public class Front {
 	}
 	
 	//9. 게시물 수정 페이지 
-	public void board_update() {
-		
+	public void board_update(int bno) {
+		if(BController.getInstance().getBoard(bno).getMember().equals(
+				MController.getInstance().getLogSeasion())) {
+			System.out.print("새로운 제목 : "); String title = scanner.next();
+			System.out.print("새로운 내용 : "); String content = scanner.next();
+			BController.getInstance().update(bno, title, content);
+			System.out.println("[안내] 수정이 완료 되었습니다.");
+			return;
+		}
+		System.err.println("[안내] 수정 권한이 없숩니다.");
 	}
 	
 	//10. 글 삭제 페이지
-	public void board_delete() {
-		
+	public void board_delete(int bno) {
+		//1. 유효성 검사 [현재 보고 있는 글의 작성자와 현재 로그인된 회원과 같으면]
+		if(BController.getInstance().getBoard(bno).getMember().equals(
+				MController.getInstance().getLogSeasion())) {
+			BController.getInstance().delete(bno);
+			System.out.println("[알림] 삭제가 되었습니다.");
+			return;
+		}
+		System.err.println("[알림] 삭제 권한이 없습니다.");
 	}
 }
