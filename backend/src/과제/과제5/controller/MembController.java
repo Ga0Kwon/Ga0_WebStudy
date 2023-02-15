@@ -3,6 +3,7 @@ package 과제.과제5.controller;
 import java.util.ArrayList;
 
 import 과제.과제5.model.Member;
+import 과제.과제5.model.Product;
 
 public class MembController {
 	//*싱글톤 : 해당 객체 공유 메모리
@@ -24,6 +25,11 @@ public class MembController {
 		return logSeasion;
 	}
 	
+	//2. 출력할 때 사용할 예정
+	public ArrayList<Member> getList(){
+		return memberDB;
+	}
+	
 	//1. 회원 가입 처리
 	public boolean signUp(String id, String pw, String confirmPw, String phone) {
 		if(!pw.equals(confirmPw)) { //비밀번호가 같지않으면
@@ -42,6 +48,7 @@ public class MembController {
 			if(memberDB.get(i).getId().equals(id)) { //아이디가 존재하고
 				if(memberDB.get(i).getPw().equals(pw)) { //해당 아이디의 비밀번호와 맞다면
 					logSeasion = memberDB.get(i); //필드 logSeasion에 해당 객체를 저장
+					return i;
 				}else { //비밀번호가 틀렸을 경우
 					return -1; //인덱스는 0부터 시작하기 때문에 나올 수 없는 숫자는 0이하부터
 				}
