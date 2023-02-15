@@ -8,6 +8,7 @@ public class SportsCar extends Car{
 	}
 	
 	//부모 클래스에서 final이 있는 메소드는 오버라이딩이 안된다.
+	// Car의 stop() 메소드가 final이라서
 //	@Override
 //	public void stop() {
 //		super.stop();
