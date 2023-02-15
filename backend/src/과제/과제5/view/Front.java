@@ -91,9 +91,9 @@ public class Front {
 	public void printProduct() {
 		while(true) {
 			System.out.println("--------------------------제품 목록 리스트-----------------------");
-			System.out.println("제품이름 \t\t\t 제품 가격 \t\t\t 제품상태");
+			System.out.println("번호 \t 제품이름 \t\t\t 제품 가격 \t\t 제품상태");
 			for(int i = 0; i < ProdContoller.getInstance().getList().size(); i++) {
-				System.out.printf("%d \t\t %s \t\t %d \t\t %s",
+				System.out.printf("%d \t %s \t\t\t %d \t\t %s\n",
 						i,
 						ProdContoller.getInstance().getList().get(i).getProdName(),
 						ProdContoller.getInstance().getList().get(i).getProdPrice(),
@@ -104,7 +104,7 @@ public class Front {
 			if(choice == 1) { //1. 제품 등록
 				registerProduct();
 			}else if(choice == 2) { //2. 제품 상세 보기
-				System.out.println("상세 보기 할 제픔 번호 : "); int index = scanner.nextInt();
+				System.out.print("상세 보기 할 제픔 번호 : "); int index = scanner.nextInt();
 				viewProduct(index);
 			}else if(choice ==3) {//3. 뒤로 가기 :
 				return; //index쪽으로 돌아감.
@@ -121,8 +121,6 @@ public class Front {
 		int result = ProdContoller.getInstance().registerProduct(title, price, content);
 		
 		if(result == -1) {// 로그인이 안된 상태 => 로그인 해야 이 화면을 보여지기에 의미없는 코드임
-			System.err.println("[안내] 로그인을 해주세요");
-		}else if(result == -2) {
 			System.err.println("[안내] 회원님의 정보를 찾지 못했습니다.");
 		}else {
 			System.out.println("[안내] 제품 등록이 완료되었습니다.");
