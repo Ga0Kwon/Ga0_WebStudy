@@ -1,9 +1,9 @@
 package 과제.과제6;
 public class Tire { //Tire 클래스
 	// 1. 필드
-	public int maxRotation;   //접근제한자가 public(어디든 사용가능)인 정수형(int)필드 maxRotation
-	public int accumulatedRotation; //접근제한자가 public(어디든 사용가능)인 정수형(int)필드 accumulatedRotation
-	public String location; //접근제한자가 public(어디든 사용가능)인 문자열형(String)필드 location
+	public int maxRotation;   //접근제한자가 public(어디든 사용가능)인 정수형(int)필드 maxRotation[최대회전수]
+	public int accumulatedRotation; //접근제한자가 public(어디든 사용가능)인 정수형(int)필드 accumulatedRotation[누적회전]
+	public String location; //접근제한자가 public(어디든 사용가능)인 문자열형(String)필드 location[타이어 위치]
 	
 	//2. 생성자
 	public Tire(int maxRotation, String location) { //매개변수를 2개(maxRotation와 location)받는 생성자 Tire
