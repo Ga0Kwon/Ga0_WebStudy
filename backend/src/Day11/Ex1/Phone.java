@@ -17,6 +17,16 @@ public class Phone {
 		//2) 생성자 : 객체 생성시 초기화 담당[지역변수]
 			// 접근제한자 클래스명(매개변수1, 매개변수){ } 
 	
+	//부모가 생성자가 없다 -> 기본 생성자 들어감
+	
+	//밑의 인수를 두개 받는 생성자만 있다면 에러! [자식 클래스에서]
+	public Phone(String model, String color) {
+		this.model = model;
+		this.color = color;
+	}
+	//자식 클래스에서 super() 쓸 수 있도록!
+	public Phone() {}
+	
 		//3) 메소드 : 객체의 행위 [지역변수]
 			// 접근제한자 반환타입 메소드명(매개변수1, 매개변수2){ }
 	
