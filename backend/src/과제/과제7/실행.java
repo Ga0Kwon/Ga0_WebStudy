@@ -64,7 +64,7 @@ public class 실행 {
 				for(int i = 0; i < bankDB.size(); i++) {
 					if(bankDB.get(i).account.equals(account)) {
 						System.out.print("예금액 : ");  int money = scanner.nextInt();
-						bankDB.get(i).amount += money;
+						bankDB.get(i).amount += money; System.out.println("예금되었습니다");
 					}
 				}
 			}
