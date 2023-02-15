@@ -1,7 +1,5 @@
 package Day11.Ex7_타입변환;
 
-import java.util.ArrayList;
-
 public class 실행 {//class s
 	public static void main(String[] args) {//main s
 		//1. 기본타입의 자동타입 변환
@@ -30,7 +28,7 @@ public class 실행 {//class s
 		byte result2 = (byte)함수2((byte)value3);
 		
 		
-		//4.배열, ArrayList
+		//4.배열
 		double[]배열 = new double[3];
 		배열[0] = 3.3; 배열[1] = 3;
 		
