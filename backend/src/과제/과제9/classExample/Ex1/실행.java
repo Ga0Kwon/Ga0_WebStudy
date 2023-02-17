@@ -41,30 +41,63 @@ public class 실행 {//class s
 			int choice = scanner.nextInt();
 			if(choice == 1) {
 				사자.printInfo();
-				System.out.print("1. move 2. eat 3. sleep : ");
+				System.out.print("1. move 2. eat 3. sleep 4. hunt : ");
+				int actChoice = scanner.nextInt();
+				if(actChoice == 1) {
+					사자.move();
+				}else if(actChoice == 2) {
+					사자.eat();
+				}else if(actChoice == 3) {
+					사자.sleep();
+				}else if(actChoice == 4){
+					사자.hunt();
+				}
 			}else if(choice == 2) {
 				System.out.print("서식지 선택> 1. 산지 2. 초원 : ");
 				int ch = scanner.nextInt();
 				if(ch == 1) {
 					여우1.printInfo();
+					System.out.print("1. move 2. eat 3. sleep 4. run : ");
+					int actChoice = scanner.nextInt();
+					if(actChoice == 1) {
+						여우1.move();
+					}else if(actChoice == 2) {
+						여우1.eat();
+					}else if(actChoice == 3) {
+						여우1.sleep();
+					}else if(actChoice == 4){
+						여우1.run();
+					}
 				}else if(ch == 2) {
 					여우2.printInfo();
+					System.out.print("1. move 2. eat 3. sleep 4. run : ");
+					int actChoice = scanner.nextInt();
+					if(actChoice == 1) {
+						여우2.move();
+					}else if(actChoice == 2) {
+						여우2.eat();
+					}else if(actChoice == 3) {
+						여우2.sleep();
+					}else if(actChoice == 4){
+						여우2.run();
+					}
 				}
 
 			}else if(choice == 3) {
 				해달.printInfo();
+				System.out.print("1. move 2. eat 3. sleep 4. swim : ");
+				int actChoice = scanner.nextInt();
+				if(actChoice == 1) {
+					해달.move();
+				}else if(actChoice == 2) {
+					해달.eat();
+				}else if(actChoice == 3) {
+					해달.sleep();
+				}else if(actChoice == 4){
+					해달.swim();
+				}
 			}
 			
-			사자.move();
-
-			여우1.sleep();
-
-			여우2.run();
-			
-			사자.hunt();
-
-			해달.eat();
-			해달.swim();
 			
 		}
 		
