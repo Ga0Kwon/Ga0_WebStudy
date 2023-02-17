@@ -14,7 +14,7 @@ public class 실행 {
 		
 		//3. 인터페이스[리모콘]에 기능[메소드] 사용
 		rc.turnOn();
-		rc.setVolume(5);
+		rc.setVolume(-1);
 		rc.turnOff();
 		
 		//2. 인터페이스[리모콘]에 오디오[구현객체]연결
@@ -22,8 +22,14 @@ public class 실행 {
 		
 		//3. 인터페이스[리모콘]에 기능[메소드] 사용
 		rc.turnOn();
-		rc.setVolume(11);
+		rc.setVolume(9);
 		rc.turnOff();
 		
+		//4. 디폴트 메소드 호출
+		rc.setMute(true);
+		rc.setMute(false);
+		
+		//5. 정적 메소드 호출
+		RemoteControl.changeBattery(); //rc 필요 없음
 	}
 }

@@ -12,7 +12,7 @@ public class Audio implements RemoteControl{
 	public void turnOff() {
 		System.out.println("Audio를 끕니다.");
 	}
-	
+
 	@Override
 	public void setVolume(int volume) {
 		 if(volume > RemoteControl.MAX_VOLUME) {//최대볼륨보다 큰 볼륨을 요청하면
@@ -31,6 +31,28 @@ public class Audio implements RemoteControl{
 		 }
 		 System.out.println("현재 Audio 볼륨 : " + this.volumn);
 	}
+	
+	//필드
+	private int memoryVolume; //추가 필드 선언
+	//음소거 하기 전에 기존 소음을 저장하는 변수
+	
+	//디폴트 메소드 오버라이딩
+	@Override
+	public void setMute(boolean mute) {
+		
+		if(mute) {
+			this.memoryVolume = this.volumn;
+			
+			System.out.println("무음 처리합니다.");
+			setVolume(RemoteControl.MIN_VOLUME);
+			
+		}else {
+			System.out.println("무음 해제합니다.");
+			setVolume(this.memoryVolume); // 원래 볼륨으로 복원하는 코드
+		}
+	}
+	
+	
 	
 	
 }
