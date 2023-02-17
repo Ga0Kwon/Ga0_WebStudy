@@ -2,7 +2,7 @@ package Day13.Ex2;
 
 public class 실행 {
 	public static void main(String[] args) {
-		
+		//-인터페이스 상수 호출
 		System.out.println("리모콘 최대 볼륨 : " +RemoteControl.MAX_VOLUME);
 		System.out.println("리모콘 최소 볼륨 : " +RemoteControl.MIN_VOLUME);
 		
