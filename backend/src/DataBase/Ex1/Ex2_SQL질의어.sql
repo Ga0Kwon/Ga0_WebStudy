@@ -213,7 +213,7 @@ use spring;
 
 create table product(
 	productNo int,
-    name varchar(30),
+    name varchar(20),
     productPrice int
 );
 
