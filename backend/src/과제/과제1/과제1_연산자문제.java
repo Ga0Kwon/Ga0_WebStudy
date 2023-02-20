@@ -1,6 +1,5 @@
 package 과제.과제1;
 
-import java.security.DrbgParameters.NextBytes;
 import java.util.Scanner;
 
 public class 과제1_연산자문제 {//class s
