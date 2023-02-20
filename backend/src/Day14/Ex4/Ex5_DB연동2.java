@@ -56,11 +56,13 @@ public class Ex5_DB연동2 {
 					pstmt.executeUpdate();
 				}
 			}catch(InputMismatchException e) {
-				System.out.println("알 수 없는 번호 입니다. " + e);
+				System.out.println("알 수 없는 입력입니다. " + e);
 				// 알 수 없는 번호를 했을 때 scanner에 그 알수없는 값이 남아 있어서 에러가 계속 생김
 				scanner = new Scanner(System.in); //기존에 입력된 데이터 제거
 			}catch(SQLException e) {
 				System.out.println("SQL 오류 : " + e);
+			}catch(Exception e) {
+				System.out.println("DB 연결 후 다시 실행.");
 			}
 		}
 	}
