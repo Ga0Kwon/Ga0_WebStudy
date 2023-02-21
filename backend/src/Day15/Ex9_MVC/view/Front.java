@@ -22,7 +22,7 @@ public class Front {
 	public void index() {
 		while(true) {
 			System.out.println("------------------------------");
-			System.out.print("1.등록 2.출력 : ");
+			System.out.print("1.등록[C] 2.출력[R] 3.수정[U] 4.삭제[D] :");
 			int choice = scanner.nextInt();
 			
 			if(choice == 1) { //1. 등록
