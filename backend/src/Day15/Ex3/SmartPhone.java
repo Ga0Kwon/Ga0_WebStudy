@@ -11,6 +11,8 @@ public class SmartPhone {
 	
 	@Override
 	public String toString() {
-		return company + ", " + os; //보고 싶은대로 설정 가능
+		return "SmartPhone [company=" + company + ", os=" + os + "]";
 	}
+	
+	
 }
