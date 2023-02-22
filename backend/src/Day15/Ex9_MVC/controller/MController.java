@@ -27,7 +27,20 @@ public class MController {
 	}
 	//출력
 	public ArrayList<MemberDto> list(){
+		//모든 회원을 호출하는 DAO메소드 호출해서 결과 얻기
 		return MemberDao.getInstance().list();
+	}
+	
+	//비밀번호 변경
+	public boolean changePw(int mno, String mpw) {
+		boolean result = MemberDao.getInstance().changePw(mno, mpw);
+		return result;
+	}
+	
+	//회원 삭제
+	public boolean delete(int mno) {
+		boolean result = MemberDao.getInstance().delete(mno);
+		return result;
 	}
 	
 	//로그인

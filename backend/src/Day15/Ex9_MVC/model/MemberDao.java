@@ -65,28 +65,82 @@ public class MemberDao {
 		}
 		
 	}
+	/*회원출력 [ 인수 : x / 반환 : [배열 vs ArrayList] 회원*/
 	//2. 출력 메소드
 	public ArrayList<MemberDto> list() {
+		//* 여러 회원 Dto 객체를 저장하기 위한 리스트 선언
 		ArrayList<MemberDto> memberDB = new ArrayList<>();
 		
+		//1. SQL 작성
 		String sql = "" + "select * from member";
 		
 		try {
+			//2. 연결된 DB에 작성된 SQL 대입 
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				MemberDto dto = new MemberDto();
-				dto.setMno(rs.getInt("mno"));
-				dto.setMid(rs.getString("mid"));
-				dto.setMpw(rs.getString("mpw"));
+			//3. SQL 조작 [매개변수 없으면 패스~]
+			
+			//4. SQL 실행 [SQL 결과를 rs 인터페이스에 저장]
+			rs = pstmt.executeQuery(); // 검색된 레코드 [rs는 처음에 null을 가지고 있음]
+			
+			//5. SQL 결과
+				// 레코드 --자바형태--> 객체 Dto로
+			while(rs.next()) { //rs.next() : 다음 레코드 이동 [없으면 false] //마지막 레코드까지
+//				MemberDto dto = new MemberDto();
+//				dto.setMno(rs.getInt("mno"));
+//				dto.setMid(rs.getString("mid"));
+//				dto.setMpw(rs.getString("mpw"));
+				
+				MemberDto dto = new MemberDto(rs.getInt(1), rs.getString(2), rs.getString(3));
 				memberDB.add(dto);
 			}
 			
 			return memberDB;
 			
 		}catch(SQLException e) {
+			System.out.println(e.getMessage());
 			return null;
+		}
+	}
+	// 3. 비밀번호 수정 [인수 : mno, mpw(바꿀)[누구의 비밀번호를 무엇으로 바꿀건지] 반환 : 성공 실패]
+	public boolean changePw(int mno, String mpw) {
+		//1. SQL 작성
+		String sql = "update member set mpw = ? where mno = ?";
+		
+		try {
+			//2. 연결 DB에 SQL 대입
+			pstmt = conn.prepareStatement(sql);
+			
+			//3. SQL 조작
+			pstmt.setString(1, mpw);
+			pstmt.setInt(2, mno);
+			
+			//4. SQL 실행
+			pstmt.executeUpdate();
+			
+			//5. SQL 결과	
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+	//삭제 메소드
+	public boolean delete(int mno) {
+		String sql = "delete from member where mno = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mno);
+			
+			pstmt.executeUpdate();
+			
+			return true;
+		}catch(SQLException e) {
+			System.err.println(e.getMessage());
+			return false;
 		}
 	}
 	
@@ -104,6 +158,10 @@ public class MemberDao {
 			pstmt.setString(2, dto.getMpw());
 			
 			rs = pstmt.executeQuery();
+			/*
+				  insert, update, delete => pstmt.executeUpdate(); => 결과 1개
+				  select => pstmt.executeQuery() => 결과 여러개
+			 */
 			
 			if(rs.next()) {
 
