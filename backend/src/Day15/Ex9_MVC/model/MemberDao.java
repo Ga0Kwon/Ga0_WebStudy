@@ -106,44 +106,76 @@ public class MemberDao {
 	public boolean changePw(int mno, String mpw) {
 		//1. SQL 작성
 		String sql = "update member set mpw = ? where mno = ?";
+		boolean check = existMno(mno);
 		
-		try {
-			//2. 연결 DB에 SQL 대입
-			pstmt = conn.prepareStatement(sql);
-			
-			//3. SQL 조작
-			pstmt.setString(1, mpw);
-			pstmt.setInt(2, mno);
-			
-			//4. SQL 실행
-			pstmt.executeUpdate();
-			
-			//5. SQL 결과	
-			return true;
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+		if(check) {
+			try {
+				//2. 연결 DB에 SQL 대입
+				pstmt = conn.prepareStatement(sql);
+				
+				//3. SQL 조작
+				pstmt.setString(1, mpw);
+				pstmt.setInt(2, mno);
+				
+				//4. SQL 실행
+				pstmt.executeUpdate();
+				
+				//5. SQL 결과	
+				return true;
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return false;
+			}
+		}else {
 			return false;
 		}
 	}
 	//삭제 메소드
 	public boolean delete(int mno) {
 		String sql = "delete from member where mno = ?";
+		boolean check = existMno(mno);
+		
+		if(check) {
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, mno);
+				
+				pstmt.executeUpdate();
+				
+				return true;
+			}catch(SQLException e) {
+				System.err.println(e.getMessage());
+				return false;
+			}
+		}else {
+			return false;
+		}
+	}
+	//있는 회원인지 확인 하는 메소드
+	public boolean existMno(int mno) {
+		String sql = "select * from member where mno = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, mno);
 			
-			pstmt.executeUpdate();
+			rs = pstmt.executeQuery();
 			
-			return true;
-		}catch(SQLException e) {
+			if(!rs.next()) { //없는 회원일 경우
+				
+				return false;
+				
+			}else {
+				return true;
+			}
+		}catch (SQLException e) {
 			System.err.println(e.getMessage());
 			return false;
 		}
+		
 	}
-	
 	
 	//로그인 메소드
 	public int login(MemberDto dto) {

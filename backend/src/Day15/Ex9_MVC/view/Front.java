@@ -75,7 +75,7 @@ public class Front {
 		if(result) {
 			System.out.println(no + "번 회원의 비밀번호가 바뀌었습니다.");
 		}else {
-			System.err.println("[에러]회원님의 비밀번호를 바꾸지 못하였습니다.");
+			System.err.println("[에러]회원님의 비밀번호를 바꾸지 못하였습니다.[없는 회원이거나 DB에러]");
 		}
 	}
 	
@@ -89,7 +89,7 @@ public class Front {
 		if(result) {
 			System.out.println(no + "번 회원이 삭제되었습니다.");
 		}else {
-			System.err.println("[에러]회원님을 삭제하지 못했습니다.");
+			System.err.println("[에러]회원님을 삭제하지 못했습니다.[없는 회원이거나 DB에러]");
 		}
 	}
 	//로그인
