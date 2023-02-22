@@ -31,72 +31,80 @@ public class ProductDao {
 			System.out.println(e.getMessage());
 		}
 	}
+	
 	/*-------------------------사용자 페이지s------------------------*/
 	//-1. 장바구니 목록 pNo로 정보 찾기
 	public ArrayList<ProductDto> printCart(ArrayList<ProductDto> cartList){
+		/*장바구니 목록에는 pNo와 구매할 개수만 담고 있기 때문에 출력할때 [번호  개수] 이렇게만 나오면 보기 안좋아서
+		  개인적으로 추가한 내용.*/
 		ArrayList<ProductDto> cartDto = new ArrayList<>();
-		ArrayList<ProductDto> compareDto =  printProduct();
+		ArrayList<ProductDto> compareDto =  printProduct(); //compareDto는 전체 제품 목록을 담고 있는 리스트
+		// 이건 관리자 페이지에서 모든 제품 출력했을 때 사용한 것. => 재사용.
 		
-		for(int i = 0; i < cartList.size(); i++) {
-			for(ProductDto dto : compareDto) {
-				if(cartList.get(i).getpNo() == dto.getpNo()) {
-					ProductDto inputCartDto = new ProductDto(
+		for(int i = 0; i < cartList.size(); i++) { //해당 인수로 받아온 [번호 개수] 리스트 사이즈만큼 반복문을 돌고
+			for(ProductDto dto : compareDto) { // 모든 제품 목록의 사이즈만큼 반복문을 돌고
+				if(cartList.get(i).getpNo() == dto.getpNo()) { //만약 현재 장바구니 리스트의 pNo와 반복문을 돈 compareDto의 pNo가 같으면
+					ProductDto inputCartDto = new ProductDto( // 해당 정보를 받아오면 됨 [정보 : pNo, pName, pStock, pPrice] 전부 출력할 것이기 때문
 							dto.getpNo(), 
 							dto.getpName(), 
 							dto.getpPrice(), 
-							cartList.get(i).getpStock()); //마지막은 구매할 재고 
-					cartDto.add(inputCartDto);
+							cartList.get(i).getpStock()); //여기서 이것만 cartList인 이유는 장바구니 리스트에서는 제품 재고가 아닌 구매할 개수를 띄울 것이기 때문
+					cartDto.add(inputCartDto); //그렇게 객체에 정보를 다 받아왔으면 리스트에 추가 해당 객체를 계속 추가 [장바구니에 담겨있는 pNo개수 만큼]
 					
 				}
 			}
 		}
-		return cartDto;
+		return cartDto; // 다 넣었다면 반환해주면됨 장바구니에 담아져있는 객체
 	}
 	
 	//0. 결제
-	public boolean purchase(ArrayList<ProductDto> cartList) {
-		ArrayList<ProductDto> cartDto = printCart(cartList);
+	public boolean purchase(ArrayList<ProductDto> cartList) { // 결제 해당 장바구니에 담은 [번호 개수] 리스트 를 인수로 받음
+		ArrayList<ProductDto> cartDto = printCart(cartList); // 이건 필 수 아님! 없어도 됨! 이줄은 없어도 돌아감!
 		
-		String sql = "update product set pStock = pStock - ? where pNo = ?";
-		for(int i = 0; i < cartDto.size(); i++) {
+		String sql = "update product set pStock = pStock - ? where pNo = ?"; //현재 pStock - [구매할 개수]를 빼주면 됨
+		for(int i = 0; i < cartDto.size(); i++) {//cartDto 장바구니 리스트 사이즈 만큼 반복
 			try {
-				pstmt = conn.prepareStatement(sql);
+				pstmt = conn.prepareStatement(sql); 
 				
-				pstmt.setInt(1, cartDto.get(i).getpStock());
+				pstmt.setInt(1, cartDto.get(i).getpStock()); // 해당 장바구니 리스트 정보의 구매할 개수를 넣어줌. 
 				pstmt.setInt(2, cartDto.get(i).getpNo());
 				
-				pstmt.executeUpdate();
+				pstmt.executeUpdate(); 
 				
 			}catch(SQLException e) {
 				return false;
 			}
 		}
-		return true;
+		return true; // 반복문이 돌고 있는데 return true를 해버리면 중간에 끝나버리니까, 다 끝나고 return!
+		// 여기까지 왔다는 건 무사히 아무 에러 없이 잘 되었다는 것이므로!
 	}
 	
 	//1. 장바구니 담기
 	public int cart(int no, int inCount) {
-		if(checkPNo(no)) {
+		if(checkPNo(no)) { //이건 해당 제품 번호가 있는지 없는지 확인하는 메소드 추가한 것.  
 //			String sql = "select pStock from product where pno = ?";
-			String sql = "select * from product where pno = ?";
+			String sql = "select * from product where pno = ?"; 
 			try {
 				pstmt = conn.prepareStatement(sql);
 				
 				pstmt.setInt(1, no);
 				
 				rs = pstmt.executeQuery();
-				rs.next();
+	
+				rs.next(); // 해당 열의 재고를 받아오려면 next필수!
+				
 				if(rs.getInt(4) < inCount) { // 사려는 개수가 재고보다 클 경우
 					return rs.getInt(4); //해당 재고를 넣어준다.
-				}else{
+				}else{ //재고가 0개일 수 있으니까 음수로 나눴음
 					return -3; //장바구니에 넣을 수 있을 경우
 				}
+	
 			}catch(SQLException e) { //DB에러
 				System.err.println(e.getMessage());
 				return -2;
 			}
 		}else { //해당 제품 번호가 없을 경우
-			return -1;
+			return -1; // 이부분은 checkPno() if문에 해당하는 부분
 		}
 	}
 	/*-------------------------사용자 페이지e------------------------*/

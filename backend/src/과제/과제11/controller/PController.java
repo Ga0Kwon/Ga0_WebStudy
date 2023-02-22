@@ -14,19 +14,19 @@ public class PController {
 		return pc;
 	}
 	
-	private static ArrayList<ProductDto> cartList = new ArrayList<>();
+	private static ArrayList<ProductDto> cartList = new ArrayList<>(); //장바구니에 담은 목록리스트
 	public static ArrayList<ProductDto> getCartInstance(){
-		return cartList;
+		return cartList; //장바구니 리스트 싱글톤
 	}
 	/*------------------------------사용자 페이지s------------------------*/
 	//-1. 장바구니 목록 
-	public ArrayList<ProductDto> printCart(){
+	public ArrayList<ProductDto> printCart(){ //장바구니 목록을 반환하는 메소드
 		return ProductDao.getInstance().printCart(cartList);
 	}
 	
 	//0. 결제
 	public boolean purchase() {
-		boolean result = ProductDao.getInstance().purchase(cartList);
+		boolean result = ProductDao.getInstance().purchase(cartList); 
 		
 		if(result) { //구매했으면 장바구니 비우기
 			cartList = new ArrayList<>();
