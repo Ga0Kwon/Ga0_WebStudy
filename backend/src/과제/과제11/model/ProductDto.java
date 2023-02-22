@@ -23,9 +23,17 @@ public class ProductDto {
 		this.pStock = pStock;
 	}
 
-
+	/*cart에 넣기 위한 생성자*/
+	
 
 	public ProductDto() {}
+
+	public ProductDto(int pNo, int pStock) {
+		this.pNo = pNo;
+		this.pStock = pStock;
+	}
+
+
 
 	//3. 메소드
 	public int getpNo() {

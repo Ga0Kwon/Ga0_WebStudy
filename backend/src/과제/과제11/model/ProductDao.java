@@ -31,7 +31,77 @@ public class ProductDao {
 			System.out.println(e.getMessage());
 		}
 	}
+	/*-------------------------사용자 페이지s------------------------*/
+	//-1. 장바구니 목록 pNo로 정보 찾기
+	public ArrayList<ProductDto> printCart(ArrayList<ProductDto> cartList){
+		ArrayList<ProductDto> cartDto = new ArrayList<>();
+		ArrayList<ProductDto> compareDto =  printProduct();
+		
+		for(int i = 0; i < cartList.size(); i++) {
+			for(ProductDto dto : compareDto) {
+				if(cartList.get(i).getpNo() == dto.getpNo()) {
+					ProductDto inputCartDto = new ProductDto(
+							dto.getpNo(), 
+							dto.getpName(), 
+							dto.getpPrice(), 
+							cartList.get(i).getpStock()); //마지막은 구매할 재고 
+					cartDto.add(inputCartDto);
+					
+				}
+			}
+		}
+		return cartDto;
+	}
 	
+	//0. 결제
+	public boolean purchase(ArrayList<ProductDto> cartList) {
+		ArrayList<ProductDto> cartDto = printCart(cartList);
+		
+		String sql = "update product set pStock = pStock - ? where pNo = ?";
+		for(int i = 0; i < cartDto.size(); i++) {
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, cartDto.get(i).getpStock());
+				pstmt.setInt(2, cartDto.get(i).getpNo());
+				
+				pstmt.executeUpdate();
+				
+			}catch(SQLException e) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//1. 장바구니 담기
+	public int cart(int no, int inCount) {
+		if(checkPNo(no)) {
+//			String sql = "select pStock from product where pno = ?";
+			String sql = "select * from product where pno = ?";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, no);
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				if(rs.getInt(4) < inCount) { // 사려는 개수가 재고보다 클 경우
+					return rs.getInt(4); //해당 재고를 넣어준다.
+				}else{
+					return -3; //장바구니에 넣을 수 있을 경우
+				}
+			}catch(SQLException e) { //DB에러
+				System.err.println(e.getMessage());
+				return -2;
+			}
+		}else { //해당 제품 번호가 없을 경우
+			return -1;
+		}
+	}
+	/*-------------------------사용자 페이지e------------------------*/
+	
+	/*-------------------------관리자 페이지s------------------------*/
 	//1. 제품 등록
 	public boolean enrollProduct(ProductDto dto) {
 		String sql = "" + "INSERT INTO product (pName, pPrice, pStock) VALUES (?, ? , ?)";
@@ -164,4 +234,5 @@ public class ProductDao {
 			return -1;
 		}
 	}
+	/*-------------------------관리자 페이지e------------------------*/
 }
