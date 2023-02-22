@@ -11,7 +11,7 @@ public class MemberDao {
 	
 	// *싱글톤 : Dao 싱글톤 사용하는 이유 : 프로그램내 DB연동 1번만 해서 하나의 연동 객체 사용
 		//1. 내부에 객체 만들기
-	public static MemberDao dao = new MemberDao();
+	private static MemberDao dao = new MemberDao();
 		//2. 생성자는 private -> 외부에서 new 사용 금지
 		//3. 외부에서 내부 객체를 사용할 수 있게 내부 객체 반환 메소드 [getInstance]
 	public static MemberDao getInstance() {
