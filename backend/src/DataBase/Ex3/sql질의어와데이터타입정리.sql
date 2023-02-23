@@ -297,5 +297,25 @@ select * from buy;
             min(필드명) : 해당 필드내 데이터 최소값
             count(필드명) : 해당 필드내 데이터 수 [null 미포함] 
             count(*) : 레코드 수 [null 포함]
-
 */
+
+-- 타입 확인
+drop table if exists testType;
+
+create table testType(
+	tinyint_col tinyint, -- 정수[1바이트] : 약 +- 128
+    smallint_col  smallint, -- 정수[2바이트] 약 +- 3만정도
+    int_col int, -- 정수[4바이트] 약 +- 21억 정도
+	int_col2 int unsigned, -- 정수[4바이트] 약 +43억정도 [unsigned : 음수 사용X -> 음수용량을 양수로 사용]
+    bigint_col bigint, -- 정수[8바이트] 약 +- 20억 이상
+    char_col char(10), -- char(길이) : 고정 길이[1 ~ 255]
+    varchar_col varchar(10), -- varchar(길이) : 가변길이[1~16383] *MySQL 5버전 이상일때만 
+    text_col text, -- text 1~65535
+    longtext_col longtext, -- longtext 1~42억정도 
+    float_col float, -- 실수[소수점 7자리까지 저장]
+    date_col date, -- 날짜 저장 [yyyy - MM - dd]
+    time_col time, -- 시간 저장 [hh : mm : ss]
+    dateTime_col datetime -- 날짜/시간 저장[yyyy-MM-dd hh:mm:ss]
+);
+
+select * from testType
