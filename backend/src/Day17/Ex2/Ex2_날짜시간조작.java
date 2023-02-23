@@ -40,5 +40,6 @@ public class Ex2_날짜시간조작 {
 		System.out.println("분 차이: " + (시작일.until(종료일, ChronoUnit.MINUTES))); // 364*24*60
 		System.out.println("초 차이: " + (시작일.until(종료일, ChronoUnit.SECONDS))); // 364*24*60*60
 		
+		
 	}
 }
