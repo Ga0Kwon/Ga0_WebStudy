@@ -43,15 +43,38 @@ public class 스레드메소드 {
 //		System.out.println(sumThread.getSum());
 		
 		
-		SumThread sumThread = new SumThread();
-		sumThread.start();
-		try {
-			sumThread.join(); // -현스레드(main)와 조인[합치기]ㄴ
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+//		SumThread sumThread = new SumThread();
+//		sumThread.start();
+//		try {
+//			sumThread.join(); // -현스레드(main)와 조인[합치기]ㄴ
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		
+//		System.out.println(sumThread.getSum());
 		
-		System.out.println(sumThread.getSum());
+		//4.yield()
+		WorkThread workThreadA = new WorkThread("workThreadA"); //스레드A 객체 생성
+		WorkThread workThreadB = new WorkThread("workThreadB"); //스레드B 객체 생성
+		
+		workThreadA.start(); // 스레드A 실행
+		workThreadB.start(); //스레드B 실행
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		workThreadA.work = false; //스레드A 필드 변경 스레드 양보 상태
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		workThreadA.work = true; //스레드 A 필드 변경 스레드 대기 상태
+		
+		
 	}
 }
