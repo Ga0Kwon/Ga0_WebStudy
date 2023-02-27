@@ -9,13 +9,12 @@ public class 실행 {
 //		boolean musicState = false; //음악 재생 여부
 //		boolean movieState = false; //영화 재생 여부
 		
+		Music music = new Music();
+		Movie movie = new Movie();
 		
 		while(true) {
 			System.out.print("1. 음악 재생/중지 2. 영화 재생/중지 : ");
 			int choice = scanner.nextInt();
-			
-			Music music = new Music();
-			Movie movie = new Movie();
 			
 			//만약에 1번을 입력하면서 음악이 꺼져있으면
 			if(choice == 1 && music.play == false) { //1. 음악 재생
