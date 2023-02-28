@@ -65,11 +65,14 @@ public class BoardDao extends Dao{
 			
 			rs = ps.executeQuery();
 			
+			String returnValue = null;
+			
 			if(rs.next()) {
-				return rs.getString(2);
-			}else {
-				return null;
+				returnValue = rs.getString(2);
+				
 			}
+			System.out.println(returnValue); 
+			return returnValue;
 			
 		}catch(Exception e) {
 			System.err.println(e.getMessage());
@@ -101,30 +104,32 @@ public class BoardDao extends Dao{
 		}
 	}
 	
-	// 게시판 목록 3개만 반환하는 메소드[받은 카테고리에 대한]
-	public ArrayList<BoardDto> printLimitBoard(int categoryNo){
-		String sql = "select * from board where category_no = ? limit 3";
+	// 게시판 목록 3개만 반환하는 메소드
+	public ArrayList<BoardDto> printLimitBoard(){
+		String sql = "select b.board_no , b.board_title , b.board_content , b.board_date , b.board_view , m.member_id , c.cateogry_name"
+				+ "			from board b , member m , category c "
+				+ "			where b.member_no = m.member_no and b.category_no = c.category_no"
+				+ "			order by b.board_date desc limit 3;";
 		ArrayList<BoardDto> boardDB = new ArrayList<>();
 		try {
 			ps = con.prepareStatement(sql);
-			
-			ps.setInt(1, categoryNo);
 			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				BoardDto dto = new BoardDto(
 						rs.getInt(1), 
+						rs.getString(2), 
 						rs.getString(3), 
 						rs.getString(4), 
-						rs.getString(6), 
-						rs.getInt(7), 
-						findMemberId(rs.getInt(5)),  
-						findCategoryName(rs.getInt(2)));
+						rs.getInt(5), 
+						rs.getString(6),  
+						rs.getString(7)
+				);
 				
 				boardDB.add(dto);
 			}
-			System.out.println(boardDB);
+			
 			return boardDB;
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -134,7 +139,10 @@ public class BoardDao extends Dao{
 
 	//전체 게시판 반환하는 메소드 [받은 카테고리에 대한]
 	public ArrayList<BoardDto> printWholeBoard(int categoryNo){
-		String sql = "select * from board where category_no = ? order by board_date desc";
+		String sql = "select b.board_no , b.board_title , b.board_content , b.board_date , b.board_view , m.member_id , c.cateogry_name "
+				+ "			from board b , member m , category c "
+				+ "			where b.member_no = m.member_no and b.category_no = c.category_no and b.category_no = ? "
+				+ "			order by b.board_date desc limit 3;";
 		ArrayList<BoardDto> boardDB = new ArrayList<>();
 		try {
 			ps = con.prepareStatement(sql);
@@ -146,12 +154,12 @@ public class BoardDao extends Dao{
 			while(rs.next()) {
 				BoardDto dto = new BoardDto(
 						rs.getInt(1), 
+						rs.getString(2), 
 						rs.getString(3), 
 						rs.getString(4), 
-						rs.getString(6), 
-						rs.getInt(7), 
-						findMemberId(rs.getInt(5)),  
-						findCategoryName(rs.getInt(2)));
+						rs.getInt(5), 
+						rs.getString(6),  
+						rs.getString(7));
 				boardDB.add(dto);
 			}
 			return boardDB;

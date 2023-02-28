@@ -30,8 +30,8 @@ public class BoardController {
 	}
 	
 	//등록된 전체 게시판 출력하기 
-	public ArrayList<BoardDto> printLimitBoard(int categoryNo){
-		return BoardDao.getInstance().printLimitBoard(categoryNo);
+	public ArrayList<BoardDto> printLimitBoard(){
+		return BoardDao.getInstance().printLimitBoard();
 	}
 	
 	public boolean writeBoard(String boardTitle ,String boardContent, int categoryNo) {

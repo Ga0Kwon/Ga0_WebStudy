@@ -77,7 +77,7 @@ public class BoardView {
 	//게시물 3개만 출력하기 [카테고리별]
 	public void printLimitBoard(int CategoryNo) throws Exception{
 		while(true) {
-			ArrayList<BoardDto> boardDB = BoardController.getInstance().printLimitBoard(CategoryNo);
+			ArrayList<BoardDto> boardDB = BoardController.getInstance().printLimitBoard();
 			System.out.println("========================== 갤러리 ==========================");
 			System.out.println("번호 \t\t 제목 \t\t\t\t 작성일");
 			System.out.println("----------------------------------------------------------");
@@ -91,11 +91,11 @@ public class BoardView {
 			int choice = scanner.nextInt();
 			
 			if(choice == 1) { //1. 상세 보기
-				
+				printWholeBoard(CategoryNo); //해당 카테고리의 모든 갤러리 목록 출력
 			}else if(choice == 2) { //2. 갤러리 글쓰기
 				writeBoard(CategoryNo);
 			}else if(choice == 3) { //3. 뒤로 가기
-				
+				return;
 			}
 		}
 	}
@@ -115,12 +115,13 @@ public class BoardView {
 		int choice = scanner.nextInt();
 		
 		if(choice == 1) {
-			
+			viewDetailBoard(choice);
 		}else if(choice == 2) {
 			return;
 		}
 	}
 	
+	//게시물 등록
 	public void writeBoard(int CategoryNo) {
 		System.out.print("제목 : "); scanner.nextLine(); String boardTitle = scanner.nextLine();
 		System.out.print("내용 : "); String boardContent = scanner.nextLine();
@@ -132,5 +133,9 @@ public class BoardView {
 		}else {
 			System.err.println("[실패] 게시물을 등록할 수 없습니다. 관리자에게 문의하세요.");
 		}
+	}
+	
+	public void viewDetailBoard(int boardNo) {
+		
 	}
 }
