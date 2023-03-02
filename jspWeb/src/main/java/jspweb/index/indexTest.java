@@ -1,4 +1,4 @@
-package jspWeb.jsweb.index;
+package jspweb.index;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class index
+ * Servlet implementation class indexTest
  */
-@WebServlet("/index")
-public class index extends HttpServlet {
+@WebServlet("/indexTest")
+public class indexTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public index() {
+    public indexTest() {
         super();
         // TODO Auto-generated constructor stub
     }
