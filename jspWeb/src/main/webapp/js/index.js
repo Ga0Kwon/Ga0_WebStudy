@@ -52,9 +52,19 @@ function 예제(){
 	
 	$.ajax({
 		url : "http://localhost:8080/jspWeb/indexTest", //통신할 서블릿 주소
-		method : "", //HTTP 메소드
-		data : {}, //데이터 보내기
-		success : function(result){} //데이터 받기  
-						
+		method : "get", //HTTP 메소드
+		data : {"data" : data + " get"}, //데이터 보내기
+		success : function(result){
+			console.log(result);
+		} //데이터 받기  		
+	})
+	
+		$.ajax({
+		url : "http://localhost:8080/jspWeb/indexTest", //통신할 서블릿 주소
+		method : "post", //HTTP 메소드
+		data : {"data" : data + " post"}, //데이터 보내기
+		success : function(result){
+			console.log(result);
+		} //데이터 받기  		
 	})
 }
