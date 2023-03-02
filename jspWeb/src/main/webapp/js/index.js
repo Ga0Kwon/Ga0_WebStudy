@@ -47,24 +47,68 @@ function 예제(){
 		 	success : function(result){
 				 
 			}
-		});
+		);
 	*/	
 	
-	$.ajax({
-		url : "http://localhost:8080/jspWeb/indexTest", //통신할 서블릿 주소
+/*	$.ajax({
+		url : "http://localhost:8080/jspWeb/Ex1", //통신할 서블릿 주소
 		method : "get", //HTTP 메소드
 		data : {"data" : data + " get"}, //데이터 보내기
 		success : function(result){
 			console.log(result);
 		} //데이터 받기  		
 	})
-	
+*/
+
 		$.ajax({
-		url : "http://localhost:8080/jspWeb/indexTest", //통신할 서블릿 주소
+		url : "/jspWeb/Ex1", //통신할 서블릿 주소
 		method : "post", //HTTP 메소드
 		data : {"data" : data + " post"}, //데이터 보내기
 		success : function(result){
 			console.log(result);
+			Ex2();
 		} //데이터 받기  		
+	})
+}
+Ex2();
+
+function Ex2(){
+	$.ajax({
+		url : "/jspWeb/Ex1",
+		method : "get",
+		//data : {}, => 생략
+		success : function(result){
+			console.log(result);
+			document.querySelector('.ex2box').innerHTML = result;
+		}
+	})
+}
+
+function 과제post(){
+	let data2 = document.querySelector('.inputData2').value;
+	console.log(data2);
+	
+	$.ajax({
+		url : "/jspWeb/Q1", //통신할 서블릿 주소
+		method : "post", //HTTP 메소드
+		data : {"data2" : data2}, //데이터 보내기
+		success : function(result){
+			console.log(result);
+			과제get();
+		} //데이터 받기  		
+	})
+}
+
+과제get();
+
+function 과제get(){
+	$.ajax({
+		url : "/jspWeb/Q1",
+		method : "get",
+		//data : {}, => 생략
+		success : function(result){
+			console.log(result);
+			document.querySelector('.q1box').innerHTML = result;
+		}
 	})
 }
