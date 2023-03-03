@@ -5,7 +5,8 @@ alert("day02-index.js 열림");
 function ex1(){
 	/*변수 10개를 객체 1개로 바꾸기! */
 	let info = {
-		//DATA1[문자열]
+		
+	//DATA1[문자열]
 	 data1 : document.querySelector('.data1').value,
 	
 	//DATA2[패스워드]
@@ -39,12 +40,16 @@ function ex1(){
 	console.log(info); //data7 제외 모두 문자열 
 	
 	
-	$.ajax({
-		url :"",
-		method : "",
-		data : "info",
+	$.ajax({ //* JQuery 라이브러리 필수!
+		url :"/jspWeb/Ex2", //1. 서블릿 주소 [/프로젝트명/서블릿주소]
+		method : "post", //2. 메소드 방식 [doGet vs doPost]
+		data : info, //3. 보낼 데이터[객체 vs {}]
 		success : function(result){
-			console.log(result);
+			if(result == 'true'){
+				console.log("[전달 완료]")
+			}else{
+				console.log("[전달 실패]")
+			}
 		}
 	})
 	
