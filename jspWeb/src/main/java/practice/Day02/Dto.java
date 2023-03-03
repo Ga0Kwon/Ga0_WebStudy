@@ -2,16 +2,16 @@ package practice.Day02;
 
 public class Dto {
 	//필드
-	String data1;
-	String data2;
-	double data3;
-	int data4;
-	String data5;
-	String data6;
-	String data7;
-	boolean data8;
-	String data9;
-	String data10;
+	private String data1;
+	private String data2;
+	private double data3;
+	private int data4;
+	private String data5;
+	private String data6;
+	private String data7;
+	private boolean data8;
+	private String data9;
+	private String data10;
 	
 	//생성자
 	public Dto() {}
@@ -111,12 +111,4 @@ public class Dto {
 	public void setData10(String data10) {
 		this.data10 = data10;
 	}
-
-	@Override
-	public String toString() {
-		return "Dto [data1=" + data1 + ", data2=" + data2 + ", data3=" + data3 + ", data4=" + data4 + ", data5=" + data5
-				+ ", data6=" + data6 + ", data7=" + data7 + ", data8=" + data8 + ", data9=" + data9 + ", data10="
-				+ data10 + "]";
-	}
-	
 }

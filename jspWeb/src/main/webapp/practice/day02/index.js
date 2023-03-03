@@ -47,6 +47,7 @@ function ex1(){
 		success : function(result){
 			if(result == 'true'){ //ajax는 문자만 전달가능하고 받을 수 있다.
 				console.log("[전달 완료]")
+				getInfo();
 			}else{
 				console.log("[전달 실패]")
 			}
@@ -65,8 +66,93 @@ function getInfo(){
 			//console.log(result);
 			//DTO 없는 버전 
 			//document.querySelector('.ex2Box').innerHTML = result;
-			console.log(result);
-			document.querySelector('.ex2_1Box').innerHTML = result;
+			let html = `<table border = "1">
+							<tr>
+								<th> data1 </th><th> data2 </th><th> data3 </th><th> data4 </th>
+								<th> data5 </th><th> data6 </th><th> data7 </th><th> data8 </th>
+								<th> data9 </th><th> data10 </th>
+							<tr>`
+			result.forEach((o, i)=>{ //객체명.forEach((반복변수, 반복인덱스) => {실행문})
+				html += `
+							<tr>
+								<td> ${o.data1} </td><td> ${o.data2} </td><td> ${o.data3} </td><td> ${o.data4} </td>
+								<td> ${o.data5} </td><td> ${o.data6} </td><td> ${o.data7} </td><td> ${o.data8} </td>
+								<td> ${o.data9} </td><td> ${o.data10} </td>
+							<tr>`
+			})
+			
+			html += `</table>`
+			document.querySelector('.ex2_1Box').innerHTML = html;
+		}
+	})
+}
+
+//등록 버튼 클릭시
+function signup(){
+	let signInfo = {
+		
+	 name : document.querySelector('.name').value,
+	
+	 phoneNumber : document.querySelector('.phoneNumber').value,
+	
+	 height : document.querySelector('.height').value,
+	
+	 age : document.querySelector('.age').value,
+	
+	 signDate : document.querySelector('.signDate').value,
+	
+	 sex : document.querySelector('input[name="sex"]:checked').value, 
+	
+	
+	 agree : document.querySelector('.agree').checked, 
+	
+	
+	 location : document.querySelector('.location').value,
+	
+
+	 introduce : document.querySelector('.introduce').value
+	}
+	
+	$.ajax({
+		url : "/jspWeb/Q2",
+		method : "post",
+		data : signInfo,
+		success : function(result){
+			if(result == 'true'){
+				console.log('[등록 성공]');
+				getStudentInfo();
+			}else{
+				console.log('[등록 실패]');
+			}
+		}
+		
+	})
+}
+
+getStudentInfo();
+
+function getStudentInfo(){
+	$.ajax({
+		url : "/jspWeb/Q2",
+		method : "get",
+		success : function(studentInfo){
+			let html = `<table border = "1">
+							<tr> 
+								<th> 번호 </th> <th> 이름 </th><th> 전화번호 </th><th> 키 </th><th> 나이 </th>
+								<th> 등록일 </th><th> 성별 </th><th> 동의 </th><th> 지역 </th>
+								<th> 소개 </th>
+							<tr>`
+							
+			studentInfo.forEach((o, i) => {
+				html += `
+						<tr>
+							<td> ${i} </td> <td> ${o.name} </td><td> ${o.phoneNumber} </td><td> ${o.height} </td><td> ${o.age} </td>
+							<td> ${o.signDate} </td><td> ${o.sex} </td><td> ${o.agree} </td><td> ${o.location} </td>
+							<td> ${o.introduce} </td>
+						<tr>`
+			})
+			html += `</table>`
+			document.querySelector('.studentInfo').innerHTML = html;
 		}
 	})
 }
