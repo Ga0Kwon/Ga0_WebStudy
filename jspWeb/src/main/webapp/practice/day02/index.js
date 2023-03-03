@@ -45,13 +45,28 @@ function ex1(){
 		method : "post", //2. 메소드 방식 [doGet vs doPost]
 		data : info, //3. 보낼 데이터[객체 vs {}]
 		success : function(result){
-			if(result == 'true'){
+			if(result == 'true'){ //ajax는 문자만 전달가능하고 받을 수 있다.
 				console.log("[전달 완료]")
 			}else{
 				console.log("[전달 실패]")
 			}
 		}
 	})
-	
-	
+}
+
+getInfo(); // JS 실행시 DB 정보 띄우기 
+
+function getInfo(){
+	$.ajax({
+		url : "/jspWeb/Ex2",
+		method : "get",
+		//data : -> 주는 데이터 없음
+		success : function(result){
+			//console.log(result);
+			//DTO 없는 버전 
+			//document.querySelector('.ex2Box').innerHTML = result;
+			console.log(result);
+			document.querySelector('.ex2_1Box').innerHTML = result;
+		}
+	})
 }

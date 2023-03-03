@@ -1,11 +1,16 @@
 package practice.Day02;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 /**
  * Servlet implementation class Ex2
@@ -26,7 +31,25 @@ public class Ex2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1. Dao에게 모든 데이터 요청
+//		ArrayList<Object> infoList = Dao.getInStance().getData();
+		ArrayList<Dto> dtoList = Dao.getInStance().getDtoData();
 		
+			//* JAVA객체와 JS객체는 체계/형태가 다르다 [호환 불가]
+			// 해결 : JAVA객체를 JS객체로 바꾸자 [Object -> json]
+				//1) 라이브러리 3개 [Jackson-databind-x, Jackson-core-x, Jackson-annotations-x]
+				//2) ObjectMapper 객체 생성 [jackson 라이브러리에서 제공]
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+				//3) ObjectMapper.writeValueAsString(자바객체) ---> 자바 객체를 JSON 형식의 문자열로 반환
+		String jsonArray = objectMapper.writeValueAsString(dtoList);
+		
+		//2. 요청으로 받은 결과를 JS에게 전달 
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json"); //전달[전송]타입 json 방식
+//		response.getWriter().print(infoList);
+		//response.getWriter().print(dtoList);
+		response.getWriter().print(jsonArray); //변환된 json 형식의 문자열 전달 
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,14 +75,18 @@ public class Ex2 extends HttpServlet {
 		String data9 = request.getParameter("data9");
 		String data10 = request.getParameter("data10");
 		
-		//3. DAO 메소드에 인수 10개 전달 
-		boolean result = Dao.getInStance().setData(data1, data2, data3, data4, data5, data6, data7, data8, data9, data10);
+		//3. DAO 메소드에 인수 10개 전달 [Dto X]
+//		boolean result = Dao.getInStance().setData(data1, data2, data3, data4, data5, data6, data7, data8, data9, data10);
+		
+		//Dto 버전 
+		Dto dto = new Dto(data1, data2, data3, data4, data5, data6, data7, data8, data9, data10);
+		boolean resultDto = Dao.getInStance().setDtoData(dto);
 		
 		// * response [응답] : JS에게 응답을 보냄
 		//4. 응답시 데이터 한글 인코딩
 		response.setCharacterEncoding("UTF-8");
 		//5. DAO를 부터 결과를 JS에게 전달하기 
-		response.getWriter().print(result);
+		response.getWriter().print(resultDto);
 	}
 
 }

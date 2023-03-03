@@ -36,8 +36,8 @@
 	<button type = "button" onclick="ex1()">전송</button>
 	
 	<h3>예1) [R] DAO -메소드-> servlet -AJAX-> js -document.querySelector-> HTML</h3>
-	
-	
+	<h4>[DTO X]</h4> <div class = "ex2Box"></div><br/><br/>
+	<h4>[DTO O]</h4> <div class = "ex2_1Box"></div>
 	
 	
 	<!-- 1. JQUERY (ajax 사용하기 위해) -->
