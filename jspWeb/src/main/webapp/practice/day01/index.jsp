@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DAY01 JSP</title>
 </head>
 <body>
 	<p>jsp 웹 프로젝트 [ctrl + f11]</p>
@@ -47,10 +47,10 @@
 	
 	</div>
 		
-	<!-- 최신 jquery[js 라이브러리] 가져오기 -->
+	<!-- 최신 jquery[js 라이브러리] 가져오기 (ajax 사용하려면 넣어야함!)-->
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
 	<!-- js 가져오기 [경로 : /프로젝트명/[webapp폴더 생략]/폴더/파일명 -->
-	<script src = "js/index.js" type = "text/javascript"></script>
+	<script src = "index.js" type = "text/javascript"></script>
 </body>
 </html>
