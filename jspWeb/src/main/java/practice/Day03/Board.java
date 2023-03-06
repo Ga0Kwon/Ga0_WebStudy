@@ -61,13 +61,13 @@ public class Board extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
-		System.out.println(request.getParameter("bno"));
+		//1. 수정할 게시물 번호 요청
 		int bno = Integer.parseInt(request.getParameter("bno"));
+		//2. 수정할 게시물 내용 요청
 		String newcontent = request.getParameter("newcontent");
-		System.out.println(bno + ", " + newcontent);
+		//3. Dao 호출해서 결과 얻기
 		boolean result = BoardDao.getInStance().onUpdate(bno, newcontent);
-		
+		//4. 결과 응답하기
 		response.getWriter().print(result);		
 	}
 	
@@ -78,11 +78,10 @@ public class Board extends HttpServlet {
 		
 		//1. 삭제할 게시물 번호 요청 [ ???? 매개변수 못들어옴 => null]
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		System.out.println(bno);
 		
-
+		//2. Dao 호출해서 결과 얻기
 		boolean result = BoardDao.getInStance().onDelete(bno);
-		
+		//3. 결과를 응답
 		response.getWriter().print(result);
 	}
 

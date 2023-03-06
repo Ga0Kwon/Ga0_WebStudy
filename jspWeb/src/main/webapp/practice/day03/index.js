@@ -1,4 +1,4 @@
-alert("day03_js열림");
+//alert("day03_js열림");
 
 function doPost(){
 	alert("http POST 메소드 실행");
@@ -39,15 +39,11 @@ function doDelete(){
 /*-----------------예제2-----------------*/
 //1. 등록
 function onWrite(){
-	console.log('onWrite()메소드 실행');
 	
 	let info = {
 		content : document.querySelector('.content').value,
 		writer : document.querySelector('.writer').value
 	}
-	
-	console.log(info);
-	
 	
 	$.ajax({
 		url : "/jspWeb/Ex3/Board",
@@ -105,8 +101,6 @@ function onUpdate(bno){
 	
 	let newcontent = prompt("수정할 내용 입력");
 	
-	console.log(bno, newcontent);
-	
 	$.ajax({
 		url : "/jspWeb/Ex3/Board",
 		method : "put",
@@ -124,7 +118,6 @@ function onUpdate(bno){
 
 //4. 삭제
 function onDelete(bno){
-	console.log(bno)
 	$.ajax({
 		url : "/jspWeb/Ex3/Board",
 		method : "delete",
@@ -140,6 +133,98 @@ function onDelete(bno){
 	})
 }
 
+/*----------------------------과제-------------------------- */
+//1. 제품 등록
+function insertProduct(){
+	let info = {
+		productName : document.querySelector('.productName').value,
+		productPrice : document.querySelector('.productPrice').value
+	}
+	
+	$.ajax({
+		url : "/jspWeb/Ex3/Product",
+		method : "post",
+		data : info,
+		success : (result) => {
+			if(result == 'true'){
+				alert('[제품 등록 성공]');
+				document.querySelector('.productName').value = '';
+				document.querySelector('.productPrice').value = '';
+				printProduct();
+			}else{
+				alert('[제품 등록 실패]')
+			}
+		}
+	})
+}
+
+printProduct();
+
+// 제품 출력 
+function printProduct(){
+	$.ajax({
+		url : "/jspWeb/Ex3/Product",
+		method : "get",
+		success : function(result){
+			let html = `<table border = 1>
+							<tr>
+								<th>제품번호</th> <th>제품이름</th> <th>제품가격</th> <th>비고</th> 
+							</tr>`
+						
+			result.forEach((o) => {
+				html += `<tr>
+							<td>${o.pno}</td> <td>${o.productName}</td> <td>${o.productPrice}</td>
+							<td><button onClick = "updateProduct(${o.pno})" type = "button">수정</button> | <button onClick = "deleteProduct(${o.pno})" type = "button">삭제</button></td>
+						 </tr>`
+			
+		})
+		
+		html += `</table>`
+		document.querySelector('.productList').innerHTML = html;
+	   }
+	})
+}
+
+//3. 제품 수정
+function updateProduct(pno){
+	let updateInfo = {
+		pno : pno,
+		pname : prompt('수정할 제품 이름'),
+		pprice : prompt('수정할 제품 가격'),
+	}
+	
+	$.ajax({
+		url : "/jspWeb/Ex3/Product",
+		method : "put",
+		data : updateInfo,
+		success : (result) => {
+			if(result == 'true'){
+				alert('[제품 수정 성공]')
+				printProduct();
+			}else{
+				alert('[제품 수정 실패]')
+			}
+		}
+	})
+}
+
+//4. 제품 삭제
+function deleteProduct(pno){
+	
+	$.ajax({
+		url : "/jspWeb/Ex3/Product",
+		method : "delete",
+		data : {"pno" : pno},
+		success : (result) => {
+			if(result == 'true'){
+				alert('[제품 삭제 성공]')
+				printProduct();
+			}else{
+				alert('[제품 삭제 실패]')
+			}
+		}
+	})
+}
 /*
 	JSP 서블릿[JSP 서블릿만!!] 
 	get, post는 안해도 되지만, 
