@@ -34,6 +34,33 @@ alert('signup js 열림');
 				/^[a-z]$/.test(qwe) => true
 				/^[a-z]$/.test(QWE) => false
 */
+// * 첨부파일 이미지 미리보기 [업로드와 상관없음]
+// onchange : 바뀌었을 때 
+// 정책 : 사용자[클라이언트]에 운영체제 접근 불가  
+/*document.addEventListener('change', (e)=>{
+	
+})*/
+function premimg(object){ // object : 해당 함수를 실행시킨 태그 객체
+	/*console.log('첨부파일 바뀜' + object);*/
+	
+	/*둘 중에 하나 쓰면 됨 */
+	//1-1). 현재 이벤트를 실행한 input의 파일명을 호출 
+	/*console.log(object.files[0]); */
+	//1-2). input의 파일명을 호출 
+	/*console.log(document.querySelector('.mimg').files[0])*/
+	//1. JS 파일 클래스
+	let file = new FileReader(); //파일 읽기 클래스 
+	//2. 해당 첨부된 파일 읽어오기(file.readAsDataURL(첨부파일))
+	file.readAsDataURL(object.files[0]) //해당 파일 읽어오기 / files[0] : 첨부파일 1개
+	//3.읽어온 파일 꺼내기 바이트단위
+	file.onload = (e) => {
+		/*console.log(e.target.result) */// 바이트 단위 나옴
+		//e.target -> file.onload : 읽어온 파일
+		//e.tartget.result : 읽어온 파일의 바이트 결과
+		//4. 이미지 태그에 src 이미지 바이트  대입 
+		document.querySelector('.premimg').src = e.target.result;
+	}
+}
 
 // * checkconfirm span 모두 가져오기 --> 여러개의 span이 배열/리스트 객체에 대입
 let checkconfirm = document.querySelectorAll('.checkconfirm');

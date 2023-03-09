@@ -18,8 +18,9 @@
 			<span class = "checkconfirm"></span><br/>
 		이메일 :  <input onkeyup = "emailCheck()" type = "text" class = "memail" name = "memail"> <br/>
 			<span class = "checkconfirm"></span><br/>
-		프로필 : <input type = "file" class = "mimg" name = "mimg"><br/>
-		
+		프로필 : <input onchange = "premimg(this)" type = "file" class = "mimg" name = "mimg"><br/>
+		<h5>미리보기</h5>  
+			<img class = "premimg" src="/jspWeb/member/pimg/basic.jpg" width = "20%"> <br/>
 		<button type = "button" onClick = "signup()"> 가입 </button>
 	</form>
 	
