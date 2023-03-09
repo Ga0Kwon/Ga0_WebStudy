@@ -16,7 +16,7 @@
 		비밀번호 : <input onkeyup = "pwdCheck()" maxlength = "20" type = "password" class = "mpwd" name = "mpwd"> <br/>
 		비밀번호 확인 : <input onkeyup = "pwdconfirmCheck()" maxlength = "20" type = "password" class = "mpwdconfirm" name = "mpwdconfirm"> <br/>
 			<span class = "checkconfirm"></span><br/>
-		이메일 :  <input type = "text" class = "memail" name = "memail"> <br/>
+		이메일 :  <input onkeyup = "emailCheck()" type = "text" class = "memail" name = "memail"> <br/>
 			<span class = "checkconfirm"></span><br/>
 		프로필 : <input type = "file" class = "mimg" name = "mimg"><br/>
 		

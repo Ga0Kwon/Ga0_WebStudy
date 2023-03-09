@@ -76,6 +76,12 @@ function idCheck(){
 
 //1. 회원 가입
 function signup(){
+	let count = 0;
+	for(let i = 0; i < checkconfirm.length; i++){
+		if(checkconfirm[i].innerHTML == 'O'){count++}
+	}
+	
+	if(count != 3){alert('정상적으로 입력되지 않은 데이터가 있습니다.'); return;}
 	
 	//1) [첨부파일 있을 때] html file 직접적으로 조작 불가능
 		//1> form 객체를 가져오기
@@ -113,14 +119,14 @@ function signup(){
 }
 //3. 비밀번호 유효성 검사
 function pwdCheck(){
-	console.log("pwdCheck 입력중");
+
 	//1. 입력받은 값 가져오기
 	let mpwd =document.querySelector('.mpwd').value;
-	console.log("mpw : " + mpwd)
+
 	//2. 정규표현식 : 영대소문자+숫자 조합 5~20글자 0-9대신 \d 써도 똑같다. ex) [\dA-Z] 이런식으로
 	let mpwdj = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{5,20}$/ //정규표현식
 	/*첫글자는 영 대소문자 중에 시작해야하고, 뒤부터는 숫자는 반드시 포함해야한다. 영대소문자+숫자 조합으로 */
-	console.log(mpwdj.test(mpwd));
+
 	
 	if(mpwdj.test(mpwd)){
 		//checkconfirm[1]은 비밀번호와 비밀번호 확인을 같이 씀 그래서 성공해도 pwdconfirmCheck() 호출해야함
@@ -133,12 +139,21 @@ function pwdCheck(){
 
 //4. 비밀번호 확인 유효성 검사
 function pwdconfirmCheck(){
-	console.log("pwdconfirmCheck 입력중");
+
 	let mpwdconfirm =document.querySelector('.mpwdconfirm').value;
-	console.log("mpwdconfirm : " + mpwdconfirm);
+
 	let mpwd =document.querySelector('.mpwd').value;
 	////2. 정규표현식 : 영대소문자+숫자 조합 5~20글자 0-9대신 \d 써도 똑같다. ex) [\dA-Z] 이런식으로
 	let mpwdj = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,20}$/ //정규표현식
+	/*  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,20}$/  
+		1. (?=.*[A-Za-z]) : 영 대소문자 한개 이상 입력
+		2. (?=.*\d) vs (?=.*[0-9]) : 슷지 한개 이상 입력
+		3. [A-Za-z\d] vs. [A-Za-z0-9] : 영대소문자 + 숫자 
+		---> 영문 1개 + 숫자 1개 필수로 갖는 5~20글자 사이
+		
+		(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{5,20}
+		---> 영대문자 1개 + 영소문자 1개 + 숫자 1개 + 특정특수문자 1개 필수로 갖는 5~20글자 사이
+	*/
 	//3. 제어
 	if(mpwdj.test(mpwdconfirm)){
 		//두 비밀번호간의 동일성 체크
@@ -152,6 +167,28 @@ function pwdconfirmCheck(){
 	}
 	
 	
+}
+//이메일 유효성 검사
+function emailCheck(){
+	console.log('emailCheck() 함수 열림');
+	let memail = document.querySelector('.memail').value;
+	
+	let memailj = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]+$/;
+	
+	if(memailj.test(memail)){
+		checkconfirm[2].innerHTML ='O'
+	}else{
+		checkconfirm[2].innerHTML ='이메일 형식으로 입력해주세요.'
+	}
+	//아이디 구역
+	// [a-zA-Z0-9_-] : 영문 + 숫자 + _ + -
+	// +@ : 아이디와 도메인 사이의 @
+	// 도메인 구역
+	//[a-zA-Z0-9-]   : 영문 + 숫자 + - (ex> naver)
+	//기능이 있는 점은 슬래시와 함께 적어줘야한다. 
+	// +\. : 점이 필수 도메인 앞 부분 .com/.co.kr/.net [도메인 중간에 .] (ex>.)
+	// [a-zA-Z0-9-] : 영문+숫지 + - (ex> com)
+	// + : .1개이상 (ex> co.kr)
 }
 
 //1)[첨부파일 없을 때] 입력값을 모두 가져와서 객체화
