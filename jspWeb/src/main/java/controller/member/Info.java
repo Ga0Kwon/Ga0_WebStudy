@@ -26,7 +26,7 @@ public class Info extends HttpServlet {
 
     }
 
-    //2. 로그인 / 회원 정보 호출 
+    //2. 회원 정보 호출 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
@@ -75,7 +75,7 @@ public class Info extends HttpServlet {
 		
 		// * 현재 서버의 배포된 프로젝트내 폴더 경로 찾기
 		String uploadpath = request.getSession().getServletContext().getRealPath("/member/pimg");
-		System.out.println(uploadpath);
+//		System.out.println(uploadpath);
 		
 		//* 진짜 업로드 [파일만 업로드]
 		//JSP에서 첨부파일 쓰는 법!

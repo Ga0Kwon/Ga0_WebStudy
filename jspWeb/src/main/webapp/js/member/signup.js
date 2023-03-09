@@ -129,13 +129,8 @@ function signup(){
 		success : (r) => {
 			/*console.log('ajax 응답');*/
 			if(r == 'true'){
+				location.href = "/jspWeb/login.jsp";
 				alert('[회원가입 성공]');
-				document.querySelector('.mid').value = '';
-				document.querySelector('.mpwd').value = '';
-				document.querySelector('.mpwdconfirm').value = '';
-				document.querySelector('.memail').value = '';
-				document.querySelector('.mimg').value = '';
-				checkconfirm[0].innerHTML = '';
 			}else{
 				alert('[회원가입 실패] 관리자에게 문의하세요.');
 			}
