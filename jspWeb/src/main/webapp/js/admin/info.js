@@ -1,5 +1,4 @@
-alert('관리자 JS 실행');
-
+/*alert('관리자 JS 실행');*/
 printMember();
 function printMember(){
 	$.ajax({

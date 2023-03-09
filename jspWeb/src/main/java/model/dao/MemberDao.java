@@ -94,4 +94,29 @@ public class MemberDao extends Dao {
 		}
 		return false; //DB 오류이거나 로그인 정보 조회 결과가 없을 경우
 	}
+	
+	//5. 로그인한 멤버의 정보 호출 [ 비밀번호 빼고 ]
+	public MemberDto getMember(String mid) {
+		String sql = "select * from member where mid = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				MemberDto dto = new MemberDto(
+					rs.getInt(1),
+					rs.getString(2),
+					null, //비밀번호 빼고
+					rs.getString(4),
+					rs.getString(5));
+				return dto;
+			}
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null; //DB에러 or 조회 결과가 없는
+	}
 }

@@ -1,4 +1,4 @@
-alert('signup js 열림');
+/*alert('signup js 열림');*/
 
 /* 
 	JS 정규 표현식 : 문자 특정 규칙, 패턴, 집합 표현할 때 사용되는 언어

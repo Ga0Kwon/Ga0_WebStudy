@@ -7,11 +7,13 @@
 <title>Insert title here</title>
 
 	<!-- 모든 페이지 공통 CSS -->
+	<link href = "/jspWeb/css/index.css" rel = "stylesheet">
 </head>
 <body>
 	<h3>헤더입니다.</h3>
+	<div class = header><!-- JS가 들어갈 자리 --></div>
 	<!-- 모든 페이지 공통 메뉴 -->
-	<% String login = (String)request.getSession().getAttribute("login"); %>
+	<%-- <% String login = (String)request.getSession().getAttribute("login"); %>
 	<%=login %>님 안녕하세요.<br/>
 	<!-- 모든 페이지 공통 메뉴[사용자마다 나누기] -->
 	<%
@@ -26,6 +28,7 @@
 		}else if(login.equals("admin")){
 	%>
 			<a href = "/jspWeb/admin/info.jsp">관리자페이지</a>
+			<a href = "/jspWeb/member/logout.jsp">로그아웃</a>
 	<%
 		}else{
 		
@@ -34,12 +37,14 @@
 			<a href = "/jspWeb/member/logout.jsp">로그아웃</a>
 	<%
 		}
-	%>
+	%> --%>
 	
 	
 	<!-- 모든 페이지 공톤 JS -->
 	<!-- 1. JQUERY (ajax 사용하기 위해) -->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
+	<!-- 사용자 정의 JS -->
+	<script src = "/jspWeb/js/header.js" type="text/javascript"></script>
 </body>
 </html>

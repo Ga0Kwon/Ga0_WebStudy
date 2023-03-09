@@ -1,4 +1,4 @@
-alert('login js 열림');
+/*alert('login js 열림');*/
 
 function login(){
 	
