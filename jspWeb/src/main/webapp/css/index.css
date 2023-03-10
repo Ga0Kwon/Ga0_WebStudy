@@ -1,11 +1,81 @@
 @charset "UTF-8";
 
+/*공통 부분 */
+*{
+	margin: 0px; padding : 0px;
+	list-style-type: none; /*기본 스타일 제거, li 경우 앞에 점 제거*/
+}
+
+/*a 태그 기본값 제거*/
+a{
+	text-decoration: none; /*밑줄 제거*/
+	color : black; /*폰트색 검정으로*/
+}
+
+/*--------------------- 외부 폰트 -----------------------*/
+/*얇은 폰트*/
+@font-face {
+    font-family: 'KyoboHandwriting2021sjy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KyoboHandwriting2021sjy.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*두꺼운 폰트*/
+@font-face {
+    font-family: 'ImcreSoojin';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /*----------------------헤더 CSS----------------------*/
-/*헤더 로그인 프로필*/
+/*헤더 */
+.header{
+	display: flex; /*레이아웃*/
+	align-items: center; /*세로 가운데*/
+	justify-content: space-between; /*가로 균등배치*/
+	margin: 20px 0px;
+}
+
+.mainLogo{width : 17%;} /*로고 구역*/
+.mainLogo img{width : 100%;} /*로고 이미지*/
+.mainmenu{width : 60%;} /*메인 메뉴 구역*/
+.submenu{width : 23%;} /*서브 메뉴 구역*/
+
+.mainmenu{
+	display: flex;
+	justify-content: center;
+	margin : 0px !important; /*부트스트랩 여백 기본값 제거*/
+	font-family: "KyoboHandwriting2021sjy";
+	font-size : 25px;
+}
+
+.mainmenu li{
+	margin: 0px 10px;
+}
+
+.submenu{
+	align-items: center;
+	justify-content: flex-end;
+	display: flex;
+	
+}
+
+.submenu a{
+	margin-left: 15px;
+	font-size: 12px; 
+}
+
+/* 1. 헤더 드롭다운 로그인 프로필 */
 .hpimg{
-	width : 100px;
-	height: 100px;
+	width : 70px;
+	height: 70px;
 	border:  solid 1px #e8e8e8;
 	border-radius: 50%; /*둥근 모서리*/
-	margin-left: 30px;
+}
+
+/*헤더 프로필 이미지 버튼*/
+.pimgBtn{
+	border: none;
+	background: transparent; /*배경색 없음*/
 }

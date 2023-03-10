@@ -19,17 +19,26 @@ function getLogin(){
 				html += `<a href = "/jspWeb/member/signup.jsp">회원가입</a> `;
 				html += `<a href = "/jspWeb/member/login.jsp">로그인</a> `;
 			}else{
-				html += `<img class = "hpimg" src ="/jspWeb/member/pimg/${r.mimg == null ? 'basic.jpg' : r.mimg }"><br/>`
-				html += `${r.mid}님 안녕하세요.<br/>`
-				html += `<a href = "/jspWeb/member/logout.jsp">로그아웃</a> `;
+				html += `<div class="dropdown">
+							  <button class = "pimgBtn" type="button" data-bs-toggle="dropdown">
+							   	<img class = "hpimg" src ="/jspWeb/member/pimg/${r.mimg == null ? 'basic.jpg' : r.mimg }">
+							  </button>
+							  <ul class="dropdown-menu"> <!-- 드롭다운시 표시되는 구역 -->
+							    <li><a class="dropdown-item" href="#"> 내 프로필 </a></li>
+							    <li><a class="dropdown-item" href="#"> 친구 목록 </a></li>
+							    <li><a class="dropdown-item" href="/jspWeb/member/logout.jsp"> 로그아웃 </a></li>
+							  </ul>
+							</div> <!-- 드롭다운 end -->
+							<span>${r.mid}님</span>
+							<a href = "#">쪽지함</a>
+							<a href = "#">포인트</a>`;
 				
-				if(r.mid == 'admin'){
+				if(r.mid == 'admin'){ //관리자이면
 					html += `<a href = "/jspWeb/admin/info.jsp">관리자페이지</a> `;
 				}
 			}
-			html += `<a href = "/jspWeb/index.jsp">메인페이지</a> `
 			
-			document.querySelector('.header').innerHTML = html;
+			document.querySelector('.submenu').innerHTML = html;
 		}
 	})
 }
