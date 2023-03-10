@@ -216,17 +216,25 @@ function emailCheck(){
 
 // 이메일 인증 함수
 function getAuth(){
+	/*메일*/
 	
+	/*----------------------- 1. 메일 인증 쓸 경우 ------------------------- */
 	//* ajax가 java에게 이메일 전송 후 인증코드 받기
-	$.ajax({
+/*	$.ajax({
 		url :"/jspWeb/email",
 		method : "post",
 		data : {"memail" : document.querySelector('.memail').value},
 		success : (r) =>{
+			let html = `<div class = "timeBox"></div>
+				<input type = "text" class = "authInput" placeholder="인증코드">
+				<button onClick = "authConfirm()" type = "button">확인</button>`
+				
 			auth = r; //인증 코드 대입[이메일에게 보낸 난수 대입
-			console.log('통신');
+			
+			document.querySelector('.authBox').innerHTML = html;
 		}
-	})
+	})*/
+	/*----------------------- 2. 메일 인증 쓰지 않을 경우 ------------------------- */
 	
 	// 인증 구역 html 구성
 	let html = `<div class = "timeBox"></div>
@@ -237,9 +245,11 @@ function getAuth(){
 	document.querySelector('.authBox').innerHTML = html;
 	
 	//3. 타이머 함수 실행
+	auth = 1234; //*인증 임시 코드 대입 [이메일에게 전송 보내는]
 	timer = 60*2; //인증 시간 대입
 	setTimer(); //타이머 함수 실행
 }
+
 let auth =  0;
 
 let timer = 0; //인증 시간 변수
@@ -290,7 +300,7 @@ function authConfirm(){
 	
 	//2. 발급된 인증코드와 입력한 인증코드 비교
 	if(authInput == auth){//인증코드 일치
-		checkconfirm[2].innerHTML = "인증 성공";
+		checkconfirm[2].innerHTML = 'O';
 		clearInterval(timerInterval); //인증 타이머 clear
 		document.querySelector('.authBox').innerHTML = ""; //인증 구역 숨기기
 		document.querySelector('.authBtn').innerHTML = "완료";

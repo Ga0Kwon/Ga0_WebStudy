@@ -119,4 +119,81 @@ public class MemberDao extends Dao {
 		}
 		return null; //DB에러 or 조회 결과가 없는
 	}
+	
+	//6. 아이디 찾기 
+	public String findId(String memail) {
+		String sql = "select mid from member where memail = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, memail);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getString(1); //찾은 아이디 반환
+			}
+			
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return "false";
+	}
+	
+//	//7. 비밀번호 찾기
+//	public String findPwd(String mid, String memail) {
+//		String sql = "select mpwd from member where memail = ? and mid = ?";
+//		
+//		try {
+//			ps = con.prepareStatement(sql);
+//			ps.setString(1, memail);
+//			ps.setString(2, mid);
+//			
+//			rs = ps.executeQuery();
+//			
+//			if(rs.next()) {
+//				return rs.getString(1);
+//			}
+//			
+//		}catch (Exception e) {
+//			System.err.println(e.getMessage());
+//		}
+//		return "false";
+//	}
+	
+	//7. 비밀번호 찾은 후 임시 비밀번호
+	public String findPwd(String mid, String memail, String updatePwd) {
+		String sql = "select mno from member where memail = ? and mid = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, memail);
+			ps.setString(2, mid);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) { //동일한 아이디와 이메일 일치한 레코드가 있으면 [찾았으면]
+				
+				sql = "update member set mpwd = ? where mno = ?";
+				
+				ps = con.prepareStatement(sql);
+				ps.setString(1, updatePwd);
+				ps.setInt(2, rs.getInt(1));
+				
+				int result = ps.executeUpdate(); //업데이트한 레코드 개수 반환
+				System.out.println(result);
+				if(result == 1) {
+					//이메일 테스트 되는 경우
+					/* new MemberDto().sendEmail(memail, updatePwd); */
+					//이메일 전송 테스트 안되는 경우
+					return "true";
+				}
+			}
+			
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return "false";
+	}
+	
 }

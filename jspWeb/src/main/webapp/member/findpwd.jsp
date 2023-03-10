@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 	<!-- 부트 스트랩 반응형 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- 부트 스트랩 CSS -->
@@ -12,7 +13,7 @@
 	 
 	<!-- 모든 페이지 공통 CSS -->
 	<link href = "/jspWeb/css/signup.css" rel = "stylesheet">
-
+	
 </head>
 <body>
 	<!-- 헤더 -->
@@ -20,27 +21,26 @@
 	
 	<div class = "container"> <!-- bs : 박스권 -->
 		<form class = "signupForm"> <!-- 폼 전송시 자식 input의 매개변수 식별 : name -->
-			<h3> KGY Comunity </h3>
-			<p>환영합니다. 다양한 커뮤니티 플랫폼을 제공합니다.</p>
+			<h3> 비밀번호 찾기</h3>
+			<p>비밀번호를 찾아 드립니다.</p>
 			
 			<div class = "title">아이디</div>
-			<input onkeyup = "idCheck()" maxlength = "30" type = "text" class = "mid" name = "mid"> 
+			<input  maxlength = "30" type = "text" class = "mid" name = "mid"> 
 			
-			<div class = "title">비밀번호</div>
-			<input onkeyup = "pwdCheck()" maxlength = "20" type = "password" class = "mpwd" name = "mpwd">
+			<div class = "title">이메일</div>
+			<input type = "text" class = "memail" name = "memail"> 
 			<div class = "checkconfirm"></div>
 			
-			<div class = "subBtnBox">
-				<a href = "/jspWeb/member/findid.jsp">아이디 찾기</a>
-				<a href = "/jspWeb/member/findpwd.jsp">비밀번호 찾기</a>
-			</div>
-			
-			<button class = "signupBtn" type = "button" onClick = "login()"> 로그인 </button>
-			
+			<button class = "signupBtn" type = "button" onClick = "findPwd()"> 비밀번호 찾기 </button>
+		
 		</form>
 	</div>
 	
 	<!-- 사용자 정의 js -->
+	<!-- signup은 해당 비밀번호 유효성 검사를 사용하기 위해 -->
+	<script src = "/jspWeb/js/member/signup.js" type = "text/javascript"></script>
+	
+	<!-- 비밀번호찾기 기능을 위해 -->
 	<script src = "/jspWeb/js/member/login.js" type="text/javascript"></script>
 </body>
 </html>
