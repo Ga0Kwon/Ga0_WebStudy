@@ -37,10 +37,10 @@ a{
 	margin: 20px 0px;
 }
 
-.mainLogo{width : 17%;} /*로고 구역*/
+.mainLogo{width : 15%;} /*로고 구역*/
 .mainLogo img{width : 100%;} /*로고 이미지*/
 .mainmenu{width : 60%;} /*메인 메뉴 구역*/
-.submenu{width : 23%;} /*서브 메뉴 구역*/
+.submenu{width : 25%;} /*서브 메뉴 구역*/
 
 .mainmenu{
 	display: flex;

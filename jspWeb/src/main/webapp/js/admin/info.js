@@ -21,7 +21,7 @@ function printMember(){
 					//만약에 회원의 mimg 프로필 이미지가 null이면 기본 프로필 사용 / 아니면 mimg 사용
 					html += `<tr>
 							<td>${o.mno}</td>
-							<td><img src = "/jspWeb/member/pimg/${o.mimg == null ? 'basic.jpg' : o.mimg}" width = "100%"></td>
+							<td><img src = "/jspWeb/member/pimg/${o.mimg == null ? 'basic.jpg' : o.mimg}" width = "50%"></td>
 							<td>${o.mid}</td>
 							<td>${o.memail}</td>
 							<td></td>
