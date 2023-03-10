@@ -36,13 +36,13 @@
 			<div class = "title">이메일</div>
 			<div class = "emailBox">
 				<input onkeyup = "emailCheck()" type = "text" class = "memail" name = "memail">
-				<button type = "button" onClick = "autalize()"> 인증 </button>
+				<!-- 인증버튼 처음엔 사용 못하게, 이메일 형식이 맞다면 인증 버튼 누를 수 있도록 -->
+				<button onClick = "getAuth()" class = "authBtn" type = "button" disabled="disabled"> 인증 </button>
 			</div>
+			
 			<!-- 인증코드 입력 구역 s -->
 			<div class = "authBox">
-				<div class = "timeBox">3:00</div>
-				<input type = "text" class = "authInput" placeholder="인증코드">
-				<button type = "button">확인</button>
+				<!-- js 들어가는 자리 -->
 			</div> 
 			<!-- 인증 코드 입력 구역 e -->
 			<div class = "checkconfirm"></div>

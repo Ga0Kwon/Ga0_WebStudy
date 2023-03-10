@@ -190,17 +190,18 @@ function pwdconfirmCheck(){
 	
 	
 }
-//이메일 유효성 검사
+//이메일 유효성 검사 [이메일 형식 유효성 검사]
 function emailCheck(){
-	console.log('emailCheck() 함수 열림');
 	let memail = document.querySelector('.memail').value;
 	
 	let memailj = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]+$/;
 	
 	if(memailj.test(memail)){
-		checkconfirm[2].innerHTML ='O'
+		checkconfirm[2].innerHTML ='이메일 형식이 맞습니다. 인증해주세요.'
+		document.querySelector('.authBtn').disabled = false; //인증 버튼 사용
 	}else{
 		checkconfirm[2].innerHTML ='이메일 형식으로 입력해주세요.'
+		document.querySelector('.authBtn').disabled = true;//형식이 틀리면 인증 버튼 사용 X 
 	}
 	//아이디 구역
 	// [a-zA-Z0-9_-] : 영문 + 숫자 + _ + -
@@ -212,6 +213,95 @@ function emailCheck(){
 	// [a-zA-Z0-9-] : 영문+숫지 + - (ex> com)
 	// + : .1개이상 (ex> co.kr)
 }
+
+// 이메일 인증 함수
+function getAuth(){
+	
+	//* ajax가 java에게 이메일 전송 후 인증코드 받기
+	$.ajax({
+		url :"/jspWeb/email",
+		method : "post",
+		data : {"memail" : document.querySelector('.memail').value},
+		success : (r) =>{
+			auth = r; //인증 코드 대입[이메일에게 보낸 난수 대입
+			console.log('통신');
+		}
+	})
+	
+	// 인증 구역 html 구성
+	let html = `<div class = "timeBox"></div>
+				<input type = "text" class = "authInput" placeholder="인증코드">
+				<button onClick = "authConfirm()" type = "button">확인</button>`
+				
+	// html 대입
+	document.querySelector('.authBox').innerHTML = html;
+	
+	//3. 타이머 함수 실행
+	timer = 60*2; //인증 시간 대입
+	setTimer(); //타이머 함수 실행
+}
+let auth =  0;
+
+let timer = 0; //인증 시간 변수
+let timerInterval; //Interval 함수를 저장할 변수
+//타이머 함수
+function setTimer(){
+	
+	// setInterval : 특정 시간마다 함수 실행
+	//setInterval(() => {}, 시간/밀리초)
+	//clearInterval : Interval 종료 
+	//timerInterval이라는 변수를 안쓰면 재사용이 불가능함.
+	// -> setInterval이 두개면 어느 것을 삭제할지 식별이 안됨. 
+	//즉, 이름을 만들어 식별하여 사용
+	timerInterval = setInterval(() => {
+		let minutes = parseInt(timer/60); //분 계산[소수점 안쓰기 때문]
+		let seconds = timer%60; //분 계산후 나머지가 초
+		
+		// 한자리 수 이면 0 추가
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+		
+		let timeHTML = minutes + ":" + seconds; // 분 : 초 형식으로 html 구성
+		
+		//html에 대입
+		document.querySelector('.timeBox').innerHTML = timeHTML;
+		
+		//1초 차감
+		timer--;
+		
+		if(timer <= 30){
+			document.querySelector('.timeBox').style.color = "red";
+		}
+		
+		//만약에 인증 시간이 0보다 작아지면
+		if(timer < 0){
+			clearInterval(timerInterval); 
+			checkconfirm[2].innerHTML = "인증 실패";
+			document.querySelector('.authBox').innerHTML = ""; //auth 내 html 지우기
+		}
+		
+	}, 1000); //1초마다 {}코드 실행
+}
+//인증 -> 확인 버튼 눌렀을 때 [인증코드 확인]
+function authConfirm(){
+	console.log("authConfirm() 실행");
+	//1. 입력받은 인증코드 가져오기
+	let authInput = document.querySelector('.authInput').value;
+	
+	//2. 발급된 인증코드와 입력한 인증코드 비교
+	if(authInput == auth){//인증코드 일치
+		checkconfirm[2].innerHTML = "인증 성공";
+		clearInterval(timerInterval); //인증 타이머 clear
+		document.querySelector('.authBox').innerHTML = ""; //인증 구역 숨기기
+		document.querySelector('.authBtn').innerHTML = "완료";
+		document.querySelector('.authBtn').disabled = true;
+		document.querySelector('.authBtn').style.backgroundColor = "#87a381";
+		
+	}else{//인증 코드 불일치
+		checkconfirm[2].innerHTML = "인증 코드가 일치하지 않습니다.";
+	}
+}
+
 
 //1)[첨부파일 없을 때] 입력값을 모두 가져와서 객체화
 /*	let info = {

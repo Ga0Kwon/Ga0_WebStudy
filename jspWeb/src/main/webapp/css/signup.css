@@ -28,6 +28,7 @@
 
 .signupForm .title{ /*입력 제목*/
 	font-size : 13px;
+	margin-top: 5px;
 }
 
 .checkconfirm{/*유효성 검사 표시 구역*/
@@ -70,6 +71,7 @@
 	height: 150px;
 	border: 1px solid #e8e8e8;
 	border-radius: 50%;
+	margin-left: 10px;
 }
 /*회원 가입 버튼*/
 .signupBtn{
