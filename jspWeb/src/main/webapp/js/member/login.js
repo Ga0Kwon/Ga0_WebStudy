@@ -92,7 +92,7 @@ function findPwd(){
 	})
 }
 
-//4. 비밀번호 변경
+/*//4. 비밀번호 변경
 function changePwd(){
 	if(document.querySelector('.checkconfirm') == 'O'){
 		let mpwd = document.querySelector('.mpwd');
@@ -106,4 +106,4 @@ function changePwd(){
 			} 
 		})
 	}
-}
+}*/
