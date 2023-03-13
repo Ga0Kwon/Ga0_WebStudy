@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <!-- 모달 CSS -->
-<link href = "/jspWeb/css/modal.css" rel = "stylesheet">
 	
 </head>
 <body>
@@ -35,41 +33,28 @@
 				
 				<div>
 					<div>새 비밀번호</div>
-					<input maxlength = "20" type = "password" class = "newmpwd" name = "newmpwd">
+					<input onkeyup = "pwdCheck()" maxlength = "20" type = "password" class = "newmpwd" name = "newmpwd">
 				</div>
 				
 				<div>
 					<div>새 비밀번호 확인</div>
-					<input maxlength = "20" type = "password" class = "newmpwdconfirm" name = "newmpwdconfirm">
+					<input onkeyup = "pwdCheck()" maxlength = "20" type = "password" class = "newmpwdconfirm" name = "newmpwdconfirm">
 				</div>
+				
+				<div class = "checkconfirm"></div>
 				
 				<div>
 				<div>새 이메일</div>
-					<input type = "text" class = "newmemail" name = "newmemail">
+					<input onkeyup = "emailCheck()" type = "text" class = "newmemail" name = "newmemail">
 					<button class = "authBtn" type = "button"> 인증 </button>
 				</div>
+				
+				<div class = "checkconfirm"></div>
 				
 				<button onClick = "setUpdate()" type = "button">회원수정</button>
 			</div>
 		</form>
-	</div>
-	
-	<!-- 모달 HTML-->
-	<div class = "modal_wrap">
-		<div class = "modal_box">
-			<h3 class = "modal_title">회원정보 수정완료</h3>
-			<div class = "modal_content">
-				회원번호가 수정되었습니다.
-			   	<br/>
-			</div>
-			<div class = "modal_btns">
-				<button onClick = "closeModal()" class = "closeModal" type = "button">확인</button>
-			</div>
-		</div>
-	</div>
-	
-	<!-- 모달JS -->
-	<script src = "/jspWeb/js/modal.js" type="text/javascript"></script>
+	</div>	
 	
 	<!-- 사용자 정의 js -->
 	<script src = "/jspWeb/js/member/update.js" type="text/javascript"></script>

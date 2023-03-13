@@ -187,8 +187,6 @@ function pwdconfirmCheck(){
 	}else{
 		checkconfirm[1].innerHTML = '영대소문자+숫자 조합 5~20글자로 입력해주세요.'
 	}
-	
-	
 }
 //이메일 유효성 검사 [이메일 형식 유효성 검사]
 function emailCheck(){
