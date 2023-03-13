@@ -1,5 +1,7 @@
 /*alert('header.js 열림')*/
 
+let memberInfo = null; //JS끼리 통신하기 위해서
+
 //로그인한 회원 정보 호출
 getLogin();
 
@@ -8,14 +10,20 @@ function getLogin(){
 		url : "/jspWeb/login",
 		method : "get",
 /*		data : "",*/
+		/*만약 동기를 안쓰면 info.js에서 해당 1명의 회원의 정보[memberInfo]를 가져올때,
+		ajax가 아직 처리를 안해서 null값을 가져가게 된다. 하지만 동기식으로 한다면,
+		ajax가 통신할 때까지 기다리기 때문에 정보를 받을 수 있다. -> JS끼리 통신 가능!*/
+		async : false, // 동기화
 		success : (r) => {
 			/* r -> dto{mno, mid, mpwd, mimg, memail} 
 				MemberDto 1개 회원 --> r 객체 1개 */
-			
+			memberInfo = r; // 응답 결과를 전역변수로 옮기기 [왜? 다른 함수/JS에서 쓰려고]
 			//1. html 구성
 			let html = ``;
-			
-			if(r == null){
+			//r.mno == 0 or r.mid = null 
+			// mno는 1부터 시작하기 때문에 0이 나오는 건 없다는 뜻이고, 
+			// mid가 null일 수도 없기 때문에 조회 결과가 없다는 것
+			if(r.mid == null){ //로그인 안했으면
 				html += `<a href = "/jspWeb/member/signup.jsp">회원가입</a> `;
 				html += `<a href = "/jspWeb/member/login.jsp">로그인</a> `;
 			}else{
@@ -24,14 +32,14 @@ function getLogin(){
 							   	<img class = "hpimg" src ="/jspWeb/member/pimg/${r.mimg == null ? 'basic.jpg' : r.mimg }">
 							  </button>
 							  <ul class="dropdown-menu"> <!-- 드롭다운시 표시되는 구역 -->
-							    <li><a class="dropdown-item" href="#"> 내 프로필 </a></li>
+							    <li><a class="dropdown-item" href="/jspWeb/member/info.jsp"> 내 프로필 </a></li>
 							    <li><a class="dropdown-item" href="#"> 친구 목록 </a></li>
 							    <li><a class="dropdown-item" href="/jspWeb/member/logout.jsp"> 로그아웃 </a></li>
 							  </ul>
 							</div> <!-- 드롭다운 end -->
 							<span>${r.mid}님</span>
 							<a href = "#">쪽지함</a>
-							<a href = "#">포인트</a>`;
+							<a href = "#">${r.mpoint} 포인트</a>`;
 				
 				if(r.mid == 'admin'){ //관리자이면
 					html += `<a href = "/jspWeb/admin/info.jsp">관리자페이지</a> `;

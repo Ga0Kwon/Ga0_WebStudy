@@ -95,23 +95,30 @@ public class MemberDao extends Dao {
 		return false; //DB 오류이거나 로그인 정보 조회 결과가 없을 경우
 	}
 	
-	//5. 로그인한 멤버의 정보 호출 [ 비밀번호 빼고 ]
+	//5. 로그인한 멤버의 정보 + 보유 포인트 호출 [ 비밀번호 빼고 ]
 	public MemberDto getMember(String mid) {
-		String sql = "select * from member where mid = ?";
+		String sql = "select m.mno, m.mid, m.mimg, m.memail, sum(p.mpamount) as mpoint"
+				+ "		from member m, mpoint p"
+				+ "    	where m.mno = p.mno and m.mid = ?;";
 		
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, mid);
 			
 			rs = ps.executeQuery();
-			
+		
+			/*정상이든 아니든 값이 없을 경우 null이 포함된 객체를 가져오기 때문에 로그인이 js에서 null님이 뜨게 됨.
+			 * 	-> join을 했을 때 null이 포함된 객체를 가져온다. [next가 한번 무조건 돌게 된다.]*/
 			if(rs.next()) {
+				//결과 레코드 : mno, mid, mimg, memal, mpoint
 				MemberDto dto = new MemberDto(
 					rs.getInt(1),
 					rs.getString(2),
 					null, //비밀번호 빼고
-					rs.getString(4),
-					rs.getString(5));
+					rs.getString(3),
+					rs.getString(4));
+				
+				dto.setMpoint(rs.getInt(5)); //포인트
 				return dto;
 			}
 		}catch (Exception e) {
