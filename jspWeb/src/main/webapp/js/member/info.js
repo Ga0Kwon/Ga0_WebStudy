@@ -19,34 +19,41 @@ document.querySelector('.mpoint').innerHTML = memberInfo.mpoint;
 //1. 회원 탈퇴
 // function delete(){} [JS 이미 사용중인 키워드]
 function setDelete(){
-
-	$.ajax({
-		url : "/jspWeb/member",
-		method : "delete",
-		success : (r) =>{
-			if(r == 'true'){
-				alert('회원탈퇴 성공');
-				location.href = "/jspWeb/member/logout.jsp"
-			}else{
-				alert('회원탈퇴 실패, 관리자에게 문의해주세요.')
+	if(memberInfo.mid == 'admin'){
+		alert('관리자는 회원 탈퇴하실 수 없습니다.')
+	}else{
+		$.ajax({
+			url : "/jspWeb/member",
+			method : "delete",
+			success : (r) =>{
+				if(r == 'true'){
+					alert('회원탈퇴 성공');
+					location.href = "/jspWeb/member/logout.jsp"
+				}else{
+					alert('회원탈퇴 실패, 관리자에게 문의해주세요.')
+				}
 			}
-		}
-	})	
+		})		
+	}
 }
 
 //2. 회원 수정
 // function update(){} [JS 이미 사용중인 키워드]
 function setUpdate(){
+	if(memberInfo.mid == 'admin'){
+		alert('관리자는 회원 수정하실 수 없습니다.')
+	}else{
 		$.ajax({
-		url : "/jspWeb/member",
-		method : "put",
-		success : (r) =>{
-			if(r == 'true'){
-				alert('회원정보 수정 성공');
-				location.href = "/jspWeb/member/info.jsp"
-			}else{
-				alert('회원정보 수정 실패, 관리자에게 문의해주세요.')
+			url : "/jspWeb/member",
+			method : "put",
+			success : (r) =>{
+				if(r == 'true'){
+					alert('회원정보 수정 성공');
+					location.href = "/jspWeb/member/info.jsp"
+				}else{
+					alert('회원정보 수정 실패, 관리자에게 문의해주세요.')
+				}
 			}
-		}
-	})
+		})
+	}
 }

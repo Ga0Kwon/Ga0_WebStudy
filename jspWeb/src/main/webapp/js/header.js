@@ -15,11 +15,9 @@ function getLogin(){
 		ajax가 통신할 때까지 기다리기 때문에 정보를 받을 수 있다. -> JS끼리 통신 가능!*/
 		async : false, // 동기화
 		success : (r) => {
-			console.log(r);
 			/* r -> dto{mno, mid, mpwd, mimg, memail} 
 				MemberDto 1개 회원 --> r 객체 1개 */
 			memberInfo = r; // 응답 결과를 전역변수로 옮기기 [왜? 다른 함수/JS에서 쓰려고]
-			console.log(r.mid);
 			//1. html 구성
 			let html = ``;
 			//r.mno == 0 or r.mid = null 

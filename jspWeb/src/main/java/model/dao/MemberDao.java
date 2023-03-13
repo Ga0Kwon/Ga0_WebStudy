@@ -139,6 +139,8 @@ public class MemberDao extends Dao {
 					rs.getString(4));
 				
 				dto.setMpoint(rs.getInt(5)); //포인트
+				
+				System.out.println(dto);
 				return dto;
 			}
 		}catch (Exception e) {
