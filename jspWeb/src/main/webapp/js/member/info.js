@@ -25,17 +25,19 @@ function setDelete(){
 		$.ajax({
 			url : "/jspWeb/member",
 			method : "delete",
+			data : {"mpwd" : document.querySelector('.mpwd').value},
 			success : (r) =>{
 				if(r == 'true'){
 					alert('회원탈퇴 성공');
 					location.href = "/jspWeb/member/logout.jsp"
 				}else{
-					alert('회원탈퇴 실패, 관리자에게 문의해주세요.')
+					alert('회원탈퇴 실패, 비밀번호가 다릅니다.')
 				}
 			}
 		})		
 	}
 }
+
 
 //2. 회원 수정
 // function update(){} [JS 이미 사용중인 키워드]

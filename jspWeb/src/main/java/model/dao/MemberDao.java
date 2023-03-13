@@ -139,8 +139,6 @@ public class MemberDao extends Dao {
 					rs.getString(4));
 				
 				dto.setMpoint(rs.getInt(5)); //포인트
-				
-				System.out.println(dto);
 				return dto;
 			}
 		}catch (Exception e) {
@@ -248,13 +246,14 @@ public class MemberDao extends Dao {
 	}
 	
 	//9. 회원 탈퇴 [인수 : mid 반환 : boolean]
-	public boolean setDelete(String mid) {
-		String sql = "delete from member where mid = ?";
+	public boolean setDelete(String mid, String mpwd) {
+		String sql = "delete from member where mid = ? and mpwd = ?";
 		
 		try {
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, mid);
+			ps.setString(2, mpwd);
 			
 			int count = ps.executeUpdate();
 			
@@ -270,14 +269,16 @@ public class MemberDao extends Dao {
 	}
 	
 	//10. 회원 수정 [인수 : mid, mpwd, memail 반환 : boolean]
-	public boolean update(String mid, String mpwd, String memail) {
-		String sql = "update member set mpwd = ? memail = ? where mid = ?";
+	public boolean update(String mid, String mpwd, String newmpwd, String newmemail, String newmimg) {
+		String sql = "update member set mpwd = ?, memail = ?, mimg = ? where mid = ? and mpwd = ?";
 		
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, mpwd);
-			ps.setString(2, memail);
-			ps.setString(3, mid);
+			ps.setString(1, newmpwd);
+			ps.setString(2, newmemail);
+			ps.setString(3, newmimg);
+			ps.setString(4, mid);
+			ps.setString(5, mpwd);
 			
 			//수정한 필드[row]가 없어도 수정된다. 따라서 몇개 수정했는데 받아서 체크해야함.
 			//executeUpdate() : 조작된 레코드 수가 반환됨

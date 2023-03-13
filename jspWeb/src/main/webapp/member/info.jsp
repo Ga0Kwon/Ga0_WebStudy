@@ -4,6 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- 모달 CSS -->
+<link href = "/jspWeb/css/modal.css" rel = "stylesheet">
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,7 +18,7 @@
 		<h3> 회원 정보 </h3>
 		<div>
 			<div>
-				<img width = "20%" class= "mimg" alt="" src="">
+				<img width = "20%" class= "mimg" >
 			</div>
 			<div>
 				<div>아이디</div>
@@ -29,13 +33,34 @@
 				<div class = "mpoint"></div>
 			</div>
 			
-			<button onClick = "setUpdate()" type = "button">회원 수정 </button>
-			<button onClick = "setDelete()" type = "button">회원 탈퇴 </button>
+			<a href = "/jspWeb/member/update.jsp"><button type = "button">회원 수정 </button></a>
+			<button onClick = "openModal()" type = "button">회원 탈퇴 </button>
 		</div>
 	</div>
 	
+	<!-- 모달 HTML-->
+	<div class = "modal_wrap">
+		<div class = "modal_box">
+			<h3 class = "modal_title">회원 탈퇴</h3>
+			<div class = "modal_content">
+				정말 회원 탈퇴 하시겠습니까?
+			   	<br>
+			  	비밀번호 확인 : <input maxlength = "20" type = "password" class = "mpwd">
+				<br>
+			</div>
+			<div class = "modal_btns">
+				<button onClick = "setDelete()" class = "modal_check" type = "button">확인</button>
+				<button onClick = "closeModal()" class = "closeModal" type = "button">취소</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 사용자 정의 modal js -->
+	<script src = "/jspWeb/js/modal.js"></script>
 	<!-- 사용자 정의 JS[info.js] -->
 	<script src ="/jspWeb/js/member/info.js" type="text/javascript"></script>
+
+
 </body>
 </html>
 

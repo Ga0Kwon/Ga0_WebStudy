@@ -122,12 +122,41 @@ public class Info extends HttpServlet {
 
 	//3. 회원 정보 수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1) 로그인된 회원아이디 가져오기 [세션(Object)] => 로그인된 회원의 정보를 수정해야하기 때문
-		String mid = (String)request.getSession().getAttribute("login");
-		String nempwd = request.getParameter("mpwd");
-		String newmemail = request.getParameter("memail");
+		request.setCharacterEncoding("UTF-8");
+		//1. 업로드 코드 구현
+			//1) 업로드 한 파일을 서버 경로
+		String path = request.getSession().getServletContext().getRealPath("/member/pimg");
 		
-		boolean result = MemberDao.getInstance().update(mid, nempwd, newmemail);
+		MultipartRequest multi = new MultipartRequest(
+				request, 						//1. 요청 방식
+				path, 							//2. 첨부파일 가져와서 저장할 서버내 폴더
+				1024*1024*10,					//3. 10MB; 첨부파일 허용 범위 용량 [바이트 단위]
+				"UTF-8", 						//4. 첨부파일 한글 인코딩
+				new DefaultFileRenamePolicy()   //5. 동일한 첨부파일명이 있으면 식별깨짐 -> 뒤에 숫자를 붙여줌
+		);
+		
+		// 그외 매개변수 요청 [request --> multi / form 하위 태그 name 식별자]
+		String mid = (String)request.getSession().getAttribute("login");
+		String mpwd = multi.getParameter("mpwd");  //호출할 input의 name
+		String newmpwd = multi.getParameter("newmpwd"); //호출할 input의 name
+		String newmemail = multi.getParameter("newmemail"); //호출할 input의 name
+		String defaultimg = multi.getParameter("defaultimg"); //기본 프로필을 쓰고 싶을 경우
+		
+		/* 첨부파일만, 첨부파일된 파일명 호출 []  */
+		String newmimg = multi.getFilesystemName("newmimg"); //호출할 input의 name
+		
+		// 만약에 첨부파일이 없으면
+		if(newmimg == null) {
+			//기존 이미지 파일 그대로 사용
+			newmimg = MemberDao.getInstance().getMember(mid).getMimg();
+		}
+		
+		/*기본 프로필을 쓰고 싶을 경우*/
+		if(defaultimg.equals("true")){ 
+			newmimg = "basic.jpg";
+		}
+		
+		boolean result = MemberDao.getInstance().update(mid, mpwd, newmpwd, newmemail, newmimg);
 		
 		response.getWriter().print(result);
 	}
@@ -137,9 +166,9 @@ public class Info extends HttpServlet {
 		//1. 현재 로그인된 회원이 탈퇴
 		 	//1) 로그인된 회원아이디 가져오기 [세션(Object)]
 		String mid = (String)request.getSession().getAttribute("login");
-		
+		String mpwd = request.getParameter("mpwd");
 			//2) DAO에게 요청후 결과 받기
-		boolean result = MemberDao.getInstance().setDelete(mid);
+		boolean result = MemberDao.getInstance().setDelete(mid, mpwd);
 			//3) 결과를 ajax에게 보내기
 		response.getWriter().print(result);
 	}

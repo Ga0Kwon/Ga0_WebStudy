@@ -9,7 +9,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- 부트 스트랩 CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-	 
+	 <!-- 모달 CSS -->
+	<link href = "/jspWeb/css/modal.css" rel = "stylesheet">
 	<!-- 모든 페이지 공통 CSS -->
 	<link href = "/jspWeb/css/signup.css" rel = "stylesheet">
 	
@@ -58,6 +59,22 @@
 		</form>
 	</div>
 	
+	<!-- 모달 HTML-->
+	<div class = "modal_wrap">
+		<div class = "modal_box">
+			<h3 class = "modal_title">회원가입 성공</h3>
+			<div class = "modal_content">
+				회원가입축하 포인트 100을 적립해드렸습니다.
+			   	<br/>
+			</div>
+			<div class = "modal_btns">
+				<button onClick = "closeModal()" class = "closeModal" type = "button">확인</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 모달JS -->
+	<script src = "/jspWeb/js/modal.js" type="text/javascript"></script>
 	<!-- 2. 사용자 정의 js -->
 	<script src = "/jspWeb/js/member/signup.js" type = "text/javascript"></script>
 	

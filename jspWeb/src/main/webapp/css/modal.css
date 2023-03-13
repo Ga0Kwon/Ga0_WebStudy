@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+/*전체 모달 박스권*/
+.modal_wrap{
+	width : 100%;
+	background-color : rgba(114,114,114,50%); /*검정색 투명도 50*/
+	position: fixed; /*fixed 고정 위치*/
+	top : 0; left : 0;
+	/*div 전체를 덮어씌웠기 때문에 모달 뒤에 있는 요소 클릭 X*/
+	width : 100%; height: 100%; /*모든 화면 감싸기*/
+	justify-content: center; align-items: center; /*내용물 가운데*/
+	
+	/*처음엔 이 모달 숨겨야함 */
+	display: none; 
+}
+
+/*모달 상자*/
+.modal_box{
+	background-color: white; /*모달 실질적 내용이 들어간 배경색*/
+	width : 45%; height: 40%;
+	padding: 5%;
+	border: 3px solid #fbbb0e;
+	border-radius: 30px;
+}
+
+/*모달 버튼 꾸미기*/
+.modal_btns button{
+	background-color : #3ca318;
+	color : white;
+	padding: 10px; 
+	border: none;
+	border-radius: 10px;
+}

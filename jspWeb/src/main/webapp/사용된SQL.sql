@@ -36,3 +36,8 @@ create table mpoint(
     foreign key (mno) references member(mno) on delete set null -- 탈퇴한 회원 포인트도 같이 사라짐
 );
 
+-- 관리자 추가해야하는 항목
+insert into member (mid, mpwd, memail) values ('admin', '1', 'admin1@kakao.co.kr');
+insert into mpoint(mpcomment, mpamount, mno) values ('관리자[포인트X]', 0, 1); -- 관리자
+
+
