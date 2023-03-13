@@ -14,7 +14,7 @@
 		<h3> 회원 정보 </h3>
 		<div>
 			<div>
-				<img class= "mimg" alt="" src="">
+				<img width = "20%" class= "mimg" alt="" src="">
 			</div>
 			<div>
 				<div>아이디</div>
@@ -29,8 +29,8 @@
 				<div class = "mpoint"></div>
 			</div>
 			
-			<button type = "button">회원 수정 </button>
-			<button type = "button">회원 탈퇴 </button>
+			<button onClick = "setUpdate()" type = "button">회원 수정 </button>
+			<button onClick = "setDelete()" type = "button">회원 탈퇴 </button>
 		</div>
 	</div>
 	

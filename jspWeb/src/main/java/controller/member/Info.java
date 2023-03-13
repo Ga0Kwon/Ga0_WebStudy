@@ -122,12 +122,26 @@ public class Info extends HttpServlet {
 
 	//3. 회원 정보 수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//1) 로그인된 회원아이디 가져오기 [세션(Object)] => 로그인된 회원의 정보를 수정해야하기 때문
+		String mid = (String)request.getSession().getAttribute("login");
+		String nempwd = request.getParameter("mpwd");
+		String newmemail = request.getParameter("memail");
+		
+		boolean result = MemberDao.getInstance().update(mid, nempwd, newmemail);
+		
+		response.getWriter().print(result);
 	}
 
 	//4. 회원 탈퇴
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//1. 현재 로그인된 회원이 탈퇴
+		 	//1) 로그인된 회원아이디 가져오기 [세션(Object)]
+		String mid = (String)request.getSession().getAttribute("login");
+		
+			//2) DAO에게 요청후 결과 받기
+		boolean result = MemberDao.getInstance().setDelete(mid);
+			//3) 결과를 ajax에게 보내기
+		response.getWriter().print(result);
 	}
 
 }

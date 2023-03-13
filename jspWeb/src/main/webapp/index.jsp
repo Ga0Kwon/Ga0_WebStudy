@@ -15,6 +15,5 @@
 	<!-- jsp 태그; JSP 페이지 포함  -->
 	<%@ include file = "footer.jsp" %> <!-- 푸터 포함 -->
 	
-	
 </body>
 </html>

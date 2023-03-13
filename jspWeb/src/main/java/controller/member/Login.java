@@ -28,6 +28,7 @@ public class Login extends HttpServlet {
 		
 		//2. 로그인한 회원의 정보 호출 [비밀번호 빼고]
 		MemberDto dto = MemberDao.getInstance().getMember(mid);
+		System.out.println(dto);
 		
 			//JAVA 객체를 --> JS 객체로 변환
 		ObjectMapper mapper = new ObjectMapper();
@@ -55,6 +56,7 @@ public class Login extends HttpServlet {
 				// setAttribute("필드명(key)" , 데이터(value)) //서버[톰캣] 내 세션객체에 속성[데이터]추가
 			//세션객체에 'login' 이름으로 로그인 성공한 데이터 저장
 			request.getSession().setAttribute("login", mid); 
+//			System.out.println(request.getSession().getAttribute("login"));
 		}
 		
 		//3. DAO로부터 받은 결과를 AJAX에 전달

@@ -24,10 +24,10 @@
 			<p>환영합니다. 다양한 커뮤니티 플랫폼을 제공합니다.</p>
 			
 			<div class = "title">아이디</div>
-			<input onkeyup = "idCheck()" maxlength = "30" type = "text" class = "mid" name = "mid"> 
+			<input maxlength = "30" type = "text" class = "mid" name = "mid"> 
 			
 			<div class = "title">비밀번호</div>
-			<input onkeyup = "pwdCheck()" maxlength = "20" type = "password" class = "mpwd" name = "mpwd">
+			<input maxlength = "20" type = "password" class = "mpwd" name = "mpwd">
 			<div class = "checkconfirm"></div>
 			
 			<div class = "subBtnBox">

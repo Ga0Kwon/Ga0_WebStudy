@@ -127,9 +127,10 @@ function signup(){
 		processData : false, // false : 해제
 								//multipart/form 형식으로 전송
 		success : (r) => {
+			console.log(r);
 			/*console.log('ajax 응답');*/
 			if(r == 'true'){
-				location.href = "/jspWeb/login.jsp";
+				location.href = "/jspWeb/member/login.jsp";
 				alert('[회원가입 성공]');
 			}else{
 				alert('[회원가입 실패] 관리자에게 문의하세요.');

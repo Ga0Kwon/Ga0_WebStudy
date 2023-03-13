@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.dto.MemberDto;
@@ -16,7 +17,7 @@ public class MemberDao extends Dao {
 		String sql = "insert into member(mid, mpwd, memail, mimg) values (?, ?, ?, ?)";
 			try {
 				
-				ps = con.prepareStatement(sql);
+				ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				
 				ps.setString(1, dto.getMid());
 				ps.setString(2, dto.getMpwd());
@@ -24,6 +25,25 @@ public class MemberDao extends Dao {
 				ps.setString(4, dto.getMimg());
 				
 				ps.executeUpdate();
+				
+				//포인트 지급 [내용, 개수, 방금회원가입한 회원번호(PK)]
+				/*
+				 - insert 이후 자동으로 생성된 auto key 찾기
+				 con.prepareStatement(sql);
+				 아래로
+				 con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+				 2. 생성된 PK 결과 담기
+				 rs = ps.getGeneratedKeys();
+				 3. 검색된 레코드 결과에서 pk 호출
+				 rs.next() --> rs.getInt(1);
+				  
+				*/
+				
+				rs = ps.getGeneratedKeys(); //pk 값을 ps로 받기
+				if(rs.next()) {
+					int pk = rs.getInt(1);
+					setPoint("회원가입축하", 100, pk);
+				}
 				
 				return true; //회원 가입 성공!
 			}catch (Exception e) {
@@ -107,9 +127,9 @@ public class MemberDao extends Dao {
 			
 			rs = ps.executeQuery();
 		
-			/*정상이든 아니든 값이 없을 경우 null이 포함된 객체를 가져오기 때문에 로그인이 js에서 null님이 뜨게 됨.
+			/*[조건이 틀려도]정상이든 아니든 값이 없을 경우 null이 포함된 객체를 가져오기 때문에 로그인이 js에서 null님이 뜨게 됨.
 			 * 	-> join을 했을 때 null이 포함된 객체를 가져온다. [next가 한번 무조건 돌게 된다.]*/
-			if(rs.next()) {
+			if(rs.next()) { 
 				//결과 레코드 : mno, mid, mimg, memal, mpoint
 				MemberDto dto = new MemberDto(
 					rs.getInt(1),
@@ -201,6 +221,74 @@ public class MemberDao extends Dao {
 			System.err.println(e.getMessage());
 		}
 		return "false";
+	}
+	
+	//8. 포인트 함수 [1. 지급 내용 2. 지급 개수 3. 대상]
+	public boolean setPoint(String content, int point, int mno) {
+		String sql = "insert into mpoint(mpcomment, mpamount, mno) values (?, ?, ?)";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, content);
+			ps.setInt(2, point);
+			ps.setInt(3, mno);
+			
+			ps.executeUpdate();
+			
+			return true;
+			
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		
+		return false;
+	}
+	
+	//9. 회원 탈퇴 [인수 : mid 반환 : boolean]
+	public boolean setDelete(String mid) {
+		String sql = "delete from member where mid = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, mid);
+			
+			int count = ps.executeUpdate();
+			
+			/* 삭제된 레코드 수 반환 */
+			if(count == 1) { //아이디가 달라도, 없어도 삭제가 된다. 즉 삭제한 개수가 있어야 확인 가능
+				return true;
+			}
+			
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	//10. 회원 수정 [인수 : mid, mpwd, memail 반환 : boolean]
+	public boolean update(String mid, String mpwd, String memail) {
+		String sql = "update member set mpwd = ? memail = ? where mid = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mpwd);
+			ps.setString(2, memail);
+			ps.setString(3, mid);
+			
+			//수정한 필드[row]가 없어도 수정된다. 따라서 몇개 수정했는데 받아서 체크해야함.
+			//executeUpdate() : 조작된 레코드 수가 반환됨
+			int count = ps.executeUpdate(); //수정된 레코드 수 반환
+			
+			if(count == 1) { 
+				return true; //레코두 수정 성공시 true
+			}
+			
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return false;
 	}
 	
 }
