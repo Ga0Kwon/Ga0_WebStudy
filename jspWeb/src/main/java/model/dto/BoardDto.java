@@ -14,6 +14,8 @@ public class BoardDto {
     
     // 추가 필드 --> 작성자 id
     private String mid; //출력용
+    //추가 필드 --> 작성자 프로필 사진
+    private String mimg;
     
     //1. 생성자 [빈생성자] : 사용할 용도가 적음
 	public BoardDto() {
@@ -60,6 +62,24 @@ public class BoardDto {
 		this.mno = mno;
 		this.cno = cno;
 		this.mid = mid;
+	}
+	
+	//5. 개별 게시물 출력
+	public BoardDto(int bno, String btitle, String bcontent, String bfile, String bwritedate, int bview, int blike,
+			int bhate, int mno, int cno, String mid, String mimg) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfile = bfile;
+		this.bwritedate = bwritedate;
+		this.bview = bview;
+		this.blike = blike;
+		this.bhate = bhate;
+		this.mno = mno;
+		this.cno = cno;
+		this.mid = mid;
+		this.mimg = mimg;
 	}
 	
 	//메소드

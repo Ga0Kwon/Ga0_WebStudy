@@ -1,12 +1,15 @@
 package controller.board;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -23,9 +26,32 @@ public class BoardInfo extends HttpServlet {
       
     }
 
-	
+	//게시글 출력
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int type = Integer.parseInt( request.getParameter("type"));
 		
+		//Java형태를 script 형식으로 바꿔주는 것이 ObjectMapper
+		ObjectMapper mapper = new ObjectMapper();
+		
+		//응답
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		
+		if(type == 1) { //1. 전체 출력
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList();
+			
+			String jsonArray =  mapper.writeValueAsString(result);
+			
+			response.getWriter().print(jsonArray);
+		}else if(type == 2) {
+			int bno = Integer.parseInt(request.getParameter("bno"));
+			BoardDto result = BoardDao.getInstance().getBoard(bno);
+
+			String jsonArray =  mapper.writeValueAsString(result);
+			
+			response.getWriter().print(jsonArray);
+		}
+
 	}
 
 	// 게시글 쓰기

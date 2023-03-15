@@ -311,4 +311,28 @@ public class MemberDao extends Dao {
 		return -1;
 	}
 	
+	//12. mno로 해당 member정보 반환하기 [mno ---> memberDto]
+	public MemberDto getMember(int mno) {
+		String sql = "select mno, mid, mimg, memail from member where mno = 2 ";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, mno);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				MemberDto dto = new MemberDto(
+						rs.getInt(1), 
+						rs.getString(2), 
+						null, 
+						rs.getString(3), 
+						rs.getString(3));
+				return dto;
+			}
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+	
 }

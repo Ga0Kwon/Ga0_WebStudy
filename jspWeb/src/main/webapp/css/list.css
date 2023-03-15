@@ -1,1 +1,17 @@
 @charset "UTF-8";
+
+.goWrite{ /*글쓰기 a 전체 구역*/
+	width: 100%;
+	display: flex;
+	justify-content:flex-end;
+	align-items: flex-end;
+	margin-bottom: 10px;
+}
+
+.goWrite a{/*글쓰기 a 요소*/
+	margin-right: 15px;
+	font-family: 'KyoboHandwriting2021sjy';
+	font-size: 20px;
+	font-weight: 250;
+	color : #ebb307;
+}
