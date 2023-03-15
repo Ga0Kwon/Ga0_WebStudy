@@ -40,4 +40,37 @@ create table mpoint(
 insert into member (mid, mpwd, memail) values ('admin', '1', 'admin1@kakao.co.kr');
 insert into mpoint(mpcomment, mpamount, mno) values ('관리자[포인트X]', 0, 1); -- 관리자
 
+-- 카테고리 테이블 [ 카테고리번호, 카테고리 이름(공지사항, 커뮤니티, QnA, 노하우 등등)]
+drop table if exists category;
+create table category(
+	cno int auto_increment primary key,
+    cname varchar(100) not null unique
+);
+
+-- 게시물 테이블 [번호 , 제목, 내용, 첨부파일 1개, 작성일, 작성자, 조회수, 좋아요수, 싫어요수, 작성자]
+drop table if exists board;
+create table board(
+	bno int auto_increment primary key,
+    btitle varchar(1000) not null,
+    bcontent longtext not null,
+    bfile longtext,
+    bwritedate datetime default now(),
+    bview int default 0,
+    blike int default 0,
+    bhate int default 0,
+    mno int, -- member 테이블의 mno
+    cno int, -- category 테이블의 cno
+    foreign key (mno) references member(mno) on delete set null, 
+    foreign key (cno) references category(cno) on delete cascade
+);
+-- on delete cascade : pk가 삭제되면 fk도 같이 삭제 
+-- on delete set null : pk가 삭제되면 fk는 null로 변경
+-- 생략                 : fk에 존재하는 식별키[pk]는 삭제 불가능 
+
+-- 카테고리 데이터 미리 추가
+insert into category(cname) value('공지사항');
+insert into category(cname) value('커뮤니티');
+insert into category(cname) value('QnA');
+insert into category(cname) value('노하우');
+
 

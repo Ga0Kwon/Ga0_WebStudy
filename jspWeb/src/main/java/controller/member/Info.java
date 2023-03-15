@@ -41,6 +41,7 @@ public class Info extends HttpServlet {
 		
 		//3. 응답
 		response.setCharacterEncoding("UTF-8"); //응답 데이터 한글 인코딩
+		//setContentType을 안쓰면 문자열 전송이된다. 만약 쓰게 되면 객체가 전송될 수 있다.
 		response.setContentType("application/json"); //응답(전송할) 데이터 타입
 		response.getWriter().print(jsonArray); //응답 데이터 보내기
 	}
