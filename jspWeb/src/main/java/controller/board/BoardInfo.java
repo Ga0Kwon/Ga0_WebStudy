@@ -50,7 +50,7 @@ public class BoardInfo extends HttpServlet {
 			//------------------ page 처리 ---------------
 			//1.현재 페이지[요청] , 2.페이지당 표시할 게시물 수  3.현재 페이지[게시물시작, 게시물 끝]
 			int page = Integer.parseInt(request.getParameter("page"));
-			int listSize = 3;
+			int listSize = Integer.parseInt(request.getParameter("listSize"));
 			int startRow  = (page-1)*listSize;//해당페이지에서의 게시물 시작 번호
 			//------------------- page 버튼 만들기 -------------------
 			//1. 전체페이지수 [총 게시물레코드수/페이지당표시되는수] 2. 페이지 표시할 최대버튼수 3. 시작버튼 번호

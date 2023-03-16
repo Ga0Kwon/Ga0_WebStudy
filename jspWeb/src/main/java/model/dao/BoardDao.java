@@ -137,4 +137,34 @@ public class BoardDao extends Dao{
 		}
 		return null;
 	}
+	
+	//조회수, 좋아요, 싫어요 중 증가
+	public boolean bIncrease(int type, int bno) {
+		
+		String sql = "";
+		
+		if(type == 1) {
+			sql = "update board set bview = bview +1 where bno = ?";
+		}else if(type == 2) {
+			sql = "update board set blike = blike +1 where bno = ?";
+		}else if(type == 3) {
+			sql = "update board set bhate = bhate +1 where bno = ?";
+		}
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, bno);
+			
+			int count = ps.executeUpdate();
+			
+			if(count == 1) {
+				return true;
+			}
+			
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return false;
+	}
 }

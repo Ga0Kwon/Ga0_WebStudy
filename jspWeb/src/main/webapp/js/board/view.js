@@ -13,7 +13,7 @@ function getBoard(){
 		success : (r) => {
 			if(r != null){
 				document.querySelector('.infoBox').innerHTML = `
-				${r.bwritedate} | ${r.bview} | ${r.blike} | ${r.bhate} `;
+				${r.bwritedate} | ${r.bview} | <button onClick = "bIncrease(2)"type = "button">${r.blike}</button> | <button onClick = "bIncrease(3)" type = "button">${r.bhate}</button>`;
 				
 				document.querySelector('.btitle').innerHTML = `${r.btitle}`;
 				document.querySelector('.pimgBox').innerHTML = `<img onClick = "friendInfo(${r.mno})" style="width: 20%;" src = "/jspWeb/member/pimg/${r.mimg == null ? 'basic.jpg' : r.mimg }" </img>`;
@@ -66,6 +66,36 @@ function bfileDownload(bfile){
 	
 }
 
+ bIncrease( 1 ); //해당 스크립트가 열리는 순간 조회수는 증가 
+// 3. 조회수 좋아요수 싫어요수
+function bIncrease( type ){
+	let kind = '';
+	//type 구분
+	if(type == 2){
+		kind = '좋아요';
+	}else if(type == 3){
+		kind = '싫어요';
+	}
+	//1. 현재 게시물의 번호 [증가할 대상]
+	let bno = document.querySelector('.bno').innerHTML;
+	//2. 
+	
+	$.ajax({
+		url : "/jspWeb/board/view",
+		method : "get",
+		data : {"type" : type, "bno" : bno},
+		success : (r) => {
+			if(r == 'true'){
+				getBoard();
+			}else if(r == '-1'){
+				if(type != 1){
+					alert(kind + '는 이미 처리하였습니다. [24시간후에 다시 처리해주세요.]')	
+				}
+			}
+		}
+	})
+}
+
 //게시물 작성자의 정보를 확인하기[인수 mno]
 function friendInfo(mno){
 	console.log(mno);
@@ -75,3 +105,4 @@ function friendInfo(mno){
 	})
 	
 }
+

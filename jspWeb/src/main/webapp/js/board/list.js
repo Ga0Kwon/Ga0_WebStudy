@@ -5,7 +5,8 @@ let pageObject = {
 	key : "",
 	keyword : "",
 	type : 1, //1. 전체 출력 2. 개별 출력
-	cno : document.querySelector('.cno').value
+	cno : document.querySelector('.cno').value,
+	listSize : 3
 }
 
 // -- 카테고리 제목 넣어주기
@@ -22,20 +23,19 @@ if(pageObject.cno == 1){
 }
 
 document.querySelector('.cname').innerHTML = cnameHTML +" 목록";
-console.log(pageObject)
+
 printBoard(1); //처음 열릴때는 페이지 1 기본값
 //게시글 출력하기
 function printBoard(page){//해당함수로부터 페이징번호 받기
 
 	pageObject.page = page; //받아온 페이지 바꿔준다.
-
+	
 	$.ajax({
 		url : "/jspWeb/board/info",
 		method : "get",
 		data : pageObject,
 		success : (r) => {
 			//------------------------ 테이블 출력 ------------------------
-			console.log(r)
 			if(r != null){
 				let html = `<tr>
 								<th>번호</th>
@@ -90,7 +90,9 @@ function printBoard(page){//해당함수로부터 페이징번호 받기
 			html += `<button onClick = "printBoard(${r.totalpage})" type = "button">맨뒤</button>`;
 			
 			document.querySelector('.pageBox').innerHTML = html;
-			
+		
+		//-------------- 게시물 수 출력 --------------
+		document.querySelector('.searchCount').innerHTML = `총 게시물 수 : ${r.totalsize}`;
 		} //sucess 끝나는 구역
 	})//ajax끝나는 구역
 }
@@ -105,6 +107,21 @@ function getSearch(){
 	// 게시물 호출
 	printBoard(1); //검색 결과에 맞는 1페이지
 }
+//3. 검색 지우기
+function setSearch(){
+	pageObject.key = "";
+	pageObject.keyword = "";
+	
+	document.querySelector('.keyword').value = '';
+	printBoard(1);
+}
+
+//
+function setListSize(){
+	pageObject.listSize = document.querySelector('.listSize').value;
+	
+	printBoard(1);
+}	
 /*
 	1. 클릭한 pk[식별자] 이동하는 경우의 수
 		1) HTTP 이용한 PK 이동 [HTTP get메소드 방식의 a태그 이용한 pk 이동 방식]

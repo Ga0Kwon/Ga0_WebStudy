@@ -26,7 +26,17 @@
 	<div class = "container">
 		<h3 class = "cname"></h3>
 		<div class ="goWrite"><a href = "write.jsp">글쓰기</a></div>
-			
+		
+		<button onClick = "setSearch()" type = "button">전체보기[검색제거]</button>
+		
+		<div class = "searchCount"></div>
+		
+		<select onChange = "setListSize()" class = "listSize">
+			<option>3</option>
+			<option>5</option>
+			<option>10</option>
+		</select>
+		
 		<table class ="boardTable table table-hover">
 			
 		</table>
