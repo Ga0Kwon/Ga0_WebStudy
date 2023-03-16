@@ -9,6 +9,9 @@ public class PageDto {
 	private int startRow; //현재 페이지에서 시작되는 게시물 번호
 	private int totalsize; // 총 게시물수
 	private int totalpage; //총 페이지수
+	private int btnSize; //페이지별 최대 페이징버튼 수
+	private int startBtn; //페이지별 시작 페이징버튼의 번호
+	private int endBtn; //페이지별 끝 페이징버튼의 번호
 	
 	//!! : 실질적인 게시물 목록 
 	ArrayList<BoardDto> boardList; //출력할 데이터[게시물] 리스트
@@ -16,14 +19,18 @@ public class PageDto {
 	public PageDto() {
 		super();
 	}
-	
-	public PageDto(int page, int listSize, int startRow, int totalsize, int totalpage, ArrayList<BoardDto> boardList) {
+
+	public PageDto(int page, int listSize, int startRow, int totalsize, int totalpage, int btnSize, int startBtn,
+			int endBtn, ArrayList<BoardDto> boardList) {
 		super();
 		this.page = page;
 		this.listSize = listSize;
 		this.startRow = startRow;
 		this.totalsize = totalsize;
 		this.totalpage = totalpage;
+		this.btnSize = btnSize;
+		this.startBtn = startBtn;
+		this.endBtn = endBtn;
 		this.boardList = boardList;
 	}
 
@@ -65,6 +72,30 @@ public class PageDto {
 
 	public void setTotalpage(int totalpage) {
 		this.totalpage = totalpage;
+	}
+
+	public int getBtnSize() {
+		return btnSize;
+	}
+
+	public void setBtnSize(int btnSize) {
+		this.btnSize = btnSize;
+	}
+
+	public int getStartBtn() {
+		return startBtn;
+	}
+
+	public void setStartBtn(int startBtn) {
+		this.startBtn = startBtn;
+	}
+
+	public int getEndBtn() {
+		return endBtn;
+	}
+
+	public void setEndBtn(int endBtn) {
+		this.endBtn = endBtn;
 	}
 
 	public ArrayList<BoardDto> getBoardList() {

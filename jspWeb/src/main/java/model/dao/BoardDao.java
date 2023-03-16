@@ -36,8 +36,14 @@ public class BoardDao extends Dao{
 	}
 	
 	//2-2. 게시물 수 구하기
-	public int getTotalSize() {
-		String sql = "select count(*) from member m natural join board b";
+	public int getTotalSize(String key, String keyword, int cno) {
+		String sql;
+		
+		if(key.equals("") && keyword.equals("")) {
+			 sql = "select count(*) from member m natural join board b where b.cno = " +cno;
+		}else {
+			 sql = "select count(*) from member m natural join board b where "+key+" like " + "\"%"+ keyword + "%\" and b.cno = " +cno;
+		}
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -55,11 +61,20 @@ public class BoardDao extends Dao{
 	}
 	
 	//2-1. 모든 글 출력
-	public ArrayList<BoardDto> getBoardList(int startRow,int listSize){
-		String sql = "select b.*, m.mid from member m natural join board b limit ?, ?;";
+	public ArrayList<BoardDto> getBoardList(int startRow,int listSize, String key, String keyword, int cno){
+		String sql;
 		ArrayList<BoardDto> boardList = new ArrayList<>();
 		
+		if(key.equals("") && keyword.equals("")) {
+			 sql = "select b.*, m.mid from member m natural join board b where b.cno = " +cno
+					 	+" order by bwritedate desc limit ?,?";
+		}else {
+			 sql = "select b.*, m.mid from member m natural join board b where "+key+" like \"%"+keyword+"%\" and b.cno = "+ cno 
+					 	+" order by bwritedate desc limit ?,?";
+		}
+		
 		try {
+			
 			ps = con.prepareStatement(sql);
 			
 			ps.setInt(1, startRow);
@@ -83,6 +98,7 @@ public class BoardDao extends Dao{
 				
 				boardList.add(dto);
 			}
+			
 			return boardList;
 			
 		}catch (Exception e) {

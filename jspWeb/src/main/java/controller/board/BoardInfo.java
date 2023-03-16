@@ -39,6 +39,13 @@ public class BoardInfo extends HttpServlet {
 		response.setContentType("application/json");
 		
 		if(type == 1) { //1. 전체 출력
+			// 카테고리 매개변수 요청 [cno]
+			int cno = Integer.parseInt(request.getParameter("cno"));
+			// ----------------- 검색 처리 ----------------
+			// 1. 검색한 필요한 매개변수 요청 [key, keyword] 
+			// gettotalSize와 getBoardList한테 조건 전달
+			String key = request.getParameter("key");
+			String keyword = request.getParameter("keyword");
 			
 			//------------------ page 처리 ---------------
 			//1.현재 페이지[요청] , 2.페이지당 표시할 게시물 수  3.현재 페이지[게시물시작, 게시물 끝]
@@ -50,7 +57,10 @@ public class BoardInfo extends HttpServlet {
 				//총레코드수/페이지당표시게시물수
 					//1) 나머지가 없으면 => 몫 9/3 => 3페이지
 					//2) 나머지가 있으면 => 몫+1 10/3 => 4페이지
-			int totalSize = BoardDao.getInstance().getTotalSize();//마지막 페이지 수
+			
+			int totalSize = BoardDao.getInstance().getTotalSize(key, keyword, cno);
+			//검색 없을 때
+//			int totalSize = BoardDao.getInstance().getTotalSize();//마지막 페이지 수
 			
 			int totalpage = (totalSize%listSize == 0)? (totalSize/listSize) : (totalSize/listSize +1);
 			/*
@@ -62,10 +72,35 @@ public class BoardInfo extends HttpServlet {
 			  	 => 나머지가 있으면 +1, 없으면 거기까지 [10/3]
 			  	2. 페이지별 게시물시작 PK 번호 찾기
 			  		1) 페이지 요청 (현재페이지-1)*페이지당표시할게시물수
+			 	
+			 	3. 시작버튼, 마지막버튼수
+			 		startBtn 1 6 11 16...
+			 		endBtn 5 10 15 
+			 		7페이지
+			 		1페이지 -> 12345
+			 		2페이지 -> 12345
+			 		3페이지 -> 12345
+			 		4페이지 -> 12345
+			 		5페이지 -> 12345
+			 		6페이지 -> 67
+			 		7페이지 -> 67
 			 */
-			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startRow, listSize);
 			
-			PageDto pagedto = new PageDto(page, listSize, startRow, totalSize, totalpage, result);
+			int btnSize = 5; //최대 페이징 버튼 출력수
+			int startBtn = ((page-1) / btnSize )*btnSize+1; 
+			int endBtn = startBtn + (btnSize-1);
+
+			//단 마지막버튼수가 총페이지수보다 커지면 막아야한다. [이 경우 마지막 버튼 수를 총 페이지수로]
+			if(endBtn > totalpage) {
+				endBtn = totalpage;
+			}
+			//검색이 있을 때 
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startRow, listSize, key, keyword, cno);
+			
+			//검색이 없을 때
+			/*ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startRow, listSize);*/
+			
+			PageDto pagedto = new PageDto(page, listSize, startRow, totalSize, totalpage, btnSize, startBtn, endBtn, result);
 			
 			
 			String jsonArray =  mapper.writeValueAsString(pagedto);
