@@ -85,8 +85,8 @@ function bIncrease( type ){
 		method : "get",
 		data : {"type" : type, "bno" : bno},
 		success : (r) => {
+			getBoard();
 			if(r == 'true'){
-				getBoard();
 			}else if(r == '-1'){
 				if(type != 1){
 					alert(kind + '는 이미 처리하였습니다. [24시간후에 다시 처리해주세요.]')	
