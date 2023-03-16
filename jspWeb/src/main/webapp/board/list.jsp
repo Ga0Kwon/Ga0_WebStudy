@@ -20,6 +20,9 @@
 		<table class ="boardTable table table-hover">
 			
 		</table>
+		<!-- 페이징 처리 버튼들 -->
+		<div class = "pageBox">
+		</div>
 	</div>
 	
 	<script src = "/jspWeb/js/board/list.js" type="text/javascript"></script>

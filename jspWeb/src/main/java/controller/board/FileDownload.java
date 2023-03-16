@@ -37,6 +37,8 @@ public class FileDownload extends HttpServlet {
 		//System.out.println("path : " + path);
 		
 		//3. 파일 클래스 [해당 경로의 파일을 파일 객체화]
+			// path.length() : 경로 문자열 길이
+			// file.length(): 해당 파일의 바이트 길이 [용량]
 		File file = new File(path); //해당 경로의 파일을 객체화
 		
 		//3-1. HTTP 다운로드 형식[프론트엔드] = 각 브라우저 [크롬(아래), 엣지(오른쪽 위)]제공
@@ -54,6 +56,7 @@ public class FileDownload extends HttpServlet {
 		BufferedInputStream fin = new BufferedInputStream(new FileInputStream(file));
 				//2> 파일입력스트림객체에서 꺼내올 바이트들을 저장할 바이트배열 준비[선언]
 				// 바이트 배열 길이 = 파일의 길이[바이트길이]
+				// 배열은 고정...[다 들어갈 수 있게 크게 만들든, 적당히 만들든 파일이 크면 배열에 담지 못하고, 배열이 너무 크면 메모리 효율적X]
 		byte[] bytes = new byte[(int)file.length()];
 		
 				//3> 파일입력스트림객체에서 read() : 해당 파일을 바이트로 읽어오는 함수
@@ -66,7 +69,7 @@ public class FileDownload extends HttpServlet {
 				// 파일출력스트림객체.write() : 해당 배열내 바이트를 출력하는 함수
 		fout.write(bytes);
 			
-			//3) 스트림 닫기 [JVM] => CG가 알아서 닫고 삭제 하겠지만 대용량이기 때문에 직접 닫는게 좋다.
+		//3) 스트림 닫기 [JVM] => CG가 알아서 닫고 삭제 하겠지만 대용량이기 때문에 직접 닫는게 좋다.
 		fin.close(); //파일입력스트림 객체 닫기[초기화]
 		fout.flush(); //파일출력스트림객체 스트림 메모리 초기화
 		fout.close(); // 파일출력스트림객체 닫기

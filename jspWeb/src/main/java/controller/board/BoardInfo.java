@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import model.dao.BoardDao;
 import model.dao.MemberDao;
 import model.dto.BoardDto;
+import model.dto.PageDto;
 
 
 @WebServlet("/board/info")
@@ -38,11 +39,39 @@ public class BoardInfo extends HttpServlet {
 		response.setContentType("application/json");
 		
 		if(type == 1) { //1. 전체 출력
-			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList();
 			
-			String jsonArray =  mapper.writeValueAsString(result);
+			//------------------ page 처리 ---------------
+			//1.현재 페이지[요청] , 2.페이지당 표시할 게시물 수  3.현재 페이지[게시물시작, 게시물 끝]
+			int page = Integer.parseInt(request.getParameter("page"));
+			int listSize = 3;
+			int startRow  = (page-1)*listSize;//해당페이지에서의 게시물 시작 번호
+			//------------------- page 버튼 만들기 -------------------
+			//1. 전체페이지수 [총 게시물레코드수/페이지당표시되는수] 2. 페이지 표시할 최대버튼수 3. 시작버튼 번호
+				//총레코드수/페이지당표시게시물수
+					//1) 나머지가 없으면 => 몫 9/3 => 3페이지
+					//2) 나머지가 있으면 => 몫+1 10/3 => 4페이지
+			int totalSize = BoardDao.getInstance().getTotalSize();//마지막 페이지 수
+			
+			int totalpage = (totalSize%listSize == 0)? (totalSize/listSize) : (totalSize/listSize +1);
+			/*
+			   [예시]
+			  	총 게시물 수 = 10 , 페이지당 표시할 게시물수 3
+			  	1. 총 페이지 수 = 4 [123, 456, 789, 10]
+			  		=> DB상 레코드 수로 따지면
+			  		[012, 345, 678, 9]이다. (0부터시작)
+			  	 => 나머지가 있으면 +1, 없으면 거기까지 [10/3]
+			  	2. 페이지별 게시물시작 PK 번호 찾기
+			  		1) 페이지 요청 (현재페이지-1)*페이지당표시할게시물수
+			 */
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startRow, listSize);
+			
+			PageDto pagedto = new PageDto(page, listSize, startRow, totalSize, totalpage, result);
+			
+			
+			String jsonArray =  mapper.writeValueAsString(pagedto);
 			
 			response.getWriter().print(jsonArray);
+			
 		}else if(type == 2) {
 			int bno = Integer.parseInt(request.getParameter("bno"));
 			BoardDto result = BoardDao.getInstance().getBoard(bno);

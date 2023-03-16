@@ -35,13 +35,36 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	
-	//2. 모든 글 출력
-	public ArrayList<BoardDto> getBoardList(){
-		String sql = "select board.*, member.mid from member natural join board";
+	//2-2. 게시물 수 구하기
+	public int getTotalSize() {
+		String sql = "select count(*) from member m natural join board b";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return 0;
+	}
+	
+	//2-1. 모든 글 출력
+	public ArrayList<BoardDto> getBoardList(int startRow,int listSize){
+		String sql = "select b.*, m.mid from member m natural join board b limit ?, ?;";
 		ArrayList<BoardDto> boardList = new ArrayList<>();
 		
 		try {
 			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, startRow);
+			ps.setInt(2, listSize);
+			
 			rs =ps.executeQuery();
 			
 			while(rs.next()) {
