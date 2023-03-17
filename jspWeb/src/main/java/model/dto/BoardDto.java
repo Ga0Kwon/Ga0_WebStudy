@@ -82,10 +82,21 @@ public class BoardDto {
 		this.mimg = mimg;
 	}
 	
+	//6. 업데이트용 생성자
+	public BoardDto(int bno, String btitle, String bcontent, String bfile, int cno) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfile = bfile;
+		this.cno = cno;
+	}
+	
 	//메소드
 	public int getBno() {
 		return bno;
 	}
+	
 	public void setBno(int bno) {
 		this.bno = bno;
 	}

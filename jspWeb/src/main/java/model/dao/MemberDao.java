@@ -53,7 +53,7 @@ public class MemberDao extends Dao {
 		}
 	
 	//2. 모든 회원 호출 [ 관리자 기준 인수 : X / 반환 : 모든 회원들의 dto]
-	public ArrayList<MemberDto> getMemberList(){
+	public ArrayList<MemberDto> getMemberListX(){
 		ArrayList<MemberDto> memberDB = new ArrayList<>(); //모든 회원들의 리스트 선언
 		
 		String sql = "select * from member"; //1. SQL명령어 작성
@@ -68,6 +68,7 @@ public class MemberDao extends Dao {
 				
 				memberDB.add(dto); //6. dto ---> 리스트 담기 
 			}
+			System.out.println(memberDB);
 			return memberDB; //7. 리스트 반환
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -335,4 +336,62 @@ public class MemberDao extends Dao {
 		return null;
 	}
 	
+	//13. 멤버 전체 몇 명인지 구하기
+	public int getTotalMemberCount(String key, String keyword) {
+		String sql = "";
+		
+		if(key.equals("") && keyword.equals("")) {
+			sql = "select count(*) from member m";
+		}else {
+			sql = "select count(*) from member m where "+key+" like '%" + keyword + "%'";
+		}
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return -1;
+	}
+	
+	//14. 멤버 정보 출력
+	public ArrayList<MemberDto> getMemberList(int startRow, int listSize, String key, String keyword){
+		String sql = "";
+		
+		ArrayList<MemberDto> memberList = new ArrayList<>();
+		
+		if(key.equals("") && keyword.equals("")) {
+			sql = "select m.mno, m.mimg, m.mid, m.memail from member m limit ?, ? ";
+		}else {
+			sql = "select m.mno, m.mimg, m.mid, m.memail from member m where "+key+" like '%"+keyword+"%' limit ?, ?";
+		}
+		
+		try {
+			ps = con.prepareStatement(sql);
+		
+			ps.setInt(1, startRow);
+			ps.setInt(2, listSize);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				MemberDto dto = new MemberDto(rs.getInt(1), rs.getString(3), rs.getString(2), rs.getString(4));
+				
+				System.out.println(dto);
+				memberList.add(dto);
+			}
+			
+			return memberList;
+			
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
 }

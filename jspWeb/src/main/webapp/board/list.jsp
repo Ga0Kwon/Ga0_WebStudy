@@ -57,7 +57,6 @@
 					<button onClick = "getSearch()">검색</button>
 				</div>
 			</div>
-		
 		</div>
 	</div>
 	

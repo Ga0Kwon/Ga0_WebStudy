@@ -38,6 +38,7 @@ function bWrite(){
 		success : (r) => {
 			if(r == 'true'){
 				alert('글쓰기 성공!')
+				location.href = "/jspWeb/board/list.jsp?cno="+document.querySelector('.cno').value;
 			}else{
 				alert('글쓰기 실패.')
 			}

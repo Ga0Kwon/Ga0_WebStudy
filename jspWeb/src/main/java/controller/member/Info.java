@@ -15,6 +15,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import model.dao.MemberDao;
 import model.dto.MemberDto;
+import model.dto.PageDto;
 
 
 @WebServlet("/member")
@@ -30,20 +31,52 @@ public class Info extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		//1. Dao에게 모든 회원 정보 요청 
-		ArrayList<MemberDto> memberList = MemberDao.getInstance().getMemberList();
+		/*
+		 * //1. Dao에게 모든 회원 정보 요청 ArrayList<MemberDto> memberList =
+		 * MemberDao.getInstance().getMemberList();
+		 * 
+		 * //String은 JS에서도 문자열이니까 형변환할 필요가 없다 [문자로 전달하니까] 하지만 객체는 다름!
+		 * 
+		 * //2. JAVA 객체 --> JS 객체 형변환 [ 서로 다른 언어 사용하니까 ] ObjectMapper objectmapper = new
+		 * ObjectMapper(); String jsonArray =
+		 * objectmapper.writeValueAsString(memberList);
+		 * 
+		 * //3. 응답 response.setCharacterEncoding("UTF-8"); //응답 데이터 한글 인코딩
+		 * //setContentType을 안쓰면 문자열 전송이된다. 만약 쓰게 되면 객체가 전송될 수 있다.
+		 * response.setContentType("application/json"); //응답(전송할) 데이터 타입
+		 * response.getWriter().print(jsonArray); //응답 데이터 보내기
+		 */	
+		ObjectMapper mapper = new ObjectMapper();
 		
-		//String은 JS에서도 문자열이니까 형변환할 필요가 없다 [문자로 전달하니까] 하지만 객체는 다름!
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
 		
-		//2. JAVA 객체 --> JS 객체 형변환 [ 서로 다른 언어 사용하니까 ]
-		ObjectMapper objectmapper = new ObjectMapper();
-		String jsonArray = objectmapper.writeValueAsString(memberList);
+		String key = request.getParameter("key");
+		String keyword = request.getParameter("keyword");
 		
-		//3. 응답
-		response.setCharacterEncoding("UTF-8"); //응답 데이터 한글 인코딩
-		//setContentType을 안쓰면 문자열 전송이된다. 만약 쓰게 되면 객체가 전송될 수 있다.
-		response.setContentType("application/json"); //응답(전송할) 데이터 타입
-		response.getWriter().print(jsonArray); //응답 데이터 보내기
+		//현재 페이지 [요청한 페이지]
+		int page = Integer.parseInt(request.getParameter("page"));
+		int listSize = Integer.parseInt(request.getParameter("listSize"));
+		int startRow = (page-1)*listSize+1; //해당 페이지의 게시물 시작번호[admin은 0번째 row에 존재하는데 admin은 출력안하려고 +1]
+		
+		/*---------------------- 페이지 버튼 만들기 ----------------------*/
+		int totalSize = MemberDao.getInstance().getTotalMemberCount(key, keyword);
+	
+		int totalPage = (totalSize%listSize == 0) ? (totalSize/listSize) : (totalSize/listSize)+1;
+		
+		int btnSize = 5; //버튼은 총 다섯개씩만 나오도록
+		int startBtn = ((page-1) / btnSize )*btnSize+1; 
+		int endBtn = startBtn+(btnSize-1); //페이지에 버튼 끝 번호
+		
+		if(endBtn > totalPage) {
+			endBtn = totalPage;
+		}
+		
+		ArrayList<MemberDto> memberList = MemberDao.getInstance().getMemberList(startRow, listSize, key, keyword);
+		PageDto amdinPageDto = new PageDto(memberList, page, listSize, startRow, totalSize, totalPage, btnSize, startBtn, endBtn);
+		String json = mapper.writeValueAsString(amdinPageDto);
+		
+		response.getWriter().print(json);
 	}
 
 	//1. 회원 가입

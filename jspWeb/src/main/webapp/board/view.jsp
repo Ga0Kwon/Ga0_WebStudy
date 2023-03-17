@@ -16,7 +16,6 @@
 		// => 주소에서 bno를 빼와야함
 		//1. JSP를 이용한 HTTP URL 변수 호출
 		String bno = request.getParameter("bno");
-		
 	%>
 	
 <%-- 	<%=bno%> <!-- JAVA코드를 HTML에서 출력하는 코드 --> --%>
@@ -45,6 +44,8 @@
 		<div>
 			<div>첨부파일</div>
 			<div class = "bfile"></div>
+		</div>
+		<div class = "btnBox">
 		</div>
 	</div>
 	

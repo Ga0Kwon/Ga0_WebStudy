@@ -19,6 +19,9 @@ public class MemberDto {
 	private String memail;
 	private int mpoint; //보유포인트 DB상[=member]에서는 없음
 	
+	
+	//추가 필드
+	
 	//1. 이메일 전송 메소드 [받는 사람 이메일, 받는 내용 HTML]
 	public boolean sendEmail(String toEmail, String contentHTML) {
 		//메일 인증 API
@@ -85,9 +88,20 @@ public class MemberDto {
 		this.memail = memail;
 	}
 
+	//출력용 생성자
+	public MemberDto(int mno, String mid, String mimg, String memail) {
+		super();
+		this.mno = mno;
+		this.mid = mid;
+		this.mimg = mimg;
+		this.memail = memail;
+	}
+	
 	public int getMno() {
 		return mno;
 	}
+
+	
 
 	public void setMno(int mno) {
 		this.mno = mno;

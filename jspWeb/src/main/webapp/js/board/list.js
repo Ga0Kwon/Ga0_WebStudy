@@ -5,13 +5,12 @@ let pageObject = {
 	key : "",
 	keyword : "",
 	type : 1, //1. 전체 출력 2. 개별 출력
-	cno : document.querySelector('.cno').value,
+	cno : document.querySelector('.cno').value, 
 	listSize : 3
 }
 
 // -- 카테고리 제목 넣어주기
 let cnameHTML = '';
-
 if(pageObject.cno == 1){
 	cnameHTML = '공지사항';
 }else if(pageObject.cno == 2){
@@ -24,12 +23,12 @@ if(pageObject.cno == 1){
 
 document.querySelector('.cname').innerHTML = cnameHTML +" 목록";
 
-printBoard(1); //처음 열릴때는 페이지 1 기본값
+printBoard(1); 
+
 //게시글 출력하기
 function printBoard(page){//해당함수로부터 페이징번호 받기
+	pageObject.page = page; //페이지 1
 
-	pageObject.page = page; //받아온 페이지 바꿔준다.
-	
 	$.ajax({
 		url : "/jspWeb/board/info",
 		method : "get",
@@ -37,6 +36,7 @@ function printBoard(page){//해당함수로부터 페이징번호 받기
 		success : (r) => {
 			//------------------------ 테이블 출력 ------------------------
 			if(r != null){
+
 				let html = `<tr>
 								<th>번호</th>
 								<th>제목</th>

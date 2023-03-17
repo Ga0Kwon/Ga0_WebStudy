@@ -29,6 +29,13 @@ function getBoard(){
 			}else{
 				alert('정보를 조회할 수 없습니다.')
 			}
+			
+			//로그인된 회원과 작성자가 일치하면 삭제함
+			if(memberInfo.mid == r.mid){
+				let html = `<button onClick ="bDelete(${r.bno}, ${r.cno})" type = "button">삭제</button>
+							<button onClick ="bUpdate(${r.bno})"  type = "button">수정</button>`;
+				document.querySelector('.btnBox').innerHTML = html;
+			}
 		}
 	})
 }
@@ -96,9 +103,31 @@ function bIncrease( type ){
 	})
 }
 
+//삭제
+function bDelete(bno, cno){
+	$.ajax({
+		url : "/jspWeb/board/info",
+		method : "delete",
+		data : {"bno" : bno, "type" : 1}, //다 삭제
+		success : (r) => {
+			if(r == 'true'){
+				alert('삭제 성공')
+				location.href = `/jspWeb/board/list.jsp?cno=${cno}&bno=${bno}`;
+			}else{
+				alert('삭제할 수 없습니다. 관리자에게 문의해주세요.')
+			}
+		}
+	})
+}
+
+//수정 [수정 페이지 이동]
+function bUpdate(bno){
+	location.href = `/jspWeb/board/update.jsp?bno=${bno}`;
+}
+
+
 //게시물 작성자의 정보를 확인하기[인수 mno]
 function friendInfo(mno){
-	console.log(mno);
 	
 	$.ajax({
 		url : "/jspWeb/member"

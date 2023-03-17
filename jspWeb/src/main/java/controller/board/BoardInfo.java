@@ -1,8 +1,10 @@
 package controller.board;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -125,18 +127,21 @@ public class BoardInfo extends HttpServlet {
 		//1. 업로드할 파일의 저장 위치 [경로]
 			// 클라이언트[유저] ----x----> git[내프로젝트]
 			//             ----o----> 서버[배포된프로젝트]
-		//2. 경로 찾기
-		String path = request.getSession().getServletContext().getRealPath("/board/bfile");
-		/* System.out.println("path : " + path); */
+//		//2. 경로 찾기
+//		String path = request.getSession().getServletContext().getRealPath("/board/bfile");
+//		/* System.out.println("path : " + path); */
+//		
+//		//3. 파일 복사 [입력받은(file) 대용량 바이트 복사하기]
+//		MultipartRequest multi = new MultipartRequest(
+//				request, 						//1. 요청 방식
+//				path, 							//2. 첨부파일 가져와서 저장할 서버내 폴더
+//				1024*1024*10,					//3. 10MB; 첨부파일 허용 범위 용량 [바이트 단위]
+//				"UTF-8", 						//4. 첨부파일 한글 인코딩
+//				new DefaultFileRenamePolicy()   //5. 동일한 첨부파일명이 있으면 식별깨짐 -> 뒤에 숫자를 붙여줌
+//		);
 		
-		//3. 파일 복사 [입력받은(file) 대용량 바이트 복사하기]
-		MultipartRequest multi = new MultipartRequest(
-				request, 						//1. 요청 방식
-				path, 							//2. 첨부파일 가져와서 저장할 서버내 폴더
-				1024*1024*10,					//3. 10MB; 첨부파일 허용 범위 용량 [바이트 단위]
-				"UTF-8", 						//4. 첨부파일 한글 인코딩
-				new DefaultFileRenamePolicy()   //5. 동일한 첨부파일명이 있으면 식별깨짐 -> 뒤에 숫자를 붙여줌
-		);
+		MultipartRequest multi = upload(request);
+		
 		/* System.out.println("multi : " + multi); */
 		//----------------------확인----------------------
 			//requeest.getParameter("객체면 필드명");
@@ -175,14 +180,101 @@ public class BoardInfo extends HttpServlet {
 		
 		
 	}
-
 	
+	//업로드 함수화 처리
+	protected MultipartRequest upload(HttpServletRequest request) throws IOException {
+		String path = request.getSession().getServletContext().getRealPath("/board/bfile");
+		
+		//업로드만 담당
+		MultipartRequest multi = new MultipartRequest(
+				request, 
+				path,
+				1024*1024*10,
+				"UTF-8",
+				new DefaultFileRenamePolicy());
+		
+		return multi;
+	}
+	
+	//수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		MultipartRequest multi = upload(request);
+		
+		int bno = Integer.parseInt( multi.getParameter("bno"));
+		int cno = Integer.parseInt(multi.getParameter("cno"));
+		String btitle = multi.getParameter("btitle");
+		String bcontent = multi.getParameter("bcontent");
+		String bfile = multi.getFilesystemName("bfile");
+		
+		// 첨부파일 수정 경우의 수 
+			//1. 기존에 첨부파일이 없었다. -> 새로운 첨부파일이 있다. [X]
+			//					  -> 새로운 첨부파일이 있다. [업로드]
+		    //2. 기존에 첨부파일이 있었다. -> 새로운 첨부파일이 없다. [기존파일로 업데이트처리]
+			//					  -> 새로운 첨부파일이 있다. [업로드, 기존파일 삭제]
+		
+		if(bfile == null) {//새로운 첨부파일 없다.
+			//기존 파일에 원래 있던 첨부파일 그대로
+			bfile = BoardDao.getInstance().getBoard(bno).getBfile();
+		
+		}else { //새로운 첨부파일 있다.
+			//수정전에 첨부파일 삭제
+			//삭제 전 첨부파일명 구하기
+			String oldfile = BoardDao.getInstance().getBoard(bno).getBfile();
+			
+			fileDelete(request, bno, oldfile);
+		}
+		
+		BoardDto dto = new BoardDto(bno, btitle, bcontent, bfile, cno);
+		
+		boolean result = BoardDao.getInstance().bUpdate(dto);
+		
+		response.getWriter().print(result);
+	}
+	
+	//첨부파일 삭제 메서드
+	protected void fileDelete(HttpServletRequest request, int bno, String oldfile) {
+		//삭제 or 수정 : 첨부파일 있을시 같이 삭제해야한다.
+			//1. 경로를 찾아서
+			//2. 파일 객체화 [?? 다양한 파일 관련 메소드 제공 .length(), delete()]
+		String path = request.getSession().getServletContext().getRealPath("/board/bfile/" +oldfile);
+		File file = new File(path); //객체화
+		
+		if(file.exists()) { //만약에 파일이 존재하면
+			
+			file.delete(); //삭제
+			
+		}
 		
 	}
 
-	
+	//삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		int type = Integer.parseInt(request.getParameter("type"));
+		
+		//삭제 전 첨부파일명 구하기
+		String oldfile = BoardDao.getInstance().getBoard(bno).getBfile();
+		boolean result = true;
+		
+		if(type == 1) { //DB+파일 삭제
+				result = BoardDao.getInstance().bDelete(bno);
+		
+			
+			if(result == true) {
+				fileDelete(request, bno, oldfile);
+			}
+			
+			response.getWriter().print(result);
+			
+		}else if(type == 2) { //파일 삭제
+			result = BoardDao.getInstance().bfileDelte(bno);
+			fileDelete(request, bno, oldfile);
+		}
+		
+	
 		
 	}
 
