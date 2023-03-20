@@ -19,8 +19,8 @@ function getBoard(){
 		method : "get",
 		data : {"type" : 2, "bno" : bno}, //1. 전체 출력 2. 개별 출력
 		success : (r) => {
-			console.log(r)
-			if(r != null){
+			
+			if(r.mid != null){
 				
 				document.querySelector('.mimg').src = `/jspWeb/member/pimg/${r.mimg == null ? 'basic.jsp' : r.mimg}`
 				document.querySelector('.mid').innerHTML = r.mid;
