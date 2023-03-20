@@ -183,3 +183,52 @@ select * from ex4, ex5; -- 5(ex4레코드수)*5(ex5레코드수) =  25 레코드
 select * from ex4, ex5 where ex4.mno = ex5.mno; -- 3레코드 [교집합의 두 레코드의 일치값 (pk -fk)]
 
 select * from ex4 natural join ex5; -- 자연조인[교집합] => 암묵적으로 동일한 레코드이 일치값]
+
+select board.*, member.mid, member.mimg from member natural join board where bno = 2;
+use jspWeb;
+select * from member;
+select * from board;
+select m.mno, m.mid, m.mimg, m.memailz from member m  natural join mpoint p where mno = 2;
+
+-- 2. 특정 개수만 출력 [페이징 조건] limit 시작인덱스[0부터시작], 표시할 게시물 수 
+select b.*, m.mid from member m natural join board b order by bno limit 0,2; -- mysql 인덱스는 0부터 시작하고 pk값은 1부터 시작.
+
+select m.mno, m.mimg, m.mid, m.memail from member m order by m.mno limit 0, 3;
+
+select count(*) from member m where m.mid like '%asd%';
+-- 3. 레코드 수 구하기 count(*)
+select count(*) from member m natural join board b;
+select count(*) from board;
+select m.mno, m.mimg, m.mid, m.memail from member m limit 0, 3;
+select count(*) from member m natural join board b where cno = 4;
+-- 4.
+select b.*, m.mid from member m natural join board b where b.btitle like "%a%" and b.cno = 1 order by bwritedate desc limit 0,2;
+
+update board set bview = bview +1 where bno = 1;
+delete from board where bno = 20;
+
+drop table if exists replay;
+
+-- 댓글 테이블 [댓글번호, 내용, 작성일, 인덱스(계층구분), 작성자(mno), 게시물번호(bno)]
+create table replay(
+	rno int auto_increment primary key,
+    rcontent longtext,
+    rdate	datetime default now(),
+    rindex int default 0, -- 0이면 1계층, 어떤 숫자가 들어있으면 그 숫자의 해당 댓글의 하위 댓글
+    mno	int,
+    bno int,
+    foreign key (mno) references member(mno) on delete set null,
+    foreign key (bno) references board(bno) on delete cascade
+);
+
+select * from replay;
+
+/*
+	[예시]
+	3번 게시물
+		1번 댓글  [rindex =0]
+			3번 댓글 [rindex =1]
+            4번 댓글 [rindex =1]
+        2번 댓글 [rindex =0]
+		5번 댓글 [rindex =0]
+*/

@@ -1,7 +1,6 @@
 /*alert('header.js 열림')*/
 
 let memberInfo = null; //JS끼리 통신하기 위해서
-
 //로그인한 회원 정보 호출
 getLogin();
 

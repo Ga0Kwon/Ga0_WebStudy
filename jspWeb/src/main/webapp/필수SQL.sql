@@ -73,4 +73,30 @@ insert into category(cname) value('커뮤니티');
 insert into category(cname) value('QnA');
 insert into category(cname) value('노하우');
 
+drop table if exists replay;
+
+-- 댓글 테이블 [댓글번호, 내용, 작성일, 인덱스(계층구분), 작성자(mno), 게시물번호(bno)]
+create table replay(
+	rno int auto_increment primary key,
+    rcontent longtext,
+    rdate	datetime default now(),
+    rindex int default 0, -- 0이면 1계층, 어떤 숫자가 들어있으면 그 숫자의 해당 댓글의 하위 댓글
+    mno	int,
+    bno int,
+    foreign key (mno) references member(mno) on delete set null,
+    foreign key (bno) references board(bno) on delete cascade
+);
+
+select * from replay;
+
+/*
+	[예시]
+	3번 게시물
+		1번 댓글  [rindex =0]
+			3번 댓글 [rindex =1]
+            4번 댓글 [rindex =1]
+        2번 댓글 [rindex =0]
+		5번 댓글 [rindex =0]
+*/
+
 

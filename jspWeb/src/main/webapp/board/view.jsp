@@ -47,6 +47,15 @@
 		</div>
 		<div class = "btnBox">
 		</div>
+		<br/>
+		<div>
+			<textarea class = "rcontent" rows="" cols=""></textarea>
+			<button onClick = "rWrite()" type = "button">댓글 작성</button>
+		</div>
+		<br/>
+		<div class = "replayListBox">
+			
+		</div>
 	</div>
 	
 	<script src = "/jspWeb/js/board/view.js"></script>

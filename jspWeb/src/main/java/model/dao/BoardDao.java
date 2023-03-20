@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.dto.BoardDto;
 import model.dto.MemberDto;
+import model.dto.ReplayDto;
 
 public class BoardDao extends Dao{
 	//싱글톤
@@ -226,5 +227,66 @@ public class BoardDao extends Dao{
 			System.err.println(e.getMessage());
 		}
 		return false;
+	}
+	
+	//댓글 달기
+	public boolean rwrite(ReplayDto dto) {
+		String sql = null;
+		
+		if(dto.getRindex() ==  0) { //상위 댓글
+			 sql = "insert into replay(rcontent, mno, bno) values (?, ?, ?)";
+		}else { // 하위 댓글
+			sql = "insert into replay(rcontent, mno, bno, rindex) values (?, ?, ?, ?)";
+		}
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, dto.getRcontent());
+			ps.setInt(2, dto.getMno());
+			ps.setInt(3, dto.getBno());
+			
+			if(dto.getRindex() != 0) {
+				ps.setInt(4, dto.getRindex());
+			}
+			int count = ps.executeUpdate();
+			
+			if(count == 1) {
+				return true;
+			}
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	public ArrayList<ReplayDto> getReplayList(int bno){
+		String sql = "select r.*, m.mid, m.mimg from replay r natural join member m where bno = " + bno;
+		ArrayList<ReplayDto> replayList = new ArrayList<>();
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ReplayDto dto = new ReplayDto(
+						rs.getInt(1),
+						rs.getString(2), 
+						rs.getString(3), 
+						rs.getInt(4), 
+						rs.getInt(5), 
+						rs.getInt(6), 
+						rs.getString(7), 
+						rs.getString(8));
+				
+				replayList.add(dto);
+			}
+			
+			return replayList;
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
 	}
 }

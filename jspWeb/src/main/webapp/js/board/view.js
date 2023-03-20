@@ -2,10 +2,10 @@
 
 getBoard()
 
+//해당 게시물 호출
 function getBoard(){
 	//bno가져오기
 	let bno = document.querySelector('.bno').innerHTML;
-	
 	$.ajax({
 		url : "/jspWeb/board/info",
 		method : "get",
@@ -36,6 +36,7 @@ function getBoard(){
 							<button onClick ="bUpdate(${r.bno})"  type = "button">수정</button>`;
 				document.querySelector('.btnBox').innerHTML = html;
 			}
+			getReplayList(); //다 출력하면 댓글 출력
 		}
 	})
 }
@@ -135,3 +136,85 @@ function friendInfo(mno){
 	
 }
 
+//댓글 달기 [상위 댓글]
+function rWrite(){
+	let rcontent = document.querySelector('.rcontent').value;
+	//bno가져오기
+	let bno = document.querySelector('.bno').innerHTML;
+	
+	$.ajax({
+		url : "/jspWeb/board/replay",
+		method : "post",
+		/*type = 1 상위 댓글 */
+		data : {"type": 1, "bno" : bno, "rcontent" : rcontent},
+		success : (r) => {
+			console.log(r);
+			if(r = 'true'){
+				alert('댓글이 작성되었습니다.')
+				/*부분적 렌더링*/
+				$(".replayListBox").load(location.href+' .replayListBox');
+				/*loaction.reload();*/ // 현재 페이지 새로 고침
+			}else{	
+				alert('댓글 작성에 실패 하였습니다. 관리자에게 문의해주세요.')
+			}
+		}
+	})
+}
+
+//댓글 출력
+function getReplayList(){
+	//bno가져오기
+	let bno = document.querySelector('.bno').innerHTML;
+	
+	$.ajax({
+		url : "/jspWeb/board/replay",
+		method : "get",
+		data : {"bno" : bno},
+		success : (r) => {
+			console.log(r);
+			let html = ``;
+			
+			if(r != null){
+				r.forEach((o) => {
+					html += `
+							<div>
+								<span>${o.mimg}</span>
+								<span>${o.mid}</span>
+								<span>${o.rdate}</span>
+								<span>${o.rcontent}</span>
+								<button onClick = "rereplayview(${o.rno})"type = "button">댓글달기</button>
+								<div class = "rereplyBox${o.rno}"></div>
+							</div>
+							`
+				})
+			}
+			
+			document.querySelector('.replayListBox').innerHTML = html;
+		}
+	})
+}
+
+function rereplayview(rno){
+	let html = `
+				<textarea class = "rerecontent${rno}" rows="" cols=""></textarea>
+				<button type = "button" onClick ="rrWrite(${rno})">대댓글 달기</button>
+				`
+	document.querySelector('.rereplyBox'+rno).innerHTML = html;
+}
+
+//하위 댓글
+function rrWrite(rno){
+	//bno가져오기
+	let bno = document.querySelector('.bno').innerHTML;
+	let rerecontent = document.querySelector(`.rerecontent${rno}`).value;
+	
+	$.ajax({
+		url : "/jspWeb/board/replay",
+		method : "post",
+		/* type = 2 대댓글 */
+		data : {"type" : 2, "bno" : bno, "rindex" : rno, "rcontent" : rerecontent},
+		success : (r) => {
+			
+		}
+	})
+}
