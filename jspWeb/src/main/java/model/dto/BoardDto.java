@@ -1,5 +1,8 @@
 package model.dto;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BoardDto {
 	private int bno; //게시물 번호
     private String btitle; // 게시물 제목
@@ -16,6 +19,7 @@ public class BoardDto {
     private String mid; //출력용
     //추가 필드 --> 작성자 프로필 사진
     private String mimg;
+    private int rcount; //댓글 개수
     
     //1. 생성자 [빈생성자] : 사용할 용도가 적음
 	public BoardDto() {
@@ -55,7 +59,19 @@ public class BoardDto {
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bfile = bfile;
-		this.bwritedate = bwritedate;
+		// 오늘 날짜와 작성일이 동일하면 시간 표기 / 아니면 날짜 표기
+			//1. 오늘 날짜 [Date 클래스 : java.util]
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String now = format.format(date);
+		
+		if(now.split(" ")[0].equals(bwritedate.split((" "))[0])){
+			//2. 만약에 오늘 날짜와 작성일과 동일하면 시간 출력 아니면 날짜출력
+			this.bwritedate = bwritedate.split(" ")[1]; //시간 출력
+		}else {
+			this.bwritedate = bwritedate.split(" ")[0]; //시간 출력
+		}
+		
 		this.bview = bview;
 		this.blike = blike;
 		this.bhate = bhate;
@@ -161,6 +177,18 @@ public class BoardDto {
 		this.mid = mid;
 	}
 	
+	public String getMimg() {
+		return mimg;
+	}
+	public void setMimg(String mimg) {
+		this.mimg = mimg;
+	}
+	public int getRcount() {
+		return rcount;
+	}
+	public void setRcount(int rcount) {
+		this.rcount = rcount;
+	}
 	@Override
 	public String toString() {
 		return "BoardDto [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bfile=" + bfile

@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.dto.BoardDto;
@@ -67,10 +68,10 @@ public class BoardDao extends Dao{
 		ArrayList<BoardDto> boardList = new ArrayList<>();
 		
 		if(key.equals("") && keyword.equals("")) {
-			 sql = "select b.*, m.mid from member m natural join board b where b.cno = " +cno
+			 sql = "select b.*, m.mid, m.mimg from member m natural join board b where b.cno = " +cno
 					 	+" order by bwritedate desc limit ?,?";
 		}else {
-			 sql = "select b.*, m.mid from member m natural join board b where "+key+" like \"%"+keyword+"%\" and b.cno = "+ cno 
+			 sql = "select b.*, m.mid, m.mimg from member m natural join board b where "+key+" like \"%"+keyword+"%\" and b.cno = "+ cno 
 					 	+" order by bwritedate desc limit ?,?";
 		}
 		
@@ -97,8 +98,27 @@ public class BoardDao extends Dao{
 						rs.getInt(10),
 						rs.getString(11));
 				
+				//!!.추가된 프로필 이미지 대입
+				dto.setMimg(rs.getString(12));
+				
+				//!! : 현재 게시물[레코드]의 댓글 수
+				sql = "select count(*) from replay where bno = " + rs.getInt(1);
+				
+				//모든 게시물을 찾은 rs가 아직 안끝났다.[이 시점에 ps의 역할은 끝이 났다.] => rs는 아직 안 끝났다.
+				// rs가 안끝난 상태에서 다른 거 넣어주면 안됨 
+				ps = con.prepareStatement(sql); 
+				
+				//rs를 새로 만들면 해결된다.
+				ResultSet rs2 = ps.executeQuery();
+				
+				if(rs2.next()) {
+					dto.setRcount(rs2.getInt(1));
+				}
+				
 				boardList.add(dto);
+				
 			}
+			
 			
 			return boardList;
 			
@@ -130,7 +150,24 @@ public class BoardDao extends Dao{
 						rs.getInt(9), 
 						rs.getInt(10), 
 						rs.getString(11), 
-						rs.getString(11));
+						rs.getString(12));
+				//!!.추가된 프로필 이미지 대입
+				dto.setMimg(rs.getString(12));
+				
+				//!! : 현재 게시물[레코드]의 댓글 수
+				sql = "select count(*) from replay where bno = " + rs.getInt(1);
+				
+				//모든 게시물을 찾은 rs가 아직 안끝났다.[이 시점에 ps의 역할은 끝이 났다.] => rs는 아직 안 끝났다.
+				// rs가 안끝난 상태에서 다른 거 넣어주면 안됨 
+				ps = con.prepareStatement(sql); 
+				
+				//rs를 새로 만들면 해결된다.
+				ResultSet rs2 = ps.executeQuery();
+				
+				if(rs2.next()) {
+					dto.setRcount(rs2.getInt(1));
+				}
+				
 				return dto;
 			}
 		}catch (Exception e) {
@@ -260,12 +297,15 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	
-	public ArrayList<ReplayDto> getReplayList(int bno){
-		String sql = "select r.*, m.mid, m.mimg from replay r natural join member m where bno = " + bno;
-		ArrayList<ReplayDto> replayList = new ArrayList<>();
-		
+	
+	//상위&하위 댓글 출력
+	public ArrayList<ReplayDto> getRerePlyList(int bno, int rno){
+		String sql = "select r.*, m.mid, m.mimg from replay r natural join member m where r.rindex = ? and bno = ?";
+		ArrayList<ReplayDto> rereplyList = new ArrayList<>();
 		try {
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, rno);
+			ps.setInt(2, bno);
 			
 			rs = ps.executeQuery();
 			
@@ -280,10 +320,10 @@ public class BoardDao extends Dao{
 						rs.getString(7), 
 						rs.getString(8));
 				
-				replayList.add(dto);
+				rereplyList.add(dto);
 			}
 			
-			return replayList;
+			return rereplyList;
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}

@@ -1,17 +1,76 @@
 @charset "UTF-8";
 
-.goWrite{ /*글쓰기 a 전체 구역*/
-	width: 100%;
-	display: flex;
-	justify-content:flex-end;
-	align-items: flex-end;
-	margin-bottom: 10px;
+.boardbox{ /*게시물 출력 구역*/
+	width : 80%;
+	margin : 70px auto;
 }
 
-.goWrite a{/*글쓰기 a 요소*/
-	margin-right: 15px;
-	font-family: 'KyoboHandwriting2021sjy';
-	font-size: 20px;
-	font-weight: 250;
-	color : #ebb307;
+.boardtoptitle{
+	text-align: center;
+}
+
+.boardtoptitle h3{
+	font-family: "ImcreSoojin";
+	font-size:42px;
+}
+
+.boardtoptitle p {
+	font-family: "KyoboHandwriting2021sjy";
+	font-size: 21px;
+}
+
+.boardtopetc{
+	display: flex;
+	justify-content: space-between;
+}
+
+.fa-feather-alt{
+	color : #fbf0bd;
+}
+
+.boardcontent{
+	margin: 25px 0px;
+	border-top : 2px solid #ede4da;
+	padding : 15px 10px;
+}
+
+.bwritedate{
+	font-size: 10px;
+}
+
+.btitle{
+	margin: 30px 0px;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.contentbtn{
+	text-align: right;
+}
+
+.contentbtn span{
+	padding-left: 8px;
+}
+
+.fa-eye, .fa-thumbs-up, .fa-thumbs-down, .querySelector, .querySelector{
+	color : #3c5632;
+}
+
+.pageBox{
+	border-radius: 10px;
+}
+
+.pagebtn{
+	background-color: transparent;
+	color : #5fba54;
+	border: solid 1px #5fba54;
+	padding: 7px;
+	margin: 7px 3px;
+}
+
+.keyword{
+	border : 1px solid #e8e8e8;
+	padding: 6px 10px;
+	border-radius: 10px;
+	margin: 0px 7px;
 }

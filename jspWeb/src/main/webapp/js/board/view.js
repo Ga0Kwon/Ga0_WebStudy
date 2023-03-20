@@ -1,28 +1,44 @@
 /*alert('view js 실행')*/
 
+//bno가져오기
+let bno = document.querySelector('.bno').value;
+
+/*로그인 안했다면 댓글 달기 X */
+if(memberInfo.mid == null){
+	document.querySelector('.rcontent').disabled = true;
+	document.querySelector('.replyBtn').disabled = true;
+	document.querySelector('.rcontent').innerHTML = '로그인 후에 댓글 작성 가능합니다.'
+}
+
 getBoard()
 
 //해당 게시물 호출
 function getBoard(){
-	//bno가져오기
-	let bno = document.querySelector('.bno').innerHTML;
 	$.ajax({
 		url : "/jspWeb/board/info",
 		method : "get",
 		data : {"type" : 2, "bno" : bno}, //1. 전체 출력 2. 개별 출력
 		success : (r) => {
+			console.log(r)
 			if(r != null){
-				document.querySelector('.infoBox').innerHTML = `
-				${r.bwritedate} | ${r.bview} | <button onClick = "bIncrease(2)"type = "button">${r.blike}</button> | <button onClick = "bIncrease(3)" type = "button">${r.bhate}</button>`;
 				
-				document.querySelector('.btitle').innerHTML = `${r.btitle}`;
-				document.querySelector('.pimgBox').innerHTML = `<img onClick = "friendInfo(${r.mno})" style="width: 20%;" src = "/jspWeb/member/pimg/${r.mimg == null ? 'basic.jpg' : r.mimg }" </img>`;
-				document.querySelector('.bcontent').innerHTML = `${r.bcontent}`;
+				document.querySelector('.mimg').src = `/jspWeb/member/pimg/${r.mimg == null ? 'basic.jsp' : r.mimg}`
+				document.querySelector('.mid').innerHTML = r.mid;
+				document.querySelector('.bwritedate').innerHTML = r.bwritedate;
+				document.querySelector('.bview').innerHTML = r.bview;
+				document.querySelector('.blike').innerHTML = r.blike;
+				document.querySelector('.bhate').innerHTML = r.bhate;
+				
+				document.querySelector('.btitle').innerHTML = r.btitle;
+				document.querySelector('.bcontent').innerHTML = r.bcontent;
 			
+				
+				document.querySelector('.replycount').innerHTML = r.rcount+"개의 댓글";
+				
 				if(r.bfile == null){ //첨부파일 없으면
 					document.querySelector('.bfile').innerHTML = '첨부파일 없음';
 				}else{//첨부파일 있을 때
-					html = `${r.bfile} <button onClick = "bfileDownload('${r.bfile}')" type = "button">다운로드</button>`
+					html = `<button class ="bfilebtn" onClick = "bfileDownload('${r.bfile}')" type = "button"><i class="fas fa-download"></i> ${r.bfile}</button>`
 					document.querySelector('.bfile').innerHTML = html;
 				}
 				
@@ -32,8 +48,8 @@ function getBoard(){
 			
 			//로그인된 회원과 작성자가 일치하면 삭제함
 			if(memberInfo.mid == r.mid){
-				let html = `<button onClick ="bDelete(${r.bno}, ${r.cno})" type = "button">삭제</button>
-							<button onClick ="bUpdate(${r.bno})"  type = "button">수정</button>`;
+				let html = `<button class = "bbtn bupdatebtn" onClick ="bDelete(${r.bno}, ${r.cno})" type = "button">삭제</button>
+							<button class = "bbtn bdeletebtn" onClick ="bUpdate(${r.bno})"  type = "button">수정</button>`;
 				document.querySelector('.btnBox').innerHTML = html;
 			}
 			getReplayList(); //다 출력하면 댓글 출력
@@ -77,6 +93,7 @@ function bfileDownload(bfile){
  bIncrease( 1 ); //해당 스크립트가 열리는 순간 조회수는 증가 
 // 3. 조회수 좋아요수 싫어요수
 function bIncrease( type ){
+
 	let kind = '';
 	//type 구분
 	if(type == 2){
@@ -85,7 +102,7 @@ function bIncrease( type ){
 		kind = '싫어요';
 	}
 	//1. 현재 게시물의 번호 [증가할 대상]
-	let bno = document.querySelector('.bno').innerHTML;
+	let bno = document.querySelector('.bno').value;
 	//2. 
 	
 	$.ajax({
@@ -139,8 +156,7 @@ function friendInfo(mno){
 //댓글 달기 [상위 댓글]
 function rWrite(){
 	let rcontent = document.querySelector('.rcontent').value;
-	//bno가져오기
-	let bno = document.querySelector('.bno').innerHTML;
+	
 	
 	$.ajax({
 		url : "/jspWeb/board/replay",
@@ -163,29 +179,27 @@ function rWrite(){
 
 //댓글 출력
 function getReplayList(){
-	//bno가져오기
-	let bno = document.querySelector('.bno').innerHTML;
 	
 	$.ajax({
 		url : "/jspWeb/board/replay",
 		method : "get",
-		data : {"bno" : bno},
+		data : {"type" : 1, "bno" : bno},
 		success : (r) => {
-			console.log(r);
+
 			let html = ``;
 			
 			if(r != null){
 				r.forEach((o) => {
 					html += `
-							<div>
-								<span>${o.mimg}</span>
-								<span>${o.mid}</span>
-								<span>${o.rdate}</span>
-								<span>${o.rcontent}</span>
-								<button onClick = "rereplayview(${o.rno})"type = "button">댓글달기</button>
-								<div class = "rereplyBox${o.rno}"></div>
-							</div>
-							`
+						<div>
+							<span>${o.mimg}</span>
+							<span>${o.mid}</span>
+							<span>${o.rdate}</span>
+							<span>${o.rcontent}</span>
+							<button onClick = "rereplayview(${o.rno})"type = "button">대댓글보기</button>
+							<div class = "rereplyBox${o.rno}"></div>
+						</div>`
+					
 				})
 			}
 			
@@ -194,18 +208,41 @@ function getReplayList(){
 	})
 }
 
+//대댓글 다는 창 출력하기
 function rereplayview(rno){
-	let html = `
-				<textarea class = "rerecontent${rno}" rows="" cols=""></textarea>
-				<button type = "button" onClick ="rrWrite(${rno})">대댓글 달기</button>
-				`
-	document.querySelector('.rereplyBox'+rno).innerHTML = html;
+	let html = ``;
+	$.ajax({
+		url : "/jspWeb/board/replay",
+		method : "get",
+		data : {"type" : 2, "rno" : rno, "bno" : bno},
+		success : (r) =>{
+			console.log(r)
+			if(r != null){
+				r.forEach((o) => {
+					html += `<div>
+								<span>대댓글 : ${o.mimg}</span>
+								<span>${o.mid}</span>
+								<span>${o.rdate}</span>
+								<span>${o.rcontent}</span>
+							</div>`	
+							
+			
+				
+				})	
+			
+			}
+			
+			html += `
+					<textarea class = "rerecontent${rno}" rows="" cols=""></textarea>
+					<button type = "button" onClick ="rrWrite(${rno})">대댓글 달기</button>
+					`
+			document.querySelector('.rereplyBox'+rno).innerHTML = html;
+		}	
+	})
 }
 
 //하위 댓글
 function rrWrite(rno){
-	//bno가져오기
-	let bno = document.querySelector('.bno').innerHTML;
 	let rerecontent = document.querySelector(`.rerecontent${rno}`).value;
 	
 	$.ajax({
@@ -214,7 +251,11 @@ function rrWrite(rno){
 		/* type = 2 대댓글 */
 		data : {"type" : 2, "bno" : bno, "rindex" : rno, "rcontent" : rerecontent},
 		success : (r) => {
-			
+			if(r == 'true'){
+				alert('대댓글이 작성되었습니다.')
+			}else{
+				alert('대댓글 작성 실패하였습니다. 관리자에게 문의해주세요.')
+			}
 		}
 	})
 }

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.jni.Sockaddr;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -103,8 +105,7 @@ public class BoardInfo extends HttpServlet {
 			/*ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startRow, listSize);*/
 			
 			PageDto pagedto = new PageDto(page, listSize, startRow, totalSize, totalpage, btnSize, startBtn, endBtn, result);
-			
-			
+
 			String jsonArray =  mapper.writeValueAsString(pagedto);
 			
 			response.getWriter().print(jsonArray);
@@ -112,7 +113,7 @@ public class BoardInfo extends HttpServlet {
 		}else if(type == 2) {
 			int bno = Integer.parseInt(request.getParameter("bno"));
 			BoardDto result = BoardDao.getInstance().getBoard(bno);
-
+			
 			String jsonArray =  mapper.writeValueAsString(result);
 			
 			response.getWriter().print(jsonArray);

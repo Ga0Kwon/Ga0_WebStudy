@@ -26,9 +26,22 @@ public class Replay extends HttpServlet {
 
 	//댓글 출력
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int type = Integer.parseInt(request.getParameter("type"));
+		
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		ArrayList<ReplayDto> result = BoardDao.getInstance().getReplayList(bno);
+		ArrayList<ReplayDto> result = new ArrayList<>();
+		
+		int rindex = 0; //상위
+		
+		if(type == 1) { //상위 댓글 출력
+			
+		}else if(type == 2) { //하위 댓글 출력
+			rindex = Integer.parseInt(request.getParameter("rno"));
+			
+		}
+		
+		result = BoardDao.getInstance().getRerePlyList(bno,rindex);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonArray = mapper.writeValueAsString(result);

@@ -23,30 +23,46 @@
 	<!-- type = "hidden"을 쓰면 칸도 안쓰고 레이아웃도 안먹음! 안보임 -->
 	<input type = "hidden" type = "text" class = "cno" value="<%=cno%>">
 	
+	<!-- html/css -->
 	<div class = "container">
-		<h3 class = "cname"></h3>
-		<div class ="goWrite"><a href = "write.jsp">글쓰기</a></div>
+		<div class = "boardbox">
+			<div class = "boardtoptitle">	
+				<h3 class = "cname"></h3>
+				<p>다양한 사람들과 정보를 공유 해보세요</p>
+			</div>
 		
-		<button onClick = "setSearch()" type = "button">전체보기[검색제거]</button>
+		<div class = "boardtopetc">
+			<a href = "write.jsp">
+				<button class = "bbtn" type = "button"><i class="fas fa-feather-alt"></i> 글쓰기</button>
+			</a>
+			<div>
+				<span class = "searchCount">게시물 수 : </span>
+				<button onClick = "setSearch()" class = "bbtn" type = "button">전체보기</button>
+				<select onChange = "setListSize()" class ="bbtn listSize" onChange = "setListSize()" class = "listSize">
+					<option>3</option>
+					<option>5</option>
+					<option>10</option>
+				</select>
 		
-		<div class = "searchCount"></div>
-		
-		<select onChange = "setListSize()" class = "listSize">
-			<option>3</option>
-			<option>5</option>
-			<option>10</option>
-		</select>
-		
-		<table class ="boardTable table table-hover">
-			
-		</table>
+			</div>
+		</div>
+		<div>
+			<div class = "boardTable">
+				 <!-- 게시물 출력 -->
+			</div>
+		</div>
+		</div>
+	</div>
+	
+	
+	<div class = "container">
 		<div class = "container" style = "text-align : center;">
 			<!-- 페이징 처리 버튼들 -->
 			<div class = "pageBox">
 			</div>
 			
 			<div class = "searchBox" style = "display : flex; justify-content: center">
-				<select class ="key"> <!-- select 시 사용되는 조건의 필드명 -->
+				<select class ="bbtn key"> <!-- select 시 사용되는 조건의 필드명 -->
 					<option value = "b.btitle">제목</option>
 					<option value = "b.bcontent">내용</option>
 					<option value = "m.mid">작성자</option>
@@ -54,12 +70,13 @@
 				<div>
 					 <!-- select 시 사용되는 조건의 데이터 -->
 					<input class = "keyword" type = "text" placeholder="검색">
-					<button onClick = "getSearch()">검색</button>
+					<button class = "bbtn" onClick = "getSearch()">검색</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	<script src = "/jspWeb/js/board/list.js" type="text/javascript"></script>
+	
 </body>
 </html>

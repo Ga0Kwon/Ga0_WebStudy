@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link href = "/jspWeb/css/view.css" rel = "stylesheet">
 </head>
 <body>
 	<!-- jsp 태그; JSP 페이지 포함 --> 
@@ -17,44 +19,33 @@
 		//1. JSP를 이용한 HTTP URL 변수 호출
 		String bno = request.getParameter("bno");
 	%>
-	
-<%-- 	<%=bno%> <!-- JAVA코드를 HTML에서 출력하는 코드 --> --%>
+	<input type = "hidden" type = "text" class = "bno" value="<%=bno%>">
 	<div class = "container">
-		<h3>게시물 조회/보기</h3>
-		<div>
-			<div>게시물 번호</div>
-			<div class = "bno"><%=bno%></div>
-		</div>
-		<div>
-			<div>작성일| 조회수 | 좋아요 | 싫어요 </div>
-			<div class = "infoBox"></div>
-		</div>
-		<div>
-			<div>제목</div>
-			<div class = "btitle"></div>
-		</div>
-		<div>
-			<div>작성자[프로필]</div>
-			<div class = "pimgBox"></div>
-		</div>
-		<div>
-			<div>내용</div>
-			<div class = "bcontent"></div>
-		</div>
-		<div>
-			<div>첨부파일</div>
-			<div class = "bfile"></div>
-		</div>
-		<div class = "btnBox">
-		</div>
-		<br/>
-		<div>
-			<textarea class = "rcontent" rows="" cols=""></textarea>
-			<button onClick = "rWrite()" type = "button">댓글 작성</button>
-		</div>
-		<br/>
-		<div class = "replayListBox">
-			
+		<div class = "boardbox">
+			<div class = "viewtop">
+				<div>
+					<img class = "hpimg mimg" src = "/jspWeb/member/pimg/basic.jpg">
+				</div>
+				<div class = "viewtopright">
+					<div class = "mid"></div>
+					<div>
+						<span class = "bwritedate">2023-03-20</span>
+						<span><i class="far fa-eye"></i><span class = "bview"></span></span>
+						<span onClick = "bIncrease(2)"><i class="far fa-thumbs-up"></i><span class = "blike"></span></span>
+						<span onClick = "bIncrease(3)"><i class="far fa-thumbs-down"></i><span class = "bhate"></span></span>
+					</div>
+				</div>
+				</div>
+				<div class = "btitle"></div>
+				<div class = "bcontent"></div>
+				<div class = "bfile"></div>
+				<div class ="btnBox"></div>
+				<div class = "replycount"></div>
+				<div class = "replyWritebox">
+					<textarea  class = "rcontent" rows="" cols=""></textarea>
+					<button class = "bbtn replyBtn" onClick = "rWrite()" type = "button">댓글 작성</button>
+				</div>
+				<div class = "replayListBox">댓글출력</div>
 		</div>
 	</div>
 	

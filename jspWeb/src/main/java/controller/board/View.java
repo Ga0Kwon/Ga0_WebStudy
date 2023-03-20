@@ -47,6 +47,7 @@ public class View extends HttpServlet {
 			request.getSession().setMaxInactiveInterval(60*60*24); //초단위
 			//하루가 지나면 다시 증가할 수 있도록 [게시물 각각 한번씩] 단위를 하루단위로 설정했다.
 			boolean result = BoardDao.getInstance().bIncrease(type, bno);
+
 			response.getWriter().print(result);
 		}
 		// 없으면 아무것도 안하면 됨

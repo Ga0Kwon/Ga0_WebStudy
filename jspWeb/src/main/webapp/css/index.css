@@ -79,3 +79,12 @@ a{
 	border: none;
 	background: transparent; /*배경색 없음*/
 }
+
+.bbtn{
+	border: none;
+	background-color: #64bc34;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+	color : white;
+}

@@ -12,6 +12,9 @@
 	 
 	<!-- 모든 페이지 공통 CSS -->
 	<link href = "/jspWeb/css/index.css" rel = "stylesheet">
+	<!-- 폰트어썸 -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+
 </head>
 <body>
 	<div class = "container"><!-- bs 박스권 -->

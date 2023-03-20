@@ -36,26 +36,25 @@ function printBoard(page){//해당함수로부터 페이징번호 받기
 		success : (r) => {
 			//------------------------ 테이블 출력 ------------------------
 			if(r != null){
-
-				let html = `<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>작성일</th>
-								<th>조회수</th>
-								<th>작성자</th>
-								<th>좋아요</th>
-								<th>싫어요</th>
-							</tr>`
+			let html = ``;
 			r.boardList.forEach((o) => {
-				html += `<tr> 
-							<td>${o.bno}</td>
-							<td><a href = "/jspWeb/board/view.jsp?bno=${o.bno}">${o.btitle}</a></td>
-							<td>${o.bwritedate}</td>
-							<td>${o.bview}</td>
-							<td>${o.mid}</td>
-							<td>${o.blike}</td>
-							<td>${o.bhate}</td>
-						 </tr>`
+				html += `<div class = "boardcontent"> <!-- 게시물 하나 -->
+							<div>
+								<img class = "hpimg" alt = "" src = "/jspWeb/member/pimg/${o.mimg == null ? 'basic.jpg' : o.mimg}">
+								<span class = "mid">${o.mid}</span>
+								<span class = "bwritedate">${o.bwritedate}</span>
+							</div>
+							
+							<div class = "btitle">
+								<a href = "/jspWeb/board/view.jsp?bno=${o.bno}">${o.btitle}</a>
+							</div>
+							<div class = "contentbtn">
+								<span><i class="far fa-eye"></i><span class = "bview">${o.bview}</span></span>
+								<span><i class="far fa-thumbs-up"></i><span class = "blike">${o.blike}</span></span>
+								<span><i class="far fa-thumbs-down"></i><span class = "bhate">${o.bhate}</span></span>
+								<span><i class="far fa-comment-dots"></i><span class = "rcount">${o.rcount}</span></span>
+							</div>
+						</div>`
 			})	
 			document.querySelector('.boardTable').innerHTML = html
 				
@@ -66,28 +65,28 @@ function printBoard(page){//해당함수로부터 페이징번호 받기
 			html ='';//기존에 들어있는 내용 제거
 			
 			//맨앞
-			html += `<button onClick = "printBoard(1)" type = "button">맨앞</button>`	;
+			html += `<button class = "pagebtn" onClick = "printBoard(1)" type = "button"><i class="fas fa-angle-double-left"></i></button>`	;
 			
 			//이전버튼 [만약에 이전 페이지가 1 혹은 1 이하이면 더이상 이전페이지 없음]
 			html += page <=1 ? 
-				`<button onClick = "printBoard(${page})" type = "button">이전</button>`	
+				`<button class = "pagebtn" onClick = "printBoard(${page})" type = "button"><i class="fas fa-angle-left"></i></button>`	
 				:
-				`<button onClick = "printBoard(${page-1})" type = "button">이전</button>`	;
+				`<button class = "pagebtn" onClick = "printBoard(${page-1})" type = "button"><i class="fas fa-angle-left"></i></button>`	;
 			
 			//페이징 버튼 번호들
 			for(let i = r.startBtn; i <= r.endBtn; i++){ //시작 버튼 번호부터 마지막 버튼 번호까지 버튼 생성
 				html += `
-					<button onClick = "printBoard(${i})" type = "button">${i}</button>`	
+					<button class = "pagebtn" onClick = "printBoard(${i})" type = "button">${i}</button>`	
 			}
 			
 			//다음버튼 [만약에 다음 페이지가 totalpage 혹은 totalpage 이상이면 더이상 다음페이지 없음]
 			html += page >= r.totalpage ?
-			` <button onClick = "printBoard(${page})" type = "button">다음</button>`	
+			` <button class = "pagebtn" onClick = "printBoard(${page})" type = "button"><i class="fas fa-angle-right"></i></button>`	
 			:	
-			` <button onClick = "printBoard(${page+1})" type = "button">다음</button>`	
+			` <button class = "pagebtn" onClick = "printBoard(${page+1})" type = "button"><i class="fas fa-angle-right"></i></button>`	
 			
 			//맨뒤
-			html += `<button onClick = "printBoard(${r.totalpage})" type = "button">맨뒤</button>`;
+			html += `<button class = "pagebtn" onClick = "printBoard(${r.totalpage})" type = "button"><i class="fas fa-angle-double-right"></i></button>`;
 			
 			document.querySelector('.pageBox').innerHTML = html;
 		

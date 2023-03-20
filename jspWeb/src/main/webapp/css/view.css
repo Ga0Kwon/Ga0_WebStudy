@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+.viewtop{
+	display: flex;
+	margin : 30px 0;
+}
+
+.viewtopright{
+	margin-left: 10px;
+}
+
+.btitle{
+	font-weight: bold;
+	font-size: 25px;
+	margin-bottom: 30px;
+}
+
+.bcontent{
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+.bfilebox{
+	border-top: 1px solid #eeeeee;
+	padding-top: 20px;
+}
+
+.replyWritebox{
+	border : 1px solid #d1e1d0;
+	padding : 20px;
+	border-radius: 20px;
+	display: flex;
+}
+
+.rcontent{
+	width: 85%;
+	border : 1px solid #d1e1d0;
+	border-radius: 10px;
+	resize: 10px;
+	margin-right: 10px;
+	padding : 17px;
+}
+
+.replyBtn{
+	font-size: 12px !important;
+}
+
+.replycount{
+	font-size: 10px;
+}
+
+.btnBox{
+	text-align: right;
+}
+
+.bfilebtn{
+	background-color: transparent;
+	border : none;
+	color : #20461c;
+	font-size: 16px;
+}
+
+.bupdatebtn, .bdeletebtn{
+	font-size: 12px !important;
+}
