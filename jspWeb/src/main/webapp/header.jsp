@@ -31,6 +31,8 @@
 				<li> <a href = "/jspWeb/board/list.jsp?cno=2">커뮤니티</a> </li>
 				<li> <a href = "/jspWeb/board/list.jsp?cno=3">QnA</a> </li>
 				<li> <a href = "/jspWeb/board/list.jsp?cno=4">노하우</a> </li>
+				<li> <a href = "/jspWeb/js/api/api.jsp">Api1</a> </li>
+				<li> <a href = "/jspWeb/js/api/api2.jsp">Api2</a> </li>
 				<li> <a href = "#">기능메뉴5</a> </li>
 			</ul>
 			<!-- 서브 메뉴 -->
