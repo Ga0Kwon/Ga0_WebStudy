@@ -14,7 +14,9 @@
 	<link href = "/jspWeb/css/index.css" rel = "stylesheet">
 	<!-- 폰트어썸 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
-
+	
+	<!-- 모달 CSS -->
+	<link href = "/jspWeb/css/modal.css" rel = "stylesheet">
 </head>
 <body>
 	<div class = "container"><!-- bs 박스권 -->
@@ -54,6 +56,9 @@
 	  
 	<!-- 사용자 정의 JS -->
 	<script src = "/jspWeb/js/header.js" type="text/javascript"></script>
+
+	<!-- 사용자 정의 modal js -->
+	<script src = "/jspWeb/js/modal.js"></script>
 </body>
 </html>
 

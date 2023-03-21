@@ -5,9 +5,6 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- 모달 CSS -->
-<link href = "/jspWeb/css/modal.css" rel = "stylesheet">
-
 <title>Insert title here</title>
 </head>
 <body>
@@ -55,8 +52,6 @@
 		</div>
 	</div>
 	
-	<!-- 사용자 정의 modal js -->
-	<script src = "/jspWeb/js/modal.js"></script>
 	<!-- 사용자 정의 JS[info.js] -->
 	<script src ="/jspWeb/js/member/info.js" type="text/javascript"></script>
 
