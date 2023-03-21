@@ -13,7 +13,12 @@
 	
 	<div class = "container">
 		<div class = "totalCount"></div>
-		<table class = "table">
+		<table class = "table api1">
+			
+		</table>
+	</div>
+	<div class = "container">
+		<table class = "table api2">
 			
 		</table>
 	</div>

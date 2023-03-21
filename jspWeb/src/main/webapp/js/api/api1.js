@@ -10,6 +10,8 @@
 	}
 })*/
 
+/*첫번째 API - 안산시 전기차 충전소 API */
+
 getApi1();
 
 function getApi1(){
@@ -53,9 +55,23 @@ function getApi1(){
 			})
 		}
 		
-		document.querySelector('.table').innerHTML = html;
+		document.querySelector('.api1').innerHTML = html;
 	}
 })
+}
 
+/*두번째 API - 한국환경공단_에어코리아_대기오염정보 시도별 실시간 측정정보 조회*/
+getApi2();
+
+function getApi2(){
+	$.ajax({
+		url : "https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=yGK0ktRbG%2BTL3dCkYWNRIAi0bHut%2FYjDdi8lXd9MeZnPxhXf8rkoOMfgZJQfrB0f%2B%2BGERokC79iVDaO%2BexWAlw%3D%3D&returnType=json&numOfRows=100&pageNo=1&sidoName=%EA%B2%BD%EA%B8%B0&ver=1.0",
+		method : "get",
+		success : (r) =>{
+			console.log(r);
+			console.log(r.response.body.items); //실제 사용할 데이터
+			
+		}
+	})
 }
 
