@@ -153,7 +153,6 @@ $.get(
 	"https://api.odcloud.kr/api/15090398/v1/uddi:6fe0e3f2-0285-4999-9edf-995afe19a6ea?page=1&perPage=96&serviceKey=yGK0ktRbG%2BTL3dCkYWNRIAi0bHut%2FYjDdi8lXd9MeZnPxhXf8rkoOMfgZJQfrB0f%2B%2BGERokC79iVDaO%2BexWAlw%3D%3D", 
 	
 	function(r) {
-		
 	//let 리턴된값들 = map.(() => {return 리턴값}) 
     // 데이터에서 좌표 값을 가지고 마커를 표시합니다
     // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
