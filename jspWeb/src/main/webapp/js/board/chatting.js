@@ -49,7 +49,7 @@
 		
 */
 
-let contentbox =  document.querySelector('.cbox');
+let contentbox =  document.querySelector('.contentbox');
 // 1. 클라이언트 소켓 생성 과 서버 소켓 연결
 let clientSocket ;
 
@@ -85,7 +85,9 @@ console.log(clientSocket);
 
 //2. 클라이언트소켓이 접속했을 때 이벤트/함수 정의
 function onopen(e){ // 접속했을 때 하고 싶은 함수 정의
-	contentbox.innerHTML += `<div>채팅방 입장</div>`
+	contentbox.innerHTML += `<div class = "alerm">
+								<div>${memberInfo.mid}님이 입장 하셨습니다.</div>
+							 </div>`
 }
 
 
@@ -93,7 +95,7 @@ function onopen(e){ // 접속했을 때 하고 싶은 함수 정의
 function msgSend(){
 	
 	let msgbox = document.querySelector('.msgbox').value;
-	console.log(msgbox + ' [메시지 전송]')
+
 	/* 메시지 전송하기 */
 	clientSocket.send(msgbox); //-> @
 	
@@ -103,7 +105,41 @@ function msgSend(){
 
 //4. 서버로 부터 메시지가 왔을때 메시지 받기
 function msgReceive(e){ // <-- e <--- getBasicRemote().sendText(msg);
-	contentbox.innerHTML += `${e.data} <br/>`;
+	/*console.log(e);
+	//e.data : 문자열 타입*/
+	console.log(e.data)
+	//JSON.parse(e.data) : 객체 json 형변환
+	//Servlet에서 application/json을 안했다면 ajax success안에 JSON.parse만 넣어주면 된다.
+	/*console.log(JSON.parse(e.data)); *///문자열 json -> 객체 json 형변환
+	let data = JSON.parse(e.data);
+	
+	//보낸 사람과 현재 유저와 일치하면 [내가 보낸 메시지]
+	if(data.fromMid == memberInfo.mid){
+		contentbox.innerHTML += `<div class = "sendcontent">
+									<div class = "date">${data.time}</div>
+									<div class = "content">${data.msg}</div>
+								 </div>`
+	}else{ //받은 경우
+		contentbox.innerHTML += `<div class = "tocontent">
+									<div><img class = "hpimg frompimg" src = "/jspWeb/member/pimg/${data.frompimg == null? 'basic.jpg' : data.frompimg}"></div>
+									<div class = "rcontent">
+										<div class = "name">${data.fromMid}</div>
+										<div class = "contentdate">
+											<div class = "content">${data.msg}</div>
+											<div class = "date">${data.time}</div>
+										</div>
+									</div>
+								</div>`
+	}
+	// ---------------- 스크롤 최 하단으로 내리기 ----------------
+	/*let top = contentbox.scrollTop; //현재 스크롤의 상단 위치 좌표
+	console.log(top);
+	let height = contentbox.scrollHeight; //현재 스크롤의 높이 현재 스크롤의 전체 높이
+	
+	console.log(height) //초기값 : 679가 나옴*/
+	//스크롤막대의 상단  위치를 스크롤 막대의 가장 아래의 위치로 대입
+	contentbox.scrollTop = contentbox.scrollHeight;
+
 }
 
 
@@ -112,6 +148,12 @@ function conectClose(e){
 	
 }
 
+/*엔터 누르면 전송 되도록*/
+function enterKey(){
+	if(window.event.keyCode == 13){ //엔터키 코드 값 : 13
+		msgSend(); //메시지 보내기 함수 실행
+	}
+}
 
 /*
 	[클라이언트 소켓이 이미 만들어져 있기 때문에 =(대입)]

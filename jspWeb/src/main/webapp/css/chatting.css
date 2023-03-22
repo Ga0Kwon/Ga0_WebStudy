@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+.chattingbox{
+	width : 40%;
+	margin: 0 auto;
+	background-color: #fdf1c4;
+	border-radius: 10px;
+}
+.contentbox{
+	width : 100%;
+	height: 700px;
+	/*해당 구역크기보다 내용물이 커지면 스크롤 생성*/
+	overflow: scroll;
+	padding : 8px;
+}
+
+.msgbox{
+	width : 95%;
+}
+
+.sendbtn{
+	padding : 10px;
+	background-color: #80ca84;
+	color : white;
+	border: none;
+	font-size : 12px;
+	border-radius: 10px;
+}
+
+.sendContentBtn{
+	display: flex;
+	justify-content: flex-end;
+}
+
+/*보낼때*/
+.sendcontent{
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	text-align: right;
+	margin-top: 5px;
+}
+
+.sendcontent .content{
+	background-color: #bcd9e7;
+}
+
+.alerm{
+	width :70%;
+	margin: 20px auto;
+	text-align : center;
+	border-radius : 10px;
+	font-size: 10px; 
+	background-color: #FCE898;
+}
+/*시간*/
+.date{
+	font-size: 2px;
+	margin: 0px 3px;
+}
+
+.content{
+	background-color: #ffffff;
+	padding : 7px;
+	border-radius: 10px;
+	
+	/*해당 구역 크기보다 내용물이 커지면 자동 줄 바꿈 처리*/
+	max-width: 70%;
+	word-break : break-all;
+	font-size: 12px; 
+}
+
+.tocontent{
+	display: flex;
+}
+
+.name{
+	font-size: 11px;
+}
+
+
+
+.contentdate{
+	display: flex;
+	align-items: flex-end;
+}
+
+.rcontent{
+	margin-left: 20px;
+}
+
+.frompimg{
+	width: 50px; height: 50px;
+}
