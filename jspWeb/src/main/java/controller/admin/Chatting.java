@@ -32,6 +32,7 @@ public class Chatting {
 		// 접속한 클라이언트 소켓들을 보관
 		clientList.add(new ClientDto(session, mid)); 	
 		
+		//연결된 클라이언트 소켓을 모든 접속명단 목록 메시지 보내기
 		OnMessage(session, "enter");
 	}
 	
@@ -50,7 +51,7 @@ public class Chatting {
 				// {"필드명1" : "데이터1", "필드명2" : "데이터2"}
 				/* String msg = "{\"param1\":\"data1\",\"param2\":\"data\"}"; */
 				
-				String msg = "{\"type\":\"alarm\",\"msgbox\":\""+dto.getMid()+"님이 채팅방에 나갔습니다.\"}";
+				String msg = "{\"type\":\"alerm\",\"msgbox\":\""+dto.getMid()+"님이 채팅방에 나갔습니다.\"}";
 				OnMessage(session, msg);
 				
 				// 연결이 끊긴 클라이언트 소켓을 모든 접속명단 목록 알림 메시지 보내기
@@ -73,14 +74,15 @@ public class Chatting {
 		if(msg.equals("enter")) { //enter가 들어올 수는 절대 없음 [엔터를 누르면 메시지가 전송되는거지, 엔터키가 전송되지않기 때문]
 			//회원 명단[이미지, 아이디] 포함된 회원리스트 생성
 			ArrayList<MessageDto> list = new ArrayList<>();
+			
 			for(ClientDto dto : clientList) {
 				list.add(new MessageDto(dto.getSession(), null)); //현재 접속된 회원정보 객체 생성
 			}
-			System.out.println(list);
-			System.out.println(clientList);
+
 			json = mapper.writeValueAsString(list); //접속자 명단 객체 여러개
 			
-		}else {	//1. 메시지 보내는 경우
+		//1. 메시지 보내는 경우	
+		}else {
 			//메세지 형식 구성
 			//메시지 받는 프로그램 [JS] : JSON -> *Session은 json으로 형변환을 할 수 없다.
 			//JSON으로 형변환할 때 Session을 형변환할 수가 없다.

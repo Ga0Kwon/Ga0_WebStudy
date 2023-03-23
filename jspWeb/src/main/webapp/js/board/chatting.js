@@ -156,27 +156,26 @@ function msgReceive(e){ // <-- e <--- getBasicRemote().sendText(msg);
 		contentbox.innerHTML += `<div class = "alerm">
 									<div>${JSON.parse(data.msg).msgbox}</div>
 								 </div>`
-	}else{
-		//보낸 사람과 현재 유저와 일치하면 [내가 보낸 메시지]
-		if(data.fromMid == memberInfo.mid){
-			contentbox.innerHTML += `<div class = "sendcontent">
-										<div class = "date">${data.time}</div>
-										${msgType(data.msg)}
-									 </div>`
-		}else{ //받은 경우
-			contentbox.innerHTML += `<div class = "tocontent">
-										<div><img class = "hpimg frompimg" src = "/jspWeb/member/pimg/${data.frompimg == null? 'basic.jpg' : data.frompimg}"></div>
-										<div class = "rcontent">
-											<div class = "name">${data.fromMid}</div>
-											<div class = "contentdate">
-												${msgType(data.msg)}
-												<div class = "date">${data.time}</div>
-											</div>
+								 
+	}//보낸 사람과 현재 유저와 일치하면 [내가 보낸 메시지]
+	else if(data.fromMid == memberInfo.mid){
+		contentbox.innerHTML += `<div class = "sendcontent">
+									<div class = "date">${data.time}</div>
+									${msgType(data.msg)}
+								 </div>`
+	}else{ //받은 경우
+		contentbox.innerHTML += `<div class = "tocontent">
+									<div><img class = "hpimg frompimg" src = "/jspWeb/member/pimg/${data.frompimg == null? 'basic.jpg' : data.frompimg}"></div>
+									<div class = "rcontent">
+										<div class = "name">${data.fromMid}</div>
+										<div class = "contentdate">
+											${msgType(data.msg)}
+											<div class = "date">${data.time}</div>
 										</div>
-									</div>`
+									</div>
+								</div>`
 		}
 	
-	}
 	// ---------------- 스크롤 최 하단으로 내리기 ----------------
 	/*let top = contentbox.scrollTop; //현재 스크롤의 상단 위치 좌표
 	console.log(top);
@@ -190,7 +189,6 @@ function msgReceive(e){ // <-- e <--- getBasicRemote().sendText(msg);
 
 
 function conectClose(e){
-	etcsend(memberInfo.mid + "님이  퇴장하였습니다." + "alerm")
 	
 }
 
