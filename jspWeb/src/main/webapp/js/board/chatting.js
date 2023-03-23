@@ -125,6 +125,7 @@ function msgType(msg){
 	return html;
 }
 
+
 //4. 서버로 부터 메시지가 왔을때 메시지 받기
 function msgReceive(e){ // <-- e <--- getBasicRemote().sendText(msg);
 	/*console.log(e);
