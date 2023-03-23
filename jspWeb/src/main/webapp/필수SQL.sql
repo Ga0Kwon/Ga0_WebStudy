@@ -99,4 +99,32 @@ select * from replay;
 		5번 댓글 [rindex =0]
 */
 
+-- 제품 1개당 사진 1개면 -> 제품 테이블 (사진 필드)
+-- 제품 1개당 사진 여러개 -> 제품 테이블(사진필드, 사진필드, 사진필드)
+
+
+-- 제품 테이블(제품번호, 제품명, 제품설명, 제품가격, 상태, 위치x, 위치y, 조회수, 등록일)
+drop table if exists product;
+
+create table product(
+	pno int auto_increment primary key,
+    pname  varchar(500) not null,-- 제품명
+    pcomment text not null,-- 제품 설명
+    pprice bigint not null,-- 제품 가격 (비싸게 팔 수도 있으니까)
+    pstate int default 1,-- 상태 [1 : 판매중 2: 거래중 3: 판매완료]
+    plat varchar(100) not null, -- 위도(위치x)
+    plng varchar(100) not null, -- 경도(위치y)
+    pview int default 0, -- 조회수
+    pdate datetime default now() -- 등록일
+);
+
+-- 제품이 있어야 사진, 찜하기, 쪽지가 가능하다 => 즉 제품테이블이 상위이다.
+
+-- 제품 사진 테이블 [제품 사진을 여러개 넣기 위해]
+
+-- 제품 찜하기 테이블
+
+-- 제품 쪽지 테이블 
+
+
 
