@@ -1,8 +1,26 @@
 @charset "UTF-8";
 
+.chattingwrap{ /*채팅과 명단이 포함된 구역*/
+	display: flex;
+	justify-content: center;
+}
+
+.connectlist{
+	width: 15%;
+	padding : 10px;
+}
+
+.connectbox{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.connectbox .name{
+	margin-left: 10px;
+}
 .chattingbox{
 	width : 40%;
-	margin: 0 auto;
 	background-color: #fdf1c4;
 	border-radius: 10px;
 }
@@ -29,7 +47,8 @@
 
 .sendContentBtn{
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between; /*양쪽 배치*/
+	background-color: white;
 }
 
 /*보낼때*/
@@ -91,4 +110,26 @@
 
 .frompimg{
 	width: 50px; height: 50px;
+}
+
+.emobtn{
+	border : none;
+	background-color: transparent;
+	padding: 5px;
+	font-size: 23px;
+	color : #153d00;
+}
+
+.enolist{
+	width: 300px; height: 300px;
+	overflow: scroll; /*넘치면 스크롤*/
+}
+
+.emo{ /*이모티콘 하나당*/
+	margin: 1px;
+}
+
+/*내용물안에 사진이 있으면 배경 투명*/
+.emocontent{
+	background-color: transparent !important;
 }

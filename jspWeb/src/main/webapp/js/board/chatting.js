@@ -76,6 +76,9 @@ if(memberInfo.mid == null){ //헤더 memberInfo에 있음
 	clientSocket.onclose = (e) => {
 		conectClose(e)
 	}
+	clientSocket.onerror = (e) => {
+		alert('에러 발생: 관리자에게 문의> ' + e)
+	}
 }
 
 
@@ -85,22 +88,41 @@ console.log(clientSocket);
 
 //2. 클라이언트소켓이 접속했을 때 이벤트/함수 정의
 function onopen(e){ // 접속했을 때 하고 싶은 함수 정의
-	contentbox.innerHTML += `<div class = "alerm">
-								<div>${memberInfo.mid}님이 입장 하셨습니다.</div>
-							 </div>`
+	etcsend(memberInfo.mid + "님이  입장하였습니다.", "alerm")
 }
 
 
-//3. 클라이언트 소켓이 서버에게 메시지 보내기 [@OnMessage]
+//3. 클라이언트 소켓이 서버에게 메시지 보내기 [@OnMessage] (1. 보내기 버튼 눌렀을 때 2. 입력창에서 엔터했을때 ) type = msg
 function msgSend(){
 	
 	let msgbox = document.querySelector('.msgbox').value;
 
 	/* 메시지 전송하기 */
-	clientSocket.send(msgbox); //-> @
+		//JSON 형식의 문자열 타입 만들어서 문자열로 타입 전송
+		//JSON.parse(JSON형식의 문지열 타입) : 문자열 타입 --> JSON 타입으로 변환
+		//JSON.stringfy(JSON객체) : JSON타입 --> JSON형식[모양]의 String 타입으로 변환
+	let info = {
+		type : 'msg',
+		msgbox : msgbox
+	}
+	
+	clientSocket.send(JSON.stringify(info)); //-> @
 	
 	// 전송 성공시 채팅 입력창 초기화
 	document.querySelector('.msgbox').value = ""; 
+}
+
+//4-2 타입에 따른 html 구별
+function msgType(msg){
+	let json = JSON.parse(msg);
+
+	let html = ``;
+	if(json.type == 'msg'){
+		html += `<div class = "content">${json.msgbox}</div>`;
+	}else if (json.type == 'emo'){
+		html += `<div class = "content emocontent"><img src = "/jspWeb/img/imoji/emo${json.msgbox}.gif"></div>`;
+	}
+	return html;
 }
 
 //4. 서버로 부터 메시지가 왔을때 메시지 받기
@@ -113,23 +135,47 @@ function msgReceive(e){ // <-- e <--- getBasicRemote().sendText(msg);
 	/*console.log(JSON.parse(e.data)); *///문자열 json -> 객체 json 형변환
 	let data = JSON.parse(e.data);
 	
-	//보낸 사람과 현재 유저와 일치하면 [내가 보낸 메시지]
-	if(data.fromMid == memberInfo.mid){
-		contentbox.innerHTML += `<div class = "sendcontent">
-									<div class = "date">${data.time}</div>
-									<div class = "content">${data.msg}</div>
+	//접속명단[여러개 = list/Array] vs. 메시지 정보[1개 = dto/object]
+		// Array 타입 확인 : Array.isArray(객체) : 해당 객체가 배열/리스트면 true
+	if(Array.isArray(data)){
+		let html = ``;
+		data.forEach((o) => {
+			html += `<div class = "connectbox"> <!-- 접속 명단 1명 -->
+						<div>
+							<img alt="" src="/jspWeb/member/pimg/${o.frompimg == null? 'basic.jpg' : o.frompimg}" class = "hpimg">
+						</div>
+						<div class = "name">
+							${o.fromMid}
+						</div>
+					</div>`
+		})
+		
+		document.querySelector('.connectlist').innerHTML = html;
+		
+	}else if(JSON.parse(data.msg).type == 'alerm'){
+		contentbox.innerHTML += `<div class = "alerm">
+									<div>${JSON.parse(data.msg).msgbox}</div>
 								 </div>`
-	}else{ //받은 경우
-		contentbox.innerHTML += `<div class = "tocontent">
-									<div><img class = "hpimg frompimg" src = "/jspWeb/member/pimg/${data.frompimg == null? 'basic.jpg' : data.frompimg}"></div>
-									<div class = "rcontent">
-										<div class = "name">${data.fromMid}</div>
-										<div class = "contentdate">
-											<div class = "content">${data.msg}</div>
-											<div class = "date">${data.time}</div>
+	}else{
+		//보낸 사람과 현재 유저와 일치하면 [내가 보낸 메시지]
+		if(data.fromMid == memberInfo.mid){
+			contentbox.innerHTML += `<div class = "sendcontent">
+										<div class = "date">${data.time}</div>
+										${msgType(data.msg)}
+									 </div>`
+		}else{ //받은 경우
+			contentbox.innerHTML += `<div class = "tocontent">
+										<div><img class = "hpimg frompimg" src = "/jspWeb/member/pimg/${data.frompimg == null? 'basic.jpg' : data.frompimg}"></div>
+										<div class = "rcontent">
+											<div class = "name">${data.fromMid}</div>
+											<div class = "contentdate">
+												${msgType(data.msg)}
+												<div class = "date">${data.time}</div>
+											</div>
 										</div>
-									</div>
-								</div>`
+									</div>`
+		}
+	
 	}
 	// ---------------- 스크롤 최 하단으로 내리기 ----------------
 	/*let top = contentbox.scrollTop; //현재 스크롤의 상단 위치 좌표
@@ -144,7 +190,7 @@ function msgReceive(e){ // <-- e <--- getBasicRemote().sendText(msg);
 
 
 function conectClose(e){
-	console.log('연결 해제~');
+	etcsend(memberInfo.mid + "님이  퇴장하였습니다." + "alerm")
 	
 }
 
@@ -153,6 +199,27 @@ function enterKey(){
 	if(window.event.keyCode == 13){ //엔터키 코드 값 : 13
 		msgSend(); //메시지 보내기 함수 실행
 	}
+}
+
+/* 이모티콘 출력 */
+function getEmo(){
+	let html = ``;
+	
+	for(let i = 1; i <= 43; i++){
+		html += `<img onClick = "etcsend(${i}, 'emo')" class ="emo" alt="" src="/jspWeb/img/imoji/emo${i}.gif" width = "50px">`
+	}
+	
+	document.querySelector('.enolist').innerHTML = html;
+}
+
+//이모티콘 보내기
+function etcsend(msgbox, type){
+	let msg = {
+		type : type,
+		msgbox : msgbox
+	}
+	
+	clientSocket.send(JSON.stringify(msg)); // ----> OnMessgae
 }
 
 /*
@@ -183,3 +250,5 @@ function enterKey(){
 		success : function(r){}
 		success : (r)=>{}
 */
+
+

@@ -12,21 +12,37 @@
 <body>
 	<%@ include file = "/header.jsp" %> <!-- 헤더 포함 -->
 	
-	<div class = "container">
-	
+	<div class = "container chattingwrap">
+		<div class = "connectlist"> <!-- 접속 명단 표시 구역 -->
+		</div>
+		
 		<div class = "chattingbox"> <!-- 채팅 구역 -->
 			<div class = "contentbox"> <!-- 채팅창 -->
 				
 				
 			</div>
+			
 			<div>
 				<!-- 채팅입력창  -->
 				<!-- form-control : 부트 스트랩 -->
 				<textarea onkeyup = "enterKey()" class = "form-control msgbox" rows="" cols=""></textarea>
 				
 				<div class = "sendContentBtn">
-					<div></div> <!-- 이모티콘 -->
-					<div></div> <!-- 첨부파일 -->
+					<!-- 
+						bs : 드롭다운
+							클릭위치 : data-bs-toggle="dropdown"
+							드롭다운시 표시할 위치 : class = "dropdown-menu"
+								
+					 -->
+					<!-- 드롭다운 버튼 -->
+					<button onClick = "getEmo()" class = "emobtn" type = "button" data-bs-toggle = "dropdown">
+						<i class="fas fa-laugh-squint"></i>
+					</button>
+					
+					<!-- 드롭다운 버튼 클릭시 보이는 구역 -->
+					<div class = "dropdown-menu enolist">
+						
+					</div>
 					<!-- 채팅 전송 버튼 -->
 					<button class = "sendbtn" onClick = "msgSend()" type = "button">보내기</button>
 				</div>
