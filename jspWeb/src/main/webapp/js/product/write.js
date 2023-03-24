@@ -15,7 +15,7 @@ function onwrite(){
 	//폼 데이터 객체에 필드 추가 
 	writeFormData.set("plat" , plat)
 	writeFormData.set("plng" , plng)
-	
+	console.log(writeFormData)
 	$.ajax({
 		url : "/jspWeb/product/info",
 		method : "post",
@@ -23,7 +23,11 @@ function onwrite(){
 		contentType : false,
 		processData : false,
 		success : (r) => {
-			console.log(r);
+			if(r == 'true'){
+				alert('등록성공!'); location.href="/jspWeb/index.jsp"
+			}else{
+				alert('등록 실패')
+			}
 		}
 	})
 
@@ -34,8 +38,8 @@ function onwrite(){
 // 카카오 지도롤 표시할 div 객체
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+      	center: new kakao.maps.LatLng(37.3218778,126.8308848), // 지도의 중심좌표.
+        level: 6 // 지도의 확대 레벨
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
