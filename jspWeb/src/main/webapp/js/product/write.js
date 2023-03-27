@@ -10,7 +10,6 @@ function onwrite(){
 	let writeForm = document.querySelectorAll('.writeform')[0];
 	//2) 폼 데이터 객체 선언
 	let writeFormData = new FormData(writeForm);
-	
 	//3. 좌표 [위도/경도 추가]
 	//폼 데이터 객체에 필드 추가 
 	writeFormData.set("plat" , plat)
