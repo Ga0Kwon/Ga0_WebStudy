@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+	/*overflow : auto => 처음부터 scroll을 보여주지 않고 넘치면 보여줌*/
+	.fileDrop{width : 600px; height : 200px; overflow : auto; border : 1px solid red;}
+</style>
 </head>
 <body>
 	<!-- jsp 태그; JSP 페이지 포함 --> 
@@ -29,9 +34,15 @@
 			<input type = "file" name = "pfile3" accept = "image/*"> image/* : 이미지 파일만 가능 audio넣으면 audio만 -->
 			
 			<!-- 첨부파일 여러개 -->
-			<div>첨부파일 여러개 [multiple : cos 불가능 / commons 가능]</div>
-			<input type = "file" name = "pfiles" multiple="multiple" accept = "image/*"> <!-- 멀티플의 경우 여러개 한꺼번에 선택 가능 -->
-			<br/>
+			<!-- <div>첨부파일 여러개 [multiple : cos 불가능 / commons 가능]</div>
+			<input type = "file" name = "pfiles" multiple="multiple" accept = "image/*"> 멀티플의 경우 여러개 한꺼번에 선택 가능
+			<br/> -->
+			
+			<!-- 드래그앤 드랍 : multiple -->
+			<div class = "fileDrop">
+				[드래그앤 드랍]여기에 첨부파일을 넣어주세요
+			</div>
+			
 			<button onClick = "onwrite()" type = "button">제품 등록</button>
 		</form>
 	</div>

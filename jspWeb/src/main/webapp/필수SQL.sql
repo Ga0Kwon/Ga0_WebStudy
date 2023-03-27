@@ -115,16 +115,32 @@ create table product(
     plat varchar(100) not null, -- 위도(위치x)
     plng varchar(100) not null, -- 경도(위치y)
     pview int default 0, -- 조회수
-    pdate datetime default now() -- 등록일
+    pdate datetime default now(), -- 등록일
+    mno int, -- 등록한 회원 번호
+    foreign key (mno) references member(mno) on delete cascade
 );
+
+select * from product;
 
 -- 제품이 있어야 사진, 찜하기, 쪽지가 가능하다 => 즉 제품테이블이 상위이다.
 
 -- 제품 사진 테이블 [제품 사진을 여러개 넣기 위해]
-
+drop table if exists pimg;
+create table pimg(
+	pimgno bigint auto_increment primary key,
+    pimgname longtext not null,
+    pno int,
+    foreign key (pno) references product(pno) on delete cascade
+);
 -- 제품 찜하기 테이블
+drop table if exists plike;
+create table plike(
+	plikeno bigint auto_increment primary key,
+    mno int,
+    pno int, 
+    foreign key (mno) references member(mno) on delete cascade,
+    foreign key (pno) references product(pno) on delete cascade
+);
 
+select * from plike;
 -- 제품 쪽지 테이블 
-
-
-

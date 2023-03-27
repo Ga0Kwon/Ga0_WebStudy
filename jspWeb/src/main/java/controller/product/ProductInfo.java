@@ -41,10 +41,10 @@ public class ProductInfo extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		String 동 = request.getParameter("동");
-		String 서 = request.getParameter("서");
-		String 남 = request.getParameter("남");
-		String 북 = request.getParameter("북");
+		String 동 = request.getParameter("동"); System.out.println(동);
+		String 서 = request.getParameter("서"); System.out.println(서);
+		String 남 = request.getParameter("남"); System.out.println(남);
+		String 북 = request.getParameter("북"); System.out.println(북);
 
 		ArrayList<ProductDto> result = ProductDao.getInstance().getProductList(동, 서, 남, 북);
 
@@ -55,6 +55,7 @@ public class ProductInfo extends HttpServlet {
 		response.getWriter().print(jsonarray);
 	}
 
+	//제품 등록
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		/*-------------------------- commons.jar 사용시 --------------------------*/
@@ -70,7 +71,7 @@ public class ProductInfo extends HttpServlet {
 		DiskFileItemFactory saveStore = new DiskFileItemFactory();
 		saveStore.setRepository(savePath); //파일 저장소 위치 대입
 		saveStore.setSizeThreshold(1024*1024*10); //파일 저장소에 저장할 수 있는 최대용향 범위
-		
+		saveStore.setDefaultCharset("UTF-8");
 		//4. 파일 업로드 객체
 		ServletFileUpload fileupload = new  ServletFileUpload(saveStore);
 		
@@ -115,7 +116,7 @@ public class ProductInfo extends HttpServlet {
 				
 			System.out.println(usufeildList.toString());
 			System.out.println(filefeildList.toString());
-			//Dao 처리
+			//dto 처리
 			ProductDto dto = new ProductDto(
 					usufeildList.get(0),
 					usufeildList.get(1),
@@ -125,8 +126,13 @@ public class ProductInfo extends HttpServlet {
 					mno,
 					filefeildList);
 				
+			
 			System.out.println( "dto : " + dto.toString() );
-				
+			//dao 처리
+			boolean result = ProductDao.getInstance().write(dto);
+			
+			response.getWriter().print(result);
+			
 		}catch(Exception e) {
 			System.err.println(e.getMessage());
 		}
