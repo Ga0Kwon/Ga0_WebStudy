@@ -142,5 +142,22 @@ create table plike(
     foreign key (pno) references product(pno) on delete cascade
 );
 
-select * from plike;
 -- 제품 쪽지 테이블 
+drop table if exists note;
+
+create table note(
+	nno bigint auto_increment primary key,
+    ncontent text not null,
+    ndate datetime default now(),
+    pno int,
+    frommno int, -- 보내는 사람
+    tomno int, -- 받는 사람
+    foreign key (pno) references product(pno) on delete cascade,
+	foreign key (frommno) references member(mno) on delete cascade,
+	foreign key (tomno) references member(mno) on delete cascade
+);
+
+
+
+
+                

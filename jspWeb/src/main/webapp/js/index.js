@@ -266,10 +266,17 @@ function getplike(pno){
 
 //채팅 페이지 이동
 function chatprint(i){
-
+	
+	if(memberInfo.mid == null){
+		alert('로그인하셔야 거래를 하실 수 있습니다.')
+		return;
+	}
+	
 	let html = `<h3 class = "productTitle">채팅방</h3>`
 	
 	let p = productList[i];
+	
+	
 	
 	html += `<div class = "chatbox">
 				<div class ="pviewinfo">
@@ -282,19 +289,67 @@ function chatprint(i){
 					</div>
 				</div>
 				<div class = "chatcontent">
-					<div class = "sendbox">구매가능할까요?</div>
-					<div class = "receviebox">네 구매 가능합니다.</div>
 				</div>
 				<div class = "chatbtn">
-					<textarea rows="" cols=""></textarea>
-					<button class = "bbtn" type = "button">전송</button>
+					<textarea class ="ncontentinput" rows="" cols=""></textarea>
+					<button onClick = "sendchat(${p.pno}, ${p.mno}) " class = "bbtn" type = "button">전송</button>
 				</div>
 			</div>`
-	
+			
 	document.querySelector('.produclistbox').innerHTML =  html;
-	
+	getChat(i)
 }
 
+//5.
+function sendchat(pno, tomno){
+	
+	let ncontentinput = document.querySelector('.ncontentinput').value;
+	
+	$.ajax({
+		url : "/jspWeb/product/chat",
+		method : "post",
+		data : {"pno" : pno, "ncontent" : ncontentinput, "tomno" : tomno},
+		success : (r) => {
+			if(r == 'true'){
+				document.querySelector('.ncontentinput').value = "";
+				
+			}
+		}
+	});
+}
+
+
+//6. 
+function getChat(i){
+	
+	let p = productList[i];
+	
+	$.ajax({
+		url : "/jspWeb/product/chat",
+		method : "get",
+		data : {"pno" : p.pno},
+		async : false, // 동기식
+		success : (r) => {
+			let html = ``;
+			
+			console.log(r);
+			
+			r.forEach((o) => {
+				if(o.frommno == memberInfo.mno){ //내가 보낸 메시지일 경우
+					
+					html += `<div class = "sendbox">${o.ncontent}</div>`
+				
+				}else{ //받은 메시지인 경우
+					
+					html +=  `<div class = "receviebox">${o.ncontent}</div>`
+				
+				}
+			})
+			
+			document.querySelector('.chatcontent').innerHTML = html;	
+		}
+	})
+}
     
 // $(r).map( (인덱스,반복객체명) =>{ } ) 		실행문에서 return 값을 배열에 대입  
         // r.map( (반복객체명,인덱스) =>{ } ) 		실행문에서 return 값을 배열에 대입  
