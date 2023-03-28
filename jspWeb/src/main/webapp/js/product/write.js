@@ -106,7 +106,7 @@ let fileList = [];
 	//1) dragenter
 fileDrop.addEventListener('dragenter', (e) => {
 	console.log('드래그 요소가 해당 구역에 닿았을때')
-	e.preventDefault(); //고유 이벤트 제거[해당 구역에]
+	e.preventDefault(); //고유 이벤트 제거[해당 구역에]-> 기존 이벤트 제거
 })
 
 	//2) dragover

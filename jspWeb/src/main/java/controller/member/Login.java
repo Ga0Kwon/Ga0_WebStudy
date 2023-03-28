@@ -49,6 +49,9 @@ public class Login extends HttpServlet {
 		//2. DAO 호출해서 요청 데이터를 보내서 결과 얻기
 		boolean result = MemberDao.getInstance().login(mid, mpwd);
 		
+		System.out.println("mid : " + mid);
+		
+		System.out.println("mpwd : " + mpwd);
 		if(result == true) { //만약에 로그인 성공했으면
 			//로그인 세션 만들기
 				// request.getSession() : 서버[톰캣] 내 세션 객체 호출
