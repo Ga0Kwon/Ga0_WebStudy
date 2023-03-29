@@ -170,9 +170,28 @@ public class ProductDao extends Dao{
 	}
 	
 	//6. 제품에 등록 채팅[제품번호 일치, 현재 보고 있는 회원[로그인된 회원] 받거나 보낸 내용들]
-	public ArrayList<ChatDto> getChatList(int pno, int mno){
-		String sql = "select * from note where pno = ? and (frommno = ? or tomno =  ?)";
+	public ArrayList<ChatDto> getChatList(int pno, int mno, int chatmno){
 		ArrayList<ChatDto> chatList = new ArrayList<>();
+		
+		/*
+		 * String sql =
+		 * "select * from note where pno = ? and  (frommno = ? or tomno = ?)";
+		 */
+		
+		/*
+		  - 1. 로그인된 회원 기준으로 보내거나 받은 메시지 모두 출력
+		  	select * from note where pno = ? and (frommno = ? or tomno = ?)
+		  	1) 구매자 문제 없음 2) 판매자는 채팅 대상자만의 메시지만 출력해야함 문제 발생
+		  	
+	      - 2. 
+	      	만약에 채팅방에 4번 회원 5번 회원 존재
+	      	frommno = 4 이면서 tomno = 5 이거나 frommno = 5이면서 tomno = 4 
+		  
+		 */
+		
+		//현재 같이 채팅하고 있는 대상자의 내용물만 출력
+		String sql = "select * from note "
+				+ " where pno = ? and ((frommno = ? and tomno = ?) or (frommno = ? and tomno = ?))";
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -180,18 +199,35 @@ public class ProductDao extends Dao{
 			ps.setInt(1, pno);
 
 			ps.setInt(2, mno);
-			ps.setInt(3, mno);
+			ps.setInt(3, chatmno);
+			
+			ps.setInt(4, chatmno);
+			ps.setInt(5, mno);
+			
 			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				chatList.add(new ChatDto(
+				ChatDto dto =  new ChatDto(
 						rs.getInt(1), 
 						rs.getString(2), 
 						rs.getString(3), 
 						rs.getInt(4), 
 						rs.getInt(5), 
-						rs.getInt(6)));
+						rs.getInt(6));
+				
+				sql = "select mid, mimg from member where mno = " + rs.getInt(5);
+				
+				ps = con.prepareStatement(sql);
+				
+				ResultSet rs2 = ps.executeQuery();
+				
+				if(rs2.next()) {
+					dto.setFrommid(rs2.getString(1));
+					dto.setFrommimg(rs2.getString(2));
+					
+					chatList.add(dto);
+				}
 			}
 			
 			return chatList;

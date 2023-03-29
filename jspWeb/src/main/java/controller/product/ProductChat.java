@@ -27,9 +27,11 @@ public class ProductChat extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pno = Integer.parseInt(request.getParameter("pno"));
 		
+		int chatmno = Integer.parseInt(request.getParameter("chatmno"));
+		
 		int mno = MemberDao.getInstance().getMno((String)request.getSession().getAttribute("login"));
 		
-		ArrayList<ChatDto> chatList = ProductDao.getInstance().getChatList(pno, mno);
+		ArrayList<ChatDto> chatList = ProductDao.getInstance().getChatList(pno, mno, chatmno);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		

@@ -24,7 +24,7 @@
 		<!-- 사이드바 -->		
 		
 		<div class="produclistbox">
-				
+			
 		</div>
 	
 	</div>
@@ -142,3 +142,16 @@
   
   
    -->
+ <!-- 
+   해당 제품으로부터 체팅을 받은 목록 
+	<div class = "chatlist">
+		<div class = "frommimg">
+			<img alt="" src="/jspWeb/member/pimg/basic.jpg" class ="hpimg">
+		</div>
+		<div class = "frominfo">
+			<div class = "fromndate">2023-03-29 10:01</div>
+			<div class = "frommid">qwe123</div>
+			<div class = "fromncontent">구매할 수 있을 까요?</div>
+		</div>
+	</div> 
+-->

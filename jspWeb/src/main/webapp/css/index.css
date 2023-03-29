@@ -265,3 +265,29 @@ html,body{
 	border : none;
 	margin-left: 10px;
 }
+
+/* --------------------- 제품별 받은 채팅 목록 --------------------- */
+.chatlist{
+	display: flex;
+	margin: 20px;
+	border-bottom: 1px solid #244413;
+	padding-bottom: 20px;
+}
+
+.frominfo{
+	margin-left: 15px;
+}
+
+.fromdate{
+	font-size: 8px;
+}
+
+.frommid{
+	font-weight: bold;
+}
+
+.fromncontent{
+	font-size: 16px;
+}
+
+
