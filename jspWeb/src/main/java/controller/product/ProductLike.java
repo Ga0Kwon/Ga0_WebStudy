@@ -35,7 +35,8 @@ public class ProductLike extends HttpServlet {
 		
 		response.getWriter().print(result);
 	}
-
+	
+	//
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int pno = Integer.parseInt(request.getParameter("pno"));

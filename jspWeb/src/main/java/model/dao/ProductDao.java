@@ -13,8 +13,8 @@ public class ProductDao extends Dao{
 	private ProductDao() {}
 	public static ProductDao getInstance() { return dao; }
 	
-	// 1. 제품 등록 
-	public boolean write( ProductDto dto ) {
+	// 1. 제품 등록 [synchronized : 멀티스레드 사용시(서블릿) 해당 메서드 동시사용불가 대기만들기 : await]
+	public synchronized boolean write( ProductDto dto ) {
 		//1. 제품 먼저 등록
 		String sql ="insert into product(pname, pcomment, pprice, plat, plng, mno)"
 				+ " values(?,?,?,?,?,?)";
@@ -47,7 +47,7 @@ public class ProductDao extends Dao{
 	}
 	
 	// 2. 제품 호출
-	public ArrayList<ProductDto> getProductList( String 동 , String 서 , String 남 , String 북 ){
+	public synchronized ArrayList<ProductDto> getProductList( String 동 , String 서 , String 남 , String 북 ){
 		ArrayList<ProductDto> list = new ArrayList<>();
 		
 		String sql ="select p.*, m.mid, m.mimg from product p natural join member m "
@@ -95,7 +95,7 @@ public class ProductDao extends Dao{
 	}
 	
 	//3. 찜하기 등록/취소
-	public boolean setplike(int pno, int mno) {
+	public synchronized boolean setplike(int pno, int mno) {
 		//1) 등록할지 취소할지 검색 먼저하기
 		String sql = "select * from plike where pno = ? and mno = ?";
 
@@ -126,7 +126,7 @@ public class ProductDao extends Dao{
 	}
 	
 	//4. 현재 회원이 해당 제품의 찜하기 상태 확인
-	public boolean getplike(int pno, int mno) {
+	public synchronized boolean getplike(int pno, int mno) {
 		String sql = "select * from plike where pno = ? and mno = ?";
 		try {
 			ps = con.prepareStatement(sql);
@@ -144,8 +144,8 @@ public class ProductDao extends Dao{
 		return false;
 	}
 	
-	//5. 제품 쪽지
-	public boolean setChat(ChatDto dto) {
+	//5. 제품에 채팅 등록
+	public synchronized boolean setChat(ChatDto dto) {
 		String sql = "insert into note(ncontent, pno, frommno, tomno) values (?, ?, ?, ?)";
 		
 		try {
@@ -170,13 +170,8 @@ public class ProductDao extends Dao{
 	}
 	
 	//6. 제품에 등록 채팅[제품번호 일치, 현재 보고 있는 회원[로그인된 회원] 받거나 보낸 내용들]
-	public ArrayList<ChatDto> getChatList(int pno, int mno, int chatmno){
+	public synchronized ArrayList<ChatDto> getChatList(int pno, int mno, int chatmno){
 		ArrayList<ChatDto> chatList = new ArrayList<>();
-		
-		/*
-		 * String sql =
-		 * "select * from note where pno = ? and  (frommno = ? or tomno = ?)";
-		 */
 		
 		/*
 		  - 1. 로그인된 회원 기준으로 보내거나 받은 메시지 모두 출력
@@ -189,20 +184,35 @@ public class ProductDao extends Dao{
 		  
 		 */
 		
-		//현재 같이 채팅하고 있는 대상자의 내용물만 출력
-		String sql = "select * from note "
-				+ " where pno = ? and ((frommno = ? and tomno = ?) or (frommno = ? and tomno = ?))";
+		String sql = "";
 		
+		if(chatmno != 0) {
+			//현재 같이 채팅하고 있는 대상자emf[로그인된 회원, 채팅대상자] 내용물만 출력
+			sql = "select * from note "
+				+ " where pno = ? and ((frommno = ? and tomno = ?) or (frommno = ? and tomno = ?))";
+		}else{
+			sql = "select * from note where pno = ? and  (frommno = ? or tomno = ?)";
+		}
+		
+		
+
 		try {
 			ps = con.prepareStatement(sql);
 			
 			ps.setInt(1, pno);
+			if(chatmno != 0) {
 
-			ps.setInt(2, mno);
-			ps.setInt(3, chatmno);
+				ps.setInt(2, mno);
+				ps.setInt(3, chatmno);
+				
+				ps.setInt(4, chatmno);
+				ps.setInt(5, mno);
 			
-			ps.setInt(4, chatmno);
-			ps.setInt(5, mno);
+			}else {
+				
+				ps.setInt(2, mno);
+				ps.setInt(3, mno);
+			}
 			
 			
 			rs = ps.executeQuery();

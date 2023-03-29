@@ -24,10 +24,13 @@ $.get(
 	8. getplike() : 찜하기 상태등록
 */
 let productList = null; //getproductList()의 ajax로부터 요청된 결과를 담는 곳
+//*
+let index = 0; //현재 보고 있는 제품의 제품인덱스
+let chatmno = 0; //현재 채팅하고 있는 상대방의 mno
 
 /* 제품 목록 출력 html 출력 함수*/
 function produclistprint(  ){
-    let html = '<h3 class = "productTitle">제품목록페이지</h3>';
+   let html = `<p style="font-size:12px; text-align:right" > 제품목록수 : ${ productList.length } 개 </h6>`;
     productList.forEach( (p, i) => {
 		html += `<div onClick = "productprint(${i})" class = "productbox">
 						<div class = "pimgbox">
@@ -319,8 +322,6 @@ function chatlistprint(i){
 	
 	
 }
-
-
 // 3. 채팅 페이지 이동
 function chatprint(i){
 	
@@ -393,9 +394,7 @@ function chatinfoprint(i, tomno){
 	getcontent();
 }
 
-//*
-let index = 0; //현재 보고 있는 제품의 제품인덱스
-let chatmno = 0; //현재 채팅하고 있는 상대방의 mno
+
 
 //10. 채팅 내용을 가져오는 메서드 [채팅방 내용을 요청해서 해당 html 출력]
 function getcontent(){

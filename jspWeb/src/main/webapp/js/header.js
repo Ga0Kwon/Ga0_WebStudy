@@ -49,3 +49,38 @@ function getLogin(){
 		}
 	})
 }
+
+
+// 알림용 소켓
+let noticeSocket = null;
+
+if(memberInfo.mid == null){
+	
+}else{
+	//JS 실행주체 = 클라이언트 // JAVA = 서버
+	//1) JS : [클라이언트 소켓 생성]
+	noticeSocket = new WebSocket('ws://localhost:8080/jspWeb/alarm/'+memberInfo.mid);
+	//2) 클라이언트 소켓 이벤트 메서드 정의
+	noticeSocket.onopen = (e) => {console.log('알림용 서버 소켓에 들어옴'); }
+	noticeSocket.onclose = (e) => {console.log('알림용 서버 소켓에 나감')}
+	noticeSocket.onerror = (e) => {console.log('알림용 서버 소켓 오류')}
+	noticeSocket.onmessage = (e) => {onalarm(e);}
+}
+
+
+// 
+function onalarm(e){
+	let msgbox =document.querySelector('.msgbox');
+	
+	msgbox.style.bottom = "50px";
+	
+	// * 4초 후에 자동 내려가기
+	// n밀리초(1/1000) 후에 이벤트 실행 setTimeout
+	// n밀리초 마다 이벤트 실행 setInterval
+	setTimeout(() => {msgbox.style.bottom = "-100px";}, 4000);
+	//Dao 메소드에 synchronized 키워드 사용
+	//스레드1 해당 메서드를 사용하고 있을 때 [return 전] 다른 스레드2 해당 메서드에 대기상태
+	//멀티 스레드
+	getcontent(); //헤더는 index에서 쓰고 있기 때문에 메서드됨. 
+   
+}

@@ -290,4 +290,20 @@ html,body{
 	font-size: 16px;
 }
 
+/* ------------------- 알림 모달 창 ------------------- */
 
+.msgbox{
+	width : 200px;
+	background-color: white;
+	height : 100px;
+	position: fixed;
+	bottom: -100px;
+	left : 1%;
+	opacity : 0.8;
+	z-index : 5;
+	border : 1px solid red;
+	
+	/*애니메이션 효과*/
+	/* 특정 css 변화있을 때 css 변화 시간(초)*/
+	transition : 1s;
+}
