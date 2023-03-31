@@ -119,7 +119,10 @@ function setListSize(){
 /*
 	JSON = JS 객체
 	
-	1) g
+	1) 해당 객체의 필드명만 호출/추출
+	Object.keys(r) : 객체내 모든 필드명/키 이름을 배열로 추출
+	2) 해당 객체의 값만 호출 추룰
+	Object.values(r): 객체내 모든 데이터를 배열로 추출
 */
 	
 const ctx = document.getElementById('myChart'); //여러 스크립트에서 쓰이기 위해 getElementById을 씀
@@ -133,12 +136,12 @@ $.get("/jspWeb/point" , (r) => {
 	 new Chart(ctx, {
 	    type: 'bar', //bar : 막대차트 / line : 선차트 등등
 	    data: {
-	      labels: Object.keys(r),
+	      labels: Object.keys(r), //가로축 //날짜 필드명
 	      datasets: [
 			{
-		        label:'포인트 충전 내역',
-		        data: Object.values(r),
-		        borderWidth: 1,
+		        label:'포인트 충전 내역', //데이터 항목명
+		        data: Object.values(r), //해당 항목의 데이터 // 데이터 값
+		        borderWidth: 1,  
 		        borderColor: '#64BC34',
 		        backgroundColor: '#F4B556',
 	     	 }]
