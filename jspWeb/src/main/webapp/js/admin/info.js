@@ -110,5 +110,51 @@ function setListSize(){
 	printMember(1);
 }	
 
+/* ------------------------------ CHART ------------------------------ */
+
+//5.chart.js 
+	//new Chart('dom객체', {차트옵션});
+	// {type : '차트 이름', data : {차트에 표시할 데이터}, options : {차트옵션}}
+	
+/*
+	JSON = JS 객체
+	
+	1) g
+*/
+	
+const ctx = document.getElementById('myChart'); //여러 스크립트에서 쓰이기 위해 getElementById을 씀
+	
+//get 방식 ajax
+$.get("/jspWeb/point" , (r) => {
+	console.log(r); //r : object => for문 못돌림
+	console.log(Object.keys(r))
+	console.log(Object.values(r))
+	
+	 new Chart(ctx, {
+	    type: 'bar', //bar : 막대차트 / line : 선차트 등등
+	    data: {
+	      labels: Object.keys(r),
+	      datasets: [
+			{
+		        label:'포인트 충전 내역',
+		        data: Object.values(r),
+		        borderWidth: 1,
+		        borderColor: '#64BC34',
+		        backgroundColor: '#F4B556',
+	     	 }]
+	    },
+	    options: {
+	      scales: {
+	        y: {
+	          beginAtZero: true
+	        }
+	      }
+	    }
+	  });
+  
+})
+
+
+ 
 
 

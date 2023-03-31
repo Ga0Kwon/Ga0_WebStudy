@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.dto.ChatDto;
 import model.dto.ProductDto;
@@ -244,6 +245,57 @@ public class ProductDao extends Dao{
 			
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	/*
+	  //1. 해당 타입의 객체를 여러개 저장할 수 있는 리스트 객체 선언
+	  ArrayList<타입> list = new ArrayList<>();
+	  	데이터 : '유재석', '강호동', '신동엽'
+	  	['유재석', '강호동', '신동엽']
+	  	
+	  //2. 해당 키 타입과 데이터타입의 해당하는 키와 데이터를 여러개 저장할 수 있는 맵 객체 선언
+	  HashMap<키타입, 데이터타입>map = new HashMap<>();
+	  	데이터 : '유재석=30', '강호동=10', '신동엽=90' => 타입 2개
+	  	{ '유재석' : 30, '강호동' : 10, '신동엽' : 90}
+	  	=> ex 
+	  		HashMap< Integer , dto> map = new HashMap<>();
+	  		- 이런식도 가능
+	  		
+	  // *JSON = JS 객체
+	   let 객체명 = {
+	   		필드명 : 값,
+	   		필드명 : 값
+	   	}
+	    
+	*/
+	//7. 날짜별 포인트 충전 내역
+	public HashMap<String, Integer>getSum(){
+		/*ArrayList<String> list ; *///String 타입 객체만 리스트에 저장
+		
+		HashMap<String, Integer> map = new HashMap<>(); //String 타입의 키와 Integer 타입의 데이터 저장
+		
+		String sql ="select"
+				+ "		sum(if(mpcomment = '포인트 충전' , mpamount, 0) )as 충전된포인트 ,"
+				+ "		date_format(mpdate, '%Y%m%d') as 층전날짜"
+				+ "	from mpoint"
+				+ "	group by 층전날짜"
+				+ "	order by 층전날짜 desc limit 5;";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				map.put(rs.getString(2), rs.getInt(1));
+			}
+			
+			return map;
+			
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 		return null;
 	}

@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+
+</style>
 <body>
 
 <%-- 	<%@include file = "../header.jsp" %> <!-- 상대 경로 --> --%>
@@ -19,13 +22,23 @@
 			<option>5</option>
 			<option>10</option>
 	</select>
-		
+	
+	<div class = "container">
+		<h3>chart.js 사용</h3>
+		<br/>
+		<div style = "width : 100%;">
+			<!-- map이 표시되는 구역 -->
+			 <canvas id="myChart" ></canvas>
+		</div>
+	</div>
+	
 	<div class = "memberList">
 		<table class = "memberTable" border = "1">
 			
 		</table>
 	</div>
 	<div class = "container" style = "text-align : center;">
+	
 		<!-- 페이징 처리 버튼들 -->
 		<div class = "adminpageBox">
 		</div>
@@ -43,7 +56,10 @@
 			</div>
 		</div>
 	</div>
-		
+	
+	<!-- chart.js API -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
 	<!-- 2. 사용자 정의 js -->
 	<script src = "/jspWeb/js/admin/info.js" type = "text/javascript"></script>
 	

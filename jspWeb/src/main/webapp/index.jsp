@@ -3,7 +3,7 @@
 <%@page import="model.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html>mno
 <html style="height: 100%">	<!-- 가로/세로 사이즈 생략시 auto( 내용물크기만큼 ) -->
 <head>
 <meta charset="UTF-8">
